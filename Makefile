@@ -11,7 +11,7 @@ SYMFONY  = $(PHP_CONT) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up start start-debug down logs sh composer vendor sf cc cs static lint
+.PHONY        = help build up up-dev start down logs sh composer vendor sf cc cs static lint test
 
 ##
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
@@ -28,11 +28,10 @@ build: ## Builds the Docker images
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
 
-start: build up ## Build and start the containers
+up-dev: ## Start the docker hub in detached mode (no logs) with Xdebug enable
+	@XDEBUG_MODE=debug $(DOCKER_COMP) up --detach
 
-start-debug: ## Build and start the containers with Xdebug enable
-start-debug: XDEBUG_MODE=debug
-start-debug: build up
+start: build up ## Build and start the containers
 
 stop: ## Stop the docker hub
 	@$(DOCKER_COMP) stop
@@ -68,8 +67,11 @@ cc: c=c:c ## Clear the cache
 cc: sf
 
 ##
-## —— Linter 🔬 ————————————————————————————————————————————————————————————————
+## —— Linter 🔮 ————————————————————————————————————————————————————————————————
 ##
+cs-dry: ## Check coding style in dry mode
+	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
+
 cs: ## Check coding style
 	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --verbose --ansi
 
@@ -77,3 +79,9 @@ static: ## Perform static analysis
 	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M
 
 lint: cs static ## Check coding style and perform static analysis
+
+##
+## —— Tests ⚗️ —————————————————————————————————————————————————————————————————
+##
+test: ## Run tests with code coverage
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./vendor/bin/simple-phpunit

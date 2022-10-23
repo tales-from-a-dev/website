@@ -40,4 +40,9 @@ jobs:
         run: curl -k https://localhost
         
       - name: Check code
-        run: make lint
+        run: |
+          make cs-dry
+          make static
+
+      - name: Run tests
+        run: make test
