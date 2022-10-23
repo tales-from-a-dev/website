@@ -1,0 +1,11 @@
+parameters:
+	scanFiles:
+		- vendor/twig/twig/src/Extension/CoreExtension.php
+
+	paths:
+		- src
+
+	fileExtensions:
+		- php
+
+	level: 9
