@@ -11,7 +11,7 @@ SYMFONY  = $(PHP_CONT) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up start start-debug down logs sh composer vendor sf cc
+.PHONY        = help build up start start-debug down logs sh composer vendor sf cc cs static lint
 
 ##
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
@@ -34,7 +34,10 @@ start-debug: ## Build and start the containers with Xdebug enable
 start-debug: XDEBUG_MODE=debug
 start-debug: build up
 
-down: ## Stop the docker hub
+stop: ## Stop the docker hub
+	@$(DOCKER_COMP) stop
+
+down: ## Stop the docker hub and remove all containers, networks, volumes, and images
 	@$(DOCKER_COMP) down --remove-orphans
 
 logs: ## Show live logs
@@ -63,3 +66,14 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+##
+## —— Linter 🔬 ————————————————————————————————————————————————————————————————
+##
+cs: ## Check coding style
+	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --verbose --ansi
+
+static: ## Perform static analysis
+	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M
+
+lint: cs static ## Check coding style and perform static analysis
