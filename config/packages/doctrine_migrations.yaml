@@ -1,0 +1,14 @@
+doctrine_migrations:
+    migrations_paths:
+        # namespace is arbitrary but should be different from App\Migrations
+        # as migrations classes should NOT be autoloaded
+        'Migrations': '%kernel.project_dir%/migrations'
+        
+    enable_profiler: false
+    
+    storage:
+        # Default (SQL table) metadata storage configuration
+        table_storage:
+            table_name: 'migration'
+
+    organize_migrations: 'BY_YEAR_AND_MONTH'
