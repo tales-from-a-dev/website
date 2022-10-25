@@ -1,0 +1,8 @@
+services:
+    App\Infrastructure\GitHub\GitHubService:
+        public: true
+        arguments:
+            $cache: '@annotations.cache_adapter'
+            $githubClient: '@github.client'
+            $logger: '@logger'
+            $githubUsername: '%env(GITHUB_USERNAME)%'

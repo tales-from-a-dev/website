@@ -7,8 +7,9 @@ parameters:
 
 	paths:
 		- src
+		- tests
 
 	fileExtensions:
 		- php
 
-	level: 9
+	level: 8
