@@ -8,10 +8,11 @@ PHP_CONT = $(DOCKER_COMP) exec php
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
+PHPUNIT  = $(PHP_CONT) bin/phpunit
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up up-dev start down logs sh composer vendor sf cc cs static lint test
+.PHONY        = help build up up-dev start down logs sh composer vendor sf cc db dbc dbd dbm dbl dbu dbv cs static lint test
 
 ##
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
@@ -66,8 +67,44 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 
+container: c=debug:container ## Display all possible services in the container
+container: sf
+
+envs: c=debug:container --env-vars ## Display all environments variables
+envs: sf
+
+parameters: c=debug:container --parameters ## Display all available parameters
+parameters: sf
+
+router: c=debug:router ## Display all available route
+router: sf
+
 ##
-## —— Linter 🔮 ————————————————————————————————————————————————————————————————
+## —— Database 🔮 ——————————————————————————————————————————————————————————————
+##
+db: dbc dbu dbl ## Create the database and load the fixtures
+
+dbc: ## Create database
+	@$(SYMFONY) doctrine:database:drop --if-exists --force
+	@$(SYMFONY) doctrine:database:create --if-not-exists
+
+dbd: ## Generate a migration by comparing your current database to your mapping information
+	@$(SYMFONY) doctrine:migration:diff
+
+dbm: ## Migrate database schema to the latest available version
+	@$(SYMFONY) doctrine:migration:migrate -n
+
+dbl: ## Reset the database fixtures
+	@$(SYMFONY) doctrine:fixtures:load  --no-interaction --purge-with-truncate
+
+dbu: ## Force database update
+	@$(SYMFONY) doctrine:schema:update --force
+
+dbv: ## Check the ORM mapping
+	@$(SYMFONY) doctrine:schema:validate
+
+##
+## —— Linter 💫 ————————————————————————————————————————————————————————————————
 ##
 cs-dry: ## Check coding style in dry mode
 	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
@@ -81,7 +118,7 @@ static: ## Perform static analysis
 lint: cs static ## Check coding style and perform static analysis
 
 ##
-## —— Tests ⚗️ —————————————————————————————————————————————————————————————————
+## —— Tests ⚗️ ————————————————————————————————————————————————————————————————
 ##
 test: ## Run tests with code coverage
 	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./vendor/bin/simple-phpunit
