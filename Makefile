@@ -29,8 +29,11 @@ build: ## Builds the Docker images
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
 
-up-dev: ## Start the docker hub in detached mode (no logs) with Xdebug enable
+up-dev: ## Start the docker hub in detached mode (no logs) for debugging
 	@XDEBUG_MODE=debug $(DOCKER_COMP) up --detach
+
+up-test: ## Start the docker hub in detached mode (no logs) for testing
+	@XDEBUG_MODE=coverage $(DOCKER_COMP) -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.test.yml up --detach
 
 start: build up ## Build and start the containers
 
@@ -120,5 +123,6 @@ lint: cs static ## Check coding style and perform static analysis
 ##
 ## —— Tests ⚗️ ————————————————————————————————————————————————————————————————
 ##
-test: ## Run tests with code coverage
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./vendor/bin/simple-phpunit
+test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
+	@$(eval f ?=)
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./vendor/bin/simple-phpunit $(f)

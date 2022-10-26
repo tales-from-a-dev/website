@@ -16,6 +16,14 @@ framework:
     #fragments: true
     php_errors:
         log: true
+        
+    http_client:
+        scoped_clients:
+            github.client:
+                base_uri: 'https://api.github.com'
+                headers:
+                    Accept: 'application/vnd.github.v4+json'
+                    Authorization: 'Bearer %env(GITHUB_ACCESS_TOKEN)%'
 
 when@test:
     framework:

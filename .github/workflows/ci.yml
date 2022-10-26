@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Docker build
+    name: Docker test build
     
     runs-on: ubuntu-latest
     
@@ -20,7 +20,11 @@ jobs:
         run: docker compose pull
 
       - name: Start services
-        run: docker compose up --build -d
+        run: >
+          GITHUB_USERNAME=${{ secrets.GH_USERNAME }}
+          GITHUB_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}
+          XDEBUG_MODE=coverage
+          docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.test.yml up --build --detach
 
       - name: Wait for services
         run: |
@@ -39,10 +43,17 @@ jobs:
       - name: Check HTTPS reachability
         run: curl -k https://localhost
         
-      - name: Check code
-        run: |
-          make cs-dry
-          make static
+      - name: Run PHP CS Fixer
+        run: make cs-dry
 
-      - name: Run tests
+      - name: Run PHPStan
+        run: make static
+
+      - name: Run PHPUnit
         run: make test
+        
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./var/test/coverage.xml

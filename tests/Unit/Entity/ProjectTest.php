@@ -18,7 +18,7 @@ final class ProjectTest extends TestCase
         $project->setDescription('Dummy project description');
         $project->setType(ProjectType::Customer);
         $project->setUrl('https://example.com');
-        $project->setMetadata(['foo' => 'bar']);
+        $project->setMetadata(['foo', 'bar']);
         $project->setSlug();
         $project->setCreatedAt();
         $project->setUpdatedAt();
@@ -28,7 +28,8 @@ final class ProjectTest extends TestCase
         self::assertSame('Dummy project description', $project->getDescription());
         self::assertSame(ProjectType::Customer, $project->getType());
         self::assertSame('https://example.com', $project->getUrl());
-        self::assertCount(1, $project->getMetadata());
+        self::assertCount(2, $project->getMetadata());
+        self::assertContains('foo', $project->getMetadata());
         self::assertContains('bar', $project->getMetadata());
         self::assertSame('dummy-project', $project->getSlug());
         self::assertNotNull($project->getCreatedAt());
