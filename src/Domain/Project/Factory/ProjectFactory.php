@@ -6,6 +6,7 @@ namespace App\Domain\Project\Factory;
 
 use App\Domain\Project\Entity\Project;
 use App\Domain\Project\Enum\ProjectType;
+use App\Domain\Project\Model\GitHubProject;
 use App\Domain\Project\Repository\ProjectRepository;
 use Elao\Enum\Bridge\Faker\Provider\EnumProvider;
 use Zenstruck\Foundry\ModelFactory;
@@ -43,6 +44,19 @@ final class ProjectFactory extends ModelFactory
     public function withType(ProjectType $type): self
     {
         return $this->addState(['type' => $type]);
+    }
+
+    public function withGitHubProject(): self
+    {
+        return $this->addState(['metadata' => new GitHubProject(
+            self::faker()->uuid(),
+            self::faker()->numberBetween(0, 10),
+            self::faker()->numberBetween(0, 10),
+            self::faker()->randomElements(
+                ['php', 'javascript', 'css', 'html', 'twig'],
+                self::faker()->numberBetween(0, 3)
+            ),
+        )]);
     }
 
     /**
