@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Project\Entity;
 
+use App\Core\Doctrine\Dbal\Types\Types as AppTypes;
 use App\Core\Entity\Behavior\IdentifiableInterface;
 use App\Core\Entity\Behavior\IdentifiableTrait;
 use App\Core\Entity\Behavior\SluggableInterface;
@@ -11,6 +12,7 @@ use App\Core\Entity\Behavior\SluggableTrait;
 use App\Core\Entity\Behavior\TimestampableInterface;
 use App\Core\Entity\Behavior\TimestampableTrait;
 use App\Domain\Project\Enum\ProjectType;
+use App\Domain\Project\Model\MetadataInterface;
 use App\Domain\Project\Repository\ProjectRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -41,10 +43,10 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     private ?string $url = null;
 
     /**
-     * @var array<int, mixed>
+     * @var \App\Domain\Project\Model\MetadataInterface<\App\Domain\Project\Model\GitHubProject>|null
      */
-    #[ORM\Column(nullable: true, options: ['jsonb' => true, 'default' => '{}'])]
-    private array $metadata = [];
+    #[ORM\Column(type: AppTypes::PROJECT_METADATA, nullable: true, options: ['jsonb' => true, 'default' => '{}'])]
+    private ?MetadataInterface $metadata = null;
 
     public function getTitle(): ?string
     {
@@ -107,19 +109,19 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     }
 
     /**
-     * @return array<int, mixed>
+     * @return \App\Domain\Project\Model\MetadataInterface<\App\Domain\Project\Model\GitHubProject>|null
      */
-    public function getMetadata(): array
+    public function getMetadata(): ?MetadataInterface
     {
         return $this->metadata;
     }
 
     /**
-     * @param array<int, mixed>|null $metadata
+     * @param \App\Domain\Project\Model\MetadataInterface<\App\Domain\Project\Model\GitHubProject>|null $metadata
      */
-    public function setMetadata(?array $metadata): self
+    public function setMetadata(?MetadataInterface $metadata): self
     {
-        $this->metadata = $metadata ?? [];
+        $this->metadata = $metadata;
 
         return $this;
     }

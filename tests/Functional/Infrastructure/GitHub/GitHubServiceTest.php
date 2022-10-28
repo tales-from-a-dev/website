@@ -7,7 +7,7 @@ namespace App\Tests\Functional\Infrastructure\GitHub;
 use App\Infrastructure\GitHub\GitHubService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class GitHubServiceTest extends KernelTestCase
+final class GitHubServiceTest extends KernelTestCase
 {
     public function testItCanFetchPinnedRepositories(): void
     {
