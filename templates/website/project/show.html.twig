@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ project.title }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <article>
+        <h1>{{ project.title }}</h1>
+        <h3>{{ project.subTitle }}</h3>
+        <div>{{ project.description }}</div>
+    </article>
+{% endblock %}

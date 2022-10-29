@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'projects.title'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for project in projects %}
+        <article id="{{ project.id }}">
+            <h2>
+                <a href="{{ path('app_website_project_show', {slug: project.slug}) }}">{{ project.title }}</a>
+            </h2>
+            <span>{{ project.subTitle }}</span>
+            <div>{{ project.description }}</div>
+        </article>
+    {% endfor %}
+
+    <div class="pagination">
+        {{ knp_pagination_render(projects) }}
+    </div>
+{% endblock %}
