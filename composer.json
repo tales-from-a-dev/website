@@ -14,8 +14,10 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.13",
         "elao/enum": "^2.0",
+        "knplabs/knp-paginator-bundle": "^5.9",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.13",
+        "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.1.*",
         "symfony/flex": "^2",
@@ -28,6 +30,7 @@
         "symfony/runtime": "6.1.*",
         "symfony/serializer": "6.1.*",
         "symfony/string": "6.1.*",
+        "symfony/translation": "6.1.*",
         "symfony/twig-bundle": "6.1.*",
         "symfony/yaml": "6.1.*",
         "twig/twig": "^3.4"
@@ -61,7 +64,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "Fixtures\\": "fixtures/"
         }
     },
     "autoload-dev": {

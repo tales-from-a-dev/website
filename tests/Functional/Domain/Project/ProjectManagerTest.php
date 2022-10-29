@@ -97,7 +97,7 @@ final class ProjectManagerTest extends KernelTestCase
     public function testItCanFindProjectByGithubId(): void
     {
         $proxy = ProjectFactory::new()
-            ->withGitHubProject()
+            ->asGitHubProject()
             ->create()
         ;
 

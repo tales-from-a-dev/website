@@ -96,6 +96,16 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
         return $this;
     }
 
+    public function isCustomer(): bool
+    {
+        return ProjectType::Customer === $this->type;
+    }
+
+    public function isGitHub(): bool
+    {
+        return ProjectType::GitHub === $this->type;
+    }
+
     public function getUrl(): ?string
     {
         return $this->url;

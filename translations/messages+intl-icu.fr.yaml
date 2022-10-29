@@ -1,0 +1,9 @@
+# app
+app:
+    title: 'Tales From a Dev'
+    meta:
+        description: 'Romain Monteil, développeur Web full stack freelance'
+        
+# project
+projects:
+    title: 'Projets'

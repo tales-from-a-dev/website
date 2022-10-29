@@ -46,19 +46,16 @@ final class ProjectFactory extends ModelFactory
         return $this->addState(['type' => $type]);
     }
 
-    public function withGitHubProject(): self
+    public function asCustomerProject(): self
+    {
+        return $this->addState(['type' => ProjectType::Customer]);
+    }
+
+    public function asGitHubProject(): self
     {
         return $this->addState([
             'type' => ProjectType::GitHub,
-            'metadata' => new GitHubProject(
-                self::faker()->uuid(),
-                self::faker()->numberBetween(0, 10),
-                self::faker()->numberBetween(0, 10),
-                self::faker()->randomElements(
-                    ['php', 'javascript', 'css', 'html', 'twig'],
-                    self::faker()->numberBetween(0, 3)
-                ),
-            ),
+            'metadata' => $this->buildGitHubMetadata(),
         ]);
     }
 
@@ -68,11 +65,11 @@ final class ProjectFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'title' => self::faker()->text(),
-            'subTitle' => self::faker()->text(),
-            'description' => self::faker()->text(),
+            'title' => self::faker()->text(50),
+            'subTitle' => self::faker()->text(30),
+            'description' => self::faker()->text(500),
             'type' => self::faker()->randomEnum(ProjectType::class),
-            'url' => self::faker()->text(),
+            'url' => self::faker()->url(),
         ];
     }
 
@@ -80,12 +77,29 @@ final class ProjectFactory extends ModelFactory
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            // ->afterInstantiate(function(Project $project): void {})
+            ->afterInstantiate(function (Project $project): void {
+                if ($project->isGitHub() && null === $project->getMetadata()) {
+                    $project->setMetadata($this->buildGitHubMetadata());
+                }
+            })
         ;
     }
 
     protected static function getClass(): string
     {
         return Project::class;
+    }
+
+    private function buildGitHubMetadata(): GitHubProject
+    {
+        return new GitHubProject(
+            self::faker()->uuid(),
+            self::faker()->numberBetween(0, 10),
+            self::faker()->numberBetween(0, 10),
+            self::faker()->randomElements(
+                ['php', 'javascript', 'css', 'html', 'twig'],
+                self::faker()->numberBetween(0, 3)
+            ),
+        );
     }
 }
