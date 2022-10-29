@@ -48,15 +48,18 @@ final class ProjectFactory extends ModelFactory
 
     public function withGitHubProject(): self
     {
-        return $this->addState(['metadata' => new GitHubProject(
-            self::faker()->uuid(),
-            self::faker()->numberBetween(0, 10),
-            self::faker()->numberBetween(0, 10),
-            self::faker()->randomElements(
-                ['php', 'javascript', 'css', 'html', 'twig'],
-                self::faker()->numberBetween(0, 3)
+        return $this->addState([
+            'type' => ProjectType::GitHub,
+            'metadata' => new GitHubProject(
+                self::faker()->uuid(),
+                self::faker()->numberBetween(0, 10),
+                self::faker()->numberBetween(0, 10),
+                self::faker()->randomElements(
+                    ['php', 'javascript', 'css', 'html', 'twig'],
+                    self::faker()->numberBetween(0, 3)
+                ),
             ),
-        )]);
+        ]);
     }
 
     /**
@@ -65,15 +68,11 @@ final class ProjectFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'title' => self::faker()->text(),
             'subTitle' => self::faker()->text(),
             'description' => self::faker()->text(),
             'type' => self::faker()->randomEnum(ProjectType::class),
             'url' => self::faker()->text(),
-            'slug' => self::faker()->text(),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 

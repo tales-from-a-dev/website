@@ -10,39 +10,42 @@
          testdox="true"
 >
     <php>
-        <ini name="display_errors" value="1" />
-        <ini name="error_reporting" value="-1" />
-        <server name="APP_ENV" value="test" force="true" />
-        <server name="SHELL_VERBOSITY" value="-1" />
-        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+        <ini name="display_errors" value="1"/>
+        <ini name="error_reporting" value="-1"/>
+        <server name="APP_ENV" value="test" force="true"/>
+        <server name="SHELL_VERBOSITY" value="-1"/>
+        <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
+        <server name="SYMFONY_PHPUNIT_VERSION" value="9.5"/>
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Tales From a Dev Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
 
-    <coverage cacheDirectory="var/test"
+    <coverage cacheDirectory="var/coverage"
               processUncoveredFiles="true"
     >
         <include>
             <directory suffix=".php">src</directory>
         </include>
         <report>
-            <clover outputFile="var/test/coverage.xml"/>
+            <clover outputFile="var/coverage.xml"/>
+            <html outputDirectory="var/coverage/html/"/>
         </report>
     </coverage>
 
     <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
     </listeners>
 
     <!-- Run `composer require symfony/panther` before enabling this extension -->
-    <!--
+
     <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+        <!--
         <extension class="Symfony\Component\Panther\ServerExtension" />
+        -->
     </extensions>
-    -->
 </phpunit>

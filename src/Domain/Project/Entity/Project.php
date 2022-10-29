@@ -30,7 +30,7 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $subTitle = null;
 
     #[ORM\Column(type: Types::TEXT)]

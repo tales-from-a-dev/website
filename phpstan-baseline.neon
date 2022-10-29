@@ -4,8 +4,3 @@ parameters:
             message: '#^Call to an undefined method Faker\\Generator::[\w]+\(\).$#'
             paths:
                 - src/Domain/*
-
-        -
-            message: '#^Cannot access property \$[\w]+ on App\\Domain\\Project\\Model[\w\\\|<>]+.$#'
-            paths:
-                - tests/Functional/Core/Doctrine/Types/*
