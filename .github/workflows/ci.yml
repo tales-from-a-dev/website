@@ -50,10 +50,6 @@ jobs:
         run: make static
 
       - name: Run PHPUnit
-        run: make test
-        
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./var/test/coverage.xml
+        run: |
+          make dbt
+          make test

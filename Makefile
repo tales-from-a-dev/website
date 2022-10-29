@@ -12,7 +12,7 @@ PHPUNIT  = $(PHP_CONT) bin/phpunit
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up up-dev start down logs sh composer vendor sf cc db dbc dbd dbm dbl dbu dbv cs static lint test
+.PHONY        = help build up up-dev start down logs sh composer vendor sf cc db dbc dbd dbm dbl dbu dbv dbt cs static lint test
 
 ##
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
@@ -98,13 +98,18 @@ dbm: ## Migrate database schema to the latest available version
 	@$(SYMFONY) doctrine:migration:migrate -n
 
 dbl: ## Reset the database fixtures
-	@$(SYMFONY) doctrine:fixtures:load  --no-interaction --purge-with-truncate
+	@$(SYMFONY) doctrine:fixtures:load --no-interaction --purge-with-truncate
 
 dbu: ## Force database update
 	@$(SYMFONY) doctrine:schema:update --force
 
 dbv: ## Check the ORM mapping
 	@$(SYMFONY) doctrine:schema:validate
+
+dbt: ## Create test database
+	@$(SYMFONY) --env=test doctrine:database:drop --if-exists --force
+	@$(SYMFONY) --env=test doctrine:database:create --if-not-exists
+	@$(SYMFONY) --env=test doctrine:schema:update --force
 
 ##
 ## —— Linter 💫 ————————————————————————————————————————————————————————————————

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Project\Repository;
 
 use App\Domain\Project\Entity\Project;
+use App\Domain\Project\Enum\ProjectType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -41,28 +42,24 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Project[] Returns an array of Project objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findOneByGithubId(string $id): ?Project
+    {
+        $rsm = $this->createResultSetMappingBuilder('p');
 
-//    public function findOneBySomeField($value): ?Project
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $query = <<<SQL
+            SELECT %s
+            FROM project AS p
+            WHERE p.type = :type
+            AND p.metadata::jsonb->>'id' = :id
+        SQL;
+        $rawQuery = sprintf($query, $rsm->generateSelectClause());
+
+        $query = $this->getEntityManager()->createNativeQuery($rawQuery, $rsm);
+        $query->setParameters([
+            'type' => ProjectType::GitHub->value,
+            'id' => $id,
+        ]);
+
+        return $query->getOneOrNullResult();
+    }
 }
