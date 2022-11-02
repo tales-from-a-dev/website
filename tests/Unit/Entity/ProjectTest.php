@@ -34,6 +34,14 @@ final class ProjectTest extends TestCase
         self::assertNotNull($project->getUpdatedAt());
     }
 
+    public function testItCanCastProjectToString(): void
+    {
+        $project = new Project();
+        $project->setTitle('Dummy project');
+
+        self::assertSame('Dummy project', (string) $project);
+    }
+
     public function testItCanInstantiateProjectWithGithubMetadata(): void
     {
         $project = new Project();

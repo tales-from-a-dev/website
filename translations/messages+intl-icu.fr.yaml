@@ -4,6 +4,10 @@ app:
     meta:
         description: 'Romain Monteil, développeur Web full stack freelance'
         
+# blog
+blog:
+    title: 'Blog'
+        
 # project
-projects:
+project:
     title: 'Projets'
