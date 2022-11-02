@@ -18,11 +18,7 @@ final class ProjectControllerTest extends WebTestCase
      */
     public function testItCanViewIndexPage(string $uri): void
     {
-        ProjectFactory::new()
-            ->asCustomerProject()
-            ->many(10)
-            ->create()
-        ;
+        ProjectFactory::new()->asCustomerProject()->many(10)->create();
 
         self::ensureKernelShutdown();
 
@@ -30,10 +26,7 @@ final class ProjectControllerTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, $uri);
 
         self::assertResponseIsSuccessful();
-        self::assertCount(
-            5,
-            $crawler->filter('article'),
-        );
+        self::assertCount(5, $crawler->filter('article'));
     }
 
     /**
@@ -49,10 +42,7 @@ final class ProjectControllerTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, $uri);
 
         self::assertResponseIsSuccessful();
-        self::assertCount(
-            1,
-            $crawler->filter('article'),
-        );
+        self::assertCount(1, $crawler->filter('article'));
         self::assertSelectorTextContains('h1', $project->getTitle());
     }
 

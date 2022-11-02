@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\UniqueConstraint(columns: ['title'])]
-class Project implements IdentifiableInterface, SluggableInterface, TimestampableInterface
+class Project implements IdentifiableInterface, SluggableInterface, TimestampableInterface, \Stringable
 {
     use IdentifiableTrait;
     use SluggableTrait;
@@ -47,6 +47,11 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
      */
     #[ORM\Column(type: AppTypes::PROJECT_METADATA, nullable: true, options: ['jsonb' => true, 'default' => '{}'])]
     private ?MetadataInterface $metadata = null;
+
+    public function __toString(): string
+    {
+        return $this->title ?? '';
+    }
 
     public function getTitle(): ?string
     {

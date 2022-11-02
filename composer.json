@@ -28,11 +28,16 @@
         "symfony/property-info": "6.1.*",
         "symfony/proxy-manager-bridge": "6.1.*",
         "symfony/runtime": "6.1.*",
+        "symfony/security-bundle": "6.1.*",
         "symfony/serializer": "6.1.*",
         "symfony/string": "6.1.*",
         "symfony/translation": "6.1.*",
         "symfony/twig-bundle": "6.1.*",
         "symfony/yaml": "6.1.*",
+        "twig/extra-bundle": "^3.4",
+        "twig/intl-extra": "^3.4",
+        "twig/markdown-extra": "^3.4",
+        "twig/string-extra": "^3.4",
         "twig/twig": "^3.4"
     },
     "require-dev": {

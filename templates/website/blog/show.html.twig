@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ post.title }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <article id="{{ post.id }}">
+        <h1>{{ post.title }}</h1>
+        <h3>{{ post.publishedAt|format_datetime('long') }}</h3>
+        <div>{{ post.content }}</div>
+    </article>
+{% endblock %}

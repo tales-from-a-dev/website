@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'projects.title'|trans }} | {{ parent() }}
+    {{ 'project.title'|trans }} | {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@
         </article>
     {% endfor %}
 
-    <div class="pagination">
+    <div>
         {{ knp_pagination_render(projects) }}
     </div>
 {% endblock %}
