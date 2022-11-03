@@ -7,6 +7,10 @@ app:
 # blog
 blog:
     title: 'Blog'
+    
+# contact
+contact:
+    title: 'Me contacter'
         
 # project
 project:

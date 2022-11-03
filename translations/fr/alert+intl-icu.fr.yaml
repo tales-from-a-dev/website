@@ -1,0 +1,5 @@
+# contact
+contact:
+    send:
+        error: "Une erreur est survenue, votre message n'a pas pu être envoyé. Veuillez réessayer plus tard."
+        success: 'Votre message a bien été envoyé. Je vous recontacterai dans les plus brefs délais.'

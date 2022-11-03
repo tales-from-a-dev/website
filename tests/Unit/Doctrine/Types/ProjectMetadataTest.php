@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Core\Doctrine\Types;
+namespace App\Tests\Unit\Doctrine\Types;
 
 use App\Core\Doctrine\Dbal\Types\ProjectMetadataType;
 use App\Core\Doctrine\Dbal\Types\Types;
