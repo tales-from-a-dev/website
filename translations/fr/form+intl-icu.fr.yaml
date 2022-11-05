@@ -1,0 +1,10 @@
+# btn
+btn:
+    send: 'Envoyer'
+    
+# placeholder
+placeholder:
+    contact:
+        name: 'Nom & prénom'
+        email: 'Email'
+        content: 'Description de votre projet'

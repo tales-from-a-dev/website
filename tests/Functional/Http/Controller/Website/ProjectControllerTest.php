@@ -46,13 +46,13 @@ final class ProjectControllerTest extends WebTestCase
         self::assertSelectorTextContains('h1', $project->getTitle());
     }
 
-    public function getIndexUri(): \Generator
+    public static function getIndexUri(): \Generator
     {
         yield ['/projets'];
         yield ['/en/projects'];
     }
 
-    public function getShowUri(): \Generator
+    public static function getShowUri(): \Generator
     {
         yield ['/projets/dummy-project'];
         yield ['/en/projects/dummy-project'];

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'contact.title'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if app.session.flashBag.has('alert') %}
+            {% for alert in app.flashes('alert') %}
+                <div class="alert alert-{{ alert.type.value }}">
+                    {{ alert.message|trans }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {{ form_start(form) }}
+            {{ form_row(form) }}
+
+            <button name="submit">{{ 'btn.send'|trans(domain='form') }}</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

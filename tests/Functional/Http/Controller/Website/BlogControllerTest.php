@@ -58,7 +58,7 @@ final class BlogControllerTest extends WebTestCase
     {
         PostFactory::new(states: $states)->withTitle('Dummy title')->create();
 
-        static::ensureKernelShutdown();
+        self::ensureKernelShutdown();
 
         $client = static::createClient();
         $client->request(Request::METHOD_GET, '/blog/dummy-title');
@@ -66,13 +66,13 @@ final class BlogControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function getIndexUri(): \Generator
+    public static function getIndexUri(): \Generator
     {
         yield ['/blog'];
         yield ['/en/blog'];
     }
 
-    public function getShowUri(): \Generator
+    public static function getShowUri(): \Generator
     {
         yield ['/blog/dummy-post'];
         yield ['/en/blog/dummy-post'];
