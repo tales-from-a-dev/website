@@ -69,13 +69,22 @@ final class PostFactory extends ModelFactory
         return $this->addState(['title' => $title]);
     }
 
+    public function withTags(int $min, int $max): self
+    {
+        return $this->addState(fn () => ['tags' => TagFactory::randomRange($min, $max)]);
+    }
+
+    public function withSpecificTag(mixed $tag): self
+    {
+        return $this->addState(['tags' => [$tag]]);
+    }
+
     /**
      * @return array<string, mixed>
      */
     protected function getDefaults(): array
     {
         return [
-            // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'title' => self::faker()->text(50),
             'content' => self::faker()->text(1000),
             'publicationStatus' => self::faker()->randomEnum(PublicationStatus::class),
@@ -84,7 +93,6 @@ final class PostFactory extends ModelFactory
 
     protected function initialize(): self
     {
-        // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
              ->afterInstantiate(function (Post $post): void {
                  if (PublicationStatus::Published === $post->getPublicationStatus() && null === $post->getPublishedAt()) {
