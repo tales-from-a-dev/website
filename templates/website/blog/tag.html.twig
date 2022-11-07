@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'tag.title'|trans({tag: tag}) }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'tag.title'|trans({tag: tag}) }}</h1>
+    <div>
+        {% for post in tag.posts %}
+            <article id="post-{{ post.id }}">
+                <h1>{{ post.title }}</h1>
+                <h3>{{ post.publishedAt|format_datetime('long') }}</h3>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}

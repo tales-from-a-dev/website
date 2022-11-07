@@ -12,6 +12,8 @@ use App\Core\Entity\Behavior\TimestampableInterface;
 use App\Core\Entity\Behavior\TimestampableTrait;
 use App\Domain\Blog\Enum\PublicationStatus;
 use App\Domain\Blog\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +38,20 @@ class Post implements IdentifiableInterface, SluggableInterface, TimestampableIn
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $publishedAt = null;
+
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'posts', cascade: ['persist'])]
+    #[ORM\JoinTable(name: 'post_tag')]
+    #[ORM\JoinColumn(name: 'post_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'id')]
+    private Collection $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -93,6 +109,32 @@ class Post implements IdentifiableInterface, SluggableInterface, TimestampableIn
     public function isPublished(): bool
     {
         return PublicationStatus::Published === $this->publicationStatus && null !== $this->publishedAt && $this->publishedAt <= new \DateTimeImmutable();
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
+
+        return $this;
     }
 
     public function getSluggableFields(): array

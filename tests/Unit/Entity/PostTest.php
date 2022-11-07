@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Entity;
 
 use App\Domain\Blog\Entity\Post;
+use App\Domain\Blog\Entity\Tag;
 use App\Domain\Blog\Enum\PublicationStatus;
 use PHPUnit\Framework\TestCase;
 
@@ -36,5 +37,21 @@ final class PostTest extends TestCase
         $post->setTitle('Dummy post');
 
         self::assertSame('Dummy post', (string) $post);
+    }
+
+    public function testItCanAddAndRemoveTags(): void
+    {
+        $post = new Post();
+        $post->addTag($tag1 = (new Tag())->setName('Tag 1'));
+        $post->addTag($tag2 = (new Tag())->setName('Tag 2'));
+
+        self::assertCount(2, $post->getTags());
+        self::assertSame($tag1, $post->getTags()->first());
+        self::assertSame($tag2, $post->getTags()->last());
+
+        $post->removeTag($tag1);
+
+        self::assertCount(1, $post->getTags());
+        self::assertSame($tag2, $post->getTags()->first());
     }
 }
