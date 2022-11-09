@@ -6,3 +6,11 @@ services:
             $githubClient: '@github.client'
             $logger: '@logger'
             $githubUsername: '%env(GITHUB_USERNAME)%'
+    
+    App\Infrastructure\Twitter\TwitterService:
+        public: true
+        arguments:
+            $cache: '@annotations.cache_adapter'
+            $twitterClient: '@twitter.client'
+            $logger: '@logger'
+            $twitterUserId: '%env(TWITTER_USER_ID)%'

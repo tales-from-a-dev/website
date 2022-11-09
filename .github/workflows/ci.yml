@@ -23,6 +23,8 @@ jobs:
         run: >
           GITHUB_USERNAME=${{ secrets.GH_USERNAME }}
           GITHUB_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}
+          TWITTER_USER_ID=${{ secrets.TWITTER_USER_ID }}
+          TWITTER_BEARER_TOKEN=${{ secrets.TWITTER_BEARER_TOKEN }}
           XDEBUG_MODE=coverage
           docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.test.yml up --build --detach
 
