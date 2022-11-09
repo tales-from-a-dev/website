@@ -6,3 +6,5 @@ services:
     environment:
       GITHUB_USERNAME: ${GITHUB_USERNAME:-app}
       GITHUB_ACCESS_TOKEN: ${GITHUB_ACCESS_TOKEN:-!ChangeMe!}
+      TWITTER_USER_ID: ${TWITTER_USER_ID:-app}
+      TWITTER_BEARER_TOKEN: ${TWITTER_BEARER_TOKEN:-!ChangeMe!}

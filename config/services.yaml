@@ -38,3 +38,7 @@ services:
     App\Infrastructure\GitHub\GitHubService:
         arguments:
             $githubUsername: '%env(GITHUB_USERNAME)%'
+    
+    App\Infrastructure\Twitter\TwitterService:
+        arguments:
+            $twitterUserId: '%env(TWITTER_USER_ID)%'
