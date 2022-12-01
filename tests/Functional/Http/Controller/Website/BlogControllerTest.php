@@ -6,6 +6,7 @@ namespace App\Tests\Functional\Http\Controller\Website;
 
 use App\Domain\Blog\Factory\PostFactory;
 use App\Domain\Blog\Factory\TagFactory;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,13 @@ use Zenstruck\Foundry\Test\Factories;
 final class BlogControllerTest extends WebTestCase
 {
     use Factories;
+
+    private KernelBrowser $client;
+
+    protected function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
 
     /**
      * @dataProvider getIndexUri
@@ -29,8 +37,7 @@ final class BlogControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
-        $client = static::createClient();
-        $crawler = $client->request(Request::METHOD_GET, $uri);
+        $crawler = $this->client->request(Request::METHOD_GET, $uri);
 
         self::assertResponseIsSuccessful();
         self::assertCount(5, $crawler->filter('article'));
@@ -45,8 +52,7 @@ final class BlogControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
-        $client = static::createClient();
-        $crawler = $client->request(Request::METHOD_GET, $uri);
+        $crawler = $this->client->request(Request::METHOD_GET, $uri);
 
         self::assertResponseIsSuccessful();
         self::assertCount(1, $crawler->filter('article'));
@@ -62,8 +68,7 @@ final class BlogControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
-        $client = static::createClient();
-        $client->request(Request::METHOD_GET, '/blog/dummy-title');
+        $this->client->request(Request::METHOD_GET, '/blog/dummy-title');
 
         self::assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
     }
@@ -76,8 +81,7 @@ final class BlogControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
-        $client = static::createClient();
-        $crawler = $client->request(Request::METHOD_GET, "/blog/tag/{$tag->getSlug()}");
+        $crawler = $this->client->request(Request::METHOD_GET, "/blog/tag/{$tag->getSlug()}");
 
         $translator = static::getContainer()->get(TranslatorInterface::class);
 
