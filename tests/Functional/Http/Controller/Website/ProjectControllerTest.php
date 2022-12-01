@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Http\Controller\Website;
 
 use App\Domain\Project\Factory\ProjectFactory;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Zenstruck\Foundry\Test\Factories;
@@ -12,6 +13,13 @@ use Zenstruck\Foundry\Test\Factories;
 final class ProjectControllerTest extends WebTestCase
 {
     use Factories;
+
+    private KernelBrowser $client;
+
+    protected function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
 
     /**
      * @dataProvider getIndexUri
@@ -22,8 +30,7 @@ final class ProjectControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
-        $client = static::createClient();
-        $crawler = $client->request(Request::METHOD_GET, $uri);
+        $crawler = $this->client->request(Request::METHOD_GET, $uri);
 
         self::assertResponseIsSuccessful();
         self::assertCount(5, $crawler->filter('article'));
@@ -38,8 +45,7 @@ final class ProjectControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
-        $client = static::createClient();
-        $crawler = $client->request(Request::METHOD_GET, $uri);
+        $crawler = $this->client->request(Request::METHOD_GET, $uri);
 
         self::assertResponseIsSuccessful();
         self::assertCount(1, $crawler->filter('article'));

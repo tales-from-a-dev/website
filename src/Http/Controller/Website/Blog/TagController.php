@@ -13,9 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(
     path: '/blog/tag/{slug}',
     name: 'blog_tag',
-    requirements: [
-        'slug' => '[\w-]+',
-    ],
+    requirements: ['slug' => '[\w-]+'],
     methods: [Request::METHOD_GET]
 )]
 final class TagController extends AbstractController

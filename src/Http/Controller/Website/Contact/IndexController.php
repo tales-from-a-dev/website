@@ -36,7 +36,7 @@ final class IndexController extends AbstractController
             }
         }
 
-        return $this->renderForm('website/contact/index.html.twig', [
+        return $this->render('website/contact/index.html.twig', [
             'form' => $form,
         ]);
     }

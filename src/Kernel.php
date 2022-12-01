@@ -18,6 +18,11 @@ class Kernel extends BaseKernel
     {
         parent::boot();
 
+        $this->addProjectMetadataTypeToDoctrine();
+    }
+
+    private function addProjectMetadataTypeToDoctrine(): void
+    {
         if (
             ($serializer = $this->getContainer()->get('serializer_doctrine')) &&
             (
