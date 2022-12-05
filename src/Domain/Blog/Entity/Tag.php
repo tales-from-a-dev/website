@@ -33,6 +33,7 @@ class Tag implements IdentifiableInterface, SluggableInterface, TimestampableInt
      * @var Collection<int, Post>
      */
     #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'tags')]
+    #[ORM\OrderBy(['publishedAt' => 'DESC'])]
     private Collection $posts;
 
     public function __construct()

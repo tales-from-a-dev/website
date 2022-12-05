@@ -1,6 +1,2 @@
 parameters:
     ignoreErrors:
-        -
-            message: '#^Call to an undefined method Faker\\Generator::[\w]+\(\).$#'
-            paths:
-                - src/Domain/*

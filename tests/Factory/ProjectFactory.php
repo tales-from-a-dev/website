@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Project\Factory;
+namespace App\Tests\Factory;
 
 use App\Domain\Project\Entity\Project;
 use App\Domain\Project\Enum\ProjectType;

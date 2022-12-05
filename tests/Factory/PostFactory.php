@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Blog\Factory;
+namespace App\Tests\Factory;
 
 use App\Domain\Blog\Entity\Post;
 use App\Domain\Blog\Enum\PublicationStatus;
 use App\Domain\Blog\Repository\PostRepository;
+use App\Tests\Faker\MarkdownProvider;
 use Elao\Enum\Bridge\Faker\Provider\EnumProvider;
 use Monolog\DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
@@ -39,6 +40,7 @@ final class PostFactory extends ModelFactory
         parent::__construct();
 
         self::faker()->addProvider(new EnumProvider());
+        self::faker()->addProvider(new MarkdownProvider(self::faker()));
     }
 
     public function draft(): self
@@ -86,7 +88,7 @@ final class PostFactory extends ModelFactory
     {
         return [
             'title' => self::faker()->text(50),
-            'content' => self::faker()->text(1000),
+            'content' => self::faker()->markdown(),
             'publicationStatus' => self::faker()->randomEnum(PublicationStatus::class),
         ];
     }

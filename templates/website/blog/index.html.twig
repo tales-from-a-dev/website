@@ -6,13 +6,7 @@
 
 {% block body %}
     {% for post in posts %}
-        <article id="{{ post.id }}">
-            <h2>
-                <a href="{{ path('app_website_blog_show', {slug: post.slug}) }}">{{ post.title }}</a>
-            </h2>
-            <span>{{ post.publishedAt|format_datetime('long') }}</span>
-            <div>{{ post.content|u.truncate(50, '...') }}</div>
-        </article>
+        {% include 'website/blog/_post_short.html.twig' %}
     {% endfor %}
 
     <div>

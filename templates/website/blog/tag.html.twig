@@ -8,10 +8,7 @@
     <h1>{{ 'tag.title'|trans({tag: tag}) }}</h1>
     <div>
         {% for post in tag.posts %}
-            <article id="post-{{ post.id }}">
-                <h1>{{ post.title }}</h1>
-                <h3>{{ post.publishedAt|format_datetime('long') }}</h3>
-            </article>
+            {% include 'website/blog/_post_short.html.twig' %}
         {% endfor %}
     </div>
 {% endblock %}

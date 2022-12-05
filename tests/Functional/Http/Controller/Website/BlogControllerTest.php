@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Http\Controller\Website;
 
-use App\Domain\Blog\Factory\PostFactory;
-use App\Domain\Blog\Factory\TagFactory;
+use App\Tests\Factory\PostFactory;
+use App\Tests\Factory\TagFactory;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +18,12 @@ final class BlogControllerTest extends WebTestCase
     use Factories;
 
     private KernelBrowser $client;
+    private TranslatorInterface $translator;
 
     protected function setUp(): void
     {
         $this->client = static::createClient();
+        $this->translator = static::getContainer()->get(TranslatorInterface::class);
     }
 
     /**
@@ -83,10 +85,8 @@ final class BlogControllerTest extends WebTestCase
 
         $crawler = $this->client->request(Request::METHOD_GET, "/blog/tag/{$tag->getSlug()}");
 
-        $translator = static::getContainer()->get(TranslatorInterface::class);
-
         self::assertResponseIsSuccessful();
-        self::assertSelectorTextContains('h1', $translator->trans('tag.title', ['tag' => $tag]));
+        self::assertSelectorTextContains('h1', $this->translator->trans('tag.title', ['tag' => $tag]));
         self::assertCount(10, $crawler->filter('article'));
     }
 
