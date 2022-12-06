@@ -1,0 +1,6 @@
+<article id="post-{{ post.id }}">
+    <h2>
+        <a href="{{ path('app_website_blog_show', {slug: post.slug}) }}">{{ post.title }}</a>
+    </h2>
+    <span>{{ post.publishedAt|format_datetime('long') }}</span>
+</article>

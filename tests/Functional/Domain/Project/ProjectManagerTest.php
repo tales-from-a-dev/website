@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Domain\Project;
 
 use App\Domain\Project\Entity\Project;
-use App\Domain\Project\Factory\ProjectFactory;
 use App\Domain\Project\ProjectManager;
+use App\Tests\Factory\ProjectFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 

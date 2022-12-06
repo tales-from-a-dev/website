@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Blog\Factory;
+namespace App\Tests\Factory;
 
 use App\Domain\Blog\Entity\Tag;
 use App\Domain\Blog\Repository\TagRepository;

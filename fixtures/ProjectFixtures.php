@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fixtures;
 
-use App\Domain\Project\Factory\ProjectFactory;
+use App\Tests\Factory\ProjectFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

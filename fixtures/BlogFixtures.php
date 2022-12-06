@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Fixtures;
 
-use App\Domain\Blog\Factory\PostFactory;
-use App\Domain\Blog\Factory\TagFactory;
+use App\Tests\Factory\PostFactory;
+use App\Tests\Factory\TagFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

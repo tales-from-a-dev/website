@@ -46,6 +46,7 @@ class Post implements IdentifiableInterface, SluggableInterface, TimestampableIn
     #[ORM\JoinTable(name: 'post_tag')]
     #[ORM\JoinColumn(name: 'post_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'id')]
+    #[ORM\OrderBy(['name' => 'ASC'])]
     private Collection $tags;
 
     public function __construct()
