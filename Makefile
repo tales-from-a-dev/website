@@ -12,7 +12,7 @@ PHPUNIT  = $(PHP_CONT) bin/phpunit
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up up-dev start down logs sh composer vendor sf cc db dbc dbd dbm dbl dbu dbv dbt cs static lint test
+.PHONY        : help build up up-dev start down logs sh composer vendor sf cc db dbc dbd dbm dbl dbu dbv dbt cs static lint test
 
 ##
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
