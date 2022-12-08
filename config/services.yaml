@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    app.contact_email: '%env(CONTACT_EMAIL)%'
+    app.contact_phone: '%env(CONTACT_PHONE)%'
 
 services:
     # default configuration for services in *this* file
@@ -11,7 +13,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
-            string $contactEmail: '%env(CONTACT_EMAIL)%'
+            string $contactEmail: '%app.contact_email%'
+            string $contactPhone: '%app.contact_phone%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -39,6 +42,7 @@ services:
         arguments:
             $githubUsername: '%env(GITHUB_USERNAME)%'
     
+    # Twitter service
     App\Infrastructure\Twitter\TwitterService:
         arguments:
             $twitterUserId: '%env(TWITTER_USER_ID)%'

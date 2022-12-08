@@ -1,7 +1,0 @@
-website_controllers:
-    resource: ../../src/Http/Controller/Website
-    type: annotation
-    name_prefix: app_website_
-    prefix:
-        fr: ''
-        en: '/en'

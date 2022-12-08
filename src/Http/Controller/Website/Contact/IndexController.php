@@ -26,14 +26,14 @@ final class IndexController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $contactManager->send($form->getData());
+                $contactManager->notify($form->getData());
 
                 $this->addAlert(AlertType::Success, 'contact.send.success');
-
-                return $this->redirectToRoute('app_website_contact_index');
             } catch (\Exception) {
                 $this->addAlert(AlertType::Error, 'contact.send.error');
             }
+
+            return $this->redirectToRoute('app_website_contact_index');
         }
 
         return $this->render('website/contact/index.html.twig', [

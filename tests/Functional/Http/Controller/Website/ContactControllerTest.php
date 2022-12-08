@@ -6,6 +6,7 @@ namespace App\Tests\Functional\Http\Controller\Website;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
+use Symfony\Bundle\FrameworkBundle\Test\NotificationAssertionsTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -13,6 +14,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class ContactControllerTest extends WebTestCase
 {
     use MailerAssertionsTrait;
+    use NotificationAssertionsTrait;
 
     private KernelBrowser $client;
     private TranslatorInterface $translator;
@@ -35,16 +37,26 @@ final class ContactControllerTest extends WebTestCase
     {
         $this->client->request(Request::METHOD_GET, '/contact');
         $this->client->submitForm('submit', [
-            'contact[name]' => 'John Doe',
-            'contact[email]' => 'johndoe@example.com',
+            'contact[name]' => $contactName = 'John Doe',
+            'contact[email]' => $contactEmail = 'johndoe@example.com',
             'contact[content]' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus nibh, tristique sed lobortis ut, facilisis sed neque. Pellentesque quis mauris volutpat, vehicula mi sed, posuere velit.',
         ]);
+
+        $notification = self::getNotifierMessage();
+
+        self::assertNotificationCount(1);
+        self::assertNotificationSubjectContains(
+            $notification,
+            $this->translator->trans(id: 'contact.subject', parameters: ['name' => $contactName], domain: 'notification')
+        );
 
         $email = self::getMailerMessage();
 
         self::assertEmailCount(1);
-        self::assertEmailHeaderSame($email, 'From', 'John Doe <johndoe@example.com>');
-        self::assertEmailAddressContains($email, 'From', 'johndoe@example.com');
+        self::assertEmailHeaderSame($email, 'From', "$contactName <$contactEmail>");
+        self::assertEmailAddressContains($email, 'From', $contactEmail);
+        self::assertEmailHeaderSame($email, 'To', 'Contact <test@example.com>');
+        self::assertEmailAddressContains($email, 'To', 'test@example.com');
 
         $crawler = $this->client->followRedirect();
 
