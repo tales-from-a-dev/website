@@ -11,11 +11,11 @@ use App\Domain\Project\Event\ProjectUpdatedEvent;
 use App\Domain\Project\Repository\ProjectRepository;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-final class ProjectManager
+final readonly class ProjectManager
 {
     public function __construct(
-        private readonly ProjectRepository $repository,
-        private readonly EventDispatcherInterface $eventDispatcher,
+        private ProjectRepository $repository,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

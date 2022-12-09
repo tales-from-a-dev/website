@@ -10,13 +10,13 @@ use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final class GitHubService
+final readonly class GitHubService
 {
     public function __construct(
-        private readonly CacheInterface $cache,
-        private readonly HttpClientInterface $githubClient,
-        private readonly LoggerInterface $logger,
-        private readonly string $githubUsername,
+        private CacheInterface $cache,
+        private HttpClientInterface $githubClient,
+        private LoggerInterface $logger,
+        private string $githubUsername,
     ) {
     }
 

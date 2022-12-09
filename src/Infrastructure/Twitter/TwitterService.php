@@ -10,13 +10,13 @@ use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final class TwitterService
+final readonly class TwitterService
 {
     public function __construct(
-        private readonly CacheInterface $cache,
-        private readonly HttpClientInterface $twitterClient,
-        private readonly LoggerInterface $logger,
-        private readonly int $twitterUserId,
+        private CacheInterface $cache,
+        private HttpClientInterface $twitterClient,
+        private LoggerInterface $logger,
+        private int $twitterUserId,
     ) {
     }
 
