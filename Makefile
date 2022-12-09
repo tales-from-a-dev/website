@@ -115,10 +115,10 @@ dbt: ## Create test database
 ## —— Linter 💫 ————————————————————————————————————————————————————————————————
 ##
 cs-dry: ## Check coding style in dry mode
-	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
+	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
 
 cs: ## Check coding style
-	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --verbose --ansi
+	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --verbose --ansi
 
 static: ## Perform static analysis
 	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M

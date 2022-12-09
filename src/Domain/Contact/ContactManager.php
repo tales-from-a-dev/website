@@ -11,13 +11,13 @@ use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class ContactManager
+final readonly class ContactManager
 {
     public function __construct(
-        private readonly NotifierInterface $notifier,
-        private readonly TranslatorInterface $translator,
-        private readonly string $contactEmail,
-        private readonly string $contactPhone,
+        private NotifierInterface $notifier,
+        private TranslatorInterface $translator,
+        private string $contactEmail,
+        private string $contactPhone,
     ) {
     }
 
