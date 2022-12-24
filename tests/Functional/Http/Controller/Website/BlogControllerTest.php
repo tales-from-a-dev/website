@@ -75,6 +75,31 @@ final class BlogControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
     }
 
+    public function testItCanSearchPublishedPost(): void
+    {
+        PostFactory::new()
+            ->published()
+            ->sequence([
+                ['title' => 'Dummy post 1'],
+                ['title' => 'Dummy post 2'],
+                ['title' => 'Dummy post 3'],
+            ])
+            ->create()
+        ;
+
+        self::ensureKernelShutdown();
+
+        $crawler = $this->client->request(Request::METHOD_GET, '/blog');
+
+        self::assertCount(3, $crawler->filter('article'));
+
+        $crawler = $this->client->request(Request::METHOD_GET, '/blog?search=post+2');
+
+        self::assertResponseIsSuccessful();
+        self::assertCount(1, $crawler->filter('article'));
+        self::assertSelectorTextContains('h2', 'Dummy post 2');
+    }
+
     public function testItCanViewTagAndRelatedPosts(): void
     {
         $tag = TagFactory::new()->withName('Dummy tag')->create();

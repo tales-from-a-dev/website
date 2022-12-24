@@ -14,25 +14,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(
     path: [
-        'en' => '/projects/{page}',
-        'fr' => '/projets/{page}',
+        'en' => '/projects',
+        'fr' => '/projets',
     ],
     name: 'project_index',
-    requirements: ['page' => '\d+'],
     methods: [Request::METHOD_GET]
 )]
 final class IndexController extends AbstractController
 {
-    public function __invoke(Request $request, ProjectRepository $repository, PaginatorInterface $paginator, int $page = 1): Response
+    public function __invoke(Request $request, ProjectRepository $repository, PaginatorInterface $paginator): Response
     {
-        $query = $repository->createQueryBuilder('p')
-            ->where('p.type = :type')
-            ->setParameter('type', ProjectType::Customer)
-            ->getQuery()
-        ;
-
         return $this->render('website/project/index.html.twig', [
-            'projects' => $paginator->paginate($query, $page, 5),
+            'projects' => $paginator->paginate(
+                $repository->queryAllByType(ProjectType::Customer),
+                $request->query->getInt('page', 1),
+                5
+            ),
         ]);
     }
 }

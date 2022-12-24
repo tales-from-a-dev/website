@@ -45,7 +45,6 @@ final class ContactType extends AbstractType
             'data_class' => Contact::class,
             'empty_data' => new Contact(),
             'translation_domain' => 'form',
-            'required' => false,
         ]);
     }
 }

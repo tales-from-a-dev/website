@@ -43,21 +43,34 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    public function queryAllPublished(): QueryBuilder
+    public function queryAllPublished(mixed $search): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('post');
-
-        return $queryBuilder
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder
+            ->select('p', 't')
+            ->leftJoin('p.tags', 't')
             ->where(
-                $queryBuilder->expr()->isNotNull('post.publishedAt'),
-                $queryBuilder->expr()->lte('post.publishedAt', ':currentDate'),
-                $queryBuilder->expr()->eq('post.publicationStatus', ':publicationStatus')
+                $queryBuilder->expr()->isNotNull('p.publishedAt'),
+                $queryBuilder->expr()->lte('p.publishedAt', ':currentDate'),
+                $queryBuilder->expr()->eq('p.publicationStatus', ':publicationStatus')
             )
             ->setParameters([
                 'currentDate' => new \DateTimeImmutable(),
                 'publicationStatus' => PublicationStatus::Published,
             ])
-            ->orderBy('post.publishedAt', 'DESC')
+        ;
+
+        if ('' !== $search) {
+            $queryBuilder
+                ->andWhere(
+                    $queryBuilder->expr()->like('LOWER(p.title)', 'LOWER(:search)')
+                )
+                ->setParameter('search', "%{$search}%")
+            ;
+        }
+
+        return $queryBuilder
+            ->orderBy('p.publishedAt', 'DESC')
         ;
     }
 }
