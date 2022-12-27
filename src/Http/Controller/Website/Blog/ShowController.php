@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(
     path: '/blog/{slug}',
@@ -19,10 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 )]
 final class ShowController extends AbstractController
 {
+    #[IsGranted(attribute: Action::View->value, subject: 'post')]
     public function __invoke(Request $request, Post $post): Response
     {
-        $this->denyAccessUnlessGranted(Action::View->value, $post);
-
         return $this->render('website/blog/show.html.twig', [
             'post' => $post,
         ]);

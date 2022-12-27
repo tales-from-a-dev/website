@@ -1,5 +1,6 @@
 # btn
 btn:
+    search: 'Rechercher'
     send: 'Envoyer'
     
 # placeholder

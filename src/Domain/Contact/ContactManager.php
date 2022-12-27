@@ -6,6 +6,7 @@ namespace App\Domain\Contact;
 
 use App\Domain\Contact\Model\Contact;
 use App\Domain\Contact\Notification\ContactNotification;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
@@ -16,6 +17,7 @@ final readonly class ContactManager
     public function __construct(
         private NotifierInterface $notifier,
         private TranslatorInterface $translator,
+        private LoggerInterface $logger,
         private string $contactEmail,
         private string $contactPhone,
     ) {
@@ -31,6 +33,12 @@ final readonly class ContactManager
 
         $recipient = new Recipient($this->contactEmail, $this->contactPhone);
 
-        $this->notifier->send($notification, $recipient);
+        try {
+            $this->notifier->send($notification, $recipient);
+        } catch (\Exception $exception) {
+            $this->logger->critical($exception->getMessage(), $exception->getTrace());
+
+            throw $exception;
+        }
     }
 }
