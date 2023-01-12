@@ -1,8 +1,8 @@
 # app
 app:
-    title: 'Tales From a Dev'
+    title: 'Tales from a Dev'
     meta:
-        description: 'Romain Monteil, développeur Web full stack freelance'
+        description: 'Développeur web full-stack freelance à Limoges. Je développe des applications PHP sur les frameworks Symfony et Laravel.'
         
 # blog
 blog:
@@ -11,6 +11,10 @@ blog:
 # contact
 contact:
     title: 'Me contacter'
+   
+# home
+home:
+    title: 'Romain Monteil'
         
 # project
 project:
