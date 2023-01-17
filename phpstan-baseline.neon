@@ -1,2 +1,76 @@
 parameters:
-    ignoreErrors:
+	ignoreErrors:
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Post\\:\\:\\$content type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Post.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Post\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Post.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Post\\:\\:\\$slug type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Post.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Post\\:\\:\\$title type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Post.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Post\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Post.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Tag\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Tag.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Tag\\:\\:\\$name type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Tag.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Tag\\:\\:\\$slug type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Tag.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Tag\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
+			count: 1
+			path: src/Domain/Blog/Entity/Tag.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
+			count: 1
+			path: src/Domain/Project/Entity/Project.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$description type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Project/Entity/Project.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$slug type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Project/Entity/Project.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$title type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Project/Entity/Project.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
+			count: 1
+			path: src/Domain/Project/Entity/Project.php
+
+		-
+			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$url type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
+			count: 1
+			path: src/Domain/Project/Entity/Project.php
