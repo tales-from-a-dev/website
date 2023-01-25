@@ -123,6 +123,12 @@ cs: ## Check coding style
 static: ## Perform static analysis
 	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M
 
+rector-dry: ## Perform code migration/refactoring with Rector in dry mode
+	@$(PHP_CONT) ./vendor/bin/rector process --dry-run
+
+rector: ## Perform code migration/refactoring with Rector
+	@$(PHP_CONT) ./vendor/bin/rector process
+
 lint: cs static ## Check coding style and perform static analysis
 
 ##

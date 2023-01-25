@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 )]
 final class ShowController extends AbstractController
 {
-    public function __invoke(Request $request, Project $project): Response
+    public function __invoke(Project $project): Response
     {
         return $this->render('website/project/show.html.twig', [
             'project' => $project,

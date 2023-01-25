@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 )]
 final class TagController extends AbstractController
 {
-    public function __invoke(Request $request, Tag $tag): Response
+    public function __invoke(Tag $tag): Response
     {
         return $this->render('website/blog/tag.html.twig', [
             'tag' => $tag,
