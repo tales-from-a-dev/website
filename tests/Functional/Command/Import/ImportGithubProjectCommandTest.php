@@ -12,7 +12,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class ImportGithubProjectCommandTest extends KernelTestCase
 {
-    public function testItExecute(): void
+    public function testItCanExecuteCommand(): void
     {
         $kernel = self::bootKernel();
         $application = new Application($kernel);
