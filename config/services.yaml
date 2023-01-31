@@ -46,3 +46,13 @@ services:
     App\Infrastructure\Twitter\TwitterService:
         arguments:
             $twitterUserId: '%env(TWITTER_USER_ID)%'
+
+when@test:
+    services:
+        app.github:
+            alias: App\Infrastructure\GitHub\GitHubService
+            public: true
+
+        app.twitter:
+            alias: App\Infrastructure\Twitter\TwitterService
+            public: true

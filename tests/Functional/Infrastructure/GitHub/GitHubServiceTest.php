@@ -16,7 +16,7 @@ final class GitHubServiceTest extends KernelTestCase
         $container = static::getContainer();
 
         /** @var GitHubService $gitHubService */
-        $gitHubService = $container->get(GitHubService::class);
+        $gitHubService = $container->get('app.github');
 
         self::assertInstanceOf(GitHubService::class, $gitHubService);
 

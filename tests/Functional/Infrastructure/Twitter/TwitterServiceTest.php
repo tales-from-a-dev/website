@@ -16,7 +16,7 @@ final class TwitterServiceTest extends KernelTestCase
         $container = static::getContainer();
 
         /** @var TwitterService $twitterService */
-        $twitterService = $container->get(TwitterService::class);
+        $twitterService = $container->get('app.twitter');
 
         self::assertInstanceOf(TwitterService::class, $twitterService);
 
