@@ -1,5 +1,7 @@
 website_controllers:
-    resource: ../src/Http/Controller/Website
+    resource:
+        path: ../src/Http/Controller/Website
+        namespace: App\Http\Controller\Website
     type: annotation
     name_prefix: app_website_
     prefix:
@@ -7,7 +9,9 @@ website_controllers:
         en: '/en'
 
 controllers:
-    resource: ../src/Http/Controller/
+    resource:
+        path: ../src/Http/Controller/
+        namespace: App\Http\Controller
     type: attribute
     
 app_website_home:
@@ -16,7 +20,3 @@ app_website_home:
     defaults:
         # the path of the template to render
         template: 'website/home.html.twig'
-
-kernel:
-    resource: ../src/Kernel.php
-    type: attribute
