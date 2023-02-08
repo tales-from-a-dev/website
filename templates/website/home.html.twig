@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
+{% block meta_title %}
     {{ 'home.title'|trans }} | {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <div class="m-auto">
-        <h1 class="text-3xl border-b-4 border-yellow-500 pb-1 font-extrabold -rotate-1">{{ '< ' ~ 'app.title'|trans ~ ' />' }}</h1>
+        <h1 class="text-3xl border-b-4 border-yellow-500 pb-1 font-extrabold -rotate-1">{{ '< ' ~ 'app.meta.title'|trans ~ ' />' }}</h1>
         <div class="flex justify-center mt-10">
             <a class="ml-5 hover:text-teal-700" href="https://github.com/ker0x" target="_blank">
                 <svg role="img" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-current">

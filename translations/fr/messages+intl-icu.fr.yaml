@@ -1,9 +1,9 @@
 # app
 app:
-    title: 'Tales from a Dev'
     meta:
         description: 'Développeur web full-stack freelance à Limoges. Je développe des applications PHP sur les frameworks Symfony et Laravel.'
-        
+        title: 'Tales from a Dev'
+
 # blog
 blog:
     title: 'Blog'
