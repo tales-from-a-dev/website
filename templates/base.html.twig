@@ -1,5 +1,5 @@
-{% set current_route = app.request.attributes.get('_route') %}
-{% set current_route_params = app.request.attributes.get('_route_params') %}
+{% set current_route = app.current_route %}
+{% set current_route_params = app.current_route_parameters %}
 {% set current_locale = app.request.locale %}
 
 <!DOCTYPE html>
@@ -8,18 +8,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>{% block title %}{{ 'app.title'|trans }}{% endblock %}</title>
+    <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
 
+    <meta name="title" content="{{ block('meta_title') }}">
     <meta name="description" content="{% block meta_description %}{{ 'app.meta.description'|trans }}{% endblock %}">
     <meta name="author" content="Romain Monteil">
-    <meta name="twitter:card" content="summary_large_image">
 
-    <meta property="og:title" content="{{ block('title') }}">
-    <meta property="og:description" content="{{ block('meta_description') }}">
-    <meta property="og:type" content="website"/>
-    <meta property="og:site_name" content="{{ 'app.title'|trans }}">
-    <meta property="og:url" content="{{ block('meta_canonical') }}">
-    <meta property="og:locale" content="{{ current_locale }}">
+    {% block meta_social %}
+        <!-- open graph / facebook -->
+        <meta property="og:title" content="{{ block('meta_title') }}">
+        <meta property="og:description" content="{{ block('meta_description') }}">
+        <meta property="og:type" content="website"/>
+        <meta property="og:site_name" content="{{ 'app.meta.title'|trans }}">
+        <meta property="og:url" content="{{ block('meta_canonical') }}">
+        <meta property="og:locale" content="{{ current_locale }}">
+
+        <!-- twitter -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ block('meta_title') }}">
+        <meta name="twitter:description" content="{{ block('meta_description') }}">
+        <meta name="twitter:site" content="@ker0x">
+        <meta name="twitter:creator" content="@ker0x">
+    {% endblock %}
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -29,7 +39,8 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     <link rel="canonical" href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}"/>
 </head>
 <body class="flex h-screen antialiased text-slate-200 bg-slate-900 selection:bg-teal-700">

@@ -101,7 +101,7 @@ dbl: ## Reset the database fixtures
 	@$(SYMFONY) doctrine:fixtures:load --no-interaction --purge-with-truncate
 
 dbu: ## Force database update
-	@$(SYMFONY) doctrine:schema:update --force
+	@$(SYMFONY) doctrine:schema:update --complete --force
 
 dbv: ## Check the ORM mapping
 	@$(SYMFONY) doctrine:schema:validate
@@ -109,7 +109,7 @@ dbv: ## Check the ORM mapping
 dbt: ## Create test database
 	@$(SYMFONY) --env=test doctrine:database:drop --if-exists --force
 	@$(SYMFONY) --env=test doctrine:database:create --if-not-exists
-	@$(SYMFONY) --env=test doctrine:schema:update --force
+	@$(SYMFONY) --env=test doctrine:schema:update --complete --force
 
 ##
 ## —— Linter 💫 ————————————————————————————————————————————————————————————————
