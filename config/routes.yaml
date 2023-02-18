@@ -1,7 +1,7 @@
 website_controllers:
     resource:
-        path: ../src/Http/Controller/Website
-        namespace: App\Http\Controller\Website
+        path: ../src/Ui/Controller/Website
+        namespace: App\Ui\Controller\Website
     type: annotation
     name_prefix: app_website_
     prefix:
@@ -10,8 +10,8 @@ website_controllers:
 
 controllers:
     resource:
-        path: ../src/Http/Controller/
-        namespace: App\Http\Controller
+        path: ../src/Ui/Controller/
+        namespace: App\Ui\Controller
     type: attribute
     
 app_website_home:
