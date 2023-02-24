@@ -12,6 +12,7 @@ use App\Core\Entity\Behavior\SluggableTrait;
 use App\Core\Entity\Behavior\TimestampableInterface;
 use App\Core\Entity\Behavior\TimestampableTrait;
 use App\Domain\Project\Enum\ProjectType;
+use App\Domain\Project\Model\GitHubProject;
 use App\Domain\Project\Model\MetadataInterface;
 use App\Domain\Project\Repository\ProjectRepository;
 use Doctrine\DBAL\Types\Types;
@@ -43,7 +44,7 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     private ?string $url = null;
 
     /**
-     * @var \App\Domain\Project\Model\MetadataInterface<\App\Domain\Project\Model\GitHubProject>|null
+     * @var MetadataInterface<GitHubProject>|null
      */
     #[ORM\Column(type: AppTypes::PROJECT_METADATA, nullable: true, options: ['jsonb' => true, 'default' => '{}'])]
     private ?MetadataInterface $metadata = null;
@@ -124,7 +125,7 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     }
 
     /**
-     * @return \App\Domain\Project\Model\MetadataInterface<\App\Domain\Project\Model\GitHubProject>|null
+     * @return MetadataInterface<GitHubProject>|null
      */
     public function getMetadata(): ?MetadataInterface
     {
@@ -132,7 +133,7 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     }
 
     /**
-     * @param \App\Domain\Project\Model\MetadataInterface<\App\Domain\Project\Model\GitHubProject>|null $metadata
+     * @param MetadataInterface<GitHubProject>|null $metadata
      */
     public function setMetadata(?MetadataInterface $metadata): self
     {

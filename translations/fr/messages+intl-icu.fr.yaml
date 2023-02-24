@@ -23,3 +23,10 @@ project:
 # tag
 tag:
     title: 'Mes articles taggués « {tag} »'
+
+# admin
+admin:
+    home:
+        title: 'Administration'
+    login:
+        title: 'Connexion'

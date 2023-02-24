@@ -8,6 +8,7 @@ use Pierstoval\SmokeTesting\FunctionalSmokeTester;
 use Pierstoval\SmokeTesting\FunctionalTestData;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 
 class RouteTest extends WebTestCase
 {
@@ -17,9 +18,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/blog')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_blog_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/blog'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/blog'))
         );
     }
 
@@ -27,9 +28,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/en/blog')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_blog_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/en/blog'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/en/blog'))
         );
     }
 
@@ -37,9 +38,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/contact')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_contact_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/contact'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/contact'))
         );
     }
 
@@ -47,9 +48,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/contact')
-                ->withMethod('POST')
+                ->withMethod(Request::METHOD_POST)
                 ->expectRouteName('app_website_contact_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('POST', '/contact'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_POST, '/contact'))
         );
     }
 
@@ -57,9 +58,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/en/contact')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_contact_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/en/contact'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/en/contact'))
         );
     }
 
@@ -67,9 +68,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/en/contact')
-                ->withMethod('POST')
+                ->withMethod(Request::METHOD_POST)
                 ->expectRouteName('app_website_contact_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('POST', '/en/contact'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_POST, '/en/contact'))
         );
     }
 
@@ -77,9 +78,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/en/projects')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_project_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/en/projects'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/en/projects'))
         );
     }
 
@@ -87,9 +88,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/projets')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_project_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/projets'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/projets'))
         );
     }
 
@@ -97,9 +98,9 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/blog')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_blog_index')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/blog'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/blog'))
         );
     }
 
@@ -107,9 +108,49 @@ class RouteTest extends WebTestCase
     {
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/')
-                ->withMethod('GET')
+                ->withMethod(Request::METHOD_GET)
                 ->expectRouteName('app_website_home')
-                ->appendCallableExpectation($this->assertStatusCodeLessThan500('GET', '/'))
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/'))
+        );
+    }
+
+    public function testRouteAppAdminLoginWithMethodGet(): void
+    {
+        $this->runFunctionalTest(
+            FunctionalTestData::withUrl('/admin/login')
+                ->withMethod(Request::METHOD_GET)
+                ->expectRouteName('app_admin_login')
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/'))
+        );
+    }
+
+    public function testRouteAppAdminLoginWithMethodPost(): void
+    {
+        $this->runFunctionalTest(
+            FunctionalTestData::withUrl('/admin/login')
+                ->withMethod(Request::METHOD_POST)
+                ->expectRouteName('app_admin_login')
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_POST, '/'))
+        );
+    }
+
+    public function testRouteAppAdminLogoutWithMethodGet(): void
+    {
+        $this->runFunctionalTest(
+            FunctionalTestData::withUrl('/admin/logout')
+                ->withMethod(Request::METHOD_GET)
+                ->expectRouteName('app_admin_logout')
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/'))
+        );
+    }
+
+    public function testRouteAppAdminHomeWithMethodGet(): void
+    {
+        $this->runFunctionalTest(
+            FunctionalTestData::withUrl('/admin')
+                ->withMethod(Request::METHOD_GET)
+                ->expectRouteName('app_admin_home')
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/'))
         );
     }
 

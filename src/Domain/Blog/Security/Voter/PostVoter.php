@@ -20,18 +20,25 @@ class PostVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         return match (Action::from($attribute)) {
-            Action::View => $this->canView($subject),
+            Action::View => $this->canView($subject, $token->getUser()),
             Action::Edit => $this->canEdit($subject, $token->getUser()),
-            default => false,
         };
     }
 
-    private function canView(Post $subject): bool
+    private function canView(Post $subject, ?UserInterface $user): bool
     {
-        return $subject->isPublished();
+        if ($subject->isPublished()) {
+            return true;
+        }
+
+        if ($user instanceof UserInterface) {
+            return true;
+        }
+
+        return false;
     }
 
-    private function canEdit(mixed $subject, ?UserInterface $user): bool
+    private function canEdit(Post $subject, ?UserInterface $user): bool
     {
         return $user instanceof UserInterface;
     }
