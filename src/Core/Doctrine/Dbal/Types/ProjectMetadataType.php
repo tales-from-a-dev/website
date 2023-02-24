@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Doctrine\Dbal\Types;
 
+use App\Domain\Project\Model\GitHubProject;
 use App\Domain\Project\Model\MetadataInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
@@ -31,7 +32,7 @@ final class ProjectMetadataType extends JsonType
     }
 
     /**
-     * @return MetadataInterface<\App\Domain\Project\Model\GitHubProject>|null
+     * @return MetadataInterface<GitHubProject>|null
      */
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?MetadataInterface
     {

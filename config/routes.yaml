@@ -7,6 +7,14 @@ website_controllers:
     prefix:
         fr: ''
         en: '/en'
+        
+admin_controllers:
+    resource:
+        path: ../src/Ui/Controller/Admin
+        namespace: App\Ui\Controller\Admin
+    type: annotation
+    name_prefix: app_admin_
+    prefix: '/admin'
 
 controllers:
     resource:
@@ -20,3 +28,14 @@ app_website_home:
     defaults:
         # the path of the template to render
         template: 'website/home.html.twig'
+        
+app_admin_home:
+    path: /admin
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template: 'admin/home.html.twig'
+
+app_admin_logout:
+    path: /admin/logout
+    methods: GET

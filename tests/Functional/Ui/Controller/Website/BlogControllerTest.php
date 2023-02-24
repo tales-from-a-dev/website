@@ -72,7 +72,7 @@ final class BlogControllerTest extends WebTestCase
 
         $this->client->request(Request::METHOD_GET, '/blog/dummy-title');
 
-        self::assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 
     public function testItCanSearchPublishedPost(): void

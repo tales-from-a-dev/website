@@ -1,7 +1,13 @@
 # btn
 btn:
+    login: 'Se connecter'
     search: 'Rechercher'
     send: 'Envoyer'
+    
+# label
+label:
+    email: 'Email'
+    password: 'Mot de passe'
     
 # placeholder
 placeholder:

@@ -20,7 +20,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 )]
 final class ShowController extends AbstractController
 {
-    #[IsGranted(attribute: Action::View->value, subject: 'post')]
+    #[IsGranted(attribute: Action::View->value, subject: 'post', statusCode: Response::HTTP_NOT_FOUND)]
     public function __invoke(Post $post): Response
     {
         return $this->render('website/blog/show.html.twig', [
