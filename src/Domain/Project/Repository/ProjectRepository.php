@@ -43,16 +43,29 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return array<Project>
+     */
+    public function findLatest(ProjectType $type = null): array
+    {
+        $queryBuilder = null !== $type
+            ? $this->queryAllByType($type)
+            : $this->createQueryBuilder('p');
+
+        return $queryBuilder
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->setMaxResults(5)
+            ->getResult();
+    }
+
     public function queryAllByType(ProjectType $type): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('p');
 
         return $queryBuilder
-            ->where(
-                $queryBuilder->expr()->eq('p.type', ':type')
-            )
-            ->setParameter('type', $type)
-        ;
+            ->where($queryBuilder->expr()->eq('p.type', ':type'))
+            ->setParameter('type', $type);
     }
 
     public function findOneByGithubId(string $id): ?Project

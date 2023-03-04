@@ -20,7 +20,7 @@ final class LoginController extends AbstractController
     public function __invoke(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('app_admin_home');
+            return $this->redirectToRoute('app_admin_dashboard_index');
         }
 
         return $this->render('admin/security/login.html.twig', [

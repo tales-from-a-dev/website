@@ -8,13 +8,41 @@ app:
 blog:
     title: 'Blog'
     
+# column
+col:
+    published_at: 'Publié le'
+    status: 'Statut'
+    title: 'Titre'
+    type: 'Type'
+    updated_at: 'Dernière modif.'
+
 # contact
 contact:
     title: 'Me contacter'
+    
+# dashboard
+dashboard:
+    title: 'Administration'
+    latest_posts: 'Derniers articles'
+    latest_projects: 'Derniers projets'
+    
+# enum
+enum:
+    project_type:
+        customer: 'Client'
+        github: 'GitHub'
+    publication_status:
+        draft: 'Brouillon'
+        frozen: 'Gelé'
+        published: 'Publié'
    
 # home
 home:
     title: 'Romain Monteil'
+    
+# login
+login:
+    title: 'Connexion'
         
 # project
 project:
@@ -26,7 +54,9 @@ tag:
 
 # admin
 admin:
-    home:
-        title: 'Administration'
-    login:
-        title: 'Connexion'
+    sidebar:
+        dashboard: 'Dashboard'
+        logout: 'Déconnexion'
+        posts: 'Articles'
+        projects: 'Projets'
+        tags: 'Tags'
