@@ -22,7 +22,7 @@ security:
                 enable_csrf: true
                 login_path: app_admin_login
                 check_path: app_admin_login
-                default_target_path: app_admin_home
+                default_target_path: app_admin_dashboard_index
             logout:
                 path: app_admin_logout
             remember_me:

@@ -149,7 +149,7 @@ class RouteTest extends WebTestCase
         $this->runFunctionalTest(
             FunctionalTestData::withUrl('/admin')
                 ->withMethod(Request::METHOD_GET)
-                ->expectRouteName('app_admin_home')
+                ->expectRouteName('app_admin_dashboard_index')
                 ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/'))
         );
     }

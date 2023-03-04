@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block meta_title %}
-    {{ 'admin.login.title'|trans }} | {{ parent() }}
+    {{ 'login.title'|trans }} | {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -10,7 +10,7 @@
             <div class="w-full bg-gray-800 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
-                        {{ 'admin.login.title'|trans }}
+                        {{ 'login.title'|trans }}
                     </h1>
                     {% if last_error %}
                         <div class="flex p-4 mb-4 text-sm text-red-400 border border-red-800 rounded-lg bg-gray-80" role="alert">
