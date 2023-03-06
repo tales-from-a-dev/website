@@ -8,6 +8,8 @@ use App\Ui\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[Route(
@@ -17,9 +19,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 )]
 final class LoginController extends AbstractController
 {
-    public function __invoke(AuthenticationUtils $authenticationUtils): Response
-    {
-        if ($this->getUser()) {
+    public function __invoke(
+        AuthenticationUtils $authenticationUtils,
+        #[CurrentUser]
+        ?UserInterface $user,
+    ): Response {
+        if ($user) {
             return $this->redirectToRoute('app_admin_dashboard_index');
         }
 

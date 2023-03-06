@@ -15,10 +15,10 @@ enum ProjectType: string implements ReadableEnumInterface, ColoreableEnumInterfa
     use ExtrasTrait;
     use ReadableEnumTrait;
 
-    #[EnumCase(label: 'enum.project_type.customer', extras: ['color' => 'bg-indigo-900 text-indigo-400'])]
+    #[EnumCase(label: 'enum.project_type.customer', extras: ['color' => 'bg-blue-900 text-blue-300'])]
     case Customer = 'customer';
 
-    #[EnumCase(label: 'enum.project_type.github', extras: ['color' => 'bg-purple-900 text-purple-400'])]
+    #[EnumCase(label: 'enum.project_type.github', extras: ['color' => 'bg-gray-900 text-gray-300'])]
     case GitHub = 'github';
 
     public function getColor(): string

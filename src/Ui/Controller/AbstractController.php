@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller;
 
-use App\Core\Enum\AlertType;
+use App\Core\Enum\Alert as EnumAlert;
 use App\Core\Model\Alert;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as SymfonyAbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,7 +28,7 @@ abstract class AbstractController extends SymfonyAbstractController
     /**
      * @param array<string, mixed> $parameters
      */
-    protected function addAlert(AlertType $type, string|TranslatableMessage $message, array $parameters = []): void
+    protected function addAlert(EnumAlert $type, string|TranslatableMessage $message, array $parameters = []): void
     {
         if (\is_string($message)) {
             $message = new TranslatableMessage($message, $parameters, 'alert');

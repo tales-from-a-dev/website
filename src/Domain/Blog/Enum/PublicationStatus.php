@@ -15,13 +15,13 @@ enum PublicationStatus: string implements ReadableEnumInterface, ColoreableEnumI
     use ExtrasTrait;
     use ReadableEnumTrait;
 
-    #[EnumCase(label: 'enum.publication_status.draft', extras: ['color' => 'badge-warning'])]
+    #[EnumCase(label: 'enum.publication_status.draft', extras: ['color' => 'bg-yellow-900 text-yellow-300'])]
     case Draft = 'draft';
 
-    #[EnumCase(label: 'enum.publication_status.frozen', extras: ['color' => 'badge-secondary'])]
+    #[EnumCase(label: 'enum.publication_status.frozen', extras: ['color' => 'bg-blue-900 text-blue-300'])]
     case Frozen = 'frozen';
 
-    #[EnumCase(label: 'enum.publication_status.published', extras: ['color' => 'badge-primary'])]
+    #[EnumCase(label: 'enum.publication_status.published', extras: ['color' => 'bg-green-900 text-green-300'])]
     case Published = 'published';
 
     public function getColor(): string
