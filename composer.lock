@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "08a8fc47e0467a6625fec277a6e024f9",
+    "content-hash": "86d659b830ddb1298b08152c84e27b99",
     "packages": [
         {
             "name": "dflydev/dot-access-data",
@@ -6033,6 +6033,79 @@
                 }
             ],
             "time": "2023-02-16T09:57:23+00:00"
+        },
+        {
+            "name": "symfony/rate-limiter",
+            "version": "v6.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/rate-limiter.git",
+                "reference": "e82784d6a8d64a33f44a8acfd703327a32831533"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/rate-limiter/zipball/e82784d6a8d64a33f44a8acfd703327a32831533",
+                "reference": "e82784d6a8d64a33f44a8acfd703327a32831533",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/options-resolver": "^5.4|^6.0"
+            },
+            "require-dev": {
+                "psr/cache": "^1.0|^2.0|^3.0",
+                "symfony/lock": "^5.4|^6.0"
+            },
+            "suggest": {
+                "symfony/lock": "For preventing race conditions in rate limiters"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\RateLimiter\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wouter de Jong",
+                    "email": "wouter@wouterj.nl"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides a Token Bucket implementation to rate limit input and output in your application",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "limiter",
+                "rate-limiter"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/rate-limiter/tree/v6.2.7"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-02-24T10:42:00+00:00"
         },
         {
             "name": "symfony/routing",

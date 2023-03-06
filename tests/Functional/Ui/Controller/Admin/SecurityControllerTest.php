@@ -47,6 +47,20 @@ final class SecurityControllerTest extends WebTestCase
         self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans('dashboard.title'), $this->translator->trans('app.meta.title')));
     }
 
+    public function testItRedirectToAdminDashboardIfAlreadyLogin(): void
+    {
+        $this->client->loginUser(new InMemoryUser(
+            username: $this->getContainer()->getParameter('user.email'),
+            password: $this->getContainer()->getParameter('user.password'),
+            roles: [Role::User->value]
+        ));
+        $this->client->request(Request::METHOD_GET, '/admin/login');
+        $this->client->followRedirect();
+
+        self::assertResponseIsSuccessful();
+        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans('dashboard.title'), $this->translator->trans('app.meta.title')));
+    }
+
     public function testItTriggerAnErrorWithInvalidCredentials(): void
     {
         $this->client->request(Request::METHOD_GET, '/admin/login');
@@ -61,20 +75,31 @@ final class SecurityControllerTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
         self::assertCount(1, $crawler->filter('div[role=alert]'));
-        self::assertSelectorTextContains('div[role=alert] > div', $this->translator->trans(id: 'Invalid credentials.', domain: 'security'));
+        self::assertSelectorTextContains('div[role=alert] > p', $this->translator->trans(id: 'Invalid credentials.', domain: 'security'));
     }
 
-    public function testItRedirectToAdminDashboardIfAlreadyLogin(): void
+    public function testItTriggerAnErrorWithTooManyAttempts(): void
     {
-        $this->client->loginUser(new InMemoryUser(
-            username: 'user@example.com',
-            password: '$2y$13$.HTrY6My5GMKXPtBaAo4yuYxi3w2VvstIOWveXCwjbTusEGc6NR8m',
-            roles: [Role::User->value]
-        ));
         $this->client->request(Request::METHOD_GET, '/admin/login');
+        $this->client->submitForm(
+            $this->translator->trans(id: 'btn.login', domain: 'form'),
+            [
+                '_email' => 'user',
+                '_password' => 'drowssap',
+            ]
+        );
         $this->client->followRedirect();
+        $this->client->submitForm(
+            $this->translator->trans(id: 'btn.login', domain: 'form'),
+            [
+                '_email' => 'user',
+                '_password' => 'drowssap',
+            ]
+        );
+        $crawler = $this->client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans('dashboard.title'), $this->translator->trans('app.meta.title')));
+        self::assertCount(1, $crawler->filter('div[role=alert]'));
+        self::assertSelectorTextContains('div[role=alert] > p', $this->translator->trans(id: 'Too many failed login attempts, please try again in %minutes% minute.', parameters: ['%minutes%' => 1], domain: 'security'));
     }
 }

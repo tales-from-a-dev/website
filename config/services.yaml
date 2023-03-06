@@ -48,6 +48,10 @@ services:
             $twitterUserId: '%env(TWITTER_USER_ID)%'
 
 when@test:
+    parameters:
+        user.email: '%env(USER_EMAIL)%'
+        user.password: '%env(USER_PASSWORD)%'
+    
     services:
         app.github:
             alias: App\Infrastructure\GitHub\GitHubService
