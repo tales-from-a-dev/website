@@ -5,22 +5,35 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        {% if app.session.flashBag.has('alert') %}
-            {% for alert in app.flashes('alert') %}
-                {{ component('alert', {
-                    alert: alert
-                }) }}
-            {% endfor %}
-        {% endif %}
+    <section class="m-auto">
+        <div class="flex flex-col items-center justify-center w-[500px] px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div class="w-full bg-gray-800 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
+                        {{ 'contact.title'|trans }}
+                    </h1>
+                    {% if app.session.flashBag.has('alert') %}
+                        {% for alert in app.flashes('alert') %}
+                            {{ component('alert', {
+                                alert: alert
+                            }) }}
+                        {% endfor %}
+                    {% endif %}
 
-        {{ form_start(form) }}
-        {{ form_row(form) }}
+                    {{ form_start(form, {
+                        attr: {
+                            class: 'space-y-4 md:space-y-6'
+                        }
+                    }) }}
+                        {{ form_row(form) }}
 
-        <button name="submit"
-                class="w-full text-white bg-teal-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-800">
-            {{- 'btn.send'|trans(domain='form') -}}
-        </button>
-        {{ form_end(form) }}
-    </div>
+                        <button name="submit"
+                                class="w-full text-white bg-teal-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-800">
+                            {{- 'btn.send'|trans(domain='form') -}}
+                        </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

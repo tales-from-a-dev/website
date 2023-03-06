@@ -33,6 +33,7 @@ final class ContactType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'placeholder.contact.content',
+                    'rows' => 4,
                 ],
             ])
         ;

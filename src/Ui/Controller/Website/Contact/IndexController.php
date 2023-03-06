@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller\Website\Contact;
 
-use App\Core\Enum\AlertType;
+use App\Core\Enum\Alert;
 use App\Domain\Contact\ContactManager;
 use App\Ui\Controller\AbstractController;
 use App\Ui\Form\ContactType;
@@ -28,9 +28,9 @@ final class IndexController extends AbstractController
             try {
                 $contactManager->notify($form->getData());
 
-                $this->addAlert(AlertType::Success, 'contact.send.success');
+                $this->addAlert(Alert::Success, 'contact.send.success');
             } catch (\Exception) {
-                $this->addAlert(AlertType::Error, 'contact.send.error');
+                $this->addAlert(Alert::Error, 'contact.send.error');
             }
 
             return $this->redirectToRoute('app_website_contact_index');

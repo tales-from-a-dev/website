@@ -61,8 +61,8 @@ final class ContactControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        self::assertCount(1, $crawler->filter('.alert'));
-        self::assertSelectorTextContains('.alert-success', $this->translator->trans(id: 'contact.send.success', domain: 'alert'));
+        self::assertCount(1, $crawler->filter('div[role=alert]'));
+        self::assertSelectorTextContains('div[role=alert]', $this->translator->trans(id: 'contact.send.success', domain: 'alert'));
     }
 
     public function testItTriggerErrorsWithInvalidData(): void
@@ -76,7 +76,7 @@ final class ContactControllerTest extends WebTestCase
         ]);
 
         self::assertResponseIsUnprocessable();
-        self::assertCount(3, $crawler->filter('ul > li'));
-        self::assertSelectorTextContains('ul > li', $this->translator->trans(id: 'This value should not be blank.', domain: 'validators'));
+        self::assertCount(3, $crawler->filter('p.mt-2.text-sm.text-red-500'));
+        self::assertSelectorTextContains('p.mt-2.text-sm.text-red-500', $this->translator->trans(id: 'This value should not be blank.', domain: 'validators'));
     }
 }
