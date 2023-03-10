@@ -44,7 +44,7 @@ final class SecurityControllerTest extends WebTestCase
         $this->client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans('dashboard.title'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
     }
 
     public function testItRedirectToAdminDashboardIfAlreadyLogin(): void
@@ -58,7 +58,7 @@ final class SecurityControllerTest extends WebTestCase
         $this->client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans('dashboard.title'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
     }
 
     public function testItTriggerAnErrorWithInvalidCredentials(): void

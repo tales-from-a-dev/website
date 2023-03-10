@@ -1,12 +1,24 @@
 # btn
 btn:
+    cancel: 'Annuler'
+    close: 'Fermer'
+    confirm: "Oui, j'en suis sûr"
+    delete: 'Supprimer'
+    edit: 'Modifier'
     login: 'Se connecter'
+    new: 'Nouveau'
+    save: 'Enregistrer'
     search: 'Rechercher'
     send: 'Envoyer'
+
+# delete
+delete:
+    confirm_text: 'Êtes-vous sûr de vouloir confirmer la suppression ?'
     
 # label
 label:
     email: 'Email'
+    name: 'Nom'
     password: 'Mot de passe'
     
 # placeholder

@@ -6,6 +6,7 @@ namespace App\Domain\Blog\Repository;
 
 use App\Domain\Blog\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,5 +40,13 @@ class TagRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function queryAll(): Query
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->orderBy('t.createdAt', 'DESC')
+            ->getQuery();
     }
 }

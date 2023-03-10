@@ -154,6 +154,26 @@ class RouteTest extends WebTestCase
         );
     }
 
+    public function testRouteAppAdminTagWithMethodGet(): void
+    {
+        $this->runFunctionalTest(
+            FunctionalTestData::withUrl('/admin/tag')
+                ->withMethod(Request::METHOD_GET)
+                ->expectRouteName('app_admin_tag_index')
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/'))
+        );
+    }
+
+    public function testRouteAppAdminTagWithMethodDelete(): void
+    {
+        $this->runFunctionalTest(
+            FunctionalTestData::withUrl('/admin/tag/1')
+                ->withMethod(Request::METHOD_DELETE)
+                ->expectRouteName('app_admin_tag_delete')
+                ->appendCallableExpectation($this->assertStatusCodeLessThan500(Request::METHOD_GET, '/'))
+        );
+    }
+
     public function assertStatusCodeLessThan500(string $method, string $url): \Closure
     {
         return function (KernelBrowser $browser) use ($method, $url) {

@@ -7,6 +7,8 @@ namespace App\Core\Entity\Behavior;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use function Symfony\Component\String\s;
+
 trait IdentifiableTrait
 {
     #[ORM\Id]
@@ -17,5 +19,10 @@ trait IdentifiableTrait
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEntityName(): string
+    {
+        return s((new \ReflectionClass($this))->getShortName())->snake()->lower()->toString();
     }
 }

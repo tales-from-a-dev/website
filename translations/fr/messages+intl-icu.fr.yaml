@@ -7,24 +7,10 @@ app:
 # blog
 blog:
     title: 'Blog'
-    
-# column
-col:
-    published_at: 'Publié le'
-    status: 'Statut'
-    title: 'Titre'
-    type: 'Type'
-    updated_at: 'Dernière modif.'
 
 # contact
 contact:
     title: 'Me contacter'
-    
-# dashboard
-dashboard:
-    title: 'Administration'
-    latest_posts: 'Derniers articles'
-    latest_projects: 'Derniers projets'
     
 # enum
 enum:
@@ -43,6 +29,20 @@ home:
 # login
 login:
     title: 'Connexion'
+    
+# pagination
+pagination:
+    first_page: 'Première page'
+    items_per_page: '{items_per_page} par page'
+    last_page: 'Dernière page'
+    next_page: 'Suivant'
+    previous_page: 'Précédent'
+    total_items: >-
+        {itemCount, plural, 
+            =0 {Il n'y a aucun enregistrement} 
+            one {<strong># enregistrement</strong> sur {pageCount} page}
+            other {<strong># enregistrements</strong> sur {pageCount} pages}
+        }
         
 # project
 project:

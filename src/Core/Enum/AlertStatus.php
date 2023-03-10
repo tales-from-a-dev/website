@@ -7,7 +7,7 @@ namespace App\Core\Enum;
 use Elao\Enum\Attribute\EnumCase;
 use Elao\Enum\ExtrasTrait;
 
-enum Alert: string implements ColoreableEnumInterface
+enum AlertStatus: string implements ColoreableEnumInterface
 {
     use ExtrasTrait;
 
