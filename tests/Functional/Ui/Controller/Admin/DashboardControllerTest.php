@@ -7,6 +7,7 @@ namespace App\Tests\Functional\Ui\Controller\Admin;
 use App\Core\Enum\Role;
 use App\Tests\Factory\PostFactory;
 use App\Tests\Factory\ProjectFactory;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\InMemoryUser;
@@ -17,6 +18,20 @@ final class DashboardControllerTest extends WebTestCase
 {
     use Factories;
 
+    private KernelBrowser $client;
+    private TranslatorInterface $translator;
+
+    protected function setUp(): void
+    {
+        $this->client = static::createClient();
+        $this->client->loginUser(new InMemoryUser(
+            username: $this->getContainer()->getParameter('user.email'),
+            password: $this->getContainer()->getParameter('user.password'),
+            roles: [Role::User->value]
+        ));
+        $this->translator = static::getContainer()->get(TranslatorInterface::class);
+    }
+
     public function testItCanViewAdminHomePage(): void
     {
         PostFactory::createMany(5);
@@ -24,25 +39,17 @@ final class DashboardControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
-        $client = static::createClient();
-        $translator = static::getContainer()->get(TranslatorInterface::class);
-
-        $client->loginUser(new InMemoryUser(
-            username: 'user@example.com',
-            password: '$2y$13$.HTrY6My5GMKXPtBaAo4yuYxi3w2VvstIOWveXCwjbTusEGc6NR8m',
-            roles: [Role::User->value]
-        ));
-        $crawler = $client->request(Request::METHOD_GET, '/admin');
+        $crawler = $this->client->request(Request::METHOD_GET, '/admin');
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $translator->trans('dashboard.title'), $translator->trans('app.meta.title')));
+        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
 
         // posts
-        self::assertSelectorTextContains('div[id=latest-posts] h3', $translator->trans('dashboard.latest_posts'));
+        self::assertSelectorTextContains('div[id=latest-posts] h3', $this->translator->trans(id: 'dashboard.latest_posts', domain: 'admin'));
         self::assertCount(5, $crawler->filter('div[id=latest-posts] table > tbody > tr'));
 
         // projects
-        self::assertSelectorTextContains('div[id=latest-projects] h3', $translator->trans('dashboard.latest_projects'));
+        self::assertSelectorTextContains('div[id=latest-projects] h3', $this->translator->trans(id: 'dashboard.latest_projects', domain: 'admin'));
         self::assertCount(5, $crawler->filter('div[id=latest-projects] table > tbody > tr'));
     }
 }

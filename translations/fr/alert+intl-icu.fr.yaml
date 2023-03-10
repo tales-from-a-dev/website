@@ -3,3 +3,42 @@ contact:
     send:
         error: "Une erreur est survenue, votre message n'a pas pu être envoyé. Veuillez réessayer plus tard."
         success: 'Votre message a bien été envoyé. Je vous recontacterai dans les plus brefs délais.'
+        
+# delete
+delete:
+    error: >-
+        {selector, select
+            tag {Impossible de supprimer le tag {name}.}
+            other {Impossible de supprimer le document.}
+        }
+    success: >-
+        {selector, select,
+            tag {Le tag {name} a été supprimé.}
+            other {Le document a été supprimé.}    
+        }
+        
+# edit
+edit:
+    error: >-
+        {selector, select
+            tag {Impossible de modifier le tag {name}.}
+            other {Impossible de modifier le document.}
+        }
+    success: >-
+        {selector, select,
+            tag {Le tag {name} a bien été modifié.}
+            other {Le document a bien été modifié.}    
+        }
+
+# new
+new:
+    error: >-
+        {selector, select,
+            tag {Impossible de créer le tag.}
+            other {Impossible de créer le document.}
+        }
+    success: >-
+        {selector, select,
+            tag {Le tag {name} a bien été créé.}
+            other {Le document a bien été créé.}    
+        }

@@ -3,14 +3,17 @@ module.exports = {
     content: [
         "./assets/**/*.js",
         "./templates/**/*.html.twig",
+        "./node_modules/flowbite/**/*.js",
 
         // Enums
-        "./src/Core/Enum/Alert.php",
+        "./src/Core/Enum/AlertStatus.php",
         "./src/Domain/Blog/Enum/PublicationStatus.php",
         "./src/Domain/Project/Enum/ProjectType.php",
     ],
     theme: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+      require('flowbite/plugin')
+    ],
 }

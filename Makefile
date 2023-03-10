@@ -12,7 +12,7 @@ PHPUNIT  = $(PHP_CONT) bin/phpunit
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up up-dev start down logs sh composer vendor sf cc db dbc dbd dbm dbl dbu dbv dbt cs static lint test
+.PHONY        : help build up up-dev start down logs sh composer vendor sf cc db dbc dbd dbm dbl dbu dbv dbt phpcsfixer phpcsfixer-dry phpstan rector rector-dry lint test
 
 ##
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
@@ -114,13 +114,13 @@ dbt: ## Create test database
 ##
 ## —— Linter 💫 ————————————————————————————————————————————————————————————————
 ##
-cs-dry: ## Check coding style in dry mode
+phpcsfixer-dry: ## Check coding style in dry mode
 	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
 
-cs: ## Check coding style
+phpcsfixer: ## Check coding style
 	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --verbose --ansi
 
-static: ## Perform static analysis
+phpstan: ## Perform static analysis
 	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M
 
 rector-dry: ## Perform code migration/refactoring with Rector in dry mode
@@ -129,11 +129,11 @@ rector-dry: ## Perform code migration/refactoring with Rector in dry mode
 rector: ## Perform code migration/refactoring with Rector
 	@$(PHP_CONT) ./vendor/bin/rector process
 
-lint: cs static ## Check coding style and perform static analysis
+lint: phpcsfixer phpstan ## Check coding style and perform static analysis
 
 ##
 ## —— Tests ⚗️ ————————————————————————————————————————————————————————————————
 ##
 test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
 	@$(eval f ?=)
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./vendor/bin/simple-phpunit $(f)
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./bin/phpunit $(f)

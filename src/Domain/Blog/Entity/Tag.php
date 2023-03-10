@@ -15,11 +15,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name: 'tag')]
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\UniqueConstraint(columns: ['name'])]
+#[UniqueEntity(fields: 'name')]
 class Tag implements IdentifiableInterface, SluggableInterface, TimestampableInterface, \Stringable
 {
     use IdentifiableTrait;
@@ -27,6 +30,8 @@ class Tag implements IdentifiableInterface, SluggableInterface, TimestampableInt
     use TimestampableTrait;
 
     #[ORM\Column(type: Types::STRING, length: 30)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 30)]
     private ?string $name = null;
 
     /**

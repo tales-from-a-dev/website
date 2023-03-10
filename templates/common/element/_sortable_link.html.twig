@@ -1,0 +1,14 @@
+<a{% for attr, value  in options %} {{ attr }}="{{ value }}"{% endfor %}>
+    <span class="float-end">
+        {% if sorted %}
+            {% if direction == 'desc' %}
+                {{ icon('sort-down') }}
+            {% else %}
+                {{ icon('sort-up') }}
+            {% endif %}
+        {% else %}
+            {{ icon('chevron-expand') }}
+        {% endif %}
+    </span>
+    {{ title }}
+</a>

@@ -7,4 +7,6 @@ namespace App\Core\Entity\Behavior;
 interface IdentifiableInterface
 {
     public function getId(): ?int;
+
+    public function getEntityName(): string;
 }

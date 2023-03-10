@@ -1,0 +1,71 @@
+<aside id="sidebar" class="fixed top-0 left-0 lg:w-64 h-full" aria-label="sidenav">
+    <div class="overflow-y-auto py-5 px-3 h-full bg-gray-800 border-r border-gray-700">
+        <ul class="space-y-2">
+            <li>
+                <a href="{{ path('app_admin_dashboard_index') }}"
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group">
+                    <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
+                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                              d="M2.5 3A1.5 1.5 0 001 4.5v4A1.5 1.5 0 002.5 10h6A1.5 1.5 0 0010 8.5v-4A1.5 1.5 0 008.5 3h-6zm11 2A1.5 1.5 0 0012 6.5v7a1.5 1.5 0 001.5 1.5h4a1.5 1.5 0 001.5-1.5v-7A1.5 1.5 0 0017.5 5h-4zm-10 7A1.5 1.5 0 002 13.5v2A1.5 1.5 0 003.5 17h6a1.5 1.5 0 001.5-1.5v-2A1.5 1.5 0 009.5 12h-6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                    <span class="ml-3 hidden lg:inline-block">{{ 'admin.sidebar.dashboard'|trans }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group">
+                    <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
+                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                              d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                    <span class="ml-3 hidden lg:inline-block">{{ 'admin.sidebar.posts'|trans }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group">
+                    <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
+                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                                d="M3.75 3A1.75 1.75 0 002 4.75v3.26a3.235 3.235 0 011.75-.51h12.5c.644 0 1.245.188 1.75.51V6.75A1.75 1.75 0 0016.25 5h-4.836a.25.25 0 01-.177-.073L9.823 3.513A1.75 1.75 0 008.586 3H3.75zM3.75 9A1.75 1.75 0 002 10.75v4.5c0 .966.784 1.75 1.75 1.75h12.5A1.75 1.75 0 0018 15.25v-4.5A1.75 1.75 0 0016.25 9H3.75z"></path>
+                    </svg>
+                    <span class="ml-3 hidden lg:inline-block">{{ 'admin.sidebar.projects'|trans }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_admin_tag_index') }}"
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group{{ is_active_path('app_admin_tag', true) }}">
+                    <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
+                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                              d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                    <span class="ml-3 hidden lg:inline-block">{{ 'admin.sidebar.tags'|trans }}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="pt-5 mt-5 space-y-2 border-t border-gray-700">
+            <li>
+                <a href="{{ path('app_admin_logout') }}"
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg transition duration-75 hover:bg-red-700 group">
+                    <svg aria-hidden="true"
+                         class="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
+                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                              d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z"
+                              fill-rule="evenodd"></path>
+                        <path clip-rule="evenodd"
+                              d="M19 10a.75.75 0 00-.75-.75H8.704l1.048-.943a.75.75 0 10-1.004-1.114l-2.5 2.25a.75.75 0 000 1.114l2.5 2.25a.75.75 0 101.004-1.114l-1.048-.943h9.546A.75.75 0 0019 10z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                    <span class="ml-3 hidden lg:inline-block">{{ 'admin.sidebar.logout'|trans }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
