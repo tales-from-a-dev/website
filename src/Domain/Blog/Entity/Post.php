@@ -16,11 +16,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name: 'post')]
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\UniqueConstraint(columns: ['title'])]
+#[UniqueEntity(fields: 'title')]
 class Post implements IdentifiableInterface, SluggableInterface, TimestampableInterface, \Stringable
 {
     use IdentifiableTrait;
@@ -28,15 +31,20 @@ class Post implements IdentifiableInterface, SluggableInterface, TimestampableIn
     use TimestampableTrait;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5, max: 255)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::STRING, enumType: PublicationStatus::class)]
+    #[Assert\Type(type: PublicationStatus::class)]
     private PublicationStatus $publicationStatus = PublicationStatus::Draft;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Assert\GreaterThanOrEqual(value: 'now')]
     private ?\DateTimeImmutable $publishedAt = null;
 
     /**

@@ -1,6 +1,11 @@
 {% trans_default_domain 'admin' %}
 
 {{ form_start(form) }}
+    <div class="grid grid-cols-2 gap-4 pb-5 mb-5 border-b border-gray-700">
+        {{ form_row(form.publicationStatus) }}
+        {{ form_row(form.publishedAt) }}
+    </div>
+
     {{ form_widget(form) }}
 
     <div class="pt-5 mt-5 space-y-2 border-t border-gray-700">

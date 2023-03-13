@@ -7,7 +7,7 @@ namespace App\Ui\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class AppExtension extends AbstractExtension
+final class AppExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {

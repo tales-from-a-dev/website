@@ -1,0 +1,15 @@
+
+{#
+    Template
+#}
+
+<div class="inline-flex rounded-md shadow-sm" role="group">
+    <a href="{{ path(edit_route, {id: entity.id}) }}"
+       class="px-4 py-2 text-sm font-medium text-white bg-gray-700 border border-gray-600 rounded-l-lg hover:bg-gray-600 focus:z-10 focus:ring-2 focus:ring-blue-500">
+        {{ 'btn.edit'|trans({}, 'form') }}
+    </a>
+    {{ component('form:delete_form', {
+        entity: entity,
+        buttonModalClass: 'px-4 py-2 text-sm font-medium text-white bg-red-600 border border-red-800 rounded-r-md hover:bg-red-800 focus:z-10 focus:ring-2 focus:ring-blue-500'
+    }) }}
+</div>
