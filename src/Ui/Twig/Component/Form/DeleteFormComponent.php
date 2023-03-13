@@ -13,18 +13,20 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 final class DeleteFormComponent
 {
     public IdentifiableInterface $entity;
-
     #[ExposeInTemplate(name: 'confirm_text')]
     public ?string $confirmText = null;
-
+    #[ExposeInTemplate(name: 'btn_modal_label')]
+    public ?string $buttonModalLabel = null;
+    #[ExposeInTemplate(name: 'btn_modal_class')]
+    public ?string $buttonModalClass = null;
     #[ExposeInTemplate(name: 'btn_confirm_label')]
     public ?string $buttonConfirmLabel = null;
-
     #[ExposeInTemplate(name: 'btn_cancel_label')]
     public ?string $buttonCancelLabel = null;
 
-    public function __construct(private readonly RequestStack $request)
-    {
+    public function __construct(
+        private readonly RequestStack $request
+    ) {
     }
 
     #[ExposeInTemplate(name: 'modal_identifier')]

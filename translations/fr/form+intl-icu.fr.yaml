@@ -17,9 +17,14 @@ delete:
     
 # label
 label:
+    content: 'Contenu'
     email: 'Email'
     name: 'Nom'
     password: 'Mot de passe'
+    publication_status: 'Statut de publication'
+    published_at: 'Date de publication'
+    tags: 'Tags'
+    title: 'Titre'
     
 # placeholder
 placeholder:

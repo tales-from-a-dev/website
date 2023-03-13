@@ -4,6 +4,7 @@ col:
   name: 'Nom'
   published_at: 'Publié le'
   status: 'Statut'
+  tags: 'Tags'
   title: 'Titre'
   type: 'Type'
   updated_at: 'Dernière modif.'
@@ -13,18 +14,21 @@ crud:
   edit:
     title: >-
       {entity_name, select,
+          post {Modifier l'article}
           tag {Modifier le tag}
           other {Modifier le document}
       }
   list:
     title: >-
       {entity_name, select,
+          post {Articles}
           tag {Tags}
           other {Documents}
       }
   new:
     title: >-
       {entity_name, select,
+          tag {Nouvel article}
           tag {Nouveau tag}
           other {Nouveau document}
       }

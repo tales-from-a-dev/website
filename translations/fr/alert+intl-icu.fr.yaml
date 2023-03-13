@@ -8,11 +8,13 @@ contact:
 delete:
     error: >-
         {selector, select
+            post {Impossible de supprimer l'article {name}.}
             tag {Impossible de supprimer le tag {name}.}
             other {Impossible de supprimer le document.}
         }
     success: >-
         {selector, select,
+            tag {L'article {name} a été supprimé.}
             tag {Le tag {name} a été supprimé.}
             other {Le document a été supprimé.}    
         }
@@ -21,11 +23,13 @@ delete:
 edit:
     error: >-
         {selector, select
+            post {Impossible de modifier l'article {name}.}
             tag {Impossible de modifier le tag {name}.}
             other {Impossible de modifier le document.}
         }
     success: >-
         {selector, select,
+            post {L'article {name} a bien été modifié.}
             tag {Le tag {name} a bien été modifié.}
             other {Le document a bien été modifié.}    
         }
@@ -34,11 +38,13 @@ edit:
 new:
     error: >-
         {selector, select,
+            post {Impossible de créer l'article.}
             tag {Impossible de créer le tag.}
             other {Impossible de créer le document.}
         }
     success: >-
         {selector, select,
+            post {L'article {name} a bien été créé.}
             tag {Le tag {name} a bien été créé.}
             other {Le document a bien été créé.}    
         }

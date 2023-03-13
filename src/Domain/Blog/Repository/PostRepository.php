@@ -7,6 +7,7 @@ namespace App\Domain\Blog\Repository;
 use App\Domain\Blog\Entity\Post;
 use App\Domain\Blog\Enum\PublicationStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -55,6 +56,16 @@ class PostRepository extends ServiceEntityRepository
             ->setMaxResults(5)
             ->getResult()
         ;
+    }
+
+    public function queryAll(): Query
+    {
+        return $this
+            ->createQueryBuilder('p')
+            ->select('p', 't')
+            ->leftJoin('p.tags', 't')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery();
     }
 
     public function queryAllPublished(mixed $search): QueryBuilder

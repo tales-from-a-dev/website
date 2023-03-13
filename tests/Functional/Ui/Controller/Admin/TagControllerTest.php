@@ -114,20 +114,20 @@ class TagControllerTest extends WebTestCase
         ]);
 
         self::assertResponseIsUnprocessable();
-        self::assertCount(1, $crawler->filter('p.mt-2.text-sm.text-red-500'));
-        self::assertSelectorTextContains('p.mt-2.text-sm.text-red-500', $this->translator->trans(id: 'This value should not be blank.', domain: 'validators'));
+        self::assertCount(1, $crawler->filter('input[id=tag_name] + p'));
+        self::assertSelectorTextContains('input[id=tag_name] + p', $this->translator->trans(id: 'This value should not be blank.', domain: 'validators'));
     }
 
     public function testItTriggerErrorsWithTooShortName(): void
     {
         $this->client->request(Request::METHOD_GET, '/admin/tag/new');
         $crawler = $this->client->submitForm('submit', [
-            'tag[name]' => 'p',
+            'tag[name]' => 'd',
         ]);
 
         self::assertResponseIsUnprocessable();
-        self::assertCount(1, $crawler->filter('p.mt-2.text-sm.text-red-500'));
-        self::assertSelectorTextContains('p.mt-2.text-sm.text-red-500', $this->translator->trans(id: 'This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.', parameters: ['{{ limit }}' => 2, '%count%' => 2], domain: 'validators'));
+        self::assertCount(1, $crawler->filter('input[id=tag_name] + p'));
+        self::assertSelectorTextContains('input[id=tag_name] + p', $this->translator->trans(id: 'This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.', parameters: ['{{ limit }}' => 2, '%count%' => 2], domain: 'validators'));
     }
 
     public function testItTriggerErrorsWithExistingName(): void
@@ -142,7 +142,7 @@ class TagControllerTest extends WebTestCase
         ]);
 
         self::assertResponseIsUnprocessable();
-        self::assertCount(1, $crawler->filter('p.mt-2.text-sm.text-red-500'));
-        self::assertSelectorTextContains('p.mt-2.text-sm.text-red-500', $this->translator->trans(id: 'This value is already used.', domain: 'validators'));
+        self::assertCount(1, $crawler->filter('input[id=tag_name] + p'));
+        self::assertSelectorTextContains('input[id=tag_name] + p', $this->translator->trans(id: 'This value is already used.', domain: 'validators'));
     }
 }

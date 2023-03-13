@@ -4,6 +4,7 @@ module.exports = {
         "./assets/**/*.js",
         "./templates/**/*.html.twig",
         "./node_modules/flowbite/**/*.js",
+        "./node_modules/tom-select/**/*.js",
 
         // Enums
         "./src/Core/Enum/AlertStatus.php",
