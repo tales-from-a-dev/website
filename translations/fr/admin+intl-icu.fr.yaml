@@ -15,6 +15,7 @@ crud:
     title: >-
       {entity_name, select,
           post {Modifier l'article}
+          project {Modifier le projet}
           tag {Modifier le tag}
           other {Modifier le document}
       }
@@ -22,13 +23,15 @@ crud:
     title: >-
       {entity_name, select,
           post {Articles}
+          project {Projets}
           tag {Tags}
           other {Documents}
       }
   new:
     title: >-
       {entity_name, select,
-          tag {Nouvel article}
+          post {Nouvel article}
+          project {Nouveau projet}
           tag {Nouveau tag}
           other {Nouveau document}
       }

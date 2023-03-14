@@ -20,7 +20,7 @@ final class ActionListComponent
     }
 
     #[ExposeInTemplate(name: 'edit_route')]
-    public function getDeleteRoute(): string
+    public function getEditRoute(): string
     {
         $route = str_starts_with($this->request->getCurrentRequest()?->attributes->get('_route'), 'app_admin_')
             ? 'app_admin_%s_edit'

@@ -1,6 +1,6 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{% trans_default_domain 'admin+intl-icu' %}
+{% trans_default_domain 'admin' %}
 
 {% block meta_title %}
     {{ 'dashboard.title'|trans }} | {{ parent() }}
@@ -79,9 +79,7 @@
                                 {{- project.title -}}
                             </th>
                             <td class="px-6 py-4">
-                                {{- component('badge', {
-                                    badge: project.type
-                                }) -}}
+                                {{- component('badge', {badge: project.type}) -}}
                             </td>
                             <td class="px-6 py-4">
                                 {{- project.updatedAt|format_date('long') -}}

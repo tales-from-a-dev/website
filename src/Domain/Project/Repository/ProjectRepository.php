@@ -7,6 +7,7 @@ namespace App\Domain\Project\Repository;
 use App\Domain\Project\Entity\Project;
 use App\Domain\Project\Enum\ProjectType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,6 +44,24 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+    public function queryAll(): Query
+    {
+        return $this
+            ->createQueryBuilder('p')
+            ->select('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery();
+    }
+
+    public function queryAllByType(ProjectType $type): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+
+        return $queryBuilder
+            ->where($queryBuilder->expr()->eq('p.type', ':type'))
+            ->setParameter('type', $type);
+    }
+
     /**
      * @return array<Project>
      */
@@ -57,15 +76,6 @@ class ProjectRepository extends ServiceEntityRepository
             ->getQuery()
             ->setMaxResults(5)
             ->getResult();
-    }
-
-    public function queryAllByType(ProjectType $type): QueryBuilder
-    {
-        $queryBuilder = $this->createQueryBuilder('p');
-
-        return $queryBuilder
-            ->where($queryBuilder->expr()->eq('p.type', ':type'))
-            ->setParameter('type', $type);
     }
 
     public function findOneByGithubId(string $id): ?Project
