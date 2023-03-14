@@ -44,7 +44,6 @@ class Post implements IdentifiableInterface, SluggableInterface, TimestampableIn
     private PublicationStatus $publicationStatus = PublicationStatus::Draft;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
-    #[Assert\GreaterThanOrEqual(value: 'now')]
     private ?\DateTimeImmutable $publishedAt = null;
 
     /**

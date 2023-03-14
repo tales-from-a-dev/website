@@ -4,12 +4,14 @@ btn:
     close: 'Fermer'
     confirm: "Oui, j'en suis sûr"
     delete: 'Supprimer'
+    description: 'Description'
     edit: 'Modifier'
     login: 'Se connecter'
     new: 'Nouveau'
     save: 'Enregistrer'
     search: 'Rechercher'
     send: 'Envoyer'
+    type: 'Type'
 
 # delete
 delete:
@@ -18,13 +20,17 @@ delete:
 # label
 label:
     content: 'Contenu'
+    description: 'Description'
     email: 'Email'
     name: 'Nom'
     password: 'Mot de passe'
     publication_status: 'Statut de publication'
     published_at: 'Date de publication'
+    subtitle: 'Sous-titre'
     tags: 'Tags'
     title: 'Titre'
+    type: 'Type'
+    url: 'Url'
     
 # placeholder
 placeholder:

@@ -1,7 +1,7 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
+    csrf_protection: true
     http_method_override: true
     handle_all_throwables: true
 
@@ -17,20 +17,6 @@ framework:
     #fragments: true
     php_errors:
         log: true
-    
-    http_client:
-        scoped_clients:
-            github.client:
-                base_uri: 'https://api.github.com'
-                headers:
-                    Accept: 'application/vnd.github.v4+json'
-                    Authorization: 'Bearer %env(GITHUB_ACCESS_TOKEN)%'
-                                
-            twitter.client:
-                base_uri: 'https://api.twitter.com'
-                headers:
-                    Accept: 'application/json'
-                    Authorization: 'Bearer %env(TWITTER_BEARER_TOKEN)%'
 
 when@test:
     framework:

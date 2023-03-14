@@ -16,6 +16,7 @@ security:
         main:
             lazy: true
             provider: users_in_memory
+            
             form_login:
                 username_parameter: _email
                 form_only: true
@@ -23,12 +24,16 @@ security:
                 login_path: app_admin_login
                 check_path: app_admin_login
                 default_target_path: app_admin_dashboard_index
-            logout:
-                path: app_admin_logout
+                
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 always_remember_me: true
+                
+            logout:
+                path: app_admin_logout
+                enable_csrf: true
+            
             login_throttling: ~
 
             # activate different ways to authenticate

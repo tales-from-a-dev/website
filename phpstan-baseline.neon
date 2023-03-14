@@ -69,8 +69,3 @@ parameters:
 			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
 			count: 1
 			path: src/Domain/Project/Entity/Project.php
-
-		-
-			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$url type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
-			count: 1
-			path: src/Domain/Project/Entity/Project.php

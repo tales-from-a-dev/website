@@ -30,6 +30,6 @@ final class DeleteController extends AbstractController
             ]);
         }
 
-        return $this->redirectToRoute('app_admin_tag_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_post_index', [], Response::HTTP_SEE_OTHER);
     }
 }

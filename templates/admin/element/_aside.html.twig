@@ -3,7 +3,7 @@
         <ul class="space-y-2">
             <li>
                 <a href="{{ path('app_admin_dashboard_index') }}"
-                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group">
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group{{ is_active_path('app_admin_dashboard', true, 'bg-gray-700') }}">
                     <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path clip-rule="evenodd"
@@ -15,7 +15,7 @@
             </li>
             <li>
                 <a href="{{ path('app_admin_post_index') }}"
-                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group">
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group{{ is_active_path('app_admin_post', true, 'bg-gray-700 text-white') }}">
                     <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path clip-rule="evenodd"
@@ -26,8 +26,8 @@
                 </a>
             </li>
             <li>
-                <a href="#"
-                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group">
+                <a href="{{ path('app_admin_project_index') }}"
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group{{ is_active_path('app_admin_project', true, 'bg-gray-700') }}">
                     <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -38,7 +38,7 @@
             </li>
             <li>
                 <a href="{{ path('app_admin_tag_index') }}"
-                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group{{ is_active_path('app_admin_tag', true) }}">
+                   class="flex items-center p-2 text-base font-normal text-white rounded-lg hover:bg-gray-700 group{{ is_active_path('app_admin_tag', true, 'bg-gray-700') }}">
                     <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path clip-rule="evenodd"
