@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ca28e938bdd6256e19d0b6611b19460",
+    "content-hash": "9971faa93ab1a6a1d5d6f843a4d9a587",
     "packages": [
         {
             "name": "dflydev/dot-access-data",
@@ -584,21 +584,21 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "2.8.3",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "fd67ba64db3c806f626a33dcab15a4db0c77652e"
+                "reference": "9819c00c2eea750b99902f244309b824911b72b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/fd67ba64db3c806f626a33dcab15a4db0c77652e",
-                "reference": "fd67ba64db3c806f626a33dcab15a4db0c77652e",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/9819c00c2eea750b99902f244309b824911b72b2",
+                "reference": "9819c00c2eea750b99902f244309b824911b72b2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/cache": "^1.11 || ^2.0",
-                "doctrine/dbal": "^3.4.0",
+                "doctrine/dbal": "^3.6.0",
                 "doctrine/persistence": "^2.2 || ^3",
                 "doctrine/sql-formatter": "^1.0.1",
                 "php": "^7.4 || ^8.0",
@@ -614,11 +614,12 @@
             "conflict": {
                 "doctrine/annotations": ">=3.0",
                 "doctrine/orm": "<2.11 || >=3.0",
-                "twig/twig": "<1.34 || >=2.0,<2.4"
+                "twig/twig": "<1.34 || >=2.0 <2.4"
             },
             "require-dev": {
                 "doctrine/annotations": "^1 || ^2",
                 "doctrine/coding-standard": "^9.0",
+                "doctrine/deprecations": "^1.0",
                 "doctrine/orm": "^2.11 || ^3.0",
                 "friendsofphp/proxy-manager-lts": "^1.0",
                 "phpunit/phpunit": "^9.5.26 || ^10.0",
@@ -679,7 +680,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.8.3"
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.9.0"
             },
             "funding": [
                 {
@@ -695,7 +696,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-03T09:32:42+00:00"
+            "time": "2023-03-23T20:02:57+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -1698,38 +1699,38 @@
         },
         {
             "name": "knplabs/knp-components",
-            "version": "v3.6.0",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/knp-components.git",
-                "reference": "145d74f3fbb24619a60a6f7e54aa4bd10862b07a"
+                "reference": "6b6efa81ee894e325744bf785d50dc962937b1f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/145d74f3fbb24619a60a6f7e54aa4bd10862b07a",
-                "reference": "145d74f3fbb24619a60a6f7e54aa4bd10862b07a",
+                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/6b6efa81ee894e325744bf785d50dc962937b1f2",
+                "reference": "6b6efa81ee894e325744bf785d50dc962937b1f2",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4 || ^8.0",
-                "symfony/event-dispatcher-contracts": "^2.0 || ^3.0",
-                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0"
+                "php": "^8.0",
+                "symfony/event-dispatcher-contracts": "^3.0"
             },
             "conflict": {
                 "doctrine/dbal": "<2.10"
             },
             "require-dev": {
-                "doctrine/mongodb-odm": "^2.0",
-                "doctrine/orm": "^2.7",
-                "doctrine/phpcr-odm": "^1.2",
+                "doctrine/mongodb-odm": "^2.4",
+                "doctrine/orm": "^2.12",
+                "doctrine/phpcr-odm": "^1.6",
                 "ext-pdo_sqlite": "*",
-                "jackalope/jackalope-doctrine-dbal": "^1.2",
+                "jackalope/jackalope-doctrine-dbal": "^1.8",
                 "phpunit/phpunit": "^9.5",
                 "propel/propel1": "^1.7",
                 "ruflin/elastica": "^7.0",
                 "solarium/solarium": "^6.0",
-                "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
-                "symfony/property-access": "^4.4 || ^5.4 || ^6.0"
+                "symfony/http-foundation": "^5.4 || ^6.0",
+                "symfony/http-kernel": "^5.4 || ^6.0",
+                "symfony/property-access": "^5.4 || ^6.0"
             },
             "suggest": {
                 "doctrine/common": "to allow usage pagination with Doctrine ArrayCollection",
@@ -1739,12 +1740,13 @@
                 "propel/propel1": "to allow usage pagination with Propel ORM",
                 "ruflin/elastica": "to allow usage pagination with ElasticSearch Client",
                 "solarium/solarium": "to allow usage pagination with Solarium Client",
-                "symfony/property-access": "To allow sorting arrays"
+                "symfony/http-foundation": "to retrieve arguments from Request",
+                "symfony/property-access": "to allow sorting arrays"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -1777,41 +1779,41 @@
             ],
             "support": {
                 "issues": "https://github.com/KnpLabs/knp-components/issues",
-                "source": "https://github.com/KnpLabs/knp-components/tree/v3.6.0"
+                "source": "https://github.com/KnpLabs/knp-components/tree/v4.1.0"
             },
-            "time": "2022-08-18T06:36:14+00:00"
+            "time": "2022-12-19T09:36:54+00:00"
         },
         {
             "name": "knplabs/knp-paginator-bundle",
-            "version": "v5.9.0",
+            "version": "v6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "7879916a8af4f4d4668535cb0b71f55cc416da66"
+                "reference": "15e5af11e4e5b4a4de84d29f82bcef23df03a892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/7879916a8af4f4d4668535cb0b71f55cc416da66",
-                "reference": "7879916a8af4f4d4668535cb0b71f55cc416da66",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/15e5af11e4e5b4a4de84d29f82bcef23df03a892",
+                "reference": "15e5af11e4e5b4a4de84d29f82bcef23df03a892",
                 "shasum": ""
             },
             "require": {
-                "knplabs/knp-components": "^2.4 || ^3.0",
-                "php": "^7.3 || ^8.0",
-                "symfony/config": "^4.4 || ^5.4 || ^6.0",
-                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
-                "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
-                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
-                "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
-                "symfony/routing": "^4.4 || ^5.4 || ^6.0",
-                "symfony/translation": "^4.4 || ^5.4 || ^6.0",
-                "twig/twig": "^2.0 || ^3.0"
+                "knplabs/knp-components": "^4.1",
+                "php": "^8.0",
+                "symfony/config": "^6.0",
+                "symfony/dependency-injection": "^6.0",
+                "symfony/event-dispatcher": "^6.0",
+                "symfony/http-foundation": "^6.0",
+                "symfony/http-kernel": "^6.0",
+                "symfony/routing": "^6.0",
+                "symfony/translation": "^6.0",
+                "twig/twig": "^3.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^1.2",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
-                "symfony/templating": "^4.4 || ^5.4 || ^6.0"
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^9.5",
+                "symfony/expression-language": "^6.0",
+                "symfony/templating": "^6.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1831,15 +1833,15 @@
             "authors": [
                 {
                     "name": "KnpLabs Team",
-                    "homepage": "http://knplabs.com"
+                    "homepage": "https://knplabs.com"
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle/contributors"
+                    "homepage": "https://github.com/KnpLabs/KnpPaginatorBundle/contributors"
                 }
             ],
             "description": "Paginator bundle for Symfony to automate pagination and simplify sorting and other features",
-            "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle",
+            "homepage": "https://github.com/KnpLabs/KnpPaginatorBundle",
             "keywords": [
                 "bundle",
                 "knp",
@@ -1851,9 +1853,9 @@
             ],
             "support": {
                 "issues": "https://github.com/KnpLabs/KnpPaginatorBundle/issues",
-                "source": "https://github.com/KnpLabs/KnpPaginatorBundle/tree/v5.9.0"
+                "source": "https://github.com/KnpLabs/KnpPaginatorBundle/tree/v6.1.1"
             },
-            "time": "2022-08-28T14:42:14+00:00"
+            "time": "2023-01-16T08:10:23+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -2468,24 +2470,27 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.6.2",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "48f445a408c131e38cab1c235aa6d2bb7a0bb20d"
+                "reference": "1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/48f445a408c131e38cab1c235aa6d2bb7a0bb20d",
-                "reference": "48f445a408c131e38cab1c235aa6d2bb7a0bb20d",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5",
+                "reference": "1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5",
                 "shasum": ""
             },
             "require": {
+                "doctrine/deprecations": "^1.0",
                 "php": "^7.4 || ^8.0",
-                "phpdocumentor/reflection-common": "^2.0"
+                "phpdocumentor/reflection-common": "^2.0",
+                "phpstan/phpdoc-parser": "^1.13"
             },
             "require-dev": {
                 "ext-tokenizer": "*",
+                "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan": "^1.8",
                 "phpstan/phpstan-phpunit": "^1.1",
@@ -2517,9 +2522,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.2"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.0"
             },
-            "time": "2022-10-14T12:47:21+00:00"
+            "time": "2023-03-12T10:13:29+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -6620,16 +6625,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v6.2.7",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "df9599873fdc2540e6f4291f49be4fcc167e9cbf"
+                "reference": "cf8df288db70003681b729b87a022d436b81035f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/df9599873fdc2540e6f4291f49be4fcc167e9cbf",
-                "reference": "df9599873fdc2540e6f4291f49be4fcc167e9cbf",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/cf8df288db70003681b729b87a022d436b81035f",
+                "reference": "cf8df288db70003681b729b87a022d436b81035f",
                 "shasum": ""
             },
             "require": {
@@ -6639,7 +6644,7 @@
             "conflict": {
                 "doctrine/annotations": "<1.12",
                 "phpdocumentor/reflection-docblock": "<3.2.2",
-                "phpdocumentor/type-resolver": "<1.4.0|>=1.7.0",
+                "phpdocumentor/type-resolver": "<1.4.0",
                 "symfony/dependency-injection": "<5.4",
                 "symfony/property-access": "<5.4",
                 "symfony/property-info": "<5.4",
@@ -6647,7 +6652,7 @@
                 "symfony/yaml": "<5.4"
             },
             "require-dev": {
-                "doctrine/annotations": "^1.12|^2",
+                "doctrine/annotations": "^1.12",
                 "phpdocumentor/reflection-docblock": "^3.2|^4.0|^5.0",
                 "symfony/cache": "^5.4|^6.0",
                 "symfony/config": "^5.4|^6.0",
@@ -6701,7 +6706,7 @@
             "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/serializer/tree/v6.2.7"
+                "source": "https://github.com/symfony/serializer/tree/v6.2.0"
             },
             "funding": [
                 {
@@ -6717,7 +6722,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-24T10:42:00+00:00"
+            "time": "2022-11-02T09:08:04+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -8091,6 +8096,59 @@
                 }
             ],
             "time": "2023-02-16T09:57:23+00:00"
+        },
+        {
+            "name": "tales-from-a-dev/flowbite-bundle",
+            "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tales-from-a-dev/flowbite-bundle.git",
+                "reference": "780b09da9b67663bdc7fa7256a24a3f7677d60df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/780b09da9b67663bdc7fa7256a24a3f7677d60df",
+                "reference": "780b09da9b67663bdc7fa7256a24a3f7677d60df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/http-kernel": "^6.2",
+                "symfony/twig-bridge": "^6.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.15"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "TalesFromADev\\FlowbiteBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Romain Monteil",
+                    "email": "monteil.romain@gmail.com"
+                }
+            ],
+            "description": "A Symfony form theme for Flowbite",
+            "homepage": "https://github.com/talesfromadev/flowbite-bundle",
+            "keywords": [
+                "bundle",
+                "flowbite",
+                "form",
+                "symfony",
+                "theme"
+            ],
+            "support": {
+                "issues": "https://github.com/tales-from-a-dev/flowbite-bundle/issues",
+                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.1"
+            },
+            "time": "2023-03-20T17:49:11+00:00"
         },
         {
             "name": "twig/extra-bundle",
@@ -9476,16 +9534,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.6",
+            "version": "1.10.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a"
+                "reference": "0166aef76e066f0dd2adc2799bdadfa1635711e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0166aef76e066f0dd2adc2799bdadfa1635711e9",
+                "reference": "0166aef76e066f0dd2adc2799bdadfa1635711e9",
                 "shasum": ""
             },
             "require": {
@@ -9514,8 +9572,11 @@
                 "static analysis"
             ],
             "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.10.6"
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
             },
             "funding": [
                 {
@@ -9531,20 +9592,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-09T16:55:12+00:00"
+            "time": "2023-03-24T10:28:16+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "1.3.35",
+            "version": "1.3.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "3dbb999bd56cc21d6733bab60898ebdf388245b5"
+                "reference": "62bd362b432fe29e175168689510ddd927b698f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/3dbb999bd56cc21d6733bab60898ebdf388245b5",
-                "reference": "3dbb999bd56cc21d6733bab60898ebdf388245b5",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/62bd362b432fe29e175168689510ddd927b698f8",
+                "reference": "62bd362b432fe29e175168689510ddd927b698f8",
                 "shasum": ""
             },
             "require": {
@@ -9599,9 +9660,9 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.3.35"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.3.37"
             },
-            "time": "2023-03-10T14:43:05+00:00"
+            "time": "2023-03-17T14:57:03+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
@@ -10141,16 +10202,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.15.21",
+            "version": "0.15.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "1cee8cc5d6d836e1bf9a3006d7b062adde3a6022"
+                "reference": "f4984ebd62b3613002869b0ddd6868261d62819e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/1cee8cc5d6d836e1bf9a3006d7b062adde3a6022",
-                "reference": "1cee8cc5d6d836e1bf9a3006d7b062adde3a6022",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/f4984ebd62b3613002869b0ddd6868261d62819e",
+                "reference": "f4984ebd62b3613002869b0ddd6868261d62819e",
                 "shasum": ""
             },
             "require": {
@@ -10190,7 +10251,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.15.21"
+                "source": "https://github.com/rectorphp/rector/tree/0.15.23"
             },
             "funding": [
                 {
@@ -10198,7 +10259,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-06T11:44:29+00:00"
+            "time": "2023-03-22T15:22:45+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -11930,16 +11991,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.29.0",
+            "version": "v1.30.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "9d31ae64bea443c784c0ccabeb7feb8fb809d167"
+                "reference": "3f7a6e7393889ad2ffa4b3810e3ab142b7b9bccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/9d31ae64bea443c784c0ccabeb7feb8fb809d167",
-                "reference": "9d31ae64bea443c784c0ccabeb7feb8fb809d167",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/3f7a6e7393889ad2ffa4b3810e3ab142b7b9bccf",
+                "reference": "3f7a6e7393889ad2ffa4b3810e3ab142b7b9bccf",
                 "shasum": ""
             },
             "require": {
@@ -11951,6 +12012,9 @@
                 "symfony/string": "^5.4|^6.0",
                 "zenstruck/assert": "^1.0",
                 "zenstruck/callback": "^1.1"
+            },
+            "conflict": {
+                "doctrine/mongodb-odm": "2.5.0"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.4",
@@ -12004,7 +12068,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.29.0"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.30.3"
             },
             "funding": [
                 {
@@ -12012,7 +12076,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-28T15:54:23+00:00"
+            "time": "2023-03-22T17:11:29+00:00"
         }
     ],
     "aliases": [],

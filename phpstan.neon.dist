@@ -18,3 +18,5 @@ parameters:
 		- php
 
 	level: 8
+
+	checkGenericClassInNonGenericObjectType: false

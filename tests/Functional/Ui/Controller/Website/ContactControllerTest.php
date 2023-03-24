@@ -76,7 +76,7 @@ final class ContactControllerTest extends WebTestCase
         ]);
 
         self::assertResponseIsUnprocessable();
-        self::assertCount(3, $crawler->filter('p.mt-2.text-sm.text-red-500'));
-        self::assertSelectorTextContains('p.mt-2.text-sm.text-red-500', $this->translator->trans(id: 'This value should not be blank.', domain: 'validators'));
+        self::assertCount(3, $crawler->filter('p.mt-2.text-sm.text-red-600.dark\:text-red-500'));
+        self::assertSelectorTextContains('p.mt-2.text-sm.text-red-600.dark\:text-red-500', $this->translator->trans(id: 'This value should not be blank.', domain: 'validators'));
     }
 }

@@ -22,7 +22,7 @@ final class ActionListComponent
     #[ExposeInTemplate(name: 'edit_route')]
     public function getEditRoute(): string
     {
-        $route = str_starts_with($this->request->getCurrentRequest()?->attributes->get('_route'), 'app_admin_')
+        $route = str_starts_with((string) $this->request->getCurrentRequest()?->attributes->get('_route'), 'app_admin_')
             ? 'app_admin_%s_edit'
             : 'app_website_%s_edit';
 

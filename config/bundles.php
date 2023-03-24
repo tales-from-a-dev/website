@@ -23,4 +23,5 @@ return [
     Pierstoval\SmokeTesting\SmokeTestingBundle::class => ['dev' => true, 'test' => true],
     Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
+    TalesFromADev\FlowbiteBundle\FlowbiteBundle::class => ['all' => true],
 ];

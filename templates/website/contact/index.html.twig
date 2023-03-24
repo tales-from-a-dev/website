@@ -6,12 +6,13 @@
 
 {% block body %}
     <section class="m-auto">
-        <div class="flex flex-col items-center justify-center w-[500px] px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <div class="w-full bg-gray-800 rounded-lg shadow border border-gray-700 md:mt-0 sm:max-w-md xl:p-0">
+        <div class="flex flex-col items-center justify-center max-w-md sm:max-w-2xl px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div class="w-full bg-gray-800 rounded-lg shadow border border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
+                    <h1 class="text-2xl font-bold leading-tight tracking-tight text-white">
                         {{ 'contact.title'|trans }}
                     </h1>
+                    <p class="mb-8">{{ 'contact.text'|trans }}</p>
                     {% if app.session.flashBag.has('alert') %}
                         {% for alert in app.flashes('alert') %}
                             {{ component('alert', {

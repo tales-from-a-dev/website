@@ -10,6 +10,7 @@ blog:
 
 # contact
 contact:
+    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
     title: 'Me contacter'
     
 # enum
