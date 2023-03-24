@@ -38,7 +38,7 @@ final class DeleteFormComponent
     #[ExposeInTemplate(name: 'delete_route')]
     public function getDeleteRoute(): string
     {
-        $route = str_starts_with($this->request->getCurrentRequest()?->attributes->get('_route'), 'app_admin_')
+        $route = str_starts_with((string) $this->request->getCurrentRequest()?->attributes->get('_route'), 'app_admin_')
             ? 'app_admin_%s_delete'
             : 'app_website_%s_delete';
 

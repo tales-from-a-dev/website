@@ -349,6 +349,9 @@
             "webpack.config.js"
         ]
     },
+    "tales-from-a-dev/flowbite-bundle": {
+        "version": "v0.2.1"
+    },
     "twig/extra-bundle": {
         "version": "v3.4.0"
     },

@@ -39,6 +39,9 @@ final class ProjectType extends AbstractType
             ])
             ->add('url', UrlType::class, [
                 'label' => 'label.url',
+                'attr' => [
+                    'placeholder' => 'https://example.com',
+                ],
                 'required' => false,
             ])
         ;
