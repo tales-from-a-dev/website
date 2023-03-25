@@ -23,5 +23,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd app
-            git pull origin main --rebase
-            
+            git pull origin main --quiet --rebase
+            SERVER_NAME=${{ secrets.SERVER_NAME }} \
+            APP_SECRET=${{ secrets.APP_SECRET }} \
+            CADDY_MERCURE_JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml up --detach --build --force-recreate --no-deps
