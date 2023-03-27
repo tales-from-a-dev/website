@@ -58,7 +58,7 @@ logs: ## Show live logs
 	@$(DOCKER_COMP) logs --tail=0 --follow
 .PHONY: logs
 
-config: ##
+config: ## Parse, resolve and render compose file
 	@$(eval f ?=)
 	@$(DOCKER_COMP) $(f) config
 .PHONY: config
