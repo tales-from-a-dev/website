@@ -29,8 +29,8 @@ final class ContactNotification extends Notification implements EmailNotificatio
         return new EmailMessage(
             (new TemplatedEmail())
                 ->from(new Address(
-                    address: $this->contact->email ?? '',
-                    name: $this->contact->name ?? ''
+                    address: 'noreply@talesfroma.dev',
+                    name: 'Tales from a Dev'
                 ))
                 ->to(new Address(
                     address: $recipient->getEmail(),
