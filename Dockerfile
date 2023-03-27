@@ -116,7 +116,7 @@ RUN set -eux; \
 # Node image
 FROM node:${NODE_VERSION}-alpine AS app_node
 
-COPY --link --from=app_composer /srv/app /app/
+COPY --from=app_composer --link /srv/app /app/
 
 WORKDIR /app
 
@@ -125,8 +125,12 @@ RUN yarn install --force; \
 ## If you are building your code for production
 # RUN npm ci --only=production
 
+# Final prod image
 FROM app_composer AS app_php
+
 COPY --from=app_node --link /app/public/build /srv/app/public/build/
+
+RUN bin/console cache:clear
 
 # Dev image
 FROM app_php AS app_php_dev
