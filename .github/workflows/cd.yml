@@ -1,7 +1,12 @@
 name: cd
 
+run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
+
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
     
 jobs:
   deployment:
@@ -9,19 +14,23 @@ jobs:
     
     runs-on: ubuntu-latest
     
-    environment: production
+    environment: ${{ inputs.environment }}
+    
+    env:
+      SERVER_NAME: ${{ secrets.SERVER_NAME }}
+      CADDY_MERCURE_JWT_SECRET: ${{ secrets.JWT_SECRET }}
     
     steps:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/production.key
-          chmod 600 ~/.ssh/production.key
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
           cat >>~/.ssh/config <<END
-          Host production
+          Host ${{ inputs.environment }}
             HostName $SSH_HOST
             User $SSH_USER
-            IdentityFile ~/.ssh/production.key
+            IdentityFile ~/.ssh/id_ed25519
             StrictHostKeyChecking no
           END
         env:
@@ -30,19 +39,17 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           
       - name: Checkout
-        run: ssh production 'cd app && git pull origin main --rebase'
+        run: ssh ${{ inputs.environment }} 'cd app && git pull origin main --rebase'
         
       - name: Build
         run: >
-          ssh production 'cd app &&
+          ssh ${{ inputs.environment }} 'cd app &&
           SERVER_NAME='"$SERVER_NAME"'
           CADDY_MERCURE_JWT_SECRET='"$CADDY_MERCURE_JWT_SECRET"'
-          POSTGRES_PASSWORD='"$POSTGRES_PASSWORD"'
-          docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build --force-recreate --no-deps --detach'
-        env:
-          SERVER_NAME: ${{ secrets.SERVER_NAME }}
-          CADDY_MERCURE_JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build --detach'
+        
+      - name: Check HTTPS reachability
+        run: curl -k https://"$SERVER_NAME"
         
       - name: Delete SSH
         run: rm -rf ~/.ssh/
