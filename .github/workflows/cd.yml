@@ -33,7 +33,7 @@ jobs:
         run: ssh production 'cd app && git pull origin main --rebase'
         
       - name: Build
-        run: ssh production 'cd app && SERVER_NAME="$SERVER_NAME" CADDY_MERCURE_JWT_SECRET="$CADDY_MERCURE_JWT_SECRET" POSTGRES_PASSWORD="$POSTGRES_PASSWORD" docker compose -f docker-compose.yml -f docker-compose.prod.yml up --detach --build --force-recreate --no-deps'
+        run: ssh production 'cd app && SERVER_NAME=$SERVER_NAME CADDY_MERCURE_JWT_SECRET=$CADDY_MERCURE_JWT_SECRET POSTGRES_PASSWORD=$POSTGRES_PASSWORD docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build --force-recreate --no-deps --detach'
         env:
           SERVER_NAME: ${{ secrets.SERVER_NAME }}
           CADDY_MERCURE_JWT_SECRET: ${{ secrets.JWT_SECRET }}
