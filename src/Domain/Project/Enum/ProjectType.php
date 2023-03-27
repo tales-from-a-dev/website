@@ -6,19 +6,21 @@ namespace App\Domain\Project\Enum;
 
 use App\Core\Enum\ColoreableEnumInterface;
 use Elao\Enum\Attribute\EnumCase;
+use Elao\Enum\Attribute\ReadableEnum;
 use Elao\Enum\ExtrasTrait;
 use Elao\Enum\ReadableEnumInterface;
 use Elao\Enum\ReadableEnumTrait;
 
+#[ReadableEnum(prefix: 'enum.project_type.')]
 enum ProjectType: string implements ReadableEnumInterface, ColoreableEnumInterface
 {
     use ExtrasTrait;
     use ReadableEnumTrait;
 
-    #[EnumCase(label: 'enum.project_type.customer', extras: ['color' => 'bg-blue-900 text-blue-300'])]
+    #[EnumCase(label: 'customer', extras: ['color' => 'bg-blue-900 text-blue-300'])]
     case Customer = 'customer';
 
-    #[EnumCase(label: 'enum.project_type.github', extras: ['color' => 'bg-gray-900 text-gray-300'])]
+    #[EnumCase(label: 'github', extras: ['color' => 'bg-gray-900 text-gray-300'])]
     case GitHub = 'github';
 
     public function getColor(): string

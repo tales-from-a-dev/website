@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Ui\Controller\Website;
 
+use App\Domain\Contact\Model\Contact;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 use Symfony\Bundle\FrameworkBundle\Test\NotificationAssertionsTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
 final class ContactControllerTest extends WebTestCase
 {
@@ -18,11 +20,13 @@ final class ContactControllerTest extends WebTestCase
 
     private KernelBrowser $client;
     private TranslatorInterface $translator;
+    private Environment $twig;
 
     protected function setUp(): void
     {
         $this->client = static::createClient();
         $this->translator = static::getContainer()->get(TranslatorInterface::class);
+        $this->twig = static::getContainer()->get(Environment::class);
     }
 
     public function testItCanViewIndexPage(): void
@@ -35,11 +39,17 @@ final class ContactControllerTest extends WebTestCase
 
     public function testItCanSendAMessage(): void
     {
+        $contact = new Contact(
+            name: 'John Doe',
+            email: 'johndoe@example.com',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus nibh, tristique sed lobortis ut, facilisis sed neque. Pellentesque quis mauris volutpat, vehicula mi sed, posuere velit.'
+        );
+
         $this->client->request(Request::METHOD_GET, '/contact');
         $this->client->submitForm('submit', [
-            'contact[name]' => $contactName = 'John Doe',
-            'contact[email]' => $contactEmail = 'johndoe@example.com',
-            'contact[content]' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus nibh, tristique sed lobortis ut, facilisis sed neque. Pellentesque quis mauris volutpat, vehicula mi sed, posuere velit.',
+            'contact[name]' => $contact->name,
+            'contact[email]' => $contact->email,
+            'contact[content]' => $contact->content,
         ]);
 
         $notification = self::getNotifierMessage();
@@ -47,16 +57,17 @@ final class ContactControllerTest extends WebTestCase
         self::assertNotificationCount(1);
         self::assertNotificationSubjectContains(
             $notification,
-            $this->translator->trans(id: 'contact.subject', parameters: ['name' => $contactName], domain: 'notification')
+            $this->translator->trans(id: 'contact.subject', parameters: ['name' => $contact->name], domain: 'notification')
         );
 
         $email = self::getMailerMessage();
 
         self::assertEmailCount(1);
-        self::assertEmailHeaderSame($email, 'From', "$contactName <$contactEmail>");
-        self::assertEmailAddressContains($email, 'From', $contactEmail);
+        self::assertEmailHeaderSame($email, 'From', 'Tales from a Dev <noreply@talesfroma.dev>');
+        self::assertEmailAddressContains($email, 'From', 'noreply@talesfroma.dev');
         self::assertEmailHeaderSame($email, 'To', 'Contact <test@example.com>');
         self::assertEmailAddressContains($email, 'To', 'test@example.com');
+        self::assertEmailHtmlBodyContains($email, $this->twig->render('email/contact.html.twig', ['contact' => $contact]));
 
         $crawler = $this->client->followRedirect();
 
