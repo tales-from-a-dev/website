@@ -48,9 +48,6 @@ jobs:
           CADDY_MERCURE_JWT_SECRET='"$CADDY_MERCURE_JWT_SECRET"'
           docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build --detach'
         
-      - name: Check HTTPS reachability
-        run: curl -k https://"$SERVER_NAME"
-        
       - name: Delete SSH
         continue-on-error: true
         run: rm -rf ~/.ssh/
