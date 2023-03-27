@@ -1785,16 +1785,16 @@
         },
         {
             "name": "knplabs/knp-paginator-bundle",
-            "version": "v6.1.1",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "15e5af11e4e5b4a4de84d29f82bcef23df03a892"
+                "reference": "8da698f0856b1d9c9c02dcacbfc382c5c9440c80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/15e5af11e4e5b4a4de84d29f82bcef23df03a892",
-                "reference": "15e5af11e4e5b4a4de84d29f82bcef23df03a892",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/8da698f0856b1d9c9c02dcacbfc382c5c9440c80",
+                "reference": "8da698f0856b1d9c9c02dcacbfc382c5c9440c80",
                 "shasum": ""
             },
             "require": {
@@ -1853,9 +1853,9 @@
             ],
             "support": {
                 "issues": "https://github.com/KnpLabs/KnpPaginatorBundle/issues",
-                "source": "https://github.com/KnpLabs/KnpPaginatorBundle/tree/v6.1.1"
+                "source": "https://github.com/KnpLabs/KnpPaginatorBundle/tree/v6.2.0"
             },
-            "time": "2023-01-16T08:10:23+00:00"
+            "time": "2023-03-25T06:51:40+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -1922,16 +1922,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.9",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5"
+                "reference": "d44a24690f16b8c1808bf13b1bd54ae4c63ea048"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c1e114f74e518daca2729ea8c4bf1167038fa4b5",
-                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/d44a24690f16b8c1808bf13b1bd54ae4c63ea048",
+                "reference": "d44a24690f16b8c1808bf13b1bd54ae4c63ea048",
                 "shasum": ""
             },
             "require": {
@@ -1967,7 +1967,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.4-dev"
+                    "dev-main": "2.5-dev"
                 }
             },
             "autoload": {
@@ -2024,7 +2024,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-15T14:07:24+00:00"
+            "time": "2023-03-24T15:16:10+00:00"
         },
         {
             "name": "league/config",
@@ -8099,16 +8099,16 @@
         },
         {
             "name": "tales-from-a-dev/flowbite-bundle",
-            "version": "v0.2.1",
+            "version": "v0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tales-from-a-dev/flowbite-bundle.git",
-                "reference": "780b09da9b67663bdc7fa7256a24a3f7677d60df"
+                "reference": "35c7b4427bffaad648b00624a2def965067c8d3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/780b09da9b67663bdc7fa7256a24a3f7677d60df",
-                "reference": "780b09da9b67663bdc7fa7256a24a3f7677d60df",
+                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/35c7b4427bffaad648b00624a2def965067c8d3b",
+                "reference": "35c7b4427bffaad648b00624a2def965067c8d3b",
                 "shasum": ""
             },
             "require": {
@@ -8117,7 +8117,12 @@
                 "symfony/twig-bridge": "^6.2"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.15"
+                "friendsofphp/php-cs-fixer": "^3.15",
+                "phpunit/phpunit": "^10.0",
+                "symfony/form": "^6.2",
+                "symfony/intl": "^6.2",
+                "symfony/security-csrf": "^6.2",
+                "symfony/translation": "^6.2"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -8136,7 +8141,7 @@
                 }
             ],
             "description": "A Symfony form theme for Flowbite",
-            "homepage": "https://github.com/talesfromadev/flowbite-bundle",
+            "homepage": "https://github.com/tales-from-a-dev/flowbite-bundle",
             "keywords": [
                 "bundle",
                 "flowbite",
@@ -8146,9 +8151,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tales-from-a-dev/flowbite-bundle/issues",
-                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.1"
+                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.2"
             },
-            "time": "2023-03-20T17:49:11+00:00"
+            "time": "2023-03-26T07:42:53+00:00"
         },
         {
             "name": "twig/extra-bundle",
