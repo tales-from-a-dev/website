@@ -12,19 +12,25 @@ jobs:
     environment: production
     
     steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/production.key
+          chmod 600 ~/.ssh/production.key
+          cat >>~/.ssh/config <<END
+          Host production
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/production.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.SSH_USERNAME }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          
       - name: Checkout
-        uses: actions/checkout@v3
-      
-      - name: Deploy
-        uses: appleboy/ssh-action@v0.1.8
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd app
-            git pull origin main --quiet --rebase
-            SERVER_NAME=${{ secrets.SERVER_NAME }} \
-            APP_SECRET=${{ secrets.APP_SECRET }} \
-            CADDY_MERCURE_JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            docker compose -f docker-compose.yml -f docker-compose.prod.yml up --detach --build --force-recreate --no-deps
+        run: ssh production 'cd app && git pull origin main --rebase'
+        
+      - name: Delete SSH
+        run: rm -rf ~/.ssh/

@@ -66,5 +66,5 @@ jobs:
 
       - name: Run PHPUnit
         run: |
-          make dbt
+          make db-test
           make test
