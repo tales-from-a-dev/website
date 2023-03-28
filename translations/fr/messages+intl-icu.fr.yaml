@@ -22,6 +22,24 @@ enum:
         draft: 'Brouillon'
         frozen: 'Gelé'
         published: 'Publié'
+        
+# error
+error:
+    back: 'Retour'
+    text: >-
+        {status_code, select,
+            403 {Vous ne passerez pas !!!}
+            404 {Il semblerait que cette page n'existe pas !}
+            500 {C'est facheux ...}
+            other {{status_text}}
+        }
+    title: >-
+        {status_code, select,
+            403 {Nope}
+            404 {There are no tales to tell...}
+            500 {Ah !}
+            other {Ola mon brave !}
+        }
    
 # home
 home:
