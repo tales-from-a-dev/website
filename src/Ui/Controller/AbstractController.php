@@ -35,7 +35,7 @@ abstract class AbstractController extends SymfonyAbstractController
             $message = new TranslatableMessage($message, $parameters, 'alert');
         }
 
-        $this->addFlash(AlertType::Alert->value, new Alert($message, $status));
+        $this->addFlash('alert', new Alert($message, $status));
     }
 
     /**
@@ -47,6 +47,6 @@ abstract class AbstractController extends SymfonyAbstractController
             $message = new TranslatableMessage($message, $parameters, 'alert');
         }
 
-        $this->addFlash(AlertType::Toast->value, new Alert($message, $status, AlertType::Toast));
+        $this->addFlash('toast', new Alert($message, $status, AlertType::Toast));
     }
 }
