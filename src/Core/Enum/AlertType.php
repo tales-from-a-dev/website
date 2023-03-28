@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Enum;
 
-enum AlertType: string
+enum AlertType
 {
-    case Alert = 'alert';
-    case Toast = 'toast';
+    case Alert;
+    case Toast;
 }
