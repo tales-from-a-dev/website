@@ -29,13 +29,13 @@ abstract class AbstractController extends SymfonyAbstractController
     /**
      * @param array<string, mixed> $parameters
      */
-    protected function addAlert(AlertStatus $status, string|TranslatableMessage $message, array $parameters = []): void
+    protected function addAlert(AlertStatus $status, string|TranslatableMessage $message, array $parameters = [], AlertType $type = AlertType::Alert): void
     {
         if (\is_string($message)) {
             $message = new TranslatableMessage($message, $parameters, 'alert');
         }
 
-        $this->addFlash('alert', new Alert($message, $status));
+        $this->addFlash($type->value, new Alert($message, $status, $type));
     }
 
     /**
@@ -43,10 +43,6 @@ abstract class AbstractController extends SymfonyAbstractController
      */
     protected function addToast(AlertStatus $status, string|TranslatableMessage $message, array $parameters = []): void
     {
-        if (\is_string($message)) {
-            $message = new TranslatableMessage($message, $parameters, 'alert');
-        }
-
-        $this->addFlash('toast', new Alert($message, $status, AlertType::Toast));
+        $this->addAlert($status, $message, $parameters, AlertType::Toast);
     }
 }
