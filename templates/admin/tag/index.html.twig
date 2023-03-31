@@ -37,12 +37,7 @@
                     {{ tag.updatedAt|format_date('long') }}
                 </td>
                 <td class="px-6 py-4 flex items-center justify-start">
-                    <div class="inline-flex rounded-md shadow-sm" role="group">
-                        <a href="{{ path('app_admin_tag_edit', {id: tag.id}) }}" class="px-4 py-2 text-sm font-medium text-white bg-gray-700 border border-gray-600 rounded-l-lg hover:bg-gray-600 focus:z-10 focus:ring-2 focus:ring-blue-500 focus:text-white">
-                            {{ 'btn.edit'|trans({}, 'form') }}
-                        </a>
-                        {{ component('form:delete_form', {entity: tag}) }}
-                    </div>
+                    {{ component('action_list', {entity: tag}) }}
                 </td>
             </tr>
         {% endfor %}

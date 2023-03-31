@@ -149,16 +149,20 @@ db-test: ## Create test database
 ## —— Linter 💫 ————————————————————————————————————————————————————————————————
 ##
 phpcsfixer-dry: ## Check coding style in dry mode
-	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
+	@$(DOCKER_COMP) exec php ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
 .PHONY: phpcsfixer-dry
 
 phpcsfixer: ## Check coding style
-	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --verbose --ansi
+	@$(DOCKER_COMP) exec php ./vendor/bin/php-cs-fixer fix --verbose --ansi
 .PHONY: phpcsfixer
 
 phpstan: ## Perform static analysis
 	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M
 .PHONY: phpstan
+
+phpstan-baseline: ## Update baseline file
+	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M --generate-baseline
+.PHONY: phpstan-baseline
 
 rector-dry: ## Perform code migration/refactoring with Rector in dry mode
 	@$(PHP_CONT) ./vendor/bin/rector process --dry-run
