@@ -42,6 +42,7 @@ jobs:
         run: ssh ${{ inputs.environment }} 'cd app && git pull origin main --rebase'
         
       - name: Build
+        continue-on-error: true
         run: >
           ssh ${{ inputs.environment }} 'cd app &&
           SERVER_NAME='"$SERVER_NAME"'
@@ -49,5 +50,4 @@ jobs:
           docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build --detach'
         
       - name: Delete SSH
-        continue-on-error: true
         run: rm -rf ~/.ssh/
