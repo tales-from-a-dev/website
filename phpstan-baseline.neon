@@ -1,6 +1,26 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Missing parameter \\$dateType \\(int\\|null\\) in call to IntlDateFormatter constructor\\.$#"
+			count: 1
+			path: src/Core/Helper/DateHelper.php
+
+		-
+			message: "#^Missing parameter \\$timeType \\(int\\|null\\) in call to IntlDateFormatter constructor\\.$#"
+			count: 1
+			path: src/Core/Helper/DateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$datetime of method Symfony\\\\Polyfill\\\\Intl\\\\Icu\\\\IntlDateFormatter\\:\\:format\\(\\) expects DateTimeInterface\\|int\\|string, DateTimeImmutable\\|false given\\.$#"
+			count: 1
+			path: src/Core/Helper/DateHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function ucfirst expects string, bool\\|string given\\.$#"
+			count: 1
+			path: src/Core/Helper/DateHelper.php
+
+		-
 			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Post\\:\\:\\$content type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
 			count: 1
 			path: src/Domain/Blog/Entity/Post.php
@@ -46,26 +66,6 @@ parameters:
 			path: src/Domain/Blog/Entity/Tag.php
 
 		-
-			message: "#^Method App\\\\Domain\\\\Blog\\\\Enum\\\\PublicationStatus\\:\\:getColor\\(\\) should return string but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Blog/Enum/PublicationStatus.php
-
-		-
-			message: "#^Part \\$search \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
-			count: 1
-			path: src/Domain/Blog/Repository/PostRepository.php
-
-		-
-			message: "#^Parameter \\#1 \\$subject of method App\\\\Domain\\\\Blog\\\\Security\\\\Voter\\\\PostVoter\\:\\:canEdit\\(\\) expects App\\\\Domain\\\\Blog\\\\Entity\\\\Post, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Blog/Security/Voter/PostVoter.php
-
-		-
-			message: "#^Parameter \\#1 \\$subject of method App\\\\Domain\\\\Blog\\\\Security\\\\Voter\\\\PostVoter\\:\\:canView\\(\\) expects App\\\\Domain\\\\Blog\\\\Entity\\\\Post, mixed given\\.$#"
-			count: 1
-			path: src/Domain/Blog/Security/Voter/PostVoter.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$createdAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
 			count: 1
 			path: src/Domain/Project/Entity/Project.php
@@ -91,141 +91,6 @@ parameters:
 			path: src/Domain/Project/Entity/Project.php
 
 		-
-			message: "#^Method App\\\\Domain\\\\Project\\\\Enum\\\\ProjectType\\:\\:getColor\\(\\) should return string but returns mixed\\.$#"
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, int\\|false given\\.$#"
 			count: 1
-			path: src/Domain/Project/Enum/ProjectType.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Project\\\\Repository\\\\ProjectRepository\\:\\:findLatest\\(\\) should return array\\<App\\\\Domain\\\\Project\\\\Entity\\\\Project\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Project/Repository/ProjectRepository.php
-
-		-
-			message: "#^Method App\\\\Domain\\\\Project\\\\Repository\\\\ProjectRepository\\:\\:findOneByGithubId\\(\\) should return App\\\\Domain\\\\Project\\\\Entity\\\\Project\\|null but returns mixed\\.$#"
-			count: 1
-			path: src/Domain/Project/Repository/ProjectRepository.php
-
-		-
-			message: "#^Cannot access offset 'data' on mixed\\.$#"
-			count: 1
-			path: src/Infrastructure/Twitter/TwitterService.php
-
-		-
-			message: "#^Method App\\\\Infrastructure\\\\Twitter\\\\TwitterService\\:\\:getTimeline\\(\\) should return array\\<int, mixed\\> but returns mixed\\.$#"
-			count: 1
-			path: src/Infrastructure/Twitter/TwitterService.php
-
-		-
-			message: "#^Cannot access offset 'description' on mixed\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 'forkCount' on mixed\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 2
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 'languages' on mixed\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 'name' on mixed\\.$#"
-			count: 2
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 'nodes' on mixed\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 'stargazerCount' on mixed\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 'url' on mixed\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Cannot access offset 0 on mixed\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$description of method App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:setDescription\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of method App\\\\Domain\\\\Project\\\\Repository\\\\ProjectRepository\\:\\:findOneByGithubId\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$title of method App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:setTitle\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$url of method App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:setUrl\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\$forkCount of class App\\\\Domain\\\\Project\\\\Model\\\\GitHubProject constructor expects int, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\$id of class App\\\\Domain\\\\Project\\\\Model\\\\GitHubProject constructor expects string, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\$languages of class App\\\\Domain\\\\Project\\\\Model\\\\GitHubProject constructor expects array\\<string\\>, array\\<int, mixed\\> given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\$stargazerCount of class App\\\\Domain\\\\Project\\\\Model\\\\GitHubProject constructor expects int, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Command/Import/ImportGithubProjectCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$contact of method App\\\\Domain\\\\Contact\\\\ContactManager\\:\\:notify\\(\\) expects App\\\\Domain\\\\Contact\\\\Model\\\\Contact, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Controller/Website/Contact/IndexController.php
-
-		-
-			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: src/Ui/Twig/AppRuntime.php
-
-		-
-			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: src/Ui/Twig/Component/ActionListComponent.php
-
-		-
-			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: src/Ui/Twig/Component/Form/DeleteFormComponent.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method Symfony\\\\Component\\\\Routing\\\\Generator\\\\UrlGeneratorInterface\\:\\:generate\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Twig/Component/Pagination/ItemsPerPageComponent.php
-
-		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, mixed given\\.$#"
-			count: 1
-			path: src/Ui/Twig/Component/Pagination/ItemsPerPageComponent.php
+			path: src/Domain/Statistics/Helper/StatisticsHelper.php

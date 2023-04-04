@@ -32,6 +32,12 @@ final class PostFixtures extends Fixture implements DependentFixtureInterface
             ->many(10)
             ->create()
         ;
+
+        PostFactory::new()
+            ->published()
+            ->many(1000)
+            ->create()
+        ;
     }
 
     public function getDependencies(): array

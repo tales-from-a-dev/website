@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Blog\Repository;
 
+use App\Core\Repository\StatisticsRepositoryInterface;
+use App\Core\Repository\StatisticsRepositoryTrait;
 use App\Domain\Blog\Entity\Post;
 use App\Domain\Blog\Enum\PublicationStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -19,8 +21,10 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Post[]    findAll()
  * @method Post[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PostRepository extends ServiceEntityRepository
+class PostRepository extends ServiceEntityRepository implements StatisticsRepositoryInterface
 {
+    use StatisticsRepositoryTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
@@ -97,5 +101,28 @@ class PostRepository extends ServiceEntityRepository
         return $queryBuilder
             ->orderBy('p.publishedAt', 'DESC')
         ;
+    }
+
+    public function countByMonth(string $year = null): array
+    {
+        $year ??= date('Y');
+
+        $query = <<<SQL
+            SELECT DATE_TRUNC('month', p.published_at) as period, COUNT(*) as count
+            FROM post AS p
+            WHERE p.published_at IS NOT NULL
+            AND EXTRACT(YEAR FROM p.published_at) = :year
+            AND p.published_at <= CURRENT_DATE
+            GROUP BY period
+            ORDER BY period DESC
+        SQL;
+
+        /** @var array{period: string, count: int} $rawResult */
+        $rawResult = $this->getEntityManager()->getConnection()
+            ->prepare($query)
+            ->executeQuery(['year' => $year])
+            ->fetchAllAssociative();
+
+        return $this->getStatisticsResult($rawResult);
     }
 }

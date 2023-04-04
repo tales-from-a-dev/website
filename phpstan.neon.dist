@@ -17,6 +17,6 @@ parameters:
 	fileExtensions:
 		- php
 
-	level: 9
+	level: 8
 
 	checkGenericClassInNonGenericObjectType: false
