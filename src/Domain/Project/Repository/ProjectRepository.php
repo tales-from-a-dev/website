@@ -69,7 +69,7 @@ class ProjectRepository extends ServiceEntityRepository implements StatisticsRep
     /**
      * @return array<Project>
      */
-    public function findLatest(ProjectType $type = null): array
+    public function findLatest(?ProjectType $type = null): array
     {
         $queryBuilder = null !== $type
             ? $this->queryAllByType($type)
@@ -103,7 +103,7 @@ class ProjectRepository extends ServiceEntityRepository implements StatisticsRep
         return $query->getOneOrNullResult();
     }
 
-    public function countByMonth(string $year = null): array
+    public function countByMonth(?string $year = null): array
     {
         $year ??= date('Y');
 

@@ -68,7 +68,7 @@ trait SluggableTrait
      * @param array<int, mixed> $values
      * @param array<int, mixed> $usableValues
      *
-     * @throws \App\Core\Entity\Exception\SluggableException
+     * @throws SluggableException
      */
     private function ensureAtLeastOneUsableValue(array $values, array $usableValues): void
     {

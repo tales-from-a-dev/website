@@ -72,7 +72,7 @@
                 {% else %}
                     <li>
                         <a class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-400 bg-gray-800 border border-gray-700 hover:bg-gray-700 hover:text-white"
-                           href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount -1 }}</a>
+                           href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount - 1 }}</a>
                     </li>
                 {% endif %}
             {% endif %}

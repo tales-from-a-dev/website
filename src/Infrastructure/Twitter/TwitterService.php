@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Infrastructure\Twitter;
 
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+#[AsAlias(id: 'app.twitter', public: true)]
 final readonly class TwitterService
 {
     public function __construct(

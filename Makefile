@@ -24,15 +24,15 @@ help: ## Outputs this help screen
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 ##
 build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --pull --no-cache
+	@$(DOCKER_COMP) build --no-cache
 .PHONY: build
 
 up: ## Start the docker hub in detached mode (no logs)
-	@$(DOCKER_COMP) up --detach
+	@$(DOCKER_COMP) up --pull always --detach --wait
 .PHONY: up
 
 up-dev: ## Start the docker hub in detached mode (no logs) for debugging
-	@XDEBUG_MODE=debug $(DOCKER_COMP) up --detach
+	@XDEBUG_MODE=debug $(DOCKER_COMP) up --pull always --detach --wait
 .PHONY: up-dev
 
 up-test: ## Start the docker hub in detached mode (no logs) for testing
@@ -172,13 +172,31 @@ rector: ## Perform code migration/refactoring with Rector
 	@$(PHP_CONT) ./vendor/bin/rector process
 .PHONY: rector
 
-lint: phpcsfixer phpstan ## Check coding style and perform static analysis
-.PHONY: lint
+twigcsfixer-dry: ## Check Twig coding style in dry mode
+	@$(PHP_CONT) ./vendor/bin/twig-cs-fixer lint
+.PHONY: twigcsfixer-dry
+
+twigcsfixer: ## Check Twig coding style
+	@$(PHP_CONT) ./vendor/bin/twig-cs-fixer lint --fix
+.PHONY: twigcsfixer
+
+fixer: phpcsfixer twigcsfixer ## Check PHP/Twig coding style
+.PHONY: fixer
+
+linter: ## Twig / Yaml & check DB mapping
+	@$(SYMFONY) lint:twig templates/ --format=github
+	@$(SYMFONY) lint:yaml translations/ config/ --format=github
+	@$(SYMFONY) doctrine:schema:validate --skip-sync
+.PHONY: linter
 
 ##
 ## —— Tests ⚗️ ————————————————————————————————————————————————————————————————
 ##
 test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
 	@$(eval f ?=)
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./bin/phpunit $(f)
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off php ./bin/phpunit $(f)
 .PHONY: test
+
+coverage: ## Run tests with code coverage
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./bin/phpunit
+.PHONY: coverage

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Project\Model;
 
 /**
- * @implements MetadataInterface<GitHubProject>
+ * @template T
+ *
+ * @implements MetadataInterface<T>
  */
 final readonly class GitHubProject implements MetadataInterface
 {

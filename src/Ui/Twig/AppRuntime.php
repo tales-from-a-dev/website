@@ -7,7 +7,7 @@ namespace App\Ui\Twig;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\RuntimeExtensionInterface;
 
-readonly class AppRuntime implements RuntimeExtensionInterface
+final readonly class AppRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
         private RequestStack $requestStack,

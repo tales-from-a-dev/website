@@ -11,16 +11,6 @@ parameters:
 			path: src/Core/Helper/DateHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$datetime of method Symfony\\\\Polyfill\\\\Intl\\\\Icu\\\\IntlDateFormatter\\:\\:format\\(\\) expects DateTimeInterface\\|int\\|string, DateTimeImmutable\\|false given\\.$#"
-			count: 1
-			path: src/Core/Helper/DateHelper.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function ucfirst expects string, bool\\|string given\\.$#"
-			count: 1
-			path: src/Core/Helper/DateHelper.php
-
-		-
 			message: "#^Property App\\\\Domain\\\\Blog\\\\Entity\\\\Post\\:\\:\\$content type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
 			count: 1
 			path: src/Domain/Blog/Entity/Post.php
@@ -91,6 +81,11 @@ parameters:
 			path: src/Domain/Project/Entity/Project.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, int\\|false given\\.$#"
+			message: "#^Call to an undefined method Faker\\\\Generator\\:\\:markdown\\(\\)\\.$#"
 			count: 1
-			path: src/Domain/Statistics/Helper/StatisticsHelper.php
+			path: tests/Factory/PostFactory.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Domain\\\\Project\\\\Model\\\\MetadataInterface\\<App\\\\Domain\\\\Project\\\\Model\\\\GitHubProject\\>\\:\\:\\$id\\.$#"
+			count: 1
+			path: tests/Functional/Domain/Project/ProjectManagerTest.php
