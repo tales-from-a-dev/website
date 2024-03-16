@@ -10,7 +10,7 @@
                 {{- 'error.title'|trans({status_code: status_code}) -}}
             </p>
             <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-                {{- 'error.text'|trans({status_code: status_code, status_text: status_text }) -}}
+                {{- 'error.text'|trans({status_code: status_code, status_text: status_text}) -}}
             </p>
             {% block error_link %}
                 <a href="{{ path('app_website_home') }}"

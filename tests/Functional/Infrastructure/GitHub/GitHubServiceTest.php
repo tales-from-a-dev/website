@@ -11,12 +11,8 @@ final class GitHubServiceTest extends KernelTestCase
 {
     public function testItCanFetchPinnedRepositories(): void
     {
-        self::bootKernel();
-
-        $container = static::getContainer();
-
         /** @var GitHubService $gitHubService */
-        $gitHubService = $container->get('app.github');
+        $gitHubService = static::getContainer()->get('app.github');
 
         self::assertInstanceOf(GitHubService::class, $gitHubService);
 

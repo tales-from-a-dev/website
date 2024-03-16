@@ -8,7 +8,6 @@ use App\Domain\Blog\Entity\Post;
 use App\Domain\Blog\Enum\PublicationStatus;
 use App\Domain\Blog\Repository\PostRepository;
 use App\Tests\Faker\MarkdownProvider;
-use Elao\Enum\Bridge\Faker\Provider\EnumProvider;
 use Monolog\DateTimeImmutable;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -39,7 +38,6 @@ final class PostFactory extends ModelFactory
     {
         parent::__construct();
 
-        self::faker()->addProvider(new EnumProvider());
         self::faker()->addProvider(new MarkdownProvider(self::faker()));
     }
 
@@ -89,7 +87,7 @@ final class PostFactory extends ModelFactory
         return [
             'title' => self::faker()->text(50),
             'content' => self::faker()->markdown(),
-            'publicationStatus' => self::faker()->randomEnum(PublicationStatus::class),
+            'publicationStatus' => self::faker()->randomElement(PublicationStatus::class),
         ];
     }
 

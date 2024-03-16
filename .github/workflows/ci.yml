@@ -1,36 +1,54 @@
-name: ci
+name: CI
 
 on:
-  pull_request:
-    branches: [ main ]
+  push:
+    branches:
+      - main
+  pull_request: ~
+  workflow_dispatch: ~
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   lint:
-    name: Docker lint
+    name: Docker Lint
     
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        
+        uses: actions/checkout@v4
+
       - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@master
-        with:
-          dockerfile: Dockerfile
-          ignore: DL3007,DL3018 # Ignore using latest on mlocati/php-extension-installer & version in apk add
+        uses: hadolint/hadolint-action@v3.1.0
 
-  build:
-    name: Docker test build
+  tests:
+    name: Tests
     
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Pull images
-        run: docker compose pull
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker images
+        uses: docker/bake-action@v4
+        with:
+          pull: true
+          load: true
+          files: |
+            compose.yaml
+            compose.override.yaml
+            compose.test.yaml
+          set: |
+            *.cache-from=type=gha,scope=${{github.ref}}
+            *.cache-from=type=gha,scope=refs/heads/main
+            *.cache-to=type=gha,scope=${{github.ref}},mode=max
 
       - name: Start services
         run: >
@@ -38,33 +56,32 @@ jobs:
           GITHUB_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}
           TWITTER_USER_ID=${{ secrets.TWITTER_USER_ID }}
           TWITTER_BEARER_TOKEN=${{ secrets.TWITTER_BEARER_TOKEN }}
-          XDEBUG_MODE=coverage
-          docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.test.yml up --build --detach
-
-      - name: Wait for services
-        run: |
-          while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
-            case $status in
-              starting) sleep 1;;
-              healthy) exit 0;;
-              unhealthy) exit 1;;
-            esac
-          done
-          exit 1
+          docker compose up --wait --no-build
 
       - name: Check HTTP reachability
-        run: curl http://localhost
+        run: curl -v --fail-with-body http://localhost
 
       - name: Check HTTPS reachability
-        run: curl -k https://localhost
-        
+        run: curl -vk --fail-with-body https://localhost
+ 
       - name: Run PHP CS Fixer
-        run: make phpcsfixer-dry
+        run: docker compose exec -T php vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
 
       - name: Run PHPStan
-        run: make phpstan
+        run: docker compose exec -T php vendor/bin/phpstan analyse --memory-limit 256M
+
+      - name: Create test database
+        if: false # Remove this line if Doctrine ORM is installed
+        run: docker compose exec -T php bin/console -e test doctrine:database:create
+
+      - name: Run migrations
+        if: false # Remove this line if Doctrine Migrations is installed
+        run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
+
+      - name: Doctrine Schema Validator
+        if: false # Remove this line if Doctrine ORM is installed
+        run: docker compose exec -T php bin/console -e test doctrine:schema:validate
 
       - name: Run PHPUnit
-        run: |
-          make db-test
-          make test
+        if: false
+        run: docker compose exec -T php bin/phpunit

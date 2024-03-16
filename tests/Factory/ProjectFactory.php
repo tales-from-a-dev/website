@@ -68,7 +68,7 @@ final class ProjectFactory extends ModelFactory
             'title' => self::faker()->text(50),
             'subTitle' => self::faker()->text(30),
             'description' => self::faker()->text(500),
-            'type' => self::faker()->randomEnum(ProjectType::class),
+            'type' => self::faker()->randomElement(ProjectType::class),
             'url' => self::faker()->url(),
         ];
     }

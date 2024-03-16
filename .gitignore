@@ -16,6 +16,7 @@
 
 ###> symfony/phpunit-bridge ###
 /.phpunit.result.cache
+/.phpunit.cache/
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
@@ -25,3 +26,11 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
+
+###> vincentlanglet/twig-cs-fixer ###
+/.twig-cs-fixer.cache
+###< vincentlanglet/twig-cs-fixer ###

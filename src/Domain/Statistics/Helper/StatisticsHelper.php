@@ -22,7 +22,7 @@ final class StatisticsHelper
 
             $data[$month] = null;
             foreach ($results as $result) {
-                if ($i === (int) date('m', strtotime($result->period))) {
+                if ($i === (int) date('m', (int) strtotime($result->period))) {
                     $data[$month] = $result->count;
                 }
             }

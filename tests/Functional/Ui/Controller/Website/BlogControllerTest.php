@@ -127,6 +127,9 @@ final class BlogControllerTest extends WebTestCase
         yield ['/en/blog/dummy-post'];
     }
 
+    /**
+     * @return iterable<array<int, mixed>>
+     */
     public static function getUnpublishedPosts(): iterable
     {
         yield ['draft'];

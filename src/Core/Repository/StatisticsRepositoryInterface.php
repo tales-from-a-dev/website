@@ -11,5 +11,5 @@ interface StatisticsRepositoryInterface
     /**
      * @return array<StatisticResult>
      */
-    public function countByMonth(string $year = null): array;
+    public function countByMonth(?string $year = null): array;
 }
