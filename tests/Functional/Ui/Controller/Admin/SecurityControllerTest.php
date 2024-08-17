@@ -27,7 +27,7 @@ final class SecurityControllerTest extends WebTestCase
         $crawler = $this->client->request(Request::METHOD_GET, '/admin/login');
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans('login.title'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(\sprintf('%s | %s', $this->translator->trans('login.title'), $this->translator->trans('app.meta.title')));
         self::assertCount(1, $crawler->filter('form'));
     }
 
@@ -44,7 +44,7 @@ final class SecurityControllerTest extends WebTestCase
         $this->client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(\sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
     }
 
     public function testItRedirectToAdminDashboardIfAlreadyLogin(): void
@@ -58,7 +58,7 @@ final class SecurityControllerTest extends WebTestCase
         $this->client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(\sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
     }
 
     public function testItTriggerAnErrorWithInvalidCredentials(): void

@@ -92,7 +92,7 @@ class ProjectRepository extends ServiceEntityRepository implements StatisticsRep
             WHERE p.type = :type
             AND p.metadata::jsonb->>'id' = :id
         SQL;
-        $rawQuery = sprintf($query, $rsm->generateSelectClause());
+        $rawQuery = \sprintf($query, $rsm->generateSelectClause());
 
         $query = $this->getEntityManager()->createNativeQuery($rawQuery, $rsm);
         $query->setParameters([

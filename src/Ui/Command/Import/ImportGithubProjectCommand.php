@@ -37,7 +37,7 @@ final class ImportGithubProjectCommand extends AbstractCommand
             if (null !== $project = $this->projectManager->getRepository()->findOneByGithubId($pinnedRepository['id'])) {
                 $this->io->writeln([
                     '',
-                    sprintf('Project "%s" already exists. Skipped', $project->getTitle()),
+                    \sprintf('Project "%s" already exists. Skipped', $project->getTitle()),
                     '',
                 ]);
 
@@ -60,7 +60,7 @@ final class ImportGithubProjectCommand extends AbstractCommand
             $this->projectManager->create($project);
             $this->io->writeln([
                 '',
-                sprintf('Project "%s" imported.', $project->getTitle()),
+                \sprintf('Project "%s" imported.', $project->getTitle()),
                 '',
             ]);
 
@@ -70,7 +70,7 @@ final class ImportGithubProjectCommand extends AbstractCommand
         $this->io->success('Import finished');
         $this->io->writeln([
             '',
-            sprintf('Total import: %d', $totalImport),
+            \sprintf('Total import: %d', $totalImport),
             '',
         ]);
 

@@ -41,7 +41,7 @@ class PostControllerTest extends WebTestCase
         $crawler = $this->client->request(Request::METHOD_GET, '/admin/post');
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'crud.list.title', parameters: ['entity_name' => 'post'], domain: 'admin'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(\sprintf('%s | %s', $this->translator->trans(id: 'crud.list.title', parameters: ['entity_name' => 'post'], domain: 'admin'), $this->translator->trans('app.meta.title')));
         self::assertCount(10, $crawler->filter('table > tbody > tr'));
     }
 

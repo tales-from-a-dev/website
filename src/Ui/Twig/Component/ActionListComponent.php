@@ -26,6 +26,6 @@ final class ActionListComponent
             ? 'app_admin_%s_edit'
             : 'app_website_%s_edit';
 
-        return sprintf($route, $this->entity->getEntityName());
+        return \sprintf($route, $this->entity->getEntityName());
     }
 }

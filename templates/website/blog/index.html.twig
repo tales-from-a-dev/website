@@ -8,7 +8,7 @@
     {{ form(form) }}
 
     {% for post in posts %}
-        {% include 'website/blog/_post_short.html.twig' %}
+        {{ include('website/blog/_post_short.html.twig') }}
     {% endfor %}
 
     {{ knp_pagination_render(posts) }}

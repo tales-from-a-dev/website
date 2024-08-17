@@ -41,7 +41,7 @@ class ProjectControllerTest extends WebTestCase
         $crawler = $this->client->request(Request::METHOD_GET, '/admin/project');
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'crud.list.title', parameters: ['entity_name' => 'project'], domain: 'admin'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(\sprintf('%s | %s', $this->translator->trans(id: 'crud.list.title', parameters: ['entity_name' => 'project'], domain: 'admin'), $this->translator->trans('app.meta.title')));
         self::assertCount(10, $crawler->filter('table > tbody > tr'));
     }
 
