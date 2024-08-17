@@ -15,11 +15,14 @@
 **/compose.*.yml
 **/compose.yaml
 **/compose.yml
+**/docker-compose.*.yaml
+**/docker-compose.*.yml
+**/docker-compose.yaml
+**/docker-compose.yml
 **/Dockerfile
 **/Thumbs.db
 .github/
 docs/
-node_modules/
 public/bundles/
 tests/
 var/

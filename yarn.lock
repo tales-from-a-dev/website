@@ -1073,7 +1073,7 @@
 "@symfony/ux-live-component@file:vendor/symfony/ux-live-component/assets":
   version "1.0.0"
   dependencies:
-    morphdom "^2.6.1"
+    idiomorph "https://github.com/bigskysoftware/idiomorph.git"
 
 "@symfony/webpack-encore@^4.0.0":
   version "4.2.0"
@@ -2744,6 +2744,10 @@ icss-utils@^5.0.0, icss-utils@^5.1.0:
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-5.1.0.tgz#c6be6858abd013d768e98366ae47e25d5887b1ae"
   integrity sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==
 
+"idiomorph@https://github.com/bigskysoftware/idiomorph.git":
+  version "0.3.0"
+  resolved "https://github.com/bigskysoftware/idiomorph.git#f75fba125e6e3cbfaa31dfa2af11be94455c6a38"
+
 import-fresh@^3.2.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.3.0.tgz#37162c25fcb9ebaa2e6e53d5b4d88ce17d9e0c2b"
@@ -3163,11 +3167,6 @@ minimatch@^3.0.4, minimatch@^3.1.1:
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
-
-morphdom@^2.6.1:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/morphdom/-/morphdom-2.7.0.tgz#9ef0c4bc15ac8725df398d127c6984f62e7f89e8"
-  integrity sha512-8L8DwbdjjWwM/aNqj7BSoSn4G7SQLNiDcxCnMWbf506jojR6lNQ5YOmQqXEIE8u3C492UlkN4d0hQwz97+M1oQ==
 
 ms@2.0.0:
   version "2.0.0"
