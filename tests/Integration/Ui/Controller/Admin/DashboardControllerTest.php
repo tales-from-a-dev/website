@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Ui\Controller\Admin;
+namespace App\Tests\Integration\Ui\Controller\Admin;
 
 use App\Core\Enum\Role;
 use App\Tests\Factory\PostFactory;
@@ -21,15 +21,16 @@ final class DashboardControllerTest extends WebTestCase
     private KernelBrowser $client;
     private TranslatorInterface $translator;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->client = static::createClient();
         $this->client->loginUser(new InMemoryUser(
-            username: $this->getContainer()->getParameter('user.email'),
-            password: $this->getContainer()->getParameter('user.password'),
+            username: self::getContainer()->getParameter('user.email'),
+            password: self::getContainer()->getParameter('user.password'),
             roles: [Role::User->value]
         ));
-        $this->translator = static::getContainer()->get(TranslatorInterface::class);
+        $this->translator = self::getContainer()->get(TranslatorInterface::class);
     }
 
     public function testItCanViewAdminHomePage(): void

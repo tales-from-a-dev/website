@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PostType extends AbstractType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -30,7 +31,7 @@ final class PostType extends AbstractType
                 'widget' => 'single_text',
                 'input' => 'datetime_immutable',
                 'attr' => [
-                    'min' => (new \DateTime())->format(\DateTime::ATOM),
+                    'min' => (new \DateTime())->format(\DateTimeInterface::ATOM),
                 ],
                 'required' => false,
             ])
@@ -51,6 +52,7 @@ final class PostType extends AbstractType
         ;
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

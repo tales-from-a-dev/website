@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 final class ProjectDeletedEvent extends Event
 {
-    public const NAME = 'project.deleted';
+    public const string NAME = 'project.deleted';
 
     public function __construct(
         private readonly Project $project

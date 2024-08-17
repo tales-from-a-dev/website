@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProjectType extends AbstractType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -39,6 +40,7 @@ final class ProjectType extends AbstractType
             ])
             ->add('url', UrlType::class, [
                 'label' => 'label.url',
+                'default_protocol' => 'https',
                 'attr' => [
                     'placeholder' => 'https://example.com',
                 ],
@@ -47,6 +49,7 @@ final class ProjectType extends AbstractType
         ;
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

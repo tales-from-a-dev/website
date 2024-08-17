@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 final class ProjectUpdatedEvent extends Event
 {
-    public const NAME = 'project.updated';
+    public const string NAME = 'project.updated';
 
     public function __construct(
         private readonly Project $project

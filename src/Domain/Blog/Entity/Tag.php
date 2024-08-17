@@ -46,6 +46,7 @@ class Tag implements IdentifiableInterface, SluggableInterface, TimestampableInt
         $this->posts = new ArrayCollection();
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->name ?? '';
@@ -71,6 +72,7 @@ class Tag implements IdentifiableInterface, SluggableInterface, TimestampableInt
         return $this->posts;
     }
 
+    #[\Override]
     public function getSluggableFields(): array
     {
         return ['name'];

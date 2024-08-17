@@ -54,6 +54,7 @@ final class TagFactory extends \Zenstruck\Foundry\Persistence\PersistentProxyObj
     /**
      * @return array<string, mixed>
      */
+    #[\Override]
     protected function defaults(): array
     {
         return [
@@ -61,6 +62,7 @@ final class TagFactory extends \Zenstruck\Foundry\Persistence\PersistentProxyObj
         ];
     }
 
+    #[\Override]
     protected function initialize(): static
     {
         return $this
@@ -68,6 +70,7 @@ final class TagFactory extends \Zenstruck\Foundry\Persistence\PersistentProxyObj
         ;
     }
 
+    #[\Override]
     public static function class(): string
     {
         return Tag::class;

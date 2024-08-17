@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Ui\Controller\Website;
+namespace App\Tests\Integration\Ui\Controller\Website;
 
 use App\Tests\Factory\ProjectFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,14 +17,13 @@ final class ProjectControllerTest extends WebTestCase
 
     private KernelBrowser $client;
 
+    #[\Override]
     protected function setUp(): void
     {
-        $this->client = static::createClient();
+        $this->client = self::createClient();
     }
 
-    /**
-     * @dataProvider getIndexUri
-     */
+    #[DataProvider('getIndexUri')]
     public function testItCanViewIndexPage(string $uri): void
     {
         ProjectFactory::new()->asCustomerProject()->many(10)->create();
@@ -36,9 +36,7 @@ final class ProjectControllerTest extends WebTestCase
         self::assertCount(5, $crawler->filter('article'));
     }
 
-    /**
-     * @dataProvider getShowUri
-     */
+    #[DataProvider('getShowUri')]
     public function testItCanViewShowPage(string $uri): void
     {
         $project = ProjectFactory::createOne(['title' => 'Dummy Project']);
@@ -52,12 +50,12 @@ final class ProjectControllerTest extends WebTestCase
         self::assertSelectorTextContains('h1', $project->getTitle());
     }
 
-    public static function getIndexUri(): \Generator
+    public static function getIndexUri(): iterable
     {
         yield ['/projets'];
     }
 
-    public static function getShowUri(): \Generator
+    public static function getShowUri(): iterable
     {
         yield ['/projets/dummy-project'];
     }

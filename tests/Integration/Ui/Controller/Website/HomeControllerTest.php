@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Ui\Controller\Website;
+namespace App\Tests\Integration\Ui\Controller\Website;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,8 +12,8 @@ final class HomeControllerTest extends WebTestCase
 {
     public function testItCanViewHomePage(): void
     {
-        $client = static::createClient();
-        $translator = static::getContainer()->get(TranslatorInterface::class);
+        $client = self::createClient();
+        $translator = self::getContainer()->get(TranslatorInterface::class);
 
         $crawler = $client->request(Request::METHOD_GET, '/');
 

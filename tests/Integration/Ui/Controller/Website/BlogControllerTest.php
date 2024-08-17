@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Ui\Controller\Website;
+namespace App\Tests\Integration\Ui\Controller\Website;
 
 use App\Domain\Blog\Enum\PublicationStatus;
 use App\Tests\Factory\PostFactory;
 use App\Tests\Factory\TagFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,15 +22,14 @@ final class BlogControllerTest extends WebTestCase
     private KernelBrowser $client;
     private TranslatorInterface $translator;
 
+    #[\Override]
     protected function setUp(): void
     {
-        $this->client = static::createClient();
-        $this->translator = static::getContainer()->get(TranslatorInterface::class);
+        $this->client = self::createClient();
+        $this->translator = self::getContainer()->get(TranslatorInterface::class);
     }
 
-    /**
-     * @dataProvider getIndexUri
-     */
+    #[DataProvider('getIndexUri')]
     public function testItCanViewIndexPage(string $uri): void
     {
         PostFactory::new()
@@ -46,9 +46,7 @@ final class BlogControllerTest extends WebTestCase
         self::assertCount(5, $crawler->filter('article'));
     }
 
-    /**
-     * @dataProvider getShowUri
-     */
+    #[DataProvider('getShowUri')]
     public function testItCanViewPublishedPost(string $uri): void
     {
         $post = PostFactory::new()->published()->withTitle('Dummy Post')->create();
@@ -62,10 +60,8 @@ final class BlogControllerTest extends WebTestCase
         self::assertSelectorTextContains('h1', $post->getTitle());
     }
 
-    /**
-     * @dataProvider getUnpublishedPosts
-     */
-    public function testItCanNotViewUnpublishedPost(PublicationStatus $status): void
+    #[DataProvider('getUnpublishedPosts')]
+    public function testItCanNotViewUnpublishedPost(string $states): void
     {
         PostFactory::new()
             ->withPublicationStatus($status)
@@ -134,12 +130,18 @@ final class BlogControllerTest extends WebTestCase
         self::assertCount(10, $crawler->filter('article'));
     }
 
-    public static function getIndexUri(): \Generator
+    /**
+     * @return iterable<array<int, mixed>>
+     */
+    public static function getIndexUri(): iterable
     {
         yield ['/blog'];
     }
 
-    public static function getShowUri(): \Generator
+    /**
+     * @return iterable<array<int, mixed>>
+     */
+    public static function getShowUri(): iterable
     {
         yield ['/blog/dummy-post'];
     }

@@ -6,5 +6,5 @@ namespace App\Core\Doctrine\Dbal\Types;
 
 final class Types
 {
-    public const PROJECT_METADATA = 'project_metadata';
+    public const string PROJECT_METADATA = 'project_metadata';
 }

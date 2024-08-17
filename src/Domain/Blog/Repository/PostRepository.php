@@ -103,6 +103,7 @@ class PostRepository extends ServiceEntityRepository implements StatisticsReposi
         ;
     }
 
+    #[\Override]
     public function countByMonth(?string $year = null): array
     {
         $year ??= date('Y');

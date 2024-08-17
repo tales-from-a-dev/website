@@ -61,6 +61,7 @@ class Post implements IdentifiableInterface, SluggableInterface, TimestampableIn
         $this->tags = new ArrayCollection();
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->title ?? '';
@@ -145,6 +146,7 @@ class Post implements IdentifiableInterface, SluggableInterface, TimestampableIn
         return $this;
     }
 
+    #[\Override]
     public function getSluggableFields(): array
     {
         return ['title'];

@@ -2,12 +2,14 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         users_in_memory:
             memory:
                 users:
                     '%env(USER_EMAIL)%': { password: '%env(USER_PASSWORD)%', roles: [ !php/enum App\Core\Enum\Role::User->value ] }
+    
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

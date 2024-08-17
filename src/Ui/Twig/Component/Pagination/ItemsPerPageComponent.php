@@ -12,8 +12,8 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 #[AsTwigComponent(name: 'pagination:items_per_page')]
 final class ItemsPerPageComponent
 {
-    final public const DISPLAY_SHORT = 'short';
-    final public const DISPLAY_FULL = 'full';
+    final public const string DISPLAY_SHORT = 'short';
+    final public const string DISPLAY_FULL = 'full';
 
     public int $currentItemsPerPage = 10;
     public string $display = self::DISPLAY_SHORT;

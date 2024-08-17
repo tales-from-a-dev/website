@@ -24,6 +24,7 @@ final class ContactNotification extends Notification implements EmailNotificatio
         parent::__construct($this->subject);
     }
 
+    #[\Override]
     public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): ?EmailMessage
     {
         return new EmailMessage(
@@ -44,6 +45,7 @@ final class ContactNotification extends Notification implements EmailNotificatio
         );
     }
 
+    #[\Override]
     public function asSmsMessage(SmsRecipientInterface $recipient, ?string $transport = null): ?SmsMessage
     {
         return new SmsMessage(

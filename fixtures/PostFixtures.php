@@ -11,6 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 
 final class PostFixtures extends Fixture implements DependentFixtureInterface
 {
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
         PostFactory::new()
@@ -40,6 +41,7 @@ final class PostFixtures extends Fixture implements DependentFixtureInterface
         ;
     }
 
+    #[\Override]
     public function getDependencies(): array
     {
         return [

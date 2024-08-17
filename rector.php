@@ -13,7 +13,7 @@ return RectorConfig::configure()
         __DIR__.'/tests',
     ])
     ->withPreparedSets(deadCode: true)
-    ->withPhpSets(php82: true)
+    ->withPhpSets(php83: true)
     ->withSets([
         FoundrySetList::UP_TO_FOUNDRY_2,
     ])
