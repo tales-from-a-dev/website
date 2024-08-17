@@ -32,7 +32,7 @@ final class DeleteFormComponent
     #[ExposeInTemplate(name: 'modal_identifier')]
     public function getModalIdentifier(): string
     {
-        return sprintf('delete-modal-%d', $this->entity->getId());
+        return \sprintf('delete-modal-%d', $this->entity->getId());
     }
 
     #[ExposeInTemplate(name: 'delete_route')]
@@ -42,6 +42,6 @@ final class DeleteFormComponent
             ? 'app_admin_%s_delete'
             : 'app_website_%s_delete';
 
-        return sprintf($route, $this->entity->getEntityName());
+        return \sprintf($route, $this->entity->getEntityName());
     }
 }

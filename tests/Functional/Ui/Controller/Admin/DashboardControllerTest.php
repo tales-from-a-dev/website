@@ -42,7 +42,7 @@ final class DashboardControllerTest extends WebTestCase
         $crawler = $this->client->request(Request::METHOD_GET, '/admin');
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
+        self::assertPageTitleSame(\sprintf('%s | %s', $this->translator->trans(id: 'dashboard.title', domain: 'admin'), $this->translator->trans('app.meta.title')));
 
         // posts
         self::assertSelectorTextContains('div[id=latest-posts] h3', $this->translator->trans(id: 'dashboard.latest_posts', domain: 'admin'));

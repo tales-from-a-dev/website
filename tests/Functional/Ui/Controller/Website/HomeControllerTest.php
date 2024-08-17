@@ -18,9 +18,9 @@ final class HomeControllerTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, '/');
 
         self::assertResponseIsSuccessful();
-        self::assertPageTitleSame(sprintf('%s | %s', $translator->trans('home.title'), $translator->trans('app.meta.title')));
+        self::assertPageTitleSame(\sprintf('%s | %s', $translator->trans('home.title'), $translator->trans('app.meta.title')));
         self::assertSame($translator->trans('app.meta.description'), $crawler->filterXPath('//meta[@name="description"]')->extract(['content'])[0]);
-        self::assertSame(sprintf('< %s />', $translator->trans('app.meta.title')), $crawler->filter('h1')->text());
+        self::assertSame(\sprintf('< %s />', $translator->trans('app.meta.title')), $crawler->filter('h1')->text());
         self::assertCount(4, $crawler->filter('a'));
     }
 }

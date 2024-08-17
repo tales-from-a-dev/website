@@ -76,7 +76,7 @@ trait SluggableTrait
             return;
         }
 
-        throw new SluggableException(sprintf('Sluggable expects to have at least one non-empty field from the following: ["%s"]', implode('", "', array_keys($values))));
+        throw new SluggableException(\sprintf('Sluggable expects to have at least one non-empty field from the following: ["%s"]', implode('", "', array_keys($values))));
     }
 
     private function resolveFieldValue(string $field): mixed

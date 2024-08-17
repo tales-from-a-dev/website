@@ -31,7 +31,7 @@ final readonly class TwitterService
             return $this->cache->get('twitter_timeline', function (ItemInterface $item) {
                 $item->expiresAfter(60 * 60);
 
-                $response = $this->twitterClient->request(Request::METHOD_GET, sprintf('/2/users/%d/tweets', $this->twitterUserId), [
+                $response = $this->twitterClient->request(Request::METHOD_GET, \sprintf('/2/users/%d/tweets', $this->twitterUserId), [
                     'query' => [
                         'max_results' => 5,
                     ],

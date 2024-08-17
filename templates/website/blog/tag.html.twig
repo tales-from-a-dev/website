@@ -8,7 +8,7 @@
     <h1>{{ 'tag.title'|trans({tag: tag}) }}</h1>
     <div>
         {% for post in tag.posts %}
-            {% include 'website/blog/_post_short.html.twig' %}
+            {{ include('website/blog/_post_short.html.twig') }}
         {% endfor %}
     </div>
 {% endblock %}
