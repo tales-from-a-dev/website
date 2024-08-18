@@ -79,13 +79,3 @@ parameters:
 			message: "#^Property App\\\\Domain\\\\Project\\\\Entity\\\\Project\\:\\:\\$updatedAt type mapping mismatch\\: property can contain DateTimeImmutable\\|null but database expects DateTimeImmutable\\.$#"
 			count: 1
 			path: src/Domain/Project/Entity/Project.php
-
-		-
-			message: "#^Call to an undefined method Faker\\\\Generator\\:\\:markdown\\(\\)\\.$#"
-			count: 1
-			path: tests/Factory/PostFactory.php
-
-		-
-			message: "#^Access to an undefined property App\\\\Domain\\\\Project\\\\Model\\\\MetadataInterface\\<App\\\\Domain\\\\Project\\\\Model\\\\GitHubProject\\>\\:\\:\\$id\\.$#"
-			count: 1
-			path: tests/Functional/Domain/Project/ProjectManagerTest.php

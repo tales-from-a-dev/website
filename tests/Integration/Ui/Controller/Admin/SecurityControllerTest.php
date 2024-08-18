@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Ui\Controller\Admin;
+namespace App\Tests\Integration\Ui\Controller\Admin;
 
 use App\Core\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -16,10 +16,11 @@ final class SecurityControllerTest extends WebTestCase
     private KernelBrowser $client;
     private TranslatorInterface $translator;
 
+    #[\Override]
     protected function setUp(): void
     {
-        $this->client = static::createClient();
-        $this->translator = static::getContainer()->get(TranslatorInterface::class);
+        $this->client = self::createClient();
+        $this->translator = self::getContainer()->get(TranslatorInterface::class);
     }
 
     public function testItCanViewAdminLoginPage(): void

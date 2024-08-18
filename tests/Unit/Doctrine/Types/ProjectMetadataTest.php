@@ -17,6 +17,7 @@ final class ProjectMetadataTest extends KernelTestCase
     protected AbstractPlatform $platform;
     protected ProjectMetadataType $type;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->platform = $this->createMock(AbstractPlatform::class);

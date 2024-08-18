@@ -16,18 +16,18 @@ final class StatisticsHelperTest extends TestCase
 
         $this->assertSame(
             [
-                'Janvier' => null,
-                'Février' => null,
-                'Mars' => null,
-                'Avril' => null,
-                'Mai' => null,
-                'Juin' => null,
-                'Juillet' => null,
-                'Août' => null,
-                'Septembre' => null,
-                'Octobre' => null,
-                'Novembre' => null,
-                'Décembre' => null,
+                'January' => null,
+                'February' => null,
+                'March' => null,
+                'April' => null,
+                'May' => null,
+                'June' => null,
+                'July' => null,
+                'August' => null,
+                'September' => null,
+                'October' => null,
+                'November' => null,
+                'December' => null,
             ],
             $data
         );
@@ -44,18 +44,18 @@ final class StatisticsHelperTest extends TestCase
 
         $this->assertSame(
             [
-                'Janvier' => 10,
-                'Février' => null,
-                'Mars' => 24,
-                'Avril' => null,
-                'Mai' => null,
-                'Juin' => null,
-                'Juillet' => 15,
-                'Août' => null,
-                'Septembre' => null,
-                'Octobre' => null,
-                'Novembre' => null,
-                'Décembre' => 1,
+                'January' => 10,
+                'February' => null,
+                'March' => 24,
+                'April' => null,
+                'May' => null,
+                'June' => null,
+                'July' => 15,
+                'August' => null,
+                'September' => null,
+                'October' => null,
+                'November' => null,
+                'December' => 1,
             ],
             $data
         );

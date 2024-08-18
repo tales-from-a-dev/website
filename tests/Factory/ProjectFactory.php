@@ -77,6 +77,7 @@ final class ProjectFactory extends \Zenstruck\Foundry\Persistence\PersistentProx
     /**
      * @return array<string, mixed>
      */
+    #[\Override]
     protected function defaults(): array
     {
         return [
@@ -88,6 +89,7 @@ final class ProjectFactory extends \Zenstruck\Foundry\Persistence\PersistentProx
         ];
     }
 
+    #[\Override]
     protected function initialize(): static
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
@@ -100,6 +102,7 @@ final class ProjectFactory extends \Zenstruck\Foundry\Persistence\PersistentProx
         ;
     }
 
+    #[\Override]
     public static function class(): string
     {
         return Project::class;

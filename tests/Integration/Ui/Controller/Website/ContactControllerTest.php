@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Ui\Controller\Website;
+namespace App\Tests\Integration\Ui\Controller\Website;
 
 use App\Domain\Contact\Model\Contact;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -22,11 +22,12 @@ final class ContactControllerTest extends WebTestCase
     private TranslatorInterface $translator;
     private Environment $twig;
 
+    #[\Override]
     protected function setUp(): void
     {
-        $this->client = static::createClient();
-        $this->translator = static::getContainer()->get(TranslatorInterface::class);
-        $this->twig = static::getContainer()->get(Environment::class);
+        $this->client = self::createClient();
+        $this->translator = self::getContainer()->get(TranslatorInterface::class);
+        $this->twig = self::getContainer()->get(Environment::class);
     }
 
     public function testItCanViewIndexPage(): void

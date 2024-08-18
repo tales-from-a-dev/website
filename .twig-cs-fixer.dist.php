@@ -6,4 +6,4 @@ $finder = (new TwigCsFixer\File\Finder())
 
 return (new TwigCsFixer\Config\Config())
     ->setFinder($finder)
-    ;
+;

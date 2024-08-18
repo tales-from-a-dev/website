@@ -49,7 +49,7 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     private ProjectType $type = ProjectType::Customer;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    #[Assert\Url]
+    #[Assert\Url(requireTld: true)]
     private ?string $url = null;
 
     /**
@@ -58,6 +58,7 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
     #[ORM\Column(type: AppTypes::PROJECT_METADATA, nullable: true, options: ['jsonb' => true, 'default' => '{}'])]
     private ?MetadataInterface $metadata = null;
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->title ?? '';
@@ -151,6 +152,7 @@ class Project implements IdentifiableInterface, SluggableInterface, Timestampabl
         return $this;
     }
 
+    #[\Override]
     public function getSluggableFields(): array
     {
         return ['title'];

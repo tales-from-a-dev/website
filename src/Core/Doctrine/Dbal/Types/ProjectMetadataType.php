@@ -24,6 +24,7 @@ final class ProjectMetadataType extends JsonType
     /**
      * @template T of MetadataInterface
      */
+    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         $rawValue = self::$serializer->normalize($value);
@@ -49,6 +50,7 @@ final class ProjectMetadataType extends JsonType
         }
     }
 
+    #[\Override]
     public function getName(): string
     {
         return Types::PROJECT_METADATA;

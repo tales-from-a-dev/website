@@ -13,6 +13,7 @@ abstract class AbstractCommand extends Command
 {
     protected TalesFromADevStyle $io;
 
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new TalesFromADevStyle($input, $output);

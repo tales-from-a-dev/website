@@ -12,11 +12,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostVoter extends Voter
 {
+    #[\Override]
     protected function supports(string $attribute, mixed $subject): bool
     {
         return \in_array($attribute, [Action::View->value, Action::Edit->value], true) && $subject instanceof Post;
     }
 
+    #[\Override]
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         return match (Action::from($attribute)) {

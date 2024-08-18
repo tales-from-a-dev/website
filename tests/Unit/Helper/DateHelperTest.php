@@ -15,29 +15,6 @@ final class DateHelperTest extends TestCase
 
         $this->assertSame(
             [
-                1 => 'Janvier',
-                2 => 'Février',
-                3 => 'Mars',
-                4 => 'Avril',
-                5 => 'Mai',
-                6 => 'Juin',
-                7 => 'Juillet',
-                8 => 'Août',
-                9 => 'Septembre',
-                10 => 'Octobre',
-                11 => 'Novembre',
-                12 => 'Décembre',
-            ],
-            $months
-        );
-    }
-
-    public function testItCanReturnMonthsWithSpecificLocale(): void
-    {
-        $months = DateHelper::months('en');
-
-        $this->assertSame(
-            [
                 1 => 'January',
                 2 => 'February',
                 3 => 'March',
@@ -55,17 +32,40 @@ final class DateHelperTest extends TestCase
         );
     }
 
+    public function testItCanReturnMonthsWithSpecificLocale(): void
+    {
+        $months = DateHelper::months('fr');
+
+        $this->assertSame(
+            [
+                1 => 'Janvier',
+                2 => 'Février',
+                3 => 'Mars',
+                4 => 'Avril',
+                5 => 'Mai',
+                6 => 'Juin',
+                7 => 'Juillet',
+                8 => 'Août',
+                9 => 'Septembre',
+                10 => 'Octobre',
+                11 => 'Novembre',
+                12 => 'Décembre',
+            ],
+            $months
+        );
+    }
+
     public function testItCanReturnSpecificMonth(): void
     {
         $month = DateHelper::month(1);
 
-        $this->assertSame('Janvier', $month);
+        $this->assertSame('January', $month);
     }
 
     public function testItCanReturnSpecificMonthWithSpecificLocale(): void
     {
-        $month = DateHelper::month(1, 'en');
+        $month = DateHelper::month(1, 'fr');
 
-        $this->assertSame('January', $month);
+        $this->assertSame('Janvier', $month);
     }
 }

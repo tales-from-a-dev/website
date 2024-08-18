@@ -11,8 +11,10 @@ doctrine:
                 #server_version: '15'
 
                 profiling_collect_backtrace: '%kernel.debug%'
+        
         types:
             project_metadata: App\Core\Doctrine\Dbal\Types\ProjectMetadataType
+    
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Domain\Project;
+namespace App\Tests\Integration\Domain\Project;
 
 use App\Domain\Project\Entity\Project;
 use App\Domain\Project\ProjectManager;
@@ -16,13 +16,15 @@ final class ProjectManagerTest extends KernelTestCase
 
     private ?ProjectManager $projectManager;
 
+    #[\Override]
     protected function setUp(): void
     {
         self::bootKernel();
 
-        $this->projectManager = static::getContainer()->get(ProjectManager::class);
+        $this->projectManager = self::getContainer()->get(ProjectManager::class);
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         parent::tearDown();

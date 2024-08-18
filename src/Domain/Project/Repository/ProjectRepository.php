@@ -103,6 +103,7 @@ class ProjectRepository extends ServiceEntityRepository implements StatisticsRep
         return $query->getOneOrNullResult();
     }
 
+    #[\Override]
     public function countByMonth(?string $year = null): array
     {
         $year ??= date('Y');
