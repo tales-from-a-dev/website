@@ -39,7 +39,7 @@ final class ProjectManagerTest extends KernelTestCase
 
         self::ensureKernelShutdown();
 
-        $this->projectManager->create($proxy->object());
+        $this->projectManager->create($proxy->_real());
 
         $entity = $this->projectManager->getRepository()->find($proxy->getId());
 
@@ -61,7 +61,7 @@ final class ProjectManagerTest extends KernelTestCase
 
         self::ensureKernelShutdown();
 
-        $entity = $proxy->object()->setTitle('Dummy update title');
+        $entity = $proxy->_real()->setTitle('Dummy update title');
 
         $this->projectManager->update($entity);
 

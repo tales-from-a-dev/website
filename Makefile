@@ -24,15 +24,15 @@ help: ## Outputs this help screen
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 ##
 build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --no-cache
+	@$(DOCKER_COMP) build --pull --no-cache
 .PHONY: build
 
 up: ## Start the docker hub in detached mode (no logs)
-	@$(DOCKER_COMP) up --pull always --detach --wait
+	@$(DOCKER_COMP) up --detach
 .PHONY: up
 
 up-dev: ## Start the docker hub in detached mode (no logs) for debugging
-	@XDEBUG_MODE=debug $(DOCKER_COMP) up --pull always --detach --wait
+	@XDEBUG_MODE=debug $(DOCKER_COMP) up --detach
 .PHONY: up-dev
 
 up-test: ## Start the docker hub in detached mode (no logs) for testing
@@ -194,9 +194,9 @@ linter: ## Twig / Yaml & check DB mapping
 ##
 test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
 	@$(eval f ?=)
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off php ./bin/phpunit $(f)
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit $(f)
 .PHONY: test
 
 coverage: ## Run tests with code coverage
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage php ./bin/phpunit
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage -e APP_ENV=test php ./bin/phpunit
 .PHONY: coverage

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Ui\Controller\Website;
 
+use App\Domain\Blog\Enum\PublicationStatus;
 use App\Tests\Factory\PostFactory;
 use App\Tests\Factory\TagFactory;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -64,14 +65,32 @@ final class BlogControllerTest extends WebTestCase
     /**
      * @dataProvider getUnpublishedPosts
      */
-    public function testItCanNotViewUnpublishedPost(string $states): void
+    public function testItCanNotViewUnpublishedPost(PublicationStatus $status): void
     {
-        PostFactory::new(states: $states)->withTitle('Dummy title')->create();
+        PostFactory::new()
+            ->withPublicationStatus($status)
+            ->withTitle('Dummy title')
+            ->create()
+        ;
 
         self::ensureKernelShutdown();
 
         $this->client->request(Request::METHOD_GET, '/blog/dummy-title');
 
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
+    }
+
+    public function testItCanNotViewPublishedInFuturePost(): void
+    {
+        PostFactory::new()
+            ->publishedInFuture()
+            ->withTitle('Dummy title')
+            ->create()
+        ;
+
+        self::ensureKernelShutdown();
+
+        $this->client->request(Request::METHOD_GET, '/blog/dummy-title');
         self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 
@@ -118,13 +137,11 @@ final class BlogControllerTest extends WebTestCase
     public static function getIndexUri(): \Generator
     {
         yield ['/blog'];
-        yield ['/en/blog'];
     }
 
     public static function getShowUri(): \Generator
     {
         yield ['/blog/dummy-post'];
-        yield ['/en/blog/dummy-post'];
     }
 
     /**
@@ -132,8 +149,7 @@ final class BlogControllerTest extends WebTestCase
      */
     public static function getUnpublishedPosts(): iterable
     {
-        yield ['draft'];
-        yield ['frozen'];
-        yield ['publishedInFuture'];
+        yield [PublicationStatus::Draft];
+        yield [PublicationStatus::Frozen];
     }
 }

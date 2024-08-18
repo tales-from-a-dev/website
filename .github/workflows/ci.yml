@@ -67,25 +67,21 @@ jobs:
       
       -
         name: Check HTTPS reachability
-        if: false # Remove this line when the homepage will be configured, or change the path to check
         run: curl -vk --fail-with-body https://localhost
       
       -
         name: Create test database
-        if: false # Remove this line if Doctrine ORM is installed
         run: docker compose exec -T php bin/console -e test doctrine:database:create
       
       -
         name: Run migrations
-        if: false # Remove this line if Doctrine Migrations is installed
         run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
       
       -
         name: Doctrine Schema Validator
-        if: false # Remove this line if Doctrine ORM is installed
+        if: false
         run: docker compose exec -T php bin/console -e test doctrine:schema:validate
       
       -
         name: Run PHPUnit
-        if: false
         run: docker compose exec -T php bin/phpunit

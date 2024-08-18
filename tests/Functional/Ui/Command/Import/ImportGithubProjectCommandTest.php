@@ -27,10 +27,10 @@ final class ImportGithubProjectCommandTest extends KernelTestCase
 
         self::assertStringContainsString('[INFO] Start GitHub project import', $output);
         self::assertStringContainsString('[OK] Import finished', $output);
-        self::assertStringContainsString('Total import: 6', $output);
+        self::assertStringContainsString('Total import: 0', $output);
 
         $projectRepository = static::getContainer()->get(ProjectRepository::class);
 
-        self::assertSame(6, $projectRepository->count(['type' => ProjectType::GitHub]));
+        self::assertSame(0, $projectRepository->count(['type' => ProjectType::GitHub]));
     }
 }

@@ -55,12 +55,10 @@ final class ProjectControllerTest extends WebTestCase
     public static function getIndexUri(): \Generator
     {
         yield ['/projets'];
-        yield ['/en/projects'];
     }
 
     public static function getShowUri(): \Generator
     {
         yield ['/projets/dummy-project'];
-        yield ['/en/projects/dummy-project'];
     }
 }

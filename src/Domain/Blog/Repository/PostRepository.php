@@ -107,21 +107,29 @@ class PostRepository extends ServiceEntityRepository implements StatisticsReposi
     {
         $year ??= date('Y');
 
-        $query = <<<SQL
-            SELECT DATE_TRUNC('month', p.published_at) as period, COUNT(*) as count
-            FROM post AS p
-            WHERE p.published_at IS NOT NULL
-            AND EXTRACT(YEAR FROM p.published_at) = :year
-            AND p.published_at <= CURRENT_DATE
-            GROUP BY period
-            ORDER BY period DESC
-        SQL;
+        $connection = $this->getEntityManager()->getConnection();
+
+        $query = $connection->createQueryBuilder();
+        $query
+            ->select("DATE_TRUNC('month', p.published_at) as period")
+            ->addSelect('COUNT(p.id) as count')
+            ->from(
+                $this->getEntityManager()->getClassMetadata(Post::class)->getTableName()/* @type Post */,
+                'p'
+            )
+            ->where('p.published_at IS NOT NULL')
+            ->andWhere('EXTRACT(YEAR FROM p.published_at) = :year')
+            ->andWhere('p.published_at <= CURRENT_DATE')
+            ->groupBy('period')
+            ->orderBy('period', 'DESC')
+            ->setParameter('year', $year)
+        ;
 
         /** @var array{period: string, count: int} $rawResult */
-        $rawResult = $this->getEntityManager()->getConnection()
-            ->prepare($query)
-            ->executeQuery(['year' => $year])
-            ->fetchAllAssociative();
+        $rawResult = $connection
+            ->executeQuery($query->getSQL(), $query->getParameters(), $query->getParameterTypes())
+            ->fetchAllAssociative()
+        ;
 
         return $this->getStatisticsResult($rawResult);
     }
