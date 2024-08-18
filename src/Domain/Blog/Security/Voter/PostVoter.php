@@ -21,7 +21,7 @@ class PostVoter extends Voter
     {
         return match (Action::from($attribute)) {
             Action::View => $this->canView($subject, $token->getUser()),
-            Action::Edit => $this->canEdit($subject, $token->getUser()),
+            Action::Edit => $this->canEdit($token->getUser()),
         };
     }
 
@@ -38,7 +38,7 @@ class PostVoter extends Voter
         return false;
     }
 
-    private function canEdit(Post $subject, ?UserInterface $user): bool
+    private function canEdit(?UserInterface $user): bool
     {
         return $user instanceof UserInterface;
     }

@@ -10,5 +10,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent(name: 'pagination:pagination')]
 final class PaginationComponent
 {
+    /**
+     * @var SlidingPagination<int, mixed>
+     */
     public SlidingPagination $pagination;
 }

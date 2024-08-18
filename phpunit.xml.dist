@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
-         backupGlobals="false"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
          bootstrap="tests/bootstrap.php"
          testdox="true"
@@ -17,28 +17,34 @@
         <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
         <server name="SYMFONY_PHPUNIT_VERSION" value="10.5"/>
     </php>
+
     <testsuites>
         <testsuite name="Tales From a Dev Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+
     <coverage>
         <report>
             <clover outputFile="var/coverage.xml"/>
             <html outputDirectory="var/coverage/html/"/>
         </report>
     </coverage>
-    <!-- Run `composer require symfony/panther` before enabling this extension -->
-    <extensions>
-        <extension class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
-        <!--
-            <extension class="Symfony\Component\Panther\ServerExtension" />
-            -->
-    </extensions>
+
     <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
     </source>
+
+    <!-- Run `composer require symfony/panther` before enabling this extension -->
+    <extensions>
+        <!--
+            <bootstrap class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+        -->
+        <bootstrap class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
+        <!--
+            <bootstrap class="Symfony\Component\Panther\ServerExtension" />
+        -->
+    </extensions>
 </phpunit>

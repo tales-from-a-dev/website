@@ -7,32 +7,47 @@ namespace App\Tests\Factory;
 use App\Domain\Project\Entity\Project;
 use App\Domain\Project\Enum\ProjectType;
 use App\Domain\Project\Model\GitHubProject;
-use App\Domain\Project\Repository\ProjectRepository;
 use Elao\Enum\Bridge\Faker\Provider\EnumProvider;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
-use Zenstruck\Foundry\RepositoryProxy;
 
 /**
- * @extends ModelFactory<Project>
+ * @method        \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       create(array|callable $attributes = [])
+ * @method static \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       createOne(array $attributes = [])
+ * @method static \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       find(object|array|mixed $criteria)
+ * @method static \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       findOrCreate(array $attributes)
+ * @method static \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       first(string $sortedField = 'id')
+ * @method static \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       last(string $sortedField = 'id')
+ * @method static \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       random(array $attributes = [])
+ * @method static \App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy                                                                       randomOrCreate(array $attributes = [])
+ * @method static \App\Domain\Project\Entity\Project[]|\Zenstruck\Foundry\Persistence\Proxy[]                                                                   all()
+ * @method static \App\Domain\Project\Entity\Project[]|\Zenstruck\Foundry\Persistence\Proxy[]                                                                   createMany(int $number, array|callable $attributes = [])
+ * @method static \App\Domain\Project\Entity\Project[]|\Zenstruck\Foundry\Persistence\Proxy[]                                                                   createSequence(iterable|callable $sequence)
+ * @method static \App\Domain\Project\Entity\Project[]|\Zenstruck\Foundry\Persistence\Proxy[]                                                                   findBy(array $attributes)
+ * @method static \App\Domain\Project\Entity\Project[]|\Zenstruck\Foundry\Persistence\Proxy[]                                                                   randomRange(int $min, int $max, array $attributes = [])
+ * @method static \App\Domain\Project\Entity\Project[]|\Zenstruck\Foundry\Persistence\Proxy[]                                                                   randomSet(int $number, array $attributes = [])
+ * @method        \Zenstruck\Foundry\FactoryCollection<\App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy>                                 many(int $min, int|null $max = null)
+ * @method        \Zenstruck\Foundry\FactoryCollection<\App\Domain\Project\Entity\Project|\Zenstruck\Foundry\Persistence\Proxy>                                 sequence(iterable|callable $sequence)
+ * @method static \Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator<\App\Domain\Project\Entity\Project, \App\Domain\Project\Repository\ProjectRepository> repository()
  *
- * @method static Project|Proxy                     createOne(array $attributes = [])
- * @method static Project[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
- * @method static Project[]|Proxy[]                 createSequence(array|callable $sequence)
- * @method static Project|Proxy                     find(object|array|mixed $criteria)
- * @method static Project|Proxy                     findOrCreate(array $attributes)
- * @method static Project|Proxy                     first(string $sortedField = 'id')
- * @method static Project|Proxy                     last(string $sortedField = 'id')
- * @method static Project|Proxy                     random(array $attributes = [])
- * @method static Project|Proxy                     randomOrCreate(array $attributes = [])
- * @method static Project[]|Proxy[]                 all()
- * @method static Project[]|Proxy[]                 findBy(array $attributes)
- * @method static Project[]|Proxy[]                 randomSet(int $number, array $attributes = [])
- * @method static Project[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
- * @method static ProjectRepository|RepositoryProxy repository()
- * @method        Project|Proxy                     create(array|callable $attributes = [])
+ * @phpstan-method \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> create(array|callable $attributes = [])
+ * @phpstan-method static \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> createOne(array $attributes = [])
+ * @phpstan-method static \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> find(object|array|mixed $criteria)
+ * @phpstan-method static \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> findOrCreate(array $attributes)
+ * @phpstan-method static \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> first(string $sortedField = 'id')
+ * @phpstan-method static \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> last(string $sortedField = 'id')
+ * @phpstan-method static \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> random(array $attributes = [])
+ * @phpstan-method static \App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project> randomOrCreate(array $attributes = [])
+ * @phpstan-method static list<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> all()
+ * @phpstan-method static list<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> createMany(int $number, array|callable $attributes = [])
+ * @phpstan-method static list<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> createSequence(iterable|callable $sequence)
+ * @phpstan-method static list<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> findBy(array $attributes)
+ * @phpstan-method static list<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> randomRange(int $min, int $max, array $attributes = [])
+ * @phpstan-method static list<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> randomSet(int $number, array $attributes = [])
+ * @phpstan-method \Zenstruck\Foundry\FactoryCollection<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> many(int $min, int|null $max = null)
+ * @phpstan-method \Zenstruck\Foundry\FactoryCollection<\App\Domain\Project\Entity\Project&\Zenstruck\Foundry\Persistence\Proxy<\App\Domain\Project\Entity\Project>> sequence(iterable|callable $sequence)
+ *
+ * @extends \Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory<\App\Domain\Project\Entity\Project>
  */
-final class ProjectFactory extends ModelFactory
+final class ProjectFactory extends \Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory
 {
     public function __construct()
     {
@@ -43,17 +58,17 @@ final class ProjectFactory extends ModelFactory
 
     public function withType(ProjectType $type): self
     {
-        return $this->addState(['type' => $type]);
+        return $this->with(['type' => $type]);
     }
 
     public function asCustomerProject(): self
     {
-        return $this->addState(['type' => ProjectType::Customer]);
+        return $this->with(['type' => ProjectType::Customer]);
     }
 
     public function asGitHubProject(): self
     {
-        return $this->addState([
+        return $this->with([
             'type' => ProjectType::GitHub,
             'metadata' => $this->buildGitHubMetadata(),
         ]);
@@ -62,7 +77,7 @@ final class ProjectFactory extends ModelFactory
     /**
      * @return array<string, mixed>
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'title' => self::faker()->text(50),
@@ -73,7 +88,7 @@ final class ProjectFactory extends ModelFactory
         ];
     }
 
-    protected function initialize(): self
+    protected function initialize(): static
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
@@ -85,7 +100,7 @@ final class ProjectFactory extends ModelFactory
         ;
     }
 
-    protected static function getClass(): string
+    public static function class(): string
     {
         return Project::class;
     }

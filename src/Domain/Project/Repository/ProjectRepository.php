@@ -107,20 +107,28 @@ class ProjectRepository extends ServiceEntityRepository implements StatisticsRep
     {
         $year ??= date('Y');
 
-        $query = <<<SQL
-            SELECT DATE_TRUNC('month', p.created_at) as period, COUNT(*) as count
-            FROM project AS p
-            WHERE EXTRACT(YEAR FROM p.created_at) = :year
-            AND p.created_at <= CURRENT_DATE
-            GROUP BY period
-            ORDER BY period DESC
-        SQL;
+        $connection = $this->getEntityManager()->getConnection();
+
+        $query = $connection->createQueryBuilder();
+        $query
+            ->select("DATE_TRUNC('month', p.created_at) as period")
+            ->addSelect('COUNT(p.id) as count')
+            ->from(
+                $this->getEntityManager()->getClassMetadata(Project::class)->getTableName()/* @type Project */,
+                'p'
+            )
+            ->where('EXTRACT(YEAR FROM p.created_at) = :year')
+            ->andWhere('p.created_at <= CURRENT_DATE')
+            ->groupBy('period')
+            ->orderBy('period', 'DESC')
+            ->setParameter('year', $year)
+        ;
 
         /** @var array{period: string, count: int} $rawResult */
-        $rawResult = $this->getEntityManager()->getConnection()
-            ->prepare($query)
-            ->executeQuery(['year' => $year])
-            ->fetchAllAssociative();
+        $rawResult = $connection
+            ->executeQuery($query->getSQL(), $query->getParameters(), $query->getParameterTypes())
+            ->fetchAllAssociative()
+        ;
 
         return $this->getStatisticsResult($rawResult);
     }

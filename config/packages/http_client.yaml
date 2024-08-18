@@ -6,9 +6,3 @@ framework:
                 headers:
                     Accept: 'application/vnd.github.v4+json'
                     Authorization: 'Bearer %env(GITHUB_ACCESS_TOKEN)%'
-
-            twitter.client:
-                base_uri: 'https://api.twitter.com'
-                headers:
-                    Accept: 'application/json'
-                    Authorization: 'Bearer %env(TWITTER_BEARER_TOKEN)%'

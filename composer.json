@@ -1,5 +1,5 @@
 {
-    "name": "tales-from-a-dev/tales-from-a-dev",
+    "name": "tales-from-a-dev/website",
     "type": "project",
     "license": "MIT",
     "description": "Tales from a Dev website",
@@ -63,7 +63,7 @@
         "phpstan/phpstan-symfony": "^1.2",
         "phpunit/phpunit": "^10.5",
         "pierstoval/smoke-testing": "^1.0",
-        "rector/rector": "^0.15.10",
+        "rector/rector": "^1.2",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
         "symfony/debug-bundle": "7.0.*",

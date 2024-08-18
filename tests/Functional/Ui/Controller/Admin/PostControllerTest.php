@@ -56,7 +56,7 @@ class PostControllerTest extends WebTestCase
         $this->client->request(Request::METHOD_GET, '/admin/post/new');
         $this->client->submitForm('submit', [
             'post[publicationStatus]' => $post->getPublicationStatus()->value,
-            'post[publishedAt]' => $post->getPublishedAt(),
+            'post[publishedAt]' => $post->getPublishedAt()?->format(\DateTimeImmutable::ATOM),
             'post[title]' => $post->getTitle(),
             'post[content]' => $post->getContent(),
         ]);
