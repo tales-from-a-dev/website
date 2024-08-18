@@ -72,10 +72,12 @@ final class PostFactory extends \Zenstruck\Foundry\Persistence\PersistentProxyOb
 
     public function publishedInFuture(): self
     {
-        return $this->with(fn () => [
-            'publicationStatus' => PublicationStatus::Published,
-            'publishedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('tomorrow', '+6 months')),
-        ]);
+        return $this->with(
+            static fn () => [
+                'publicationStatus' => PublicationStatus::Published,
+                'publishedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('tomorrow', '+6 months')),
+            ]
+        );
     }
 
     public function withPublicationStatus(PublicationStatus $status): self

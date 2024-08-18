@@ -61,7 +61,7 @@ final class BlogControllerTest extends WebTestCase
     }
 
     #[DataProvider('getUnpublishedPosts')]
-    public function testItCanNotViewUnpublishedPost(string $states): void
+    public function testItCanNotViewUnpublishedPost(PublicationStatus $status): void
     {
         PostFactory::new()
             ->withPublicationStatus($status)
