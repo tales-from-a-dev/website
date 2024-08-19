@@ -1,7 +1,0 @@
-{% embed 'admin/crud/new.html.twig' with {entity_name: tag.entityName} %}
-    {% trans_default_domain 'admin' %}
-
-    {% block form %}
-        {% embed 'admin/tag/_form.html.twig' %}{% endembed %}
-    {% endblock %}
-{% endembed %}

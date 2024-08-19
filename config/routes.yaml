@@ -4,15 +4,6 @@ website_controllers:
         namespace: App\Ui\Controller\Website
     type: attribute
     name_prefix: app_website_
-        
-admin_controllers:
-    resource:
-        path: ../src/Ui/Controller/Admin
-        namespace: App\Ui\Controller\Admin
-    type: attribute
-    name_prefix: app_admin_
-    prefix: '/admin'
-    trailing_slash_on_root: false
     
 app_website_home:
     path: /
@@ -20,8 +11,8 @@ app_website_home:
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         # the path of the template to render
-        template: 'website/home.html.twig'
+        template: 'app/website/home.html.twig'
 
-app_admin_logout:
-    path: /admin/logout
+app_website_logout:
+    path: /logout
     methods: GET

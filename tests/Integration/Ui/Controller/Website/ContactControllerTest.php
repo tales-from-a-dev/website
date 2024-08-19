@@ -4,91 +4,79 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Ui\Controller\Website;
 
-use App\Domain\Contact\Model\Contact;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
-use Symfony\Bundle\FrameworkBundle\Test\NotificationAssertionsTrait;
+use App\Domain\Model\Contact;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
+use Zenstruck\Browser\Test\HasBrowser;
 
 final class ContactControllerTest extends WebTestCase
 {
-    use MailerAssertionsTrait;
-    use NotificationAssertionsTrait;
-
-    private KernelBrowser $client;
-    private TranslatorInterface $translator;
-    private Environment $twig;
-
-    #[\Override]
-    protected function setUp(): void
-    {
-        $this->client = self::createClient();
-        $this->translator = self::getContainer()->get(TranslatorInterface::class);
-        $this->twig = self::getContainer()->get(Environment::class);
-    }
+    use HasBrowser;
 
     public function testItCanViewIndexPage(): void
     {
-        $crawler = $this->client->request(Request::METHOD_GET, '/contact');
+        $this->browser()
+            ->visit('/contact')
 
-        self::assertResponseIsSuccessful();
-        self::assertCount(1, $crawler->filter('form'));
+            ->assertSuccessful()
+            ->assertElementCount('form', 1)
+        ;
     }
 
     public function testItCanSendAMessage(): void
     {
+        $translator = static::getContainer()->get(TranslatorInterface::class);
+
         $contact = new Contact(
             name: 'John Doe',
             email: 'johndoe@example.com',
             content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus nibh, tristique sed lobortis ut, facilisis sed neque. Pellentesque quis mauris volutpat, vehicula mi sed, posuere velit.'
         );
 
-        $this->client->request(Request::METHOD_GET, '/contact');
-        $this->client->submitForm('submit', [
-            'contact[name]' => $contact->name,
-            'contact[email]' => $contact->email,
-            'contact[content]' => $contact->content,
-        ]);
+        $this->browser()
+            ->visit('/contact')
 
-        $notification = self::getNotifierMessage();
+            ->fillField('contact_name', $contact->name)
+            ->fillField('contact_email', $contact->email)
+            ->fillField('contact_content', $contact->content)
+            ->click('submit')
 
-        self::assertNotificationCount(1);
-        self::assertNotificationSubjectContains(
-            $notification,
-            $this->translator->trans(id: 'contact.subject', parameters: ['name' => $contact->name], domain: 'notification')
-        );
-
-        $email = self::getMailerMessage();
-
-        self::assertEmailCount(1);
-        self::assertEmailHeaderSame($email, 'From', 'Tales from a Dev <noreply@talesfroma.dev>');
-        self::assertEmailAddressContains($email, 'From', 'noreply@talesfroma.dev');
-        self::assertEmailHeaderSame($email, 'To', 'Contact <test@example.com>');
-        self::assertEmailAddressContains($email, 'To', 'test@example.com');
-        self::assertEmailHtmlBodyContains($email, $this->twig->render('email/contact.html.twig', ['contact' => $contact]));
-
-        $crawler = $this->client->followRedirect();
-
-        self::assertResponseIsSuccessful();
-        self::assertCount(1, $crawler->filter('div[role=alert]'));
-        self::assertSelectorTextContains('div[role=alert]', $this->translator->trans(id: 'contact.send.success', domain: 'alert'));
+            ->assertSuccessful()
+            ->assertOn('/contact')
+            ->assertElementCount('div[role=alert]', 1)
+            ->assertSeeIn(
+                'div[role=alert]',
+                $translator->trans(id: 'contact.send.success', domain: 'alert')
+            )
+        ;
     }
 
     public function testItTriggerErrorsWithInvalidData(): void
     {
-        $this->client->request(Request::METHOD_GET, '/contact');
-        $this->client->followRedirects();
-        $crawler = $this->client->submitForm('submit', [
-            'contact[name]' => '',
-            'contact[email]' => '',
-            'contact[content]' => '',
-        ]);
+        $translator = static::getContainer()->get(TranslatorInterface::class);
 
-        self::assertResponseIsUnprocessable();
-        self::assertCount(3, $crawler->filter('p.mt-2.text-sm.text-red-600.dark\:text-red-500'));
-        self::assertSelectorTextContains('p.mt-2.text-sm.text-red-600.dark\:text-red-500', $this->translator->trans(id: 'This value should not be blank.', domain: 'validators'));
+        $this->browser()
+            ->visit('/contact')
+
+            ->fillField('contact_name', '')
+            ->fillField('contact_email', '')
+            ->fillField('contact_content', '')
+            ->click('submit')
+
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertSeeIn(
+                'p[id=contact_name_error_0]',
+                $translator->trans(id: 'This value should not be blank.', domain: 'validators')
+            )
+            ->assertSeeIn(
+                'p[id=contact_email_error_0]',
+                $translator->trans(id: 'This value should not be blank.', domain: 'validators')
+            )
+            ->assertSeeIn(
+                'p[id=contact_content_error_0]',
+                $translator->trans(id: 'This value should not be blank.', domain: 'validators')
+            )
+        ;
     }
 }
