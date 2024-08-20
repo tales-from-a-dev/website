@@ -161,7 +161,7 @@ phpstan: ## Perform static analysis
 .PHONY: phpstan
 
 phpstan-baseline: ## Update baseline file
-	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M --generate-baseline
+	@$(PHP_CONT) ./vendor/bin/phpstan analyse --memory-limit 256M --generate-baseline --allow-empty-baseline
 .PHONY: phpstan-baseline
 
 rector-dry: ## Perform code migration/refactoring with Rector in dry mode

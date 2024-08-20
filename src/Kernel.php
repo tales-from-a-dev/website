@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Core\Doctrine\Dbal\Types\ProjectMetadataType;
+use App\Infrastructure\Dbal\Types\ProjectMetadataType;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 

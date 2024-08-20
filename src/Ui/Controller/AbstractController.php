@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller;
 
-use App\Core\Enum\AlertStatus;
-use App\Core\Enum\AlertType;
-use App\Core\Model\Alert;
+use App\Domain\Enum\AlertStatusEnum;
+use App\Domain\Model\Alert;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as SymfonyAbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,20 +28,12 @@ abstract class AbstractController extends SymfonyAbstractController
     /**
      * @param array<string, mixed> $parameters
      */
-    protected function addAlert(AlertStatus $status, string|TranslatableMessage $message, array $parameters = [], AlertType $type = AlertType::Alert): void
+    protected function addAlert(AlertStatusEnum $status, string|TranslatableMessage $message, array $parameters = []): void
     {
         if (\is_string($message)) {
             $message = new TranslatableMessage($message, $parameters, 'alert');
         }
 
-        $this->addFlash($type->value, new Alert($message, $status, $type));
-    }
-
-    /**
-     * @param array<string, mixed> $parameters
-     */
-    protected function addToast(AlertStatus $status, string|TranslatableMessage $message, array $parameters = []): void
-    {
-        $this->addAlert($status, $message, $parameters, AlertType::Toast);
+        $this->addFlash('alert', new Alert($message, $status));
     }
 }

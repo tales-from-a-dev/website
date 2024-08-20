@@ -72,7 +72,8 @@
         "symfony/stopwatch": "7.1.*",
         "symfony/web-profiler-bundle": "7.1.*",
         "vincentlanglet/twig-cs-fixer": "^3.0",
-        "zenstruck/foundry": "^1.36"
+        "zenstruck/browser": "^1.8",
+        "zenstruck/foundry": "^2.0"
     },
     "config": {
         "allow-plugins": {

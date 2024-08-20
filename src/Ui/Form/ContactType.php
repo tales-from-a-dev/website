@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ui\Form;
 
-use App\Domain\Contact\Model\Contact;
+use App\Domain\Model\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

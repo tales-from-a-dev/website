@@ -41,7 +41,7 @@ services:
         public: true
 
     # GitHub service
-    App\Infrastructure\GitHub\GitHubService:
+    App\Infrastructure\Service\GitHubService:
         arguments:
             $githubUsername: '%env(GITHUB_USERNAME)%'
 

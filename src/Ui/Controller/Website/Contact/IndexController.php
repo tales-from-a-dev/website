@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller\Website\Contact;
 
-use App\Core\Enum\AlertStatus;
-use App\Domain\Contact\ContactManager;
+use App\Domain\Enum\AlertStatusEnum;
+use App\Infrastructure\Service\ContactManager;
 use App\Ui\Controller\AbstractController;
 use App\Ui\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,15 +28,15 @@ final class IndexController extends AbstractController
             try {
                 $contactManager->notify($form->getData());
 
-                $this->addAlert(AlertStatus::Success, 'contact.send.success');
+                $this->addAlert(AlertStatusEnum::Success, 'contact.send.success');
             } catch (\Exception) {
-                $this->addAlert(AlertStatus::Error, 'contact.send.error');
+                $this->addAlert(AlertStatusEnum::Danger, 'contact.send.error');
             }
 
             return $this->redirectToRoute('app_website_contact_index');
         }
 
-        return $this->render('website/contact/index.html.twig', [
+        return $this->render('app/website/contact/index.html.twig', [
             'form' => $form,
         ]);
     }
