@@ -31,12 +31,12 @@
             <meta name="twitter:creator" content="@ker0x">
         {% endblock %}
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}{% endblock %}
+
+        {% block importmap %}
+            {{ importmap('app') }}
         {% endblock %}
 
         <link rel="icon"

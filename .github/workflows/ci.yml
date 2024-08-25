@@ -58,6 +58,9 @@ jobs:
           GITHUB_USERNAME=${{ secrets.GH_USERNAME }}
           GITHUB_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}
           docker compose up --wait --no-build
+          
+      - name: Build assets
+        run: docker compose exec -T php bin/console -e test tailwind:build
       
       -
         name: Check HTTP reachability

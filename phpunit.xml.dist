@@ -32,14 +32,14 @@
 
     <coverage>
         <report>
-            <clover outputFile="var/coverage.xml"/>
-            <html outputDirectory="var/coverage/html/"/>
+            <clover outputFile="coverage/coverage.xml"/>
+            <html outputDirectory="coverage/html/"/>
         </report>
     </coverage>
 
     <source>
         <include>
-            <directory suffix=".php">src</directory>
+            <directory>src</directory>
         </include>
     </source>
 

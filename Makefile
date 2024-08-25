@@ -75,10 +75,15 @@ composer: ## Run composer, pass the parameter "c=" to run a given command, examp
 	@$(COMPOSER) $(c)
 .PHONY: composer
 
-vendor: ## Install vendors according to the current composer.lock file
-vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
-vendor: composer
-.PHONY: vendor
+install: ## Install vendors according to the current composer.lock file
+install: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
+install: composer
+.PHONY: install
+
+update: ## Update vendors
+update: c=update
+update: composer
+.PHONY: update
 
 ##
 ## —— Symfony 🎵 ———————————————————————————————————————————————————————————————
@@ -107,6 +112,17 @@ parameters: sf
 router: c=debug:router ## Display all available route
 router: sf
 .PHONY: router
+
+asset-map: c=debug:asset-map ## Display all mapped assets
+asset-map: sf
+.PHONY: asset-map
+
+##
+## —— Assets 🎨 ————————————————————————————————————————————————————————————————
+##
+tailwind: c=tailwind:build --watch --poll ## Build CSS
+tailwind: sf
+.PHONY: tailwind
 
 ##
 ## —— Database 🔮 ——————————————————————————————————————————————————————————————
