@@ -7,7 +7,7 @@ namespace App\Infrastructure\Dbal\Types;
 use App\Domain\Model\GitHubProject;
 use App\Domain\Model\MetadataInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\JsonType;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -47,11 +47,10 @@ final class ProjectMetadataType extends JsonType
         try {
             return self::$serializer->denormalize($rawValue, MetadataInterface::class);
         } catch (\Exception $exception) {
-            throw ConversionException::conversionFailed($value, $this->getName(), $exception);
+            throw ValueNotConvertible::new($value, $this->getName(), $exception->getMessage(), $exception);
         }
     }
 
-    #[\Override]
     public function getName(): string
     {
         return Types::PROJECT_METADATA;

@@ -88,7 +88,7 @@ final class ProjectMetadataTest extends KernelTestCase
 
         $this->expectException(ConversionException::class);
         $this->expectExceptionMessage(
-            'Could not convert database value "{"type":"metadata_pr..." to Doctrine Type project_metadata',
+            'Could not convert database value to "project_metadata" as an error was triggered by the unserialization: The type "metadata_project" is not a valid value.',
         );
         $this->type->convertToPHPValue($databaseValue, $this->platform);
     }
