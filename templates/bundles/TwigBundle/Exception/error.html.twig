@@ -1,8 +1,8 @@
 {% extends 'app/base.html.twig' %}
 
 {% block body %}
-    <section class="py-8 px-4 m-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <div class="mx-auto max-w-screen-sm text-center">
+    <section class="py-8 px-4 m-auto max-w-(--breakpoint-xl) lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-(--breakpoint-sm) text-center">
             <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-teal-600 dark:text-teal-500">
                 {{- status_code -}}
             </h1>
@@ -14,7 +14,7 @@
             </p>
             {% block error_link %}
                 <a href="{{ path('app_website_home') }}"
-                   class="inline-flex text-white bg-teal-600 hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4 focus:ring-2 focus:outline-none focus:ring-teal-300">
+                   class="inline-flex text-white bg-teal-600 hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4 focus:ring-2 focus:outline-hidden focus:ring-teal-300">
                     {{- 'error.back'|trans -}}
                 </a>
             {% endblock %}

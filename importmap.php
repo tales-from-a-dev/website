@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Returns the importmap for this application.
  *
@@ -60,5 +58,8 @@ return [
     ],
     'picocolors' => [
         'version' => '1.0.1',
+    ],
+    '@stimulus-components/scroll-to' => [
+        'version' => '5.0.1',
     ],
 ];

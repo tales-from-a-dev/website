@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Infrastructure\Dbal\Types;
 
-use App\Domain\Model\GitHubProject;
+use App\Domain\ValueObjact\GitHubProject;
 use App\Infrastructure\Dbal\Types\ProjectMetadataType;
 use App\Infrastructure\Dbal\Types\Types;
 use Doctrine\DBAL\ParameterType;

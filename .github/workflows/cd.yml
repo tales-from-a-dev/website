@@ -1,4 +1,4 @@
-name: cd
+name: CD
 
 run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
@@ -47,7 +47,7 @@ jobs:
           ssh ${{ inputs.environment }} 'cd app &&
           SERVER_NAME='"$SERVER_NAME"'
           CADDY_MERCURE_JWT_SECRET='"$CADDY_MERCURE_JWT_SECRET"'
-          docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build --detach'
+          docker compose -f compose.yaml -f compose.prod.yaml up --build --detach --wait'
         
       - name: Delete SSH
         run: rm -rf ~/.ssh/

@@ -83,6 +83,18 @@
             ".php-cs-fixer.dist.php"
         ]
     },
+    "omines/antispam-bundle": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.1",
+            "ref": "d9a98e83faed625423372bcc607ea371584264db"
+        },
+        "files": [
+            "config/packages/antispam.yaml"
+        ]
+    },
     "phpstan/phpstan": {
         "version": "1.10",
         "recipe": {
@@ -336,6 +348,18 @@
         "files": [
             "config/packages/twig.yaml",
             "templates/base.html.twig"
+        ]
+    },
+    "symfony/ux-icons": {
+        "version": "2.22",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.17",
+            "ref": "803a3bbd5893f9584969ab8670290cdfb6a0a5b5"
+        },
+        "files": [
+            "assets/icons/symfony.svg"
         ]
     },
     "symfony/ux-live-component": {

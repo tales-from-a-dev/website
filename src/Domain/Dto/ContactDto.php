@@ -2,16 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Model;
+namespace App\Domain\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class Contact
+final class ContactDto
 {
     public function __construct(
         #[Assert\NotBlank]
         #[Assert\Length(min: 1, max: 255)]
-        public ?string $name = null,
+        public ?string $fullName = null,
+
+        #[Assert\NotBlank(allowNull: true)]
+        #[Assert\Length(min: 1, max: 255)]
+        public ?string $company = null,
 
         #[Assert\NotBlank]
         #[Assert\Email]

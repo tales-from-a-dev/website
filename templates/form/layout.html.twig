@@ -1,0 +1,25 @@
+{% use '@TalesFromADevFlowbite/form/default.html.twig' %}
+
+{% block class_label -%}
+    block mb-2 text-sm font-semibold text-gray-900
+{%- endblock %}
+
+{% block class_input_text -%}
+    text-gray-900 bg-white rounded-md text-sm block w-full p-2.5 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 placeholder:text-gray-400 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500
+{%- endblock %}
+
+{% block class_submit -%}
+    px-7 py-3 md:px-9 md:py-4 font-medium md:font-semibold bg-gray-700 text-gray-50 text-sm rounded-md hover:bg-gray-900 transition ease-linear duration-500
+{%- endblock class_submit %}
+
+{% block class_label_error -%}
+    block mb-2 text-sm font-semibold text-red-600
+{%- endblock %}
+
+{% block class_input_error -%}
+    text-red-600 bg-red-50 ring-red-400 placeholder-red-700 focus:z-10 focus:outline-red-400
+{%- endblock %}
+
+{% block class_text_error -%}
+    mt-2 text-sm text-red-600
+{%- endblock %}

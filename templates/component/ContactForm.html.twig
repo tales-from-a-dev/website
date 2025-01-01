@@ -1,0 +1,18 @@
+<div {{ attributes }}>
+    {% block content %}{% endblock %}
+
+    {{ form_start(form, {
+        attr: {
+            'data-action': 'live#action:prevent',
+            'data-live-action-param': 'send'
+        }
+    }) }}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-3">
+            {{ form_row(form.fullName) }}
+            {{ form_row(form.company) }}
+        </div>
+        {{ form_row(form.email) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.send) }}
+    {{ form_end(form) }}
+</div>

@@ -1,0 +1,18 @@
+{%- props color = 'yellow' -%}
+
+{%- set highlight = html_cva(
+    base: 'before:block before:absolute before:-inset-1 before:-skew-y-3 relative inline-block',
+    variants: {
+        color: {
+            yellow: 'before:bg-[#eab308]',
+            purple: 'before:bg-[#4f5b93]',
+            black: 'before:bg-black',
+        }
+    }
+) -%}
+
+<span class="{{ highlight.apply({color}, attributes.render('class')) }}">
+    <span class="relative text-white font-semibold">
+        {%- block content -%}{%- endblock -%}
+    </span>
+</span>

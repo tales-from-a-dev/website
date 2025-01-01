@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Model;
 
-use App\Domain\Model\GitHubProject;
+use App\Domain\ValueObjact\GitHubProject;
 use PHPUnit\Framework\TestCase;
 
 final class GithubProjectTest extends TestCase

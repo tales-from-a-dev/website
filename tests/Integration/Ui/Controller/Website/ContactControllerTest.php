@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Ui\Controller\Website;
 
-use App\Domain\Model\Contact;
+use App\Domain\Dto\ContactDto;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -28,8 +28,8 @@ final class ContactControllerTest extends WebTestCase
     {
         $translator = static::getContainer()->get(TranslatorInterface::class);
 
-        $contact = new Contact(
-            name: 'John Doe',
+        $contact = new ContactDto(
+            fullName: 'John Doe',
             email: 'johndoe@example.com',
             content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lectus nibh, tristique sed lobortis ut, facilisis sed neque. Pellentesque quis mauris volutpat, vehicula mi sed, posuere velit.'
         );
@@ -37,7 +37,7 @@ final class ContactControllerTest extends WebTestCase
         $this->browser()
             ->visit('/contact')
 
-            ->fillField('contact_name', $contact->name)
+            ->fillField('contact_name', $contact->fullName)
             ->fillField('contact_email', $contact->email)
             ->fillField('contact_content', $contact->content)
             ->click('submit')

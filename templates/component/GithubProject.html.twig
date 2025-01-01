@@ -1,0 +1,37 @@
+<div {{ attributes }}>
+    <h2 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5">{{ 'home.section.github.title'|trans }}</h2>
+    <p class="font-normal text-gray-500 text-xs md:text-base mb-20">{{ 'home.section.github.subtitle'|trans }}</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for project in this.projects %}
+            <div class="group relative bg-gray-50 flex flex-col justify-between px-8 py-10 rounded-md">
+                <div>
+                    <h4 class="font-medium text-gray-700 text-lg mb-4">
+                        <a href="{{ project.url }}" target="_blank" title="{{ project.name }}">
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            {{ project.name }}
+                        </a>
+                    </h4>
+                    <p class="font-normal text-gray-500 text-md mb-8">{{ project.description }}</p>
+                </div>
+                <ul class="text-gray-500 space-x-4">
+                    <li class="inline-flex items-center gap-x-1.5">
+                        <twig:Ux:Icon name="tabler:star" class="size-5" />
+                        {{ project.stargazerCount }}
+                    </li>
+                    {% if project.forkCount %}
+                        <li class="inline-flex items-center gap-x-1.5">
+                            <twig:Ux:Icon name="tabler:git-fork" class="size-5" />
+                            {{ project.forkCount }}
+                        </li>
+                    {% endif %}
+                </ul>
+                <span
+                    class="pointer-events-none absolute right-8 top-10 text-gray-300 group-hover:text-gray-400"
+                    aria-hidden="true"
+                >
+                    <twig:Ux:Icon name="tabler:arrow-up-right" class="size-6" />
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+</div>

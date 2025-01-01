@@ -1,0 +1,67 @@
+# app
+app:
+    meta:
+        description: 'Freelance full-stack web developer in Limoges. I develop PHP applications using the Symfony and Laravel frameworks.'
+        title: 'Tales from a Dev'
+
+# blog
+blog:
+    title: 'Blog'
+
+# contact
+contact:
+    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
+    title: 'Me contacter'
+    
+# enum
+enum:
+    project_type:
+        customer: 'Client'
+        github: 'GitHub'
+    publication_status:
+        draft: 'Brouillon'
+        frozen: 'Gelé'
+        published: 'Publié'
+        
+# error
+error:
+    back: 'Retour'
+    text: >-
+        {status_code, select,
+            403 {Vous ne passerez pas !!!}
+            404 {Il semblerait que cette page n'existe pas !}
+            500 {C'est facheux ...}
+            other {{status_text}}
+        }
+    title: >-
+        {status_code, select,
+            403 {Nope}
+            404 {There are no tales to tell...}
+            500 {Ah !}
+            other {Ola mon brave !}
+        }
+
+
+# github
+github:
+    title: 'Github projects'
+    subtitle: "Below are some of the projects I've created and currently maintain"
+
+# home
+home:
+    title: 'Romain Monteil - Freelance Developer - Limoges'
+    section:
+        about:
+            surtitle: 'Romain Monteil'
+            title: 'Développeur backend senior'
+        github:
+            title: 'Github projects'
+            subtitle: "Below are some of the projects I've created and currently maintain"
+        
+# project
+project:
+    title: 'Projets'
+    
+# tag
+tag:
+    title: 'Mes articles taggués « {tag} »'

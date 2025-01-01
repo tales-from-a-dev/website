@@ -1,5 +1,5 @@
 # btn
-btn:
+button:
     cancel: 'Annuler'
     close: 'Fermer'
     confirm: "Oui, j'en suis sûr"
@@ -19,18 +19,10 @@ delete:
     
 # label
 label:
+    company: 'Société'
     content: 'Contenu'
-    description: 'Description'
     email: 'Email'
-    name: 'Nom'
-    password: 'Mot de passe'
-    publication_status: 'Statut de publication'
-    published_at: 'Date de publication'
-    subtitle: 'Sous-titre'
-    tags: 'Tags'
-    title: 'Titre'
-    type: 'Type'
-    url: 'Url'
+    full_name: 'Nom & Prénom'
     
 # placeholder
 placeholder:
