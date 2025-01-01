@@ -1,0 +1,15 @@
+{% extends 'app/base.html.twig' %}
+
+{% block meta_title %}
+    {{ 'login.title'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <twig:Form:LoginForm
+        class="flex justify-center py-4 md:py-6"
+        :lastUsername="last_username"
+        :lastError="last_error"
+    />
+{% endblock %}
+
+{% block footer %}{% endblock %}

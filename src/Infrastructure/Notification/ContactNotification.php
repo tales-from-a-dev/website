@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Notification;
 
-use App\Domain\Model\Contact;
+use App\Domain\Dto\ContactDto;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Notifier\Message\EmailMessage;
@@ -18,7 +18,7 @@ use Symfony\Component\Notifier\Recipient\SmsRecipientInterface;
 final class ContactNotification extends Notification implements EmailNotificationInterface, SmsNotificationInterface
 {
     public function __construct(
-        private readonly Contact $contact,
+        private readonly ContactDto $contact,
         private readonly string $subject,
     ) {
         parent::__construct($this->subject);
@@ -28,11 +28,7 @@ final class ContactNotification extends Notification implements EmailNotificatio
     public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): ?EmailMessage
     {
         return new EmailMessage(
-            (new TemplatedEmail())
-                ->from(new Address(
-                    address: 'noreply@talesfroma.dev',
-                    name: 'Tales from a Dev'
-                ))
+            new TemplatedEmail()
                 ->to(new Address(
                     address: $recipient->getEmail(),
                     name: 'Contact'

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Infrastructure\Dbal\Types;
 
-use App\Domain\Model\GitHubProject;
+use App\Domain\ValueObject\GitHubProject;
 use App\Infrastructure\Dbal\Types\ProjectMetadataType;
 use App\Infrastructure\Dbal\Types\Types;
 use Doctrine\DBAL\ParameterType;
@@ -55,17 +55,19 @@ final class ProjectMetadataTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $value = ['type' => 'github_project', 'id' => 'foo', 'forkCount' => 10, 'stargazerCount' => 10, 'languages' => ['php']];
+        $value = ['type' => 'github_project', 'id' => '1', 'name' => 'foo', 'description' => 'foo bar', 'forkCount' => 10, 'stargazerCount' => 10, 'url' => 'https://github.com/foo/bar', 'languages' => [['name' => 'php', 'color' => '#000']]];
         $databaseValue = json_encode($value, \JSON_THROW_ON_ERROR | 0, \JSON_THROW_ON_ERROR | \JSON_PRESERVE_ZERO_FRACTION);
 
         $phpValue = $this->type->convertToPHPValue($databaseValue, $this->platform);
 
         self::assertInstanceOf(GitHubProject::class, $phpValue);
-        self::assertSame('foo', $phpValue->id);
+        self::assertSame('1', $phpValue->id);
+        self::assertSame('foo', $phpValue->name);
+        self::assertSame('foo bar', $phpValue->description);
         self::assertSame(10, $phpValue->forkCount);
         self::assertSame(10, $phpValue->stargazerCount);
         self::assertCount(1, $phpValue->languages);
-        self::assertContains('php', $phpValue->languages);
+        self::assertContains(['name' => 'php', 'color' => '#000'], $phpValue->languages);
     }
 
     public function testItConvertPhpNullValueToJsonNull(): void
@@ -75,15 +77,15 @@ final class ProjectMetadataTest extends KernelTestCase
 
     public function testItConvertPhpGithubProjectClassToJsonGithubObject(): void
     {
-        $source = new GitHubProject('foo', 10, 10, ['php']);
+        $source = new GitHubProject('1', 'foo', 'foo bar', 10, 10, 'https://github.com/foo/bar', [['name' => 'php', 'color' => '#000']]);
         $databaseValue = $this->type->convertToDatabaseValue($source, $this->platform);
 
-        self::assertSame('{"type":"github_project","id":"foo","forkCount":10,"stargazerCount":10,"languages":["php"]}', $databaseValue);
+        self::assertSame('{"type":"github_project","id":"1","name":"foo","description":"foo bar","forkCount":10,"stargazerCount":10,"url":"https:\/\/github.com\/foo\/bar","languages":[{"name":"php","color":"#000"}]}', $databaseValue);
     }
 
     public function testItThrowAnExceptionOnDenormalizationWithInvalidType(): void
     {
-        $value = ['type' => 'metadata_project', 'id' => 'foo', 'forkCount' => 10, 'stargazerCount' => 10, 'languages' => ['php']];
+        $value = ['type' => 'metadata_project', 'id' => '1', 'name' => 'foo', 'description' => 'foo bar', 'forkCount' => 10, 'stargazerCount' => 10, 'languages' => [['name' => 'php', 'color' => '#000']]];
         $databaseValue = json_encode($value, 0, \JSON_THROW_ON_ERROR | \JSON_PRESERVE_ZERO_FRACTION);
 
         $this->expectException(ConversionException::class);

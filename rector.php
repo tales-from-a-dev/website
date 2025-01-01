@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Zenstruck\Foundry\Utils\Rector\FoundrySetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -14,7 +13,4 @@ return RectorConfig::configure()
     ])
     ->withPreparedSets(deadCode: true)
     ->withPhpSets(php84: true)
-    ->withSets([
-        FoundrySetList::UP_TO_FOUNDRY_2,
-    ])
 ;

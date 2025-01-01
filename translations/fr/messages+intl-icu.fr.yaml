@@ -4,25 +4,19 @@ app:
         description: 'Développeur web full-stack freelance à Limoges. Je développe des applications PHP sur les frameworks Symfony et Laravel.'
         title: 'Tales from a Dev'
 
-# blog
-blog:
-    title: 'Blog'
-
-# contact
-contact:
-    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
-    title: 'Me contacter'
-    
 # enum
 enum:
     project_type:
         customer: 'Client'
         github: 'GitHub'
-    publication_status:
-        draft: 'Brouillon'
-        frozen: 'Gelé'
-        published: 'Publié'
-        
+    experience_position:
+        backend_developer: 'Développeur Back-end'
+        frontend_developer: 'Développeur Front-end'
+        fullstack_developer: 'Développeur Fullstack'
+    experience_type:
+        freelance: 'Freelance'
+        permanent_contract: 'CDI'
+
 # error
 error:
     back: 'Retour'
@@ -40,42 +34,64 @@ error:
             500 {Ah !}
             other {Ola mon brave !}
         }
-   
+
 # home
 home:
-    title: 'Romain Monteil - Développeur Freelance - Limoges'
-    
+    title: 'Romain Monteil - Développeur Back-end Senior'
+    section:
+        about:
+            surtitle: 'Romain Monteil'
+            title: 'Développeur Back-end Senior'
+            subtitle: "Développeur passionné avec 15 ans d'expériences, je travaille principalement sur {php} avec {symfony}"
+        github:
+            title: 'Projets Github'
+            subtitle: "Voici quelques-uns des projets que j'ai créés et que je maintiens actuellement"
+        contact:
+            title: 'Me contacter'
+            subtitle: "N'hésitez pas à me contacter pour toute demande de devis."
+            text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
+        faq:
+            title: 'Faq'
+            subtitle: 'Quelques questions fréquentes'
+            dl:
+                dt_1: 'Quels sont tes disponibilités ?'
+                dd_1: 'Je suis actuellement {available}.'
+                dd_1_available: >-
+                    {available, select,
+                        yes {disponible}
+                        other {indisponible}
+                    }
+                dt_2: 'Quels sont tes tarifs ?'
+                dd_2: 'Mon tarif journalier se situe aux alentours de {daily_price}.'
+                dd_2_price: '{price} € / jour'
+                dt_3: 'Te deplaces-tu en mission chez le client ?'
+                dd_3: "J'effectue l'ensemble de mes missions à distance."
+        experience:
+            title: 'Expériences'
+            subtitle: 'Un résumé des mes expériences professionnelles'
+            table:
+                col:
+                    company: 'Société'
+                    position: 'Poste'
+                    year: 'Année'
+                    
 # login
 login:
     title: 'Connexion'
     
-# pagination
-pagination:
-    first_page: 'Première page'
-    items_per_page: '{items_per_page} par page'
-    last_page: 'Dernière page'
-    next_page: 'Suivant'
-    previous_page: 'Précédent'
-    total_items: >-
-        {itemCount, plural, 
-            =0 {Il n'y a aucun enregistrement} 
-            one {<strong># enregistrement</strong> sur {pageCount} page}
-            other {<strong># enregistrements</strong> sur {pageCount} pages}
-        }
-        
-# project
-project:
-    title: 'Projets'
-    
-# tag
-tag:
-    title: 'Mes articles taggués « {tag} »'
+# logout
+logout:
+    title: 'Déconnexion'
 
-# admin
-admin:
-    sidebar:
-        dashboard: 'Dashboard'
-        logout: 'Déconnexion'
-        posts: 'Articles'
-        projects: 'Projets'
-        tags: 'Tags'
+# settings                
+settings:
+    title: 'Paramètres'
+
+# contact
+contact:
+    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
+    title: 'Me contacter'
+
+# footer
+footer:
+    copyright: '© {year} Romain Monteil. Tous droits réservés.'

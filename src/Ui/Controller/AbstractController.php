@@ -5,26 +5,15 @@ declare(strict_types=1);
 namespace App\Ui\Controller;
 
 use App\Domain\Enum\AlertStatusEnum;
-use App\Domain\Model\Alert;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as SymfonyAbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
+use App\Domain\ValueObject\Alert;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
-abstract class AbstractController extends SymfonyAbstractController
+abstract class AbstractController extends BaseAbstractController
 {
-    /**
-     * @param array<string, mixed> $parameters
-     */
-    protected function redirectToReferrer(string $fallbackRoute, array $parameters = [], int $status = Response::HTTP_FOUND): RedirectResponse
-    {
-        if (null !== $request = $this->container->get('request_stack')->getCurrentRequest()) {
-            $referrer = $request->headers->get('referer');
-        }
-
-        return $this->redirectToRoute($referrer ?? $fallbackRoute, $parameters, $status);
-    }
-
     /**
      * @param array<string, mixed> $parameters
      */
@@ -35,5 +24,16 @@ abstract class AbstractController extends SymfonyAbstractController
         }
 
         $this->addFlash('alert', new Alert($message, $status));
+    }
+
+    /**
+     * Creates and returns a named form instance from the type of the form.
+     *
+     * @param class-string<FormTypeInterface> $type
+     * @param array<string, mixed>            $options
+     */
+    protected function createFormNamed(string $name, string $type = FormType::class, mixed $data = null, array $options = []): FormInterface
+    {
+        return $this->container->get('form.factory')->createNamed($name, $type, $data, $options);
     }
 }

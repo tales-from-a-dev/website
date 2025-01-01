@@ -8,5 +8,6 @@ enum RouteNameEnum: string
 {
     // website
     case WebsiteHome = 'app_website_home';
-    case WebsiteContactIndex = 'app_website_contact_index';
+    case WebsiteLogin = 'app_website_login';
+    case WebsiteSettings = 'app_website_settings';
 }

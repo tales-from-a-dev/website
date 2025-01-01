@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Returns the importmap for this application.
  *
@@ -26,10 +28,10 @@ return [
         'version' => '3.2.2',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.12',
+        'version' => '8.0.13',
     ],
     'flowbite' => [
-        'version' => '3.1.1',
+        'version' => '3.1.2',
     ],
     '@popperjs/core' => [
         'version' => '2.11.8',
@@ -38,25 +40,28 @@ return [
         'version' => '1.3.2',
     ],
     'flowbite/dist/flowbite.min.css' => [
-        'version' => '3.1.1',
+        'version' => '3.1.2',
         'type' => 'css',
     ],
     'flowbite/plugin' => [
-        'version' => '3.1.1',
+        'version' => '3.1.2',
     ],
     'mini-svg-data-uri' => [
         'version' => '1.4.4',
     ],
     'tailwindcss/plugin' => [
-        'version' => '4.0.3',
+        'version' => '4.1.8',
     ],
     'tailwindcss/defaultTheme' => [
-        'version' => '4.0.3',
+        'version' => '4.1.8',
     ],
     'tailwindcss/colors' => [
-        'version' => '4.0.3',
+        'version' => '4.1.8',
     ],
     'picocolors' => [
         'version' => '1.1.1',
+    ],
+    '@stimulus-components/scroll-to' => [
+        'version' => '5.0.1',
     ],
 ];

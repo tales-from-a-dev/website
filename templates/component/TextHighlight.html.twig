@@ -1,0 +1,18 @@
+{%- props color = 'yellow' -%}
+
+{%- set highlight = html_cva(
+    base: 'before:block before:absolute before:-z-10 before:-inset-1 before:-skew-y-3 relative inline-block text-white font-semibold z-10',
+    variants: {
+        color: {
+            yellow: 'before:bg-[#eab308]',
+            purple: 'before:bg-[#4f5b93]',
+            black: 'before:bg-black',
+            red: 'before:bg-red-400',
+            green: 'before:bg-green-400',
+        },
+    },
+) -%}
+
+<mark class="{{ highlight.apply({color}, attributes.render('class')) }}">
+    {%- block content -%}{%- endblock -%}
+</mark>

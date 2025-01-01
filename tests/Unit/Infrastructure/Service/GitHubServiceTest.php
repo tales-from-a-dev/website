@@ -20,7 +20,7 @@ final class GitHubServiceTest extends TestCase
             'http_code' => 200,
             'response_headers' => ['Content-Type: application/json'],
         ]);
-        $mockHttpClient = (new MockHttpClient($mockResponse, 'https://api.github.com'))
+        $mockHttpClient = new MockHttpClient($mockResponse, 'https://api.github.com')
             ->withOptions([
                 'headers' => [
                     'Accept: application/vnd.github.v4+json',

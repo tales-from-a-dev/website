@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Dbal\Types;
 
-use App\Domain\Model\GitHubProject;
-use App\Domain\Model\MetadataInterface;
+use App\Domain\ValueObject\GitHubProject;
+use App\Domain\ValueObject\MetadataInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\JsonType;

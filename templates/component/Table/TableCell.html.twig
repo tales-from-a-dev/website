@@ -1,0 +1,19 @@
+{%- props align = 'left' -%}
+
+{%- set ctx = html_cva(
+    base: 'px-2 py-8 align-middle whitespace-nowrap',
+    variants: {
+        align: {
+            left: 'text-left',
+            center: 'text-center',
+            right: 'text-right',
+        },
+    },
+) -%}
+
+<td {{ attributes.defaults({
+    'data-slot': 'table-cell',
+    class: ctx.apply({align}),
+}) }}>
+    {% block content %}{% endblock %}
+</td>

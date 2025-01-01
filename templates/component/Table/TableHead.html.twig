@@ -1,0 +1,20 @@
+{%- props align = 'left' -%}
+
+{%- set ctx = html_cva(
+    base: 'px-2 py-8 text-gray-400 align-middle font-medium uppercase whitespace-nowrap',
+    variants: {
+        align: {
+            left: 'text-left',
+            center: 'text-center',
+            right: 'text-right',
+        },
+    },
+) -%}
+
+<th {{ attributes.defaults({
+    'data-slot': 'table-head',
+    scope: 'col',
+    class: ctx.apply({align}),
+}) }}>
+    {% block content %}{% endblock %}
+</th>

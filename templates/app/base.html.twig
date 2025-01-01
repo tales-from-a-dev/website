@@ -3,7 +3,7 @@
 {% set current_locale = app.request.locale %}
 
 <!DOCTYPE html>
-<html lang="{{ current_locale }}" class="dark">
+<html lang="{{ current_locale }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,7 +44,36 @@
         <link rel="canonical"
               href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}" />
     </head>
-    <body class="flex h-screen antialiased text-slate-200 bg-slate-900 selection:bg-teal-700">
-        {% block body %}{% endblock %}
+    <body class="bg-gray-100">
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+        {% block footer %}
+            <footer class="bg-gray-900">
+                <div class="container max-w-(--breakpoint-xl) mx-auto px-6 py-16 flex flex-col md:flex-row items-center md:justify-between">
+                    <div class="flex items-center justify-center space-x-4 md:order-2">
+                        <a href="https://github.com/ker0x" target="_blank" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">Github</span>
+                            <twig:Ux:Icon name="simple-icons:github" class="size-6" />
+                        </a>
+                        <a href="https://bsky.app/profile/ker0x.bsky.social" target="_blank" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">Bluesky</span>
+                            <twig:Ux:Icon name="simple-icons:bluesky" class="size-6" />
+                        </a>
+                        <a href="https://x.com/ker0x" target="_blank" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">X</span>
+                            <twig:Ux:Icon name="simple-icons:x" class="size-6" />
+                        </a>
+                        <a href="https://www.linkedin.com/in/romain-monteil/" target="_blank" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">Linkedin</span>
+                            <twig:Ux:Icon name="simple-icons:linkedin" class="size-6" />
+                        </a>
+                    </div>
+                    <p class="mt-8 text-sm/6 text-gray-400 md:order-1 md:mt-0">
+                        {{ 'footer.copyright'|trans({year: 'now'|date('Y')}) }}
+                    </p>
+                </div>
+            </footer>
+        {% endblock %}
     </body>
 </html>

@@ -1,17 +1,8 @@
-website_controllers:
+controllers:
     resource:
-        path: ../src/Ui/Controller/Website
-        namespace: App\Ui\Controller\Website
+        path: ../src/Ui/Controller/
+        namespace: App\Ui\Controller
     type: attribute
-    name_prefix: app_website_
-    
-app_website_home:
-    path: /
-    methods: GET
-    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
-    defaults:
-        # the path of the template to render
-        template: 'app/website/home.html.twig'
 
 app_website_logout:
     path: /logout

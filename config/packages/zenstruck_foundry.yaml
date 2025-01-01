@@ -3,15 +3,9 @@ when@dev: &dev
     zenstruck_foundry:
         faker:
             locale: fr_FR # set the locale
-            
-        instantiator:
-            use_constructor:  true
         
-        orm:
-            auto_persist: true
-            reset:
-                connections: [ default ]
-                entity_managers: [ default ]
-                mode: schema
+        persistence:
+            # Flush only once per call of `PersistentObjectFactory::create()`
+            flush_once: true
 
 when@test: *dev

@@ -18,7 +18,10 @@ final class WebsiteRouteTest extends RouteTestCase
     {
         yield 'GET /' => ['/', Request::METHOD_GET, RouteNameEnum::WebsiteHome];
 
-        yield 'GET /contact' => ['/contact', Request::METHOD_GET, RouteNameEnum::WebsiteContactIndex];
-        yield 'POST /contact' => ['/contact', Request::METHOD_POST, RouteNameEnum::WebsiteContactIndex];
+        yield 'GET /login' => ['/login', Request::METHOD_GET, RouteNameEnum::WebsiteLogin];
+        yield 'POST /login' => ['/login', Request::METHOD_POST, RouteNameEnum::WebsiteLogin];
+
+        yield 'GET /settings' => ['/settings', Request::METHOD_GET, RouteNameEnum::WebsiteSettings];
+        yield 'POST /settings' => ['/settings', Request::METHOD_POST, RouteNameEnum::WebsiteSettings];
     }
 }

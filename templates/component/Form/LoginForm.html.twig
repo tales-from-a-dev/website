@@ -1,0 +1,27 @@
+<div {{ attributes.defaults({'data-slot': 'form-login'}) }}>
+    <twig:Card:Card class="w-full max-w-sm">
+        <twig:Card:CardHeader>
+            <twig:Card:CardTitle class="text-xl">
+                {{ 'login.title'|trans }}
+            </twig:Card:CardTitle>
+        </twig:Card:CardHeader>
+        <twig:Card:CardContent class="grid gap-4">
+            {%- if last_error -%}
+                <twig:Alert:Alert variant="error">
+                    <twig:Ux:Icon name="tabler:exclamation-circle" />
+                    <twig:Alert:AlertTitle>
+                        {{ last_error.messageKey|trans(last_error.messageData, 'security') }}
+                    </twig:Alert:AlertTitle>
+                </twig:Alert:Alert>
+            {%- endif -%}
+            {{ form_start(form, {attr: {id: 'form_login'}}) }}
+                {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </twig:Card:CardContent>
+        <twig:Card:CardFooter>
+            <twig:Button class="w-full" form="form_login">
+                {{ 'button.login'|trans(domain: 'form') }}
+            </twig:Button>
+        </twig:Card:CardFooter>
+    </twig:Card:Card>
+</div>

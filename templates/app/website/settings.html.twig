@@ -1,0 +1,47 @@
+{% extends 'app/base.html.twig' %}
+
+{% block meta_title %}
+    {{ 'settings.title'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="flex justify-center py-4 md:py-6">
+        <twig:Card:Card class="w-full max-w-sm">
+            <twig:Card:CardHeader>
+                <twig:Card:CardTitle class="text-xl">
+                    {{ 'settings.title'|trans }}
+                </twig:Card:CardTitle>
+                <twig:Card:CardAction>
+                    <a
+                        class="text-gray-300 hover:text-gray-400"
+                        href="{{ logout_url() }}"
+                        title="{{ 'logout.title'|trans }}"
+                        data-turbo="false"
+                    >
+                        <twig:Ux:Icon name="tabler:logout" class="size-5"/>
+                    </a>
+                </twig:Card:CardAction>
+            </twig:Card:CardHeader>
+            <twig:Card:CardContent class="grid gap-4">
+                {% for alert in app.flashes('alert') %}
+                    <twig:Alert:Alert :variant="alert.status.value">
+                        <twig:Ux:Icon name="tabler:circle-check"/>
+                        <twig:Alert:AlertTitle>
+                            {{ alert.message|trans(domain: 'alert') }}
+                        </twig:Alert:AlertTitle>
+                    </twig:Alert:Alert>
+                {% endfor %}
+                {{ form_start(form, {attr: {id: form.vars.id}}) }}
+                    {{ form_rest(form) }}
+                {{ form_end(form) }}
+            </twig:Card:CardContent>
+            <twig:Card:CardFooter>
+                <twig:Button class="w-full" form="{{ form.vars.id }}">
+                    {{ 'button.save'|trans(domain: 'form') }}
+                </twig:Button>
+            </twig:Card:CardFooter>
+        </twig:Card:Card>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

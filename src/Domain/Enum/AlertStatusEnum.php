@@ -5,19 +5,14 @@ declare(strict_types=1);
 namespace App\Domain\Enum;
 
 use Elao\Enum\Attribute\ReadableEnum;
-use Elao\Enum\ExtrasTrait;
-use Elao\Enum\ReadableEnumInterface;
-use Elao\Enum\ReadableEnumTrait;
+use Elao\Enum\Bridge\Symfony\Translation\TranslatableEnumInterface;
+use Elao\Enum\Bridge\Symfony\Translation\TranslatableEnumTrait;
 
 #[ReadableEnum(prefix: 'enum.alert_status.', useValueAsDefault: true)]
-enum AlertStatusEnum: string implements ReadableEnumInterface
+enum AlertStatusEnum: string implements TranslatableEnumInterface
 {
-    use ExtrasTrait;
-    use ReadableEnumTrait;
+    use TranslatableEnumTrait;
 
-    case Default = 'default';
     case Danger = 'danger';
-    case Info = 'info';
     case Success = 'success';
-    case Warning = 'warning';
 }
