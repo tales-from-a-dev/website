@@ -36,11 +36,11 @@ up-dev: ## Start the docker hub in detached mode (no logs) for debugging
 .PHONY: up-dev
 
 up-test: ## Start the docker hub in detached mode (no logs) for testing
-	@XDEBUG_MODE=coverage $(DOCKER_COMP) -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.test.yml up --detach
+	@XDEBUG_MODE=coverage $(DOCKER_COMP) -f compose.yaml -f compose.override.yaml -f compose.test.yaml up --detach
 .PHONY: up-test
 
 up-prod: ## Start the docker hub in detached mode (no logs) for production
-	@$(DOCKER_COMP) -f docker-compose.yml -f docker-compose.prod.yml up --detach
+	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml up --detach
 .PHONY: up-prod
 
 start: build up ## Build and start the containers
@@ -120,9 +120,29 @@ asset-map: sf
 ##
 ## —— Assets 🎨 ————————————————————————————————————————————————————————————————
 ##
-tailwind: c=tailwind:build --watch --poll ## Build CSS
-tailwind: sf
-.PHONY: tailwind
+importmap: c=importmap:install ## Install
+importmap: sf
+.PHONY: importmap
+
+asset-build: ## Build assets
+	@$(SYMFONY) tailwind:build
+.PHONY: asset-build
+
+asset-watch: ## Watch and build assets
+	@$(SYMFONY) tailwind:build --watch --poll
+.PHONY: asset-watch
+
+asset-outdated: ## List outdated JavaScript packages and their latest versions
+	@$(SYMFONY) importmap:outdated
+.PHONY: asset-outdated
+
+asset-update: ## Update JavaScript packages to their latest versions
+	@$(SYMFONY) importmap:update
+.PHONY: asset-update
+
+asset-audit: ## Check for vulnerability in assets
+	@$(SYMFONY) importmap:audit
+.PHONY: asset-audit
 
 ##
 ## —— Database 🔮 ——————————————————————————————————————————————————————————————
