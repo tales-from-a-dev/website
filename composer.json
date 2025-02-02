@@ -47,13 +47,13 @@
         "symfony/validator": "7.2.*",
         "symfony/web-link": "7.2.*",
         "symfony/yaml": "7.2.*",
-        "symfonycasts/tailwind-bundle": "^0.6.0",
+        "symfonycasts/tailwind-bundle": "^0.7",
         "tales-from-a-dev/flowbite-bundle": "^0.7",
-        "twig/extra-bundle": "^3.18",
-        "twig/intl-extra": "^3.18",
-        "twig/markdown-extra": "^3.18",
-        "twig/string-extra": "^3.18",
-        "twig/twig": "^3.18"
+        "twig/extra-bundle": "^3.19",
+        "twig/intl-extra": "^3.19",
+        "twig/markdown-extra": "^3.19",
+        "twig/string-extra": "^3.19",
+        "twig/twig": "^3.19"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.0",
