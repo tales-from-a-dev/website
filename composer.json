@@ -44,7 +44,6 @@
         "symfony/translation": "7.3.*",
         "symfony/twig-bundle": "7.3.*",
         "symfony/ux-icons": "^2.23",
-        "symfony/ux-live-component": "^2.23",
         "symfony/ux-turbo": "^2.23",
         "symfony/ux-twig-component": "^2.23",
         "symfony/validator": "7.3.*",
@@ -77,8 +76,7 @@
         "symfony/stopwatch": "7.3.*",
         "symfony/web-profiler-bundle": "7.3.*",
         "vincentlanglet/twig-cs-fixer": "^3.5",
-        "zenstruck/browser": "^1.8",
-        "zenstruck/foundry": "^2.0"
+        "zenstruck/browser": "^1.8"
     },
     "config": {
         "allow-plugins": {

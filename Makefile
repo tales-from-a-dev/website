@@ -180,6 +180,7 @@ db-test: ## Create test database
 	@$(SYMFONY) --env=test doctrine:database:drop --if-exists --force
 	@$(SYMFONY) --env=test doctrine:database:create --if-not-exists
 	@$(SYMFONY) --env=test doctrine:schema:update --complete --force
+	@$(SYMFONY) --env=test app:database:seed
 .PHONY: db-test
 
 ##
@@ -231,10 +232,20 @@ linter: ## Twig / Yaml & check DB mapping
 ##
 test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
 	@$(eval f ?=)
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/console tailwind:build
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/console cache:clear
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit $(f)
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testdox $(f)
 .PHONY: test
+
+test-unit: ## Run all unit tests
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testsuite unit --testdox
+.PHONY: test-unit
+
+test-functional: ## Run all functional tests
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testsuite functional --testdox
+.PHONY: test-functional
+
+test-integration: ## Run all integration tests
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testsuite integration --testdox
+.PHONY: test-integration
 
 coverage: ## Run tests with code coverage
 	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage -e APP_ENV=test php ./bin/phpunit

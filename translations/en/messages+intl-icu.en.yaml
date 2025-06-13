@@ -1,31 +1,25 @@
 # app
 app:
     meta:
-        description: 'Freelance full-stack web developer in Limoges. I develop PHP applications using the Symfony and Laravel frameworks.'
+        description: 'Freelance full-stack web developer based in Limoges. I develop PHP applications using the Symfony and Laravel frameworks.'
         title: 'Tales from a Dev'
 
-# blog
-blog:
-    title: 'Blog'
-
-# contact
-contact:
-    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
-    title: 'Me contacter'
-    
 # enum
 enum:
     project_type:
-        customer: 'Client'
+        customer: 'Customer'
         github: 'GitHub'
-    publication_status:
-        draft: 'Brouillon'
-        frozen: 'Gelé'
-        published: 'Publié'
-        
+    experience_position:
+        backend_developer: 'Back-end Developer'
+        frontend_developer: 'Front-end Developer'
+        fullstack_developer: 'Fullstack Developer'
+    experience_type:
+        freelance: 'Freelance'
+        permanent_contract: 'Permanent contract'
+
 # error
 error:
-    back: 'Retour'
+    back: 'Back'
     text: >-
         {status_code, select,
             403 {Vous ne passerez pas !!!}
@@ -41,27 +35,63 @@ error:
             other {Ola mon brave !}
         }
 
-
-# github
-github:
-    title: 'Github projects'
-    subtitle: "Below are some of the projects I've created and currently maintain"
-
 # home
 home:
-    title: 'Romain Monteil - Freelance Developer - Limoges'
+    title: 'Romain Monteil - Senior Back-end Developer'
     section:
         about:
             surtitle: 'Romain Monteil'
-            title: 'Développeur backend senior'
+            title: 'Senior Back-end Developer'
+            subtitle: "A passionate developer with 15 years' experience, I work mainly on {php} with {symfony}."
         github:
-            title: 'Github projects'
-            subtitle: "Below are some of the projects I've created and currently maintain"
-        
-# project
-project:
-    title: 'Projets'
-    
-# tag
-tag:
-    title: 'Mes articles taggués « {tag} »'
+            title: 'Github Projects'
+            subtitle: "Here are some of the projects I have created and am currently maintaining"
+        contact:
+            title: 'Contact Me'
+            subtitle: "Please do not hesitate to contact me for a quotation."
+            text: 'So that I can best respond to your request and correctly assess the workload, please give as much detail as possible about the project. This will also enable me to give you an initial estimate as close as possible to the final quote.'
+        faq:
+            title: 'Faq'
+            subtitle: 'Frequently asked questions'
+            dl:
+                dt_1: "What's your availability?"
+                dd_1: "I am currently {available}."
+                dd_1_available: >-
+                    {available, select,
+                        yes {available}
+                        other {unavailable}
+                    }
+                dt_2: 'What are your rates?'
+                dd_2: 'My daily rate is around {daily_price}.'
+                dd_2_price: '{price} € / day'
+                dt_3: 'Do you work on site?'
+                dd_3: "I do all my work remotely."
+        experience:
+            title: 'Experiences'
+            subtitle: 'A summary of my professional experience'
+            table:
+                col:
+                    company: 'Company'
+                    position: 'Position'
+                    year: 'Year'
+
+# login
+login:
+    title: 'Login'
+
+# logout
+logout:
+    title: 'Logout'
+
+# settings                
+settings:
+    title: 'Settings'
+
+# contact
+contact:
+    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
+    title: 'Me contacter'
+
+# footer
+footer:
+    copyright: '© {year} Romain Monteil. All rights reserved.'

@@ -13,6 +13,6 @@
     },
 ) -%}
 
-<mark class="{{ highlight.apply({color}, attributes.render('class')) }}">
+<mark class="{{ highlight.apply({color: color}, attributes.render('class')) }}">
     {%- block content -%}{%- endblock -%}
 </mark>

@@ -30,16 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
       
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
-      -
-        name: Build Docker images
+      - name: Build Docker images
         uses: docker/bake-action@v6
         with:
           pull: true
@@ -52,39 +49,23 @@ jobs:
             *.cache-from=type=gha,scope=refs/heads/main
             *.cache-to=type=gha,scope=${{github.ref}},mode=max
       
-      -
-        name: Start services
+      - name: Start services
         run: >
           GITHUB_USERNAME=${{ secrets.GH_USERNAME }}
           GITHUB_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}
           docker compose up --wait --no-build
           
       - name: Build assets
-        run: docker compose exec -T php bin/console -e test tailwind:build
+        run: make asset-build
       
-      -
-        name: Check HTTP reachability
+      - name: Create test database
+        run: make db-test
+        
+      - name: Check HTTP reachability
         run: curl -v --fail-with-body http://localhost
-      
-      -
-        name: Check HTTPS reachability
+
+      - name: Check HTTPS reachability
         run: curl -vk --fail-with-body https://localhost
       
-      -
-        name: Create test database
-        if: false
-        run: docker compose exec -T php bin/console -e test doctrine:database:create
-      
-      -
-        name: Run migrations
-        if: false
-        run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
-      
-      -
-        name: Doctrine Schema Validator
-        if: false
-        run: docker compose exec -T php bin/console -e test doctrine:schema:validate
-      
-      -
-        name: Run PHPUnit
+      - name: Run PHPUnit
         run: make coverage

@@ -25,6 +25,8 @@ security:
                 enable_csrf: true
                 login_path: app_website_login
                 check_path: app_website_login
+                default_target_path: app_website_settings
+                always_use_default_target_path: true
                 
             logout:
                 path: app_website_logout

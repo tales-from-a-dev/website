@@ -12,6 +12,6 @@
     },
 ) -%}
 
-<a {{ attributes.defaults({class: ctx.apply({size, variant})}) }}>
+<a {{ attributes.defaults({class: ctx.apply({size: size, variant: variant})}) }}>
     {%- block content %}{% endblock -%}
 </a>

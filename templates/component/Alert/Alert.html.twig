@@ -14,7 +14,7 @@
 <div {{ attributes.defaults({
     'data-slot': 'alert',
     role: 'alert',
-    class: ctx.apply({variant}),
+    class: ctx.apply({variant: variant}),
 }) }}>
     {% block content %}{% endblock %}
 </div>

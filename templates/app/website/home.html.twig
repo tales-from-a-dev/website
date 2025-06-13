@@ -81,7 +81,14 @@
                 <twig:Section:SectionTitle>{{ 'home.section.contact.title'|trans }}</twig:Section:SectionTitle>
                 <twig:Section:SectionDescription>{{ 'home.section.contact.subtitle'|trans }}</twig:Section:SectionDescription>
             </div>
-            <twig:Form:ContactForm class="lg:col-span-2" />
+            <twig:Turbo:Frame
+                id="contact-form-container"
+                loading="lazy"
+                src="{{ path('app_website_contact') }}"
+                data-slot="contact-form"
+                class="lg:col-span-2"
+            />
+        </div>
     </twig:Section:Section>
     <twig:Section:Section id="faq">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">

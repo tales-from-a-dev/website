@@ -14,7 +14,7 @@
 <th {{ attributes.defaults({
     'data-slot': 'table-head',
     scope: 'col',
-    class: ctx.apply({align}),
+    class: ctx.apply({align: align}),
 }) }}>
     {% block content %}{% endblock %}
 </th>

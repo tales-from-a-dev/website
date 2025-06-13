@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
     name: RouteNameEnum::WebsiteHome->value,
     methods: [
         Request::METHOD_GET,
+        Request::METHOD_POST,
     ]
 )]
 final class HomeController extends AbstractController
