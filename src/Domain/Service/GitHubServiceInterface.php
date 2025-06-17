@@ -4,24 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Service;
 
+use App\Domain\ValueObject\GitHubProject;
+
 interface GitHubServiceInterface
 {
     /**
-     * @return array<array{
-     *     id: string,
-     *     name: string,
-     *     description: string,
-     *     url: string,
-     *     forkCount: int,
-     *     stargazerCount: int,
-     *     languages: array{
-     *         nodes: array{
-     *             0: array{
-     *                 name: string
-     *             }
-     *         }
-     *     }
-     * }>
+     * @return GitHubProject[]
      */
     public function getPinnedRepositories(): array;
 }

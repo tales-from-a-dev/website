@@ -25,7 +25,7 @@ final class ContactNotification extends Notification implements EmailNotificatio
     }
 
     #[\Override]
-    public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): ?EmailMessage
+    public function asEmailMessage(EmailRecipientInterface $recipient, ?string $transport = null): EmailMessage
     {
         return new EmailMessage(
             new TemplatedEmail()
@@ -42,7 +42,7 @@ final class ContactNotification extends Notification implements EmailNotificatio
     }
 
     #[\Override]
-    public function asSmsMessage(SmsRecipientInterface $recipient, ?string $transport = null): ?SmsMessage
+    public function asSmsMessage(SmsRecipientInterface $recipient, ?string $transport = null): SmsMessage
     {
         return new SmsMessage(
             $recipient->getPhone(),

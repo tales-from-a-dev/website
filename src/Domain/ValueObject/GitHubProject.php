@@ -10,7 +10,7 @@ namespace App\Domain\ValueObject;
 final readonly class GitHubProject implements MetadataInterface
 {
     /**
-     * @param list<array{name: string, color: string}> $languages
+     * @param array<int, array{name: string, color: string}> $languages
      */
     public function __construct(
         public string $id,
@@ -32,7 +32,7 @@ final readonly class GitHubProject implements MetadataInterface
      *     stargazerCount: int,
      *     url: string,
      *     languages: array{
-     *         nodes: array<int, array{name: string, color: string}
+     *         nodes?: array<int, array{name: string, color: string}>
      *     },
      * } $data
      */

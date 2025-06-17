@@ -27,6 +27,9 @@ final class LoginForm extends AbstractController
         $this->form = $this->createLoginForm($lastUsername)->createView();
     }
 
+    /**
+     * @return FormInterface<mixed>
+     */
     private function createLoginForm(string $lastUsername): FormInterface
     {
         return $this->createFormNamed(

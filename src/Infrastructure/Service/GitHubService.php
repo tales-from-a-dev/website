@@ -24,6 +24,9 @@ final readonly class GitHubService implements GitHubServiceInterface
     ) {
     }
 
+    /**
+     * @return GitHubProject[]
+     */
     public function getPinnedRepositories(): array
     {
         try {
@@ -49,7 +52,7 @@ final readonly class GitHubService implements GitHubServiceInterface
                  *                     stargazerCount: int,
                  *                     url: string,
                  *                     languages: array{
-                 *                         nodes: array<int, array{name: string, color: string}
+                 *                         nodes: array<int, array{name: string, color: string}>
                  *                     },
                  *                 }>|null
                  *             }

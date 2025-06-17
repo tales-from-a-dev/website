@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller;
 
+use App\Domain\Dto\ContactDto;
 use App\Domain\Enum\RouteNameEnum;
 use App\Domain\Service\ContactServiceInterface;
 use App\Ui\Form\ContactType;
@@ -40,26 +41,26 @@ final class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $success = true;
 
-            $this->contactService->notify($form->getData());
-            //            try {
-            //            } catch (\Exception $exception) {
-            //                $success = false;
-            //
-            //               $this->logger->critical($exception->getMessage(), $exception->getTrace());
-            //            } finally {
-            //
-            //            }
+            try {
+                /** @var ContactDto $dto */
+                $dto = $form->getData();
 
-            if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
-                $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+                $this->contactService->notify($dto);
+            } catch (\Exception $exception) {
+                $success = false;
 
-                return true === $success
-                    ? $this->renderBlock('app/website/contact.html.twig', 'form_success')
-                    : $this->renderBlock('app/website/contact.html.twig', 'form_error')
-                ;
+                $this->logger->critical($exception->getMessage(), $exception->getTrace());
+            } finally {
+                if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
+                    $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+
+                    return true === $success
+                        ? $this->renderBlock('app/website/contact.html.twig', 'form_success')
+                        : $this->renderBlock('app/website/contact.html.twig', 'form_error');
+                }
+
+                return $this->redirectToRoute(route: RouteNameEnum::WebsiteHome->value, status: Response::HTTP_SEE_OTHER);
             }
-
-            return $this->redirectToRoute(route: RouteNameEnum::WebsiteHome->value, status: Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderBlock('app/website/contact.html.twig', 'form', [
@@ -67,6 +68,9 @@ final class ContactController extends AbstractController
         ]);
     }
 
+    /**
+     * @return FormInterface<ContactDto|null>
+     */
     private function createContactForm(): FormInterface
     {
         return $this
@@ -82,7 +86,6 @@ final class ContactController extends AbstractController
                 'row_attr' => [
                     'class' => 'flex justify-end',
                 ],
-            ])
-        ;
+            ]);
     }
 }

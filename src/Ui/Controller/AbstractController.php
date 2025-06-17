@@ -29,8 +29,10 @@ abstract class AbstractController extends BaseAbstractController
     /**
      * Creates and returns a named form instance from the type of the form.
      *
-     * @param class-string<FormTypeInterface> $type
-     * @param array<string, mixed>            $options
+     * @param class-string<FormTypeInterface<mixed>> $type
+     * @param array<string, mixed>                   $options
+     *
+     * @return FormInterface<mixed>
      */
     protected function createFormNamed(string $name, string $type = FormType::class, mixed $data = null, array $options = []): FormInterface
     {
