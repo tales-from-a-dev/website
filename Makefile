@@ -144,7 +144,7 @@ asset-audit: ## Check for vulnerability in assets
 ##
 ## —— Database 🔮 ——————————————————————————————————————————————————————————————
 ##
-db: db-create db-update db-load ## Create the database and load the fixtures
+db: db-create db-update db-seed ## Create the database and seed it
 .PHONY: db
 
 db-create: ## Create database
