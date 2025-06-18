@@ -1,7 +1,14 @@
 framework:
-    default_locale: '%app.locale%'
+    default_locale: '%app.default_locale%'
+    enabled_locales: '%app.enabled_locales%'
+    set_content_language_from_locale: true
+    set_locale_from_accept_language: true
     translator:
         default_path: '%kernel.project_dir%/translations'
         fallbacks:
-            - '%app.locale%'
+            - '%app.default_locale%'
         providers:
+
+when@test:
+    framework:
+        default_locale: 'en'
