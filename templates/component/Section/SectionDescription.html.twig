@@ -1,3 +1,6 @@
-<p {{ attributes.defaults({class: 'font-normal text-gray-500 text-xs md:text-base mb-20'}) }}>
+<p {{ attributes.defaults({
+    'data-slot': 'section-description',
+    class: 'font-normal text-gray-500 text-xs md:text-base mb-10 md:mb-20',
+}) }}>
     {% block content %}{% endblock %}
 </p>
