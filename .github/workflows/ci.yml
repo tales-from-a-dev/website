@@ -1,10 +1,9 @@
-name: CI
+name: ci
 
 on:
-  push:
-    branches:
-      - main
-  pull_request: ~
+  pull_request:
+    branches: [ main ]
+    
   workflow_dispatch: ~
 
 concurrency:
@@ -60,6 +59,15 @@ jobs:
 
       - name: Create test database
         run: make db-test
+        
+      - name: Run PHP CS Fixer
+        run: make phpcsfixer-dry
+
+      - name: Run Twig CS Fixer
+        run: make twigcsfixer-dry
+
+      - name: Run PHPStan
+        run: make phpstan
 
       - name: Run PHPUnit
         run: make coverage

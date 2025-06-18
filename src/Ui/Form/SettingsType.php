@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class SettingsType extends AbstractType
 {
-    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -34,11 +33,9 @@ final class SettingsType extends AbstractType
             ->add('averageDailyRate', NumberType::class, [
                 'label' => 'label.average_daily_rate',
                 'html5' => true,
-            ])
-        ;
+            ]);
     }
 
-    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

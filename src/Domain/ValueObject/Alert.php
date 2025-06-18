@@ -15,7 +15,6 @@ final readonly class Alert implements \Stringable
     ) {
     }
 
-    #[\Override]
     public function __toString(): string
     {
         return (string) $this->message;
