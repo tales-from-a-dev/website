@@ -1,0 +1,9 @@
+# contact
+contact:
+    send:
+        error: "An error has occurred, your message could not be sent. Please try again later."
+        success: 'Your message has been sent. I will contact you as soon as possible.'
+
+settings:
+    update:
+        success: 'Settings saved'
