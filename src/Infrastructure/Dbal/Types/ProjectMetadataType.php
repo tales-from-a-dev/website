@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Dbal\Types;
 
-use App\Domain\Model\GitHubProject;
-use App\Domain\Model\MetadataInterface;
+use App\Domain\ValueObject\GitHubProject;
+use App\Domain\ValueObject\MetadataInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\JsonType;
@@ -24,7 +24,6 @@ final class ProjectMetadataType extends JsonType
     /**
      * @template T of MetadataInterface
      */
-    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         $rawValue = self::$serializer->normalize($value);
@@ -35,7 +34,6 @@ final class ProjectMetadataType extends JsonType
     /**
      * @return MetadataInterface<GitHubProject>|null
      */
-    #[\Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?MetadataInterface
     {
         $rawValue = parent::convertToPHPValue($value, $platform);

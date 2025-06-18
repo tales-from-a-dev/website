@@ -2,7 +2,7 @@ twig:
     file_name_pattern: '*.twig'
     default_path: '%kernel.project_dir%/templates'
     form_themes:
-        - '@TalesFromADevFlowbite/form/default.html.twig'
+        - 'form/layout.html.twig'
 
 when@test:
     twig:

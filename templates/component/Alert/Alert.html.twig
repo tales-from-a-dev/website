@@ -1,0 +1,20 @@
+{%- props variant = 'default' -%}
+
+{%- set ctx = html_cva(
+    base: 'relative w-full rounded-md px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(.25rem*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current',
+    variants: {
+        variant: {
+            default: 'bg-white text-gray-900',
+            error: 'bg-red-50 text-red-700 [&>h3]:text-red-800 [&>svg]:text-red-400',
+            success: 'bg-green-50 text-green-700 [&>h3]:text-green-800 [&>svg]:text-green-400',
+        },
+    },
+) -%}
+
+<div {{ attributes.defaults({
+    'data-slot': 'alert',
+    role: 'alert',
+    class: ctx.apply({variant: variant}),
+}) }}>
+    {% block content %}{% endblock %}
+</div>

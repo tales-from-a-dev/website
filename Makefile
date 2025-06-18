@@ -24,27 +24,24 @@ help: ## Outputs this help screen
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 ##
 build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --pull --no-cache
+	@COMPOSE_BAKE=true $(DOCKER_COMP) build --pull --no-cache
 .PHONY: build
 
 up: ## Start the docker hub in detached mode (no logs)
-	@$(DOCKER_COMP) up --detach
+	@$(DOCKER_COMP) up --wait
 .PHONY: up
 
 up-dev: ## Start the docker hub in detached mode (no logs) for debugging
-	@XDEBUG_MODE=debug $(DOCKER_COMP) up --detach
+	@XDEBUG_MODE=debug $(DOCKER_COMP) up --wait
 .PHONY: up-dev
 
 up-test: ## Start the docker hub in detached mode (no logs) for testing
-	@XDEBUG_MODE=coverage $(DOCKER_COMP) -f compose.yaml -f compose.override.yaml -f compose.test.yaml up --detach
+	@XDEBUG_MODE=coverage $(DOCKER_COMP) -f compose.yaml -f compose.override.yaml -f compose.test.yaml up --wait
 .PHONY: up-test
 
 up-prod: ## Start the docker hub in detached mode (no logs) for production
-	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml up --detach
+	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml up --wait
 .PHONY: up-prod
-
-start: build up ## Build and start the containers
-.PHONY: start
 
 stop: ## Stop the docker hub
 	@$(DOCKER_COMP) stop
@@ -120,8 +117,8 @@ asset-map: sf
 ##
 ## —— Assets 🎨 ————————————————————————————————————————————————————————————————
 ##
-importmap: c=importmap:install ## Install
-importmap: sf
+importmap: ## Install
+	@$(SYMFONY) importmap:install
 .PHONY: importmap
 
 asset-build: ## Build assets
@@ -147,7 +144,7 @@ asset-audit: ## Check for vulnerability in assets
 ##
 ## —— Database 🔮 ——————————————————————————————————————————————————————————————
 ##
-db: db-create db-update db-load ## Create the database and load the fixtures
+db: db-create db-update db-seed ## Create the database and seed it
 .PHONY: db
 
 db-create: ## Create database
@@ -167,6 +164,10 @@ db-load: ## Reset the database fixtures
 	@$(SYMFONY) doctrine:fixtures:load --no-interaction --purge-with-truncate
 .PHONY: db-load
 
+db-seed: ## Seed the database
+	@$(SYMFONY) app:database:seed
+.PHONY: db-seed
+
 db-update: ## Force database update
 	@$(SYMFONY) doctrine:schema:update --complete --force
 .PHONY: db-update
@@ -179,17 +180,18 @@ db-test: ## Create test database
 	@$(SYMFONY) --env=test doctrine:database:drop --if-exists --force
 	@$(SYMFONY) --env=test doctrine:database:create --if-not-exists
 	@$(SYMFONY) --env=test doctrine:schema:update --complete --force
+	@$(SYMFONY) --env=test app:database:seed
 .PHONY: db-test
 
 ##
 ## —— Linter 💫 ————————————————————————————————————————————————————————————————
 ##
 phpcsfixer-dry: ## Check coding style in dry mode
-	@$(DOCKER_COMP) exec php ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
+	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
 .PHONY: phpcsfixer-dry
 
 phpcsfixer: ## Check coding style
-	@$(DOCKER_COMP) exec php ./vendor/bin/php-cs-fixer fix --verbose --ansi
+	@$(DOCKER_COMP) exec -e PHP_CS_FIXER_IGNORE_ENV=1 php ./vendor/bin/php-cs-fixer fix --verbose --ansi
 .PHONY: phpcsfixer
 
 phpstan: ## Perform static analysis
@@ -230,8 +232,20 @@ linter: ## Twig / Yaml & check DB mapping
 ##
 test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
 	@$(eval f ?=)
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit $(f)
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testdox $(f)
 .PHONY: test
+
+test-unit: ## Run all unit tests
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testsuite unit --testdox
+.PHONY: test-unit
+
+test-functional: ## Run all functional tests
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testsuite functional --testdox
+.PHONY: test-functional
+
+test-integration: ## Run all integration tests
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./bin/phpunit --testsuite integration --testdox
+.PHONY: test-integration
 
 coverage: ## Run tests with code coverage
 	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage -e APP_ENV=test php ./bin/phpunit

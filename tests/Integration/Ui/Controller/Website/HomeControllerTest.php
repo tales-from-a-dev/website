@@ -18,7 +18,6 @@ final class HomeControllerTest extends WebTestCase
 
         $this->browser()
             ->visit('/')
-
             ->assertSuccessful()
             ->assertSeeIn('head title', \sprintf(
                 '%s | %s',
@@ -30,11 +29,9 @@ final class HomeControllerTest extends WebTestCase
                 'content',
                 $translator->trans('app.meta.description')
             )
-            ->assertSeeIn('h1', \sprintf(
-                '< %s />',
-                $translator->trans('app.meta.title')
-            ))
-            ->assertElementCount('a', 4)
+            ->assertSeeIn('h6', $translator->trans('home.section.about.surtitle'))
+            ->assertSeeIn('h1', $translator->trans('home.section.about.title'))
+            ->assertElementCount('section', 4)
         ;
     }
 }

@@ -6,7 +6,8 @@ namespace App\Domain\Enum;
 
 enum RouteNameEnum: string
 {
-    // website
     case WebsiteHome = 'app_website_home';
-    case WebsiteContactIndex = 'app_website_contact_index';
+    case WebsiteContact = 'app_website_contact';
+    case WebsiteLogin = 'app_website_login';
+    case WebsiteSettings = 'app_website_settings';
 }

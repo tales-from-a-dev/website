@@ -1,0 +1,11 @@
+{% props number = '01' %}
+
+<div {{ attributes.defaults({
+    class: 'flex space-x-6',
+}) }}>
+    <span class="font-normal text-gray-700 text-3xl md:text-4xl">{{ number }}</span>
+    <span class="w-14 h-0.5 bg-gray-300 mt-5"></span>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</div>

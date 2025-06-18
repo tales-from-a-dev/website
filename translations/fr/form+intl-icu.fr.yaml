@@ -1,36 +1,19 @@
 # btn
-btn:
-    cancel: 'Annuler'
-    close: 'Fermer'
-    confirm: "Oui, j'en suis sûr"
-    delete: 'Supprimer'
-    description: 'Description'
-    edit: 'Modifier'
+button:
     login: 'Se connecter'
-    new: 'Nouveau'
     save: 'Enregistrer'
-    search: 'Rechercher'
     send: 'Envoyer'
-    type: 'Type'
-
-# delete
-delete:
-    confirm_text: 'Êtes-vous sûr de vouloir confirmer la suppression ?'
     
 # label
 label:
+    available: 'Disponible'
+    available_at: 'Prochaine disponibilité'
+    average_daily_rate: 'Taux journalier moyen'
+    company: 'Société'
     content: 'Contenu'
-    description: 'Description'
     email: 'Email'
-    name: 'Nom'
+    full_name: 'Nom & Prénom'
     password: 'Mot de passe'
-    publication_status: 'Statut de publication'
-    published_at: 'Date de publication'
-    subtitle: 'Sous-titre'
-    tags: 'Tags'
-    title: 'Titre'
-    type: 'Type'
-    url: 'Url'
     
 # placeholder
 placeholder:

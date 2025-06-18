@@ -3,54 +3,7 @@ contact:
     send:
         error: "Une erreur est survenue, votre message n'a pas pu être envoyé. Veuillez réessayer plus tard."
         success: 'Votre message a bien été envoyé. Je vous recontacterai dans les plus brefs délais.'
-        
-# delete
-delete:
-    error: >-
-        {selector, select
-            post {Impossible de supprimer l'article {name}.}
-            project {Impossible de supprimer le projet {name}.}
-            tag {Impossible de supprimer le tag {name}.}
-            other {Impossible de supprimer le document.}
-        }
-    success: >-
-        {selector, select,
-            post {L'article {name} a été supprimé.}
-            project {Le projet {name} a été supprimé.}
-            tag {Le tag {name} a été supprimé.}
-            other {Le document a été supprimé.}    
-        }
-        
-# edit
-edit:
-    error: >-
-        {selector, select
-            post {Impossible de modifier l'article {name}.}
-            project {Impossible de modifier le projet {name}.}
-            tag {Impossible de modifier le tag {name}.}
-            other {Impossible de modifier le document.}
-        }
-    success: >-
-        {selector, select,
-            post {L'article {name} a bien été modifié.}
-            project {Le projet {name} a bien été modifié.}
-            tag {Le tag {name} a bien été modifié.}
-            other {Le document a bien été modifié.}    
-        }
 
-# new
-new:
-    error: >-
-        {selector, select,
-            post {Impossible de créer l'article.}
-            project {Impossible de créer le projet.}
-            tag {Impossible de créer le tag.}
-            other {Impossible de créer le document.}
-        }
-    success: >-
-        {selector, select,
-            post {L'article {name} a bien été créé.}
-            project {Le projet {name} a bien été créé.}
-            tag {Le tag {name} a bien été créé.}
-            other {Le document a bien été créé.}    
-        }
+settings:
+    update:
+        success: 'Paramètres sauvegardés'

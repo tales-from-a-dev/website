@@ -1,0 +1,34 @@
+<div {{ attributes.defaults({class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}) }}>
+    {% for project in this.projects %}
+        <twig:Card:Card class="group relative justify-between">
+            <twig:Card:CardHeader>
+                <twig:Card:CardTitle class="text-gray-700 text-lg">
+                    <h4>{{ project.name }}</h4>
+                </twig:Card:CardTitle>
+                <twig:Card:CardAction>
+                    <a class="text-gray-300 group-hover:text-gray-400"
+                       href="{{ project.url }}"
+                       target="_blank"
+                       title="{{ project.name }}"
+                    >
+                        <span class="absolute inset-0" aria-hidden="true"></span>
+                        <twig:Ux:Icon name="tabler:arrow-up-right" class="size-6" />
+                    </a>
+                </twig:Card:CardAction>
+            </twig:Card:CardHeader>
+            <twig:Card:CardContent class="font-normal text-gray-500 text-md">
+                <p>{{ project.description }}</p>
+            </twig:Card:CardContent>
+            <twig:Card:CardFooter class="gap-4 text-gray-500">
+                <div class="inline-flex items-center gap-x-1.5">
+                    <twig:Ux:Icon name="tabler:star" class="size-5" />
+                    {{ project.stargazerCount }}
+                </div>
+                <div class="inline-flex items-center gap-x-1.5">
+                    <twig:Ux:Icon name="tabler:git-fork" class="size-5" />
+                    {{ project.forkCount }}
+                </div>
+            </twig:Card:CardFooter>
+        </twig:Card:Card>
+    {% endfor %}
+</div>

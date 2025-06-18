@@ -25,12 +25,8 @@ security:
                 enable_csrf: true
                 login_path: app_website_login
                 check_path: app_website_login
-                default_target_path: app_website_home
-                
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
-                always_remember_me: true
+                default_target_path: app_website_settings
+                always_use_default_target_path: true
                 
             logout:
                 path: app_website_logout
@@ -49,6 +45,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/settings, roles: !php/enum App\Domain\Enum\UserRoleEnum::User->value, requires_channel: '%env(SECURE_SCHEME)%' }
         - { path: ^/, roles: !php/enum App\Domain\Enum\UserRoleEnum::Public->value, requires_channel: '%env(SECURE_SCHEME)%' }
 
 when@test:
