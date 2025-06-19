@@ -8,7 +8,3 @@ framework:
         fallbacks:
             - '%app.default_locale%'
         providers:
-
-when@test:
-    framework:
-        default_locale: 'en'
