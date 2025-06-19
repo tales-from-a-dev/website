@@ -112,6 +112,10 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd"
         },
+        "prod-scripts": {
+            "tailwind:build --minify": "symfony-cmd",
+            "asset-map:compile": "symfony-cmd"
+        },
         "post-install-cmd": [
             "@auto-scripts"
         ],

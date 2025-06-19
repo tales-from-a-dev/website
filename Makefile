@@ -141,6 +141,10 @@ asset-audit: ## Check for vulnerability in assets
 	@$(SYMFONY) importmap:audit
 .PHONY: asset-audit
 
+asset-compile: ## Compile assets
+	@$(SYMFONY) asset-map:compile
+.PHONY: asset-audit
+
 ##
 ## —— Database 🔮 ——————————————————————————————————————————————————————————————
 ##
