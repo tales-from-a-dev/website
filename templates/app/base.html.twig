@@ -45,9 +45,7 @@
               href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}" />
     </head>
     <body class="bg-gray-100">
-        <main>
-            {% block body %}{% endblock %}
-        </main>
+        {% block body %}{% endblock %}
         {% block footer %}
             <footer class="bg-gray-900">
                 <div class="container max-w-(--breakpoint-xl) mx-auto px-6 py-16 flex flex-col md:flex-row items-center md:justify-between">

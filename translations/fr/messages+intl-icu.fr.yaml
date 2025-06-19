@@ -1,7 +1,7 @@
 # app
 app:
     meta:
-        description: 'Développeur web full-stack freelance à Limoges. Je développe des applications PHP sur les frameworks Symfony et Laravel.'
+        description: 'Développeur back-end senior freelance à Limoges. Je développe des applications PHP sur les frameworks Symfony et Laravel.'
         title: 'Tales from a Dev'
 
 # enum
