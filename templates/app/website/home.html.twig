@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block body %}
-    <header class="h-dvh container max-w-screen-xl mx-auto flex flex-col items-center justify-center px-4 md:px-8 lg:px-16">
-        <picture class="size-80 mb-16">
+    <header
+        class="h-dvh container max-w-screen-xl mx-auto flex flex-col items-center justify-center p-4 md:px-8 lg:px-16">
+        <picture class="size-40 md:size-60 lg:size-80 mb-8 lg:mb-16">
             <img
                 class="size-full rounded-full bg-yellow-500"
                 src="{{ asset('images/profile.png') }}"
@@ -18,118 +19,134 @@
             >
         </picture>
         <div class="text-center">
-            <h6 class="font-medium text-gray-600 text-lg md:text-2xl uppercase mb-8">{{ 'home.section.about.surtitle'|trans }}</h6>
-            <h1 class="font-normal text-gray-900 text-4xl md:text-7xl leading-none mb-8">{{ 'home.section.about.title'|trans }}</h1>
-            <p class="font-normal text-gray-600 text-md md:text-xl leading-loose mb-16">
+            <h6 class="font-medium text-gray-600 text-lg md:text-xl lg:text-2xl uppercase mb-8">{{- 'home.section.about.surtitle'|trans -}}</h6>
+            <h1 class="font-normal text-gray-900 text-4xl md:text-5xl lg:text-7xl leading-none mb-8">{{- 'home.section.about.title'|trans -}}</h1>
+            <p class="font-normal text-gray-600 text-md md:text-lg lg:text-xl leading-loose mb-16">
                 {%- set php -%}
-                    <twig:TextHighlight color="purple" class="mx-0.5">PHP</twig:TextHighlight>
+                    <twig:TextHighlight variant="purple" class="mx-0.5">PHP</twig:TextHighlight>
                 {%- endset -%}
 
                 {%- set symfony -%}
-                    <twig:TextHighlight color="black" class="mx-0.5">Symfony</twig:TextHighlight>
+                    <twig:TextHighlight variant="black" class="mx-0.5">Symfony</twig:TextHighlight>
                 {%- endset -%}
 
-                {{ 'home.section.about.subtitle'|trans({
+                {{- 'home.section.about.subtitle'|trans({
                     php: php,
                     symfony: symfony,
-                })|raw }}
+                })|raw -}}
             </p>
             <a
                 class="px-7 py-3 md:px-9 md:py-4 font-medium md:font-semibold bg-gray-900 text-white shadow-xs hover:bg-gray-900/90 text-sm rounded-md transition ease-linear duration-500"
                 href="#contact"
                 data-controller="scroll-to"
             >
-                {{ 'home.section.contact.title'|trans }}
+                {{- 'home.section.contact.title'|trans -}}
             </a>
         </div>
     </header>
-    <twig:Section:Section id="github-projects">
-        <twig:Section:SectionTitle>{{ 'home.section.github.title'|trans }}</twig:Section:SectionTitle>
-        <twig:Section:SectionDescription>{{ 'home.section.github.subtitle'|trans }}</twig:Section:SectionDescription>
-        <twig:GithubProjects/>
-    </twig:Section:Section>
-    <twig:Section:Section id="experience">
-        <twig:Section:SectionTitle>{{ 'home.section.experience.title'|trans }}</twig:Section:SectionTitle>
-        <twig:Section:SectionDescription>{{ 'home.section.experience.subtitle'|trans }}</twig:Section:SectionDescription>
-        <twig:Table:Table>
-            <twig:Table:TableHeader>
-                <twig:Table:TableRow>
-                    <twig:Table:TableHead>{{ 'home.section.experience.table.col.company'|trans }}</twig:Table:TableHead>
-                    <twig:Table:TableHead align="center">{{ 'home.section.experience.table.col.position'|trans }}</twig:Table:TableHead>
-                    <twig:Table:TableHead align="right">{{ 'home.section.experience.table.col.year'|trans }}</twig:Table:TableHead>
-                </twig:Table:TableRow>
-            </twig:Table:TableHeader>
-            <twig:Table:TableBody>
-                {% for experience in experiences %}
-                    <twig:Table:TableRow>
-                        <twig:Table:TableCell class="font-semibold text-gray-600">
-                            {{ experience.company }}
-                            <span class="font-normal text-gray-300">/ {{ experience.type|trans }}</span>
-                        </twig:Table:TableCell>
-                        <twig:Table:TableCell class="text-gray-400" align="center">{{ experience.position|trans }}</twig:Table:TableCell>
-                        <twig:Table:TableCell class="text-gray-400" align="right">
-                            {{ experience.startAt|format_date(pattern: 'MMM Y') }} - {{ experience.endAt|format_date(pattern: 'MMM Y') }}
-                        </twig:Table:TableCell>
-                    </twig:Table:TableRow>
-                {% endfor %}
-            </twig:Table:TableBody>
-        </twig:Table:Table>
-    </twig:Section:Section>
-    <twig:Section:Section id="contact">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div>
-                <twig:Section:SectionTitle>{{ 'home.section.contact.title'|trans }}</twig:Section:SectionTitle>
-                <twig:Section:SectionDescription>{{ 'home.section.contact.subtitle'|trans }}</twig:Section:SectionDescription>
+    <main>
+        <twig:Section:Section id="github-projects">
+            <twig:Section:SectionHeader class="mb-10 lg:mb-20">
+                <twig:Section:SectionTitle>{{ 'home.section.github.title'|trans }}</twig:Section:SectionTitle>
+                <twig:Section:SectionDescription>{{ 'home.section.github.subtitle'|trans }}</twig:Section:SectionDescription>
+            </twig:Section:SectionHeader>
+            <twig:Section:SectionContent>
+                <twig:GithubProjects />
+            </twig:Section:SectionContent>
+        </twig:Section:Section>
+        <twig:Section:Section id="experience">
+            <twig:Section:SectionHeader class="mb-10 lg:mb-20">
+                <twig:Section:SectionTitle>{{ 'home.section.experience.title'|trans }}</twig:Section:SectionTitle>
+                <twig:Section:SectionDescription>{{ 'home.section.experience.subtitle'|trans }}</twig:Section:SectionDescription>
+            </twig:Section:SectionHeader>
+            <twig:Section:SectionContent>
+                <twig:Table:Table>
+                    <twig:Table:TableHeader>
+                        <twig:Table:TableRow>
+                            <twig:Table:TableHead>{{ 'home.section.experience.table.col.company'|trans }}</twig:Table:TableHead>
+                            <twig:Table:TableHead
+                                align="center">{{ 'home.section.experience.table.col.position'|trans }}</twig:Table:TableHead>
+                            <twig:Table:TableHead
+                                align="right">{{ 'home.section.experience.table.col.year'|trans }}</twig:Table:TableHead>
+                        </twig:Table:TableRow>
+                    </twig:Table:TableHeader>
+                    <twig:Table:TableBody>
+                        {% for experience in experiences %}
+                            <twig:Table:TableRow>
+                                <twig:Table:TableCell class="font-semibold text-gray-600">
+                                    {{ experience.company }}
+                                    <span class="font-normal text-gray-300">/ {{ experience.type|trans }}</span>
+                                </twig:Table:TableCell>
+                                <twig:Table:TableCell class="text-gray-400"
+                                                      align="center">{{ experience.position|trans }}</twig:Table:TableCell>
+                                <twig:Table:TableCell class="text-gray-400" align="right">
+                                    {{ experience.startAt|format_date(pattern: 'MMM Y') }}
+                                    - {{ experience.endAt|format_date(pattern: 'MMM Y') }}
+                                </twig:Table:TableCell>
+                            </twig:Table:TableRow>
+                        {% endfor %}
+                    </twig:Table:TableBody>
+                </twig:Table:Table>
+            </twig:Section:SectionContent>
+        </twig:Section:Section>
+        <twig:Section:Section id="contact">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <twig:Section:SectionHeader class="mb-10 lg:mb-0">
+                    <twig:Section:SectionTitle>{{ 'home.section.contact.title'|trans }}</twig:Section:SectionTitle>
+                    <twig:Section:SectionDescription>{{ 'home.section.contact.subtitle'|trans }}</twig:Section:SectionDescription>
+                </twig:Section:SectionHeader>
+                <twig:Section:SectionContent class="lg:col-span-2">
+                    <twig:Turbo:Frame
+                        id="contact-form-container"
+                        loading="lazy"
+                        src="{{ path('app_website_contact') }}"
+                        data-slot="contact-form"
+                    />
+                </twig:Section:SectionContent>
             </div>
-            <twig:Turbo:Frame
-                id="contact-form-container"
-                loading="lazy"
-                src="{{ path('app_website_contact') }}"
-                data-slot="contact-form"
-                class="lg:col-span-2"
-            />
-        </div>
-    </twig:Section:Section>
-    <twig:Section:Section id="faq">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div>
-                <twig:Section:SectionTitle>{{ 'home.section.faq.title'|trans }}</twig:Section:SectionTitle>
-                <twig:Section:SectionDescription>{{ 'home.section.faq.subtitle'|trans }}</twig:Section:SectionDescription>
-            </div>
-            <div class="space-y-24 md:col-span-2">
-                <twig:Faq:Faq>
-                    <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_1'|trans }}</twig:Faq:FaqTitle>
-                    <twig:Faq:FaqDescription>
-                        {%- set available -%}
-                            <twig:TextHighlight class="mx-0.5" color="{{ settings.available ? 'yellow' : 'red' }}">
-                                {{- 'home.section.faq.dl.dd_1_available'|trans({available: settings.available ? 'yes' : 'no'}) -}}
-                            </twig:TextHighlight>
-                        {%- endset -%}
+        </twig:Section:Section>
+        <twig:Section:Section id="faq">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <twig:Section:SectionHeader class="mb-10 lg:mb-0">
+                    <twig:Section:SectionTitle>{{ 'home.section.faq.title'|trans }}</twig:Section:SectionTitle>
+                    <twig:Section:SectionDescription>{{ 'home.section.faq.subtitle'|trans }}</twig:Section:SectionDescription>
+                </twig:Section:SectionHeader>
+                <twig:Section:SectionContent class="space-y-24 lg:col-span-2">
+                    <twig:Faq:Faq>
+                        <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_1'|trans }}</twig:Faq:FaqTitle>
+                        <twig:Faq:FaqDescription>
+                            {%- set available -%}
+                                <twig:TextHighlight class="mx-0.5"
+                                                    variant="{{ settings.available ? 'yellow' : 'red' }}">
+                                    {{- 'home.section.faq.dl.dd_1_available'|trans({available: settings.available ? 'yes' : 'no'}) -}}
+                                </twig:TextHighlight>
+                            {%- endset -%}
 
-                        {{- 'home.section.faq.dl.dd_1'|trans({available: available})|raw -}}
-                    </twig:Faq:FaqDescription>
-                </twig:Faq:Faq>
-                <twig:Faq:Faq number="02">
-                    <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_2'|trans }}</twig:Faq:FaqTitle>
-                    <twig:Faq:FaqDescription>
-                        {%- set daily_price -%}
-                            <twig:TextHighlight class="mx-0.5">
-                                {{- 'home.section.faq.dl.dd_2_price'|trans({price: settings.averageDailyRate}) -}}
-                            </twig:TextHighlight>
-                        {%- endset -%}
+                            {{- 'home.section.faq.dl.dd_1'|trans({available: available})|raw -}}
+                        </twig:Faq:FaqDescription>
+                    </twig:Faq:Faq>
+                    <twig:Faq:Faq number="02">
+                        <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_2'|trans }}</twig:Faq:FaqTitle>
+                        <twig:Faq:FaqDescription>
+                            {%- set daily_price -%}
+                                <twig:TextHighlight class="mx-0.5">
+                                    {{- 'home.section.faq.dl.dd_2_price'|trans({price: settings.averageDailyRate}) -}}
+                                </twig:TextHighlight>
+                            {%- endset -%}
 
-                        {{- 'home.section.faq.dl.dd_2'|trans({
-                            daily_price: daily_price,
-                        })|raw -}}
-                    </twig:Faq:FaqDescription>
-                </twig:Faq:Faq>
-                <twig:Faq:Faq number="03">
-                    <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_3'|trans }}</twig:Faq:FaqTitle>
-                    <twig:Faq:FaqDescription>
-                        {{ 'home.section.faq.dl.dd_3'|trans }}
-                    </twig:Faq:FaqDescription>
-                </twig:Faq:Faq>
+                            {{- 'home.section.faq.dl.dd_2'|trans({
+                                daily_price: daily_price,
+                            })|raw -}}
+                        </twig:Faq:FaqDescription>
+                    </twig:Faq:Faq>
+                    <twig:Faq:Faq number="03">
+                        <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_3'|trans }}</twig:Faq:FaqTitle>
+                        <twig:Faq:FaqDescription>
+                            {{ 'home.section.faq.dl.dd_3'|trans }}
+                        </twig:Faq:FaqDescription>
+                    </twig:Faq:Faq>
+                </twig:Section:SectionContent>
             </div>
-        </div>
-    </twig:Section:Section>
+        </twig:Section:Section>
+    </main>
 {% endblock %}

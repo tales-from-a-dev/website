@@ -8739,23 +8739,23 @@
         },
         {
             "name": "tales-from-a-dev/flowbite-bundle",
-            "version": "v0.8.0",
+            "version": "v0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tales-from-a-dev/flowbite-bundle.git",
-                "reference": "f70da9181cf2c04614cb06bfcf5b6ee032defa7f"
+                "reference": "51445baeba8f5509037ab950c246c0e2fb54bebf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/f70da9181cf2c04614cb06bfcf5b6ee032defa7f",
-                "reference": "f70da9181cf2c04614cb06bfcf5b6ee032defa7f",
+                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/51445baeba8f5509037ab950c246c0e2fb54bebf",
+                "reference": "51445baeba8f5509037ab950c246c0e2fb54bebf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
                 "symfony/http-kernel": "^6.4 || ^7.0",
                 "symfony/twig-bridge": "^6.4 || ^7.0",
-                "tales-from-a-dev/twig-tailwind-extra": "^0.4"
+                "tales-from-a-dev/twig-tailwind-extra": "^0.5"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.15",
@@ -8792,22 +8792,22 @@
             ],
             "support": {
                 "issues": "https://github.com/tales-from-a-dev/flowbite-bundle/issues",
-                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.8.0"
+                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.8.1"
             },
-            "time": "2025-05-09T08:54:42+00:00"
+            "time": "2025-06-18T08:51:26+00:00"
         },
         {
             "name": "tales-from-a-dev/twig-tailwind-extra",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tales-from-a-dev/twig-tailwind-extra.git",
-                "reference": "b72445f4b7801181cfb972c0c17089b82e10a923"
+                "reference": "ba2d24668bb293092faa4fc4c118d47f9c6c00fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/b72445f4b7801181cfb972c0c17089b82e10a923",
-                "reference": "b72445f4b7801181cfb972c0c17089b82e10a923",
+                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/ba2d24668bb293092faa4fc4c118d47f9c6c00fa",
+                "reference": "ba2d24668bb293092faa4fc4c118d47f9c6c00fa",
                 "shasum": ""
             },
             "require": {
@@ -8847,9 +8847,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tales-from-a-dev/twig-tailwind-extra/issues",
-                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v0.4.0"
+                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v0.5.0"
             },
-            "time": "2025-05-08T14:04:53+00:00"
+            "time": "2025-06-16T13:27:13+00:00"
         },
         {
             "name": "twig/extra-bundle",
@@ -10614,16 +10614,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "11.0.9",
+            "version": "11.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "14d63fbcca18457e49c6f8bebaa91a87e8e188d7"
+                "reference": "1a800a7446add2d79cc6b3c01c45381810367d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/14d63fbcca18457e49c6f8bebaa91a87e8e188d7",
-                "reference": "14d63fbcca18457e49c6f8bebaa91a87e8e188d7",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/1a800a7446add2d79cc6b3c01c45381810367d76",
+                "reference": "1a800a7446add2d79cc6b3c01c45381810367d76",
                 "shasum": ""
             },
             "require": {
@@ -10680,15 +10680,27 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/11.0.9"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/show"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpunit/php-code-coverage",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-02-25T13:26:39+00:00"
+            "time": "2025-06-18T08:56:18+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -13327,16 +13339,16 @@
         },
         {
             "name": "vincentlanglet/twig-cs-fixer",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VincentLanglet/Twig-CS-Fixer.git",
-                "reference": "73361943569623ff844ed5f80b3078b041b71bd8"
+                "reference": "4e330681d38579a3354bb3dff4b357118baab32c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/73361943569623ff844ed5f80b3078b041b71bd8",
-                "reference": "73361943569623ff844ed5f80b3078b041b71bd8",
+                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/4e330681d38579a3354bb3dff4b357118baab32c",
+                "reference": "4e330681d38579a3354bb3dff4b357118baab32c",
                 "shasum": ""
             },
             "require": {
@@ -13392,7 +13404,7 @@
             "homepage": "https://github.com/VincentLanglet/Twig-CS-Fixer",
             "support": {
                 "issues": "https://github.com/VincentLanglet/Twig-CS-Fixer/issues",
-                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/3.8.0"
+                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/3.8.1"
             },
             "funding": [
                 {
@@ -13400,7 +13412,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-16T19:22:21+00:00"
+            "time": "2025-06-18T07:46:36+00:00"
         },
         {
             "name": "zenstruck/assert",
