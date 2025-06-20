@@ -97,5 +97,7 @@ RUN set -eux; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
-	composer run-script --no-dev prod-scripts; \
-	chmod +x bin/console; sync;
+	chmod +x bin/console; \
+    bin/console cache:warmup; \
+	bin/console tailwind:build --minify; \
+	bin/console asset-map:compile; sync;
