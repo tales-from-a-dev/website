@@ -23,11 +23,6 @@ jobs:
     
     environment: ${{ inputs.environment }}
     
-    env:
-      SERVER_NAME: ${{ secrets.SERVER_NAME }}
-      APP_SECRET: ${{ secrets.APP_SECRET }}
-      CADDY_MERCURE_JWT_SECRET: ${{ secrets.JWT_SECRET }}
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,37 +30,22 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          cat >>~/.ssh/config <<END
-          Host ${{ inputs.environment }}
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/id_ed25519
-            StrictHostKeyChecking no
-          END
-        env:
-          SSH_USER: ${{ secrets.SSH_USERNAME }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
 
-      - name: Checkout tag
+      - name: Deploy to droplet
         run: >
-          ssh ${{ inputs.environment }} <<EOF
-            cd app
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
+            set -e
+            cd "$(dirname "$0")"
             git fetch --all --tags --prune
             git checkout tags/${{ inputs.tag }}
-          EOF
-
-      - name: Build and run image
-        continue-on-error: true
-        run: >
-          ssh ${{ inputs.environment }} <<EOF
-            cd app
+            docker compose down
             docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
-            SERVER_NAME=${SERVER_NAME}
-            APP_SECRET=${APP_SECRET}
-            CADDY_MERCURE_JWT_SECRET=${CADDY_MERCURE_JWT_SECRET}
+            SERVER_NAME=${{ secrets.SERVER_NAME }}
+            APP_SECRET=${{ secrets.APP_SECRET }}
+            CADDY_MERCURE_JWT_SECRET=${{ secrets.JWT_SECRET }}
             docker compose -f compose.yaml -f compose.prod.yaml up --wait
           EOF
 
