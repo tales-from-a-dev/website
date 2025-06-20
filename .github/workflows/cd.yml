@@ -38,11 +38,11 @@ jobs:
         run: >
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
             set -e
-            cd "$(dirname "$0")"
+            cd app
             git fetch --all --tags --prune
             git checkout tags/${{ inputs.tag }}
-            docker compose down
             docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
+            docker compose down
             SERVER_NAME=${{ secrets.SERVER_NAME }}
             APP_SECRET=${{ secrets.APP_SECRET }}
             CADDY_MERCURE_JWT_SECRET=${{ secrets.JWT_SECRET }}
