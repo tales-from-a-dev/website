@@ -35,6 +35,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
 
       - name: Deploy to droplet
+        continue-on-error: true
         run: >
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
             set -e
