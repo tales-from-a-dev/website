@@ -23,9 +23,9 @@ phpstan.neon
 ###< phpstan/phpstan ###
 
 ###> phpunit/phpunit ###
+/phpunit.xml
 /.phpunit.cache/
 /coverage/
-/phpunit.xml
 ###< phpunit/phpunit ###
 
 ###> vincentlanglet/twig-cs-fixer ###
