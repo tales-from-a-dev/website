@@ -1,9 +1,3 @@
-controllers:
-    resource:
-        path: ../src/Ui/Controller/
-        namespace: App\Ui\Controller
-    type: attribute
-
 app_website_logout:
     path: /logout
     methods: GET

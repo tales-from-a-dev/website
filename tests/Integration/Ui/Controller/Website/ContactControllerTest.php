@@ -13,7 +13,7 @@ final class ContactControllerTest extends WebTestCase
 {
     use HasBrowser;
 
-    public function testItCanViewHomePage(): void
+    public function testItCanViewContactPage(): void
     {
         $translator = self::getContainer()->get(TranslatorInterface::class);
 
