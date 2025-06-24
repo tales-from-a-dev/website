@@ -2,10 +2,9 @@
 framework:
     form:
         csrf_protection:
-#            token_id: submit
+            token_id: submit
 
     csrf_protection:
-        check_header: true
         stateless_token_ids:
             - submit
             - authenticate

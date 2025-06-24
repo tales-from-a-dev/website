@@ -1244,16 +1244,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "4664373bd0668d71b40cc368b950de95e1dba2f8"
+                "reference": "92e2f6db831be44bc041fdfbc49402a063ec33cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/4664373bd0668d71b40cc368b950de95e1dba2f8",
-                "reference": "4664373bd0668d71b40cc368b950de95e1dba2f8",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/92e2f6db831be44bc041fdfbc49402a063ec33cc",
+                "reference": "92e2f6db831be44bc041fdfbc49402a063ec33cc",
                 "shasum": ""
             },
             "require": {
@@ -1328,9 +1328,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.4.0"
+                "source": "https://github.com/doctrine/orm/tree/3.4.1"
             },
-            "time": "2025-06-14T11:47:14+00:00"
+            "time": "2025-06-21T10:44:26+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -2147,22 +2147,22 @@
         },
         {
             "name": "omines/antispam-bundle",
-            "version": "0.1.11",
+            "version": "0.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/omines/antispam-bundle.git",
-                "reference": "0b6895482b69a5bafbaad050de0be48cf205c403"
+                "reference": "646c4a4eb3b9b2b47714ba0ff53c851aa981a988"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omines/antispam-bundle/zipball/0b6895482b69a5bafbaad050de0be48cf205c403",
-                "reference": "0b6895482b69a5bafbaad050de0be48cf205c403",
+                "url": "https://api.github.com/repos/omines/antispam-bundle/zipball/646c4a4eb3b9b2b47714ba0ff53c851aa981a988",
+                "reference": "646c4a4eb3b9b2b47714ba0ff53c851aa981a988",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.2",
-                "psr/log": "^3.0",
+                "psr/log": "^2.0|^3.0",
                 "symfony/clock": "^6.4|^7.1",
                 "symfony/form": "^6.4|^7.1",
                 "symfony/framework-bundle": "^6.4|^7.1",
@@ -2177,22 +2177,22 @@
             },
             "require-dev": {
                 "ekino/phpstan-banned-code": "^3.0",
-                "friendsofphp/php-cs-fixer": "^3.68.0",
-                "infection/infection": "^0.29.8",
+                "friendsofphp/php-cs-fixer": "^3.75.0",
+                "infection/infection": "^0.29.14",
                 "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan": "^2.1.1",
-                "phpstan/phpstan-phpunit": "^2.0.3",
-                "phpstan/phpstan-symfony": "^2.0.1",
-                "phpunit/phpunit": "^11.5.3",
-                "symfony/browser-kit": "^6.4|^7.2.0",
-                "symfony/css-selector": "^6.4|^7.2.0",
-                "symfony/debug-bundle": "^6.4|^7.2.0",
-                "symfony/dotenv": "^6.4|^7.2.0",
+                "phpstan/phpstan": "^2.1.17",
+                "phpstan/phpstan-phpunit": "^2.0.6",
+                "phpstan/phpstan-symfony": "^2.0.6",
+                "phpunit/phpunit": "^11.5.8|^12.2.2",
+                "symfony/browser-kit": "^6.4|^7.3.0",
+                "symfony/css-selector": "^6.4|^7.3.0",
+                "symfony/debug-bundle": "^6.4|^7.3.0",
+                "symfony/dotenv": "^6.4|^7.3.0",
                 "symfony/monolog-bundle": "^3.10",
-                "symfony/routing": "^6.4|^7.2.0",
-                "symfony/runtime": "^6.4|^7.2.0",
-                "symfony/twig-bundle": "^6.4|^7.2.0",
-                "symfony/web-profiler-bundle": "^6.4|^7.2.2"
+                "symfony/routing": "^6.4|^7.3.0",
+                "symfony/runtime": "^6.4|^7.3.0",
+                "symfony/twig-bundle": "^6.4|^7.3.0",
+                "symfony/web-profiler-bundle": "^6.4|^7.3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2227,7 +2227,7 @@
             ],
             "support": {
                 "issues": "https://github.com/omines/antispam-bundle/issues",
-                "source": "https://github.com/omines/antispam-bundle/tree/0.1.11"
+                "source": "https://github.com/omines/antispam-bundle/tree/0.1.12"
             },
             "funding": [
                 {
@@ -2235,7 +2235,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-25T14:08:16+00:00"
+            "time": "2025-06-19T18:46:25+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -10949,16 +10949,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.23",
+            "version": "11.5.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "86ebcd8a3dbcd1857d88505109b2a2b376501cde"
+                "reference": "6b07ab1047155cf38f82dd691787a277782271dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/86ebcd8a3dbcd1857d88505109b2a2b376501cde",
-                "reference": "86ebcd8a3dbcd1857d88505109b2a2b376501cde",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6b07ab1047155cf38f82dd691787a277782271dd",
+                "reference": "6b07ab1047155cf38f82dd691787a277782271dd",
                 "shasum": ""
             },
             "require": {
@@ -10972,7 +10972,7 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.2",
-                "phpunit/php-code-coverage": "^11.0.9",
+                "phpunit/php-code-coverage": "^11.0.10",
                 "phpunit/php-file-iterator": "^5.1.0",
                 "phpunit/php-invoker": "^5.0.1",
                 "phpunit/php-text-template": "^4.0.1",
@@ -11030,7 +11030,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.23"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.24"
             },
             "funding": [
                 {
@@ -11054,7 +11054,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-13T05:47:49+00:00"
+            "time": "2025-06-20T11:31:02+00:00"
         },
         {
             "name": "pierstoval/smoke-testing",
