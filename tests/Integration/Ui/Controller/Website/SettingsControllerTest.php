@@ -48,9 +48,9 @@ final class SettingsControllerTest extends WebTestCase
 
         $settings = self::getContainer()->get(SettingsRepository::class)->findFirst();
 
-        $this->assertFalse($settings->isAvailable());
-        $this->assertSame($availableAt->format(\DateTimeInterface::ATOM), $settings->getAvailableAt()?->format(\DateTimeInterface::ATOM));
-        $this->assertSame(100, $settings->getAverageDailyRate());
+        $this->assertFalse($settings->available);
+        $this->assertSame($availableAt->format(\DateTimeInterface::ATOM), $settings->availableAt?->format(\DateTimeInterface::ATOM));
+        $this->assertSame(100, $settings->averageDailyRate);
     }
 
     public function testItTriggerErrorsWithInvalidData(): void
