@@ -9,6 +9,7 @@
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "cweagans/composer-patches": "^1.7",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/doctrine-migrations-bundle": "^3.3",
@@ -81,9 +82,10 @@
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
+            "cweagans/composer-patches": true,
+            "phpstan/extension-installer": true,
             "symfony/flex": true,
-            "symfony/runtime": true,
-            "phpstan/extension-installer": true
+            "symfony/runtime": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -123,6 +125,7 @@
         "symfony/symfony": "*"
     },
     "extra": {
+        "patches-file": "composer.patches.json",
         "symfony": {
             "allow-contrib": true,
             "require": "7.3.*",
