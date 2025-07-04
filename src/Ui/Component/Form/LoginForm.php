@@ -6,7 +6,7 @@ namespace App\Ui\Component\Form;
 
 use App\Domain\Enum\RouteNameEnum;
 use App\Ui\Controller\AbstractController;
-use App\Ui\Form\LoginType;
+use App\Ui\Form\Type\LoginType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;

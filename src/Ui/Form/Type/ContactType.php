@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Ui\Form;
+namespace App\Ui\Form\Type;
 
-use App\Domain\Dto\ContactDto;
+use App\Ui\Form\Data\ContactDto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

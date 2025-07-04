@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller;
 
-use App\Domain\Dto\ContactDto;
 use App\Domain\Enum\RouteNameEnum;
 use App\Domain\Service\ContactServiceInterface;
-use App\Ui\Form\ContactType;
+use App\Ui\Form\Data\ContactDto;
+use App\Ui\Form\Type\ContactType;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
