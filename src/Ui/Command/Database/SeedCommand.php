@@ -67,8 +67,8 @@ final readonly class SeedCommand
 
         if ([] === $this->entityManager->getRepository(Settings::class)->findAll()) {
             $settings = new Settings();
-            $settings->setAvailable(true);
-            $settings->setAverageDailyRate(500);
+            $settings->available = true;
+            $settings->averageDailyRate = 500;
 
             $this->entityManager->persist($settings);
         }
@@ -86,11 +86,11 @@ final readonly class SeedCommand
         foreach ($this->getExperienceData() as [$company, $type, $position, $startAt, $endAt]) {
             if (!$this->entityManager->getRepository(Experience::class)->findOneBy(['company' => $company])) {
                 $experience = new Experience();
-                $experience->setCompany($company);
-                $experience->setType($type);
-                $experience->setPosition($position);
-                $experience->setStartAt($startAt);
-                $experience->setEndAt($endAt);
+                $experience->company = $company;
+                $experience->type = $type;
+                $experience->position = $position;
+                $experience->startAt = $startAt;
+                $experience->endAt = $endAt;
 
                 $this->entityManager->persist($experience);
             }

@@ -17,49 +17,14 @@ class Settings
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    public ?int $id = null;
 
     #[ORM\Column(type: Types::SMALLINT, options: ['default' => 500])]
-    private int $averageDailyRate;
+    public int $averageDailyRate;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
-    private bool $available;
+    public bool $available;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $availableAt = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getAverageDailyRate(): int
-    {
-        return $this->averageDailyRate;
-    }
-
-    public function setAverageDailyRate(int $averageDailyRate): void
-    {
-        $this->averageDailyRate = $averageDailyRate;
-    }
-
-    public function isAvailable(): bool
-    {
-        return $this->available;
-    }
-
-    public function setAvailable(bool $available): void
-    {
-        $this->available = $available;
-    }
-
-    public function getAvailableAt(): ?\DateTimeImmutable
-    {
-        return $this->availableAt;
-    }
-
-    public function setAvailableAt(?\DateTimeImmutable $availableAt): void
-    {
-        $this->availableAt = $availableAt;
-    }
+    public ?\DateTimeImmutable $availableAt = null;
 }
