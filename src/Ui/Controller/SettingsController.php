@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller;
 
-use App\Domain\Dto\SettingsDto;
 use App\Domain\Entity\Settings;
 use App\Domain\Enum\AlertStatusEnum;
 use App\Domain\Enum\RouteNameEnum;
-use App\Ui\Form\SettingsType;
+use App\Ui\Form\Data\SettingsDto;
+use App\Ui\Form\Type\SettingsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;

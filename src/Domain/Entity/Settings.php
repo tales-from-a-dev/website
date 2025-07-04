@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use App\Domain\Dto\SettingsDto;
 use App\Infrastructure\Repository\SettingsRepository;
+use App\Ui\Form\Data\SettingsDto;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\ObjectMapper\Attribute\Map;

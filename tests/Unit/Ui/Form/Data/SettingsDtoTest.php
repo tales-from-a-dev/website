@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\Domain\Dto;
+namespace App\Tests\Unit\Ui\Form\Data;
 
-use App\Domain\Dto\SettingsDto;
+use App\Ui\Form\Data\SettingsDto;
 use PHPUnit\Framework\TestCase;
 
 final class SettingsDtoTest extends TestCase

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Service;
 
-use App\Domain\Dto\ContactDto;
+use App\Ui\Form\Data\ContactDto;
 
 interface ContactServiceInterface
 {

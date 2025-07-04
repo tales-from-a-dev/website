@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Ui\Form;
+namespace App\Ui\Form\Type;
 
-use App\Domain\Dto\SettingsDto;
+use App\Ui\Form\Data\SettingsDto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
