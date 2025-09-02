@@ -1,7 +1,0 @@
-{
-  "patches": {
-    "elao/enum": {
-      "Fix PHP 8.4 deprecation notice": "./patches/elao-enum.patch"
-    }
-  }
-}
