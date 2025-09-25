@@ -51,7 +51,7 @@
                 <twig:Section:SectionDescription>{{ 'home.section.github.subtitle'|trans }}</twig:Section:SectionDescription>
             </twig:Section:SectionHeader>
             <twig:Section:SectionContent>
-                <twig:GithubProjects />
+                <twig:GithubProjects/>
             </twig:Section:SectionContent>
         </twig:Section:Section>
         <twig:Section:Section id="experience">
@@ -116,8 +116,10 @@
                         <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_1'|trans }}</twig:Faq:FaqTitle>
                         <twig:Faq:FaqDescription>
                             {%- set available -%}
-                                <twig:TextHighlight class="mx-0.5"
-                                                    variant="{{ settings.available ? 'yellow' : 'red' }}">
+                                <twig:TextHighlight
+                                    class="mx-0.5"
+                                    variant="{{ settings.available ? 'yellow' : 'red' }}"
+                                >
                                     {{- 'home.section.faq.dl.dd_1_available'|trans({available: settings.available ? 'yes' : 'no'}) -}}
                                 </twig:TextHighlight>
                             {%- endset -%}
