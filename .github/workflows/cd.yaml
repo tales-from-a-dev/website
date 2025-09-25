@@ -1,0 +1,66 @@
+---
+name: cd
+
+run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target deployment environment'
+        type: environment
+        required: true
+
+      tag:
+        description: 'Tag to deploy'
+        type: string
+        required: true
+
+jobs:
+  deployment:
+    name: Deploy ${{ inputs.environment }}
+
+    runs-on: ubuntu-latest
+
+    environment: ${{ inputs.environment }}
+
+    permissions:
+      contents: read
+
+    concurrency:
+      group: cd-${{ inputs.environment }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy to droplet
+        run: |
+          ssh -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" <<'EOF'
+            set -Eeuo pipefail
+            cd app
+
+            git fetch --all --tags --prune
+            git rev-parse --verify "refs/tags/${{ inputs.tag }}" >/dev/null 2>&1 || { echo "Tag '${{ inputs.tag }}' not found"; exit 1; }
+            git reset --hard
+            git clean -fdx
+            git checkout -f --detach "tags/${{ inputs.tag }}"
+
+            docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
+            docker compose -f compose.yaml -f compose.prod.yaml down --remove-orphans
+
+            SERVER_NAME="${{ secrets.SERVER_NAME }}" \
+            APP_SECRET="${{ secrets.APP_SECRET }}" \
+            CADDY_MERCURE_JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+            docker compose -f compose.yaml -f compose.prod.yaml up --wait
+          EOF
+
+      - name: Delete SSH
+        run: rm -rf ~/.ssh/
