@@ -32,7 +32,7 @@ final class ContactControllerTest extends WebTestCase
             ->fillField('contact_company', 'ACME Corp')
             ->fillField('contact_email', 'johndoe@example.com')
             ->fillField('contact_content', 'Hello World')
-            ->click('contact_submit')
+            ->click('submit')
             ->assertSuccessful()
         ;
     }
@@ -46,7 +46,7 @@ final class ContactControllerTest extends WebTestCase
             ->fillField('contact_fullName', '')
             ->fillField('contact_email', 'johndoe@example')
             ->fillField('contact_content', '')
-            ->click('contact_submit')
+            ->click('submit')
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertSeeIn(
                 'p[id=contact_fullName_error_0]',

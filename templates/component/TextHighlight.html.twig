@@ -12,6 +12,12 @@
     },
 ) -%}
 
-<mark {{ attributes.defaults({class: ctx.apply({variant: variant})}) }}>
+{#- Template -#}
+
+<mark
+    data-slot="text-highlight"
+    class="{{ ctx.apply({variant: variant}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes }}
+>
     {%- block content -%}{%- endblock -%}
 </mark>

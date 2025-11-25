@@ -11,10 +11,13 @@
     },
 ) -%}
 
-<div {{ attributes.defaults({
-    'data-slot': 'alert',
-    role: 'alert',
-    class: ctx.apply({variant: variant}),
-}) }}>
+{#- Template -#}
+
+<div
+    data-slot="alert"
+    role="alert"
+    class="{{ ctx.apply({variant: variant}) }}"
+    {{ attributes }}
+>
     {% block content %}{% endblock %}
 </div>

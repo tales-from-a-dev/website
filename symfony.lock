@@ -440,17 +440,8 @@
             "config/packages/symfonycasts_tailwind.yaml"
         ]
     },
-    "tales-from-a-dev/flowbite-bundle": {
-        "version": "0.7",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.4",
-            "ref": "8c5eef17730535682128557a1016872fd3e81c33"
-        }
-    },
     "tales-from-a-dev/twig-tailwind-extra": {
-        "version": "0.2",
+        "version": "1.0",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",

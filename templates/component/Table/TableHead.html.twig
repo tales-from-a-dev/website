@@ -11,10 +11,13 @@
     },
 ) -%}
 
-<th {{ attributes.defaults({
-    'data-slot': 'table-head',
-    scope: 'col',
-    class: ctx.apply({align: align}),
-}) }}>
-    {% block content %}{% endblock %}
+{#- Template -#}
+
+<th
+    data-slot="table-head"
+    scope="col"
+    class="{{ ctx.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </th>

@@ -1,5 +1,8 @@
-<thead {{ attributes.defaults({
-    'data-slot': 'table-header',
-}) }}>
-    {% block content %}{% endblock %}
+{#- Template -#}
+
+<thead
+    data-slot="table-header"
+    {{ attributes }}
+>
+{%- block content %}{% endblock -%}
 </thead>

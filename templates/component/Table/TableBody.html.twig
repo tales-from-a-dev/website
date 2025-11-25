@@ -1,6 +1,14 @@
-<tbody {{ attributes.defaults({
-    'data-slot': 'table-body',
-    class: '[&_tr:last-child]:border-0',
-}) }}>
-    {% block content %}{% endblock %}
+{%- set classes = html_classes(
+    '[&_tr:last-child]:border-0',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<tbody
+    data-slot="table-body"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+{%- block content %}{% endblock -%}
 </tbody>

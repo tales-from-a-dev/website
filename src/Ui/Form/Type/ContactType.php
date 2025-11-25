@@ -55,6 +55,9 @@ final class ContactType extends AbstractType
             'empty_data' => new ContactDto(),
             'translation_domain' => 'form',
             'antispam_profile' => 'default',
+            'attr' => [
+                'id' => 'contact-form',
+            ],
         ]);
     }
 }

@@ -1,6 +1,65 @@
-{% use '@TalesFromADevFlowbite/form/default.html.twig' %}
+{% use 'form_div_layout.html.twig' %}
 
 {# Widgets #}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    {%- if type == 'hidden' -%}
+        {{- parent() -}}
+    {%- else -%}
+        {%- set attr_class = block('class_input_text') -%}
+        {%- if type == 'range' -%}
+            {%- set attr_class = block('class_input_range') -%}
+        {%- elseif type == 'file' -%}
+            {%- set attr_class = block('class_input_file') -%}
+        {%- endif -%}
+        {%- set attr = attr|merge({class: (attr_class ~ ' ' ~ attr.class|default(''))|trim|tailwind_merge}) -%}
+        {{- parent() -}}
+    {%- endif -%}
+{%- endblock form_widget_simple -%}
+
+{%- block textarea_widget -%}
+    {%- set attr_class = block('class_textarea') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
+    {{- parent() -}}
+{%- endblock textarea_widget -%}
+
+{%- block choice_widget_collapsed -%}
+    {%- set attr_class = block('class_select') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
+    {{- parent() -}}
+{%- endblock choice_widget_collapsed -%}
+
+{%- block checkbox_widget -%}
+    {%- set attr_class = block('class_input_checkbox') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
+    {{- form_label(form, null, {widget: parent()}) -}}
+{%- endblock checkbox_widget -%}
+
+{%- block radio_widget -%}
+    {%- set attr_class = block('class_input_radio') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
+    {{- form_label(form, null, {widget: parent()}) -}}
+{%- endblock radio_widget -%}
+
+{%- block date_widget -%}
+    {%- if widget == 'single_text' -%}
+        {{ block('form_widget_simple') }}
+    {%- else -%}
+        {%- set attr = attr|merge({class: attr.class|default('flex')|trim}) -%}
+        {%- set attr_class_error = '' -%}
+        {%- if not valid -%}
+            {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
+        {%- endif -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- date_pattern|replace({
+                '{{ year }}': form_widget(form.year, {attr: {class: (block('class_widget_addon_append') ~ ' ' ~ attr_class_error|trim|tailwind_merge)}}),
+                '{{ month }}': form_widget(form.month, {attr: {class: (block('class_widget_addon_prepend') ~ ' ' ~ attr_class_error|trim|tailwind_merge)}}),
+                '{{ day }}': form_widget(form.day, {attr: {class: ('rounded-none' ~ attr_class_error)|trim|tailwind_merge}}),
+            })|raw -}}
+        </div>
+    {%- endif -%}
+{%- endblock date_widget -%}
 
 {%- block submit_widget -%}
     {%- set button_attr_class = block('class_submit') ~ ' ' ~ attr.class|default('') -%}
@@ -8,10 +67,118 @@
     {{- parent() -}}
 {%- endblock submit_widget -%}
 
+{# Labels #}
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {%- set label_attr_class = (valid ? block('class_label') : block('class_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
+        {%- set label_attr = label_attr|merge({class: label_attr_class|trim|tailwind_merge}) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({for: id}) %}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif -%}
+        <{{ element|default('label') }}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- block('form_label_content') -}}
+        </{{ element|default('label') }}>
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{%- block checkbox_radio_label -%}
+    {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
+    {%- if widget is defined -%}
+        {%- if checked and form.parent.vars.valid == false -%}
+            {%- set valid = false -%}
+        {%- endif -%}
+        {%- set label_attr_class = (valid ? block('class_label') : block('class_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
+        {%- set label_attr = label_attr|merge({class: label_attr_class|trim|tailwind_merge}) -%}
+        {%- if not compound -%}
+            {% set label_attr = label_attr|merge({for: id}) %}
+        {%- endif -%}
+        <div class="flex flex-row items-center gap-2">
+            {{- widget|raw -}}
+            {%- if label is not same as(false) -%}
+                <label{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}>
+                    {{- block('form_label_content') -}}
+                </label>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+{%- endblock checkbox_radio_label %}
+
+{% block checkbox_label -%}
+    {{- block('checkbox_radio_label') -}}
+{%- endblock checkbox_label %}
+
+{% block radio_label -%}
+    {{- block('checkbox_radio_label') -}}
+{%- endblock radio_label %}
+
+{# Rows #}
+
+{%- block form_row -%}
+    {%- set row_attr_class = block('class_row') ~ ' ' ~ row_attr.class|default('') -%}
+    {%- set row_attr = row_attr|merge({class: row_attr_class|trim|tailwind_merge}) -%}
+    {%- if compound is defined and compound -%}
+        {%- set element = 'fieldset' -%}
+    {%- endif -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~ '_help'}} -%}
+    {%- endif -%}
+    <{{ element|default('div') }}{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_errors(form) -}}
+        {{- form_help(form) -}}
+    </{{ element|default('div') }}>
+{%- endblock form_row -%}
+
+{# Help #}
+
+{% block form_help -%}
+    {%- if help is not empty -%}
+        {%- set help_attr_class = block('class_help_text') ~ ' ' ~ help_attr.class|default('') -%}
+        {%- set help_attr = help_attr|merge({class: help_attr_class|trim|tailwind_merge}) -%}
+        <p id="{{ id }}_help"{% with {attr: help_attr} %}{{ block('attributes') }}{% endwith %}>
+            {{- block('form_help_content') -}}
+        </p>
+    {%- endif -%}
+{%- endblock form_help %}
+
+{# Misc #}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for key, error in errors -%}
+            <p id="{{ id }}_error_{{ key }}" class="{{ block('class_text_error') }}">{{ error.message }}</p>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{# Support #}
+
+{%- block widget_attributes -%}
+    {%- set attr_class = attr.class|default('') -%}
+    {%- if not valid %}
+        {%- set attr_class = attr_class ~ ' ' ~ block('class_input_error') -%}
+    {% endif -%}
+    {%- if disabled %}
+        {%- set attr_class = attr_class ~ ' ' ~ block('class_input_disabled') -%}
+    {% endif -%}
+    {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
+    {{ parent() }}
+{%- endblock widget_attributes -%}
+
 {# Class #}
 
+{% block class_row -%}
+    grid items-center gap-3
+{%- endblock %}
+
 {% block class_label -%}
-    block mb-2 text-sm font-semibold text-gray-900
+    text-sm font-semibold text-gray-900
 {%- endblock %}
 
 {% block class_input_radio_label -%}
@@ -22,12 +189,36 @@
     text-gray-900 bg-white rounded-md text-sm block w-full p-2.5 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 placeholder:text-gray-400 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500
 {%- endblock %}
 
+{% block class_select -%}
+    {{ block('class_input_text') }}
+{%- endblock %}
+
+{% block class_textarea -%}
+    {{ block('class_input_text') }}
+{%- endblock %}
+
+{% block class_input_radio -%}
+    size-4 text-gray-900 bg-white border-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900
+{%- endblock class_input_radio %}
+
+{% block class_input_checkbox -%}
+    rounded-md {{ block('class_input_radio') }}
+{%- endblock class_input_checkbox %}
+
 {% block class_submit -%}
     inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-gray-900 text-white shadow-xs hover:bg-gray-900/90 w-full md:w-auto px-4 py-2 transition ease-linear duration-500
 {%- endblock class_submit %}
 
+{% block class_widget_addon_prepend -%}
+    rounded-r-none
+{%- endblock class_widget_addon_prepend %}
+
+{% block class_widget_addon_append -%}
+    rounded-l-none
+{%- endblock class_widget_addon_append %}
+
 {% block class_label_error -%}
-    block mb-2 text-sm font-semibold text-red-600
+    text-sm font-semibold text-red-600
 {%- endblock %}
 
 {% block class_input_error -%}
@@ -35,5 +226,5 @@
 {%- endblock %}
 
 {% block class_text_error -%}
-    mt-2 text-sm text-red-600
+    text-sm text-red-600
 {%- endblock %}

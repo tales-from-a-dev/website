@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1995fe4ae93e90e0fd95fc3b2b2c3438",
+    "content-hash": "f8a864e61fedd3f8046f2c6421e123c9",
     "packages": [
         {
             "name": "async-aws/core",
@@ -1631,73 +1631,6 @@
             "time": "2025-06-06T06:50:35+00:00"
         },
         {
-            "name": "gehrisandro/tailwind-merge-php",
-            "version": "v1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gehrisandro/tailwind-merge-php.git",
-                "reference": "dc11b9d4a625dd5be885900e5ef14c3efa260277"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gehrisandro/tailwind-merge-php/zipball/dc11b9d4a625dd5be885900e5ef14c3efa260277",
-                "reference": "dc11b9d4a625dd5be885900e5ef14c3efa260277",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1.0",
-                "psr/simple-cache": "^3.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.13.8",
-                "nunomaduro/collision": "^7.10",
-                "pestphp/pest": "^v2.24.0",
-                "pestphp/pest-plugin-arch": "^2.6",
-                "pestphp/pest-plugin-mock": "^2.0.0",
-                "pestphp/pest-plugin-type-coverage": "^2.8",
-                "phpstan/phpstan": "^1.10.55",
-                "rector/rector": "^1.0.5",
-                "symfony/var-dumper": "^6.4.2"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/TailwindMerge.php"
-                ],
-                "psr-4": {
-                    "TailwindMerge\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sandro Gehri",
-                    "email": "sandrogehri@gmail.com"
-                }
-            ],
-            "description": "TailwindMerge for PHP merges multiple Tailwind CSS classes by automatically resolving conflicts between them",
-            "keywords": [
-                "classes",
-                "merge",
-                "php",
-                "tailwindcss"
-            ],
-            "support": {
-                "issues": "https://github.com/gehrisandro/tailwind-merge-php/issues",
-                "source": "https://github.com/gehrisandro/tailwind-merge-php/tree/v1.1.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/gehrisandro",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-05-21T17:32:42+00:00"
-        },
-        {
             "name": "league/commonmark",
             "version": "2.7.1",
             "source": {
@@ -2354,16 +2287,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.11.1",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "f626740b38009078de0dc8b2b9dc4e7f749c6eba"
+                "reference": "92a98ada2b93d9b201a613cb5a33584dde25f195"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/f626740b38009078de0dc8b2b9dc4e7f749c6eba",
-                "reference": "f626740b38009078de0dc8b2b9dc4e7f749c6eba",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/92a98ada2b93d9b201a613cb5a33584dde25f195",
+                "reference": "92a98ada2b93d9b201a613cb5a33584dde25f195",
                 "shasum": ""
             },
             "require": {
@@ -2406,9 +2339,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.11.1"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.12.0"
             },
-            "time": "2025-11-21T11:31:57+00:00"
+            "time": "2025-11-21T15:09:14+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -8970,37 +8903,33 @@
             "time": "2025-07-14T17:36:36+00:00"
         },
         {
-            "name": "tales-from-a-dev/flowbite-bundle",
-            "version": "v0.8.1",
+            "name": "tales-from-a-dev/tailwind-merge-php",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tales-from-a-dev/flowbite-bundle.git",
-                "reference": "51445baeba8f5509037ab950c246c0e2fb54bebf"
+                "url": "https://github.com/tales-from-a-dev/tailwind-merge-php.git",
+                "reference": "dbf99fb623411a4db549fe8aac44a9ed350edd51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/51445baeba8f5509037ab950c246c0e2fb54bebf",
-                "reference": "51445baeba8f5509037ab950c246c0e2fb54bebf",
+                "url": "https://api.github.com/repos/tales-from-a-dev/tailwind-merge-php/zipball/dbf99fb623411a4db549fe8aac44a9ed350edd51",
+                "reference": "dbf99fb623411a4db549fe8aac44a9ed350edd51",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/http-kernel": "^6.4 || ^7.0",
-                "symfony/twig-bridge": "^6.4 || ^7.0",
-                "tales-from-a-dev/twig-tailwind-extra": "^0.5"
+                "psr/simple-cache": "^3.0",
+                "symfony/string": "^6.4 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.15",
-                "phpunit/phpunit": "^10.0",
-                "symfony/form": "^6.4 || ^7.0",
-                "symfony/intl": "^6.4 || ^7.0",
-                "symfony/security-csrf": "^6.4 || ^7.0",
-                "symfony/translation": "^6.4 || ^7.0"
+                "friendsofphp/php-cs-fixer": "^3.89",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.5"
             },
-            "type": "symfony-bundle",
+            "type": "library",
             "autoload": {
                 "psr-4": {
-                    "TalesFromADev\\FlowbiteBundle\\": "src/"
+                    "TalesFromADev\\TailwindMerge\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -9009,49 +8938,53 @@
             ],
             "authors": [
                 {
+                    "name": "Sandro Gehri",
+                    "email": "sandrogehri@gmail.com"
+                },
+                {
                     "name": "Romain Monteil",
                     "email": "monteil.romain@gmail.com"
                 }
             ],
-            "description": "A Symfony form theme for Flowbite",
-            "homepage": "https://github.com/tales-from-a-dev/flowbite-bundle",
+            "description": "TailwindMerge for PHP merges multiple Tailwind CSS classes by automatically resolving conflicts between them",
+            "homepage": "https://github.com/tales-from-a-dev/tailwind-merge-php",
             "keywords": [
-                "bundle",
-                "flowbite",
-                "form",
-                "symfony",
-                "theme"
+                "classes",
+                "merge",
+                "php",
+                "tailwindcss"
             ],
             "support": {
-                "issues": "https://github.com/tales-from-a-dev/flowbite-bundle/issues",
-                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.8.1"
+                "issues": "https://github.com/tales-from-a-dev/tailwind-merge-php/issues",
+                "source": "https://github.com/tales-from-a-dev/tailwind-merge-php/tree/v0.1.0"
             },
-            "time": "2025-06-18T08:51:26+00:00"
+            "time": "2025-11-20T17:56:36+00:00"
         },
         {
             "name": "tales-from-a-dev/twig-tailwind-extra",
-            "version": "v0.5.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tales-from-a-dev/twig-tailwind-extra.git",
-                "reference": "ba2d24668bb293092faa4fc4c118d47f9c6c00fa"
+                "reference": "c398d66cd164de0a52282fff0e2d45ecbcbb06ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/ba2d24668bb293092faa4fc4c118d47f9c6c00fa",
-                "reference": "ba2d24668bb293092faa4fc4c118d47f9c6c00fa",
+                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/c398d66cd164de0a52282fff0e2d45ecbcbb06ef",
+                "reference": "c398d66cd164de0a52282fff0e2d45ecbcbb06ef",
                 "shasum": ""
             },
             "require": {
-                "gehrisandro/tailwind-merge-php": "^1.0",
                 "php": ">=8.1",
-                "symfony/cache": "^6.4 || ^7.0",
-                "symfony/framework-bundle": "^6.4 || ^7.0",
+                "symfony/cache": "^6.4 || ^7.0 || ^8.0",
+                "symfony/framework-bundle": "^6.4 || ^7.0 || ^8.0",
+                "tales-from-a-dev/tailwind-merge-php": "^0.1",
                 "twig/twig": "^3.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.38",
-                "symfony/phpunit-bridge": "^6.4 || ^7.0"
+                "symfony/phpunit-bridge": "^6.4 || ^7.0 || ^8.0",
+                "symfony/yaml": "^6.4 || ^7.0 || ^8.0"
             },
             "type": "twig",
             "autoload": {
@@ -9079,9 +9012,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tales-from-a-dev/twig-tailwind-extra/issues",
-                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v0.5.0"
+                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v1.0.0"
             },
-            "time": "2025-06-16T13:27:13+00:00"
+            "time": "2025-11-21T15:19:24+00:00"
         },
         {
             "name": "twig/extra-bundle",
@@ -13247,31 +13180,31 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.64.0",
+            "version": "v1.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "c86da84640b0586e92aee2b276ee3638ef2f425a"
+                "reference": "9a0276d7486b29cae641b4a0a85d5e5cc149bff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c86da84640b0586e92aee2b276ee3638ef2f425a",
-                "reference": "c86da84640b0586e92aee2b276ee3638ef2f425a",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/9a0276d7486b29cae641b4a0a85d5e5cc149bff2",
+                "reference": "9a0276d7486b29cae641b4a0a85d5e5cc149bff2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "^2.0",
                 "nikic/php-parser": "^5.0",
                 "php": ">=8.1",
-                "symfony/config": "^6.4|^7.0",
-                "symfony/console": "^6.4|^7.0",
-                "symfony/dependency-injection": "^6.4|^7.0",
+                "symfony/config": "^6.4|^7.0|^8.0",
+                "symfony/console": "^6.4|^7.0|^8.0",
+                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
                 "symfony/deprecation-contracts": "^2.2|^3",
-                "symfony/filesystem": "^6.4|^7.0",
-                "symfony/finder": "^6.4|^7.0",
-                "symfony/framework-bundle": "^6.4|^7.0",
-                "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/process": "^6.4|^7.0"
+                "symfony/filesystem": "^6.4|^7.0|^8.0",
+                "symfony/finder": "^6.4|^7.0|^8.0",
+                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
+                "symfony/http-kernel": "^6.4|^7.0|^8.0",
+                "symfony/process": "^6.4|^7.0|^8.0"
             },
             "conflict": {
                 "doctrine/doctrine-bundle": "<2.10",
@@ -13279,13 +13212,14 @@
             },
             "require-dev": {
                 "composer/semver": "^3.0",
-                "doctrine/doctrine-bundle": "^2.5.0",
+                "doctrine/doctrine-bundle": "^2.5.0|^3.0.0",
                 "doctrine/orm": "^2.15|^3",
-                "symfony/http-client": "^6.4|^7.0",
-                "symfony/phpunit-bridge": "^6.4.1|^7.0",
-                "symfony/security-core": "^6.4|^7.0",
-                "symfony/security-http": "^6.4|^7.0",
-                "symfony/yaml": "^6.4|^7.0",
+                "doctrine/persistence": "^3.1|^4.0",
+                "symfony/http-client": "^6.4|^7.0|^8.0",
+                "symfony/phpunit-bridge": "^6.4.1|^7.0|^8.0",
+                "symfony/security-core": "^6.4|^7.0|^8.0",
+                "symfony/security-http": "^6.4|^7.0|^8.0",
+                "symfony/yaml": "^6.4|^7.0|^8.0",
                 "twig/twig": "^3.0|^4.x-dev"
             },
             "type": "symfony-bundle",
@@ -13320,7 +13254,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.64.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.65.0"
             },
             "funding": [
                 {
@@ -13332,11 +13266,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-23T16:12:08+00:00"
+            "time": "2025-11-24T15:41:51+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -13648,16 +13586,16 @@
         },
         {
             "name": "vincentlanglet/twig-cs-fixer",
-            "version": "3.10.0",
+            "version": "3.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VincentLanglet/Twig-CS-Fixer.git",
-                "reference": "ee9b6a31d2c2522b2773ecf31f5d29c2e26311a6"
+                "reference": "866af065fd09980b6390ee5c69e45b08053101e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/ee9b6a31d2c2522b2773ecf31f5d29c2e26311a6",
-                "reference": "ee9b6a31d2c2522b2773ecf31f5d29c2e26311a6",
+                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/866af065fd09980b6390ee5c69e45b08053101e8",
+                "reference": "866af065fd09980b6390ee5c69e45b08053101e8",
                 "shasum": ""
             },
             "require": {
@@ -13713,7 +13651,7 @@
             "homepage": "https://github.com/VincentLanglet/Twig-CS-Fixer",
             "support": {
                 "issues": "https://github.com/VincentLanglet/Twig-CS-Fixer/issues",
-                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/3.10.0"
+                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/3.11.0"
             },
             "funding": [
                 {
@@ -13721,7 +13659,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-15T11:28:55+00:00"
+            "time": "2025-11-24T18:13:18+00:00"
         },
         {
             "name": "zenstruck/assert",

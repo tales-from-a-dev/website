@@ -1,5 +1,8 @@
-<div {{ attributes.defaults({
-    'data-slot': 'section-content',
-}) }}>
+{#- Template -#}
+
+<div
+    data-slot="section-content"
+    {{ attributes }}
+>
     {% block content %}{% endblock %}
 </div>

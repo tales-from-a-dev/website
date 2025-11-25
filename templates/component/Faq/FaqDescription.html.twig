@@ -1,6 +1,14 @@
-<p {{ attributes.defaults({
-    'data-slot': 'faq-description',
-    class: 'font-normal text-gray-500 text-sm md:text-base leading-loose',
-}) }}>
+{%- set classes = html_classes(
+    'font-normal text-gray-500 text-sm md:text-base leading-loose',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<p
+    data-slot="faq-description"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
     {% block content %}{% endblock %}
 </p>
