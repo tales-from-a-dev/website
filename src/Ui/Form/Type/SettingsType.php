@@ -43,7 +43,7 @@ final class SettingsType extends AbstractType
             'empty_data' => new SettingsDto(),
             'translation_domain' => 'form',
             'attr' => [
-                'class' => 'max-w-xl',
+                'class' => 'w-full',
             ],
         ]);
     }

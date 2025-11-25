@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Ui\Controller;
 
+use App\Domain\Enum\AlertStatusEnum;
 use App\Domain\Enum\RouteNameEnum;
-use App\Domain\Service\ContactServiceInterface;
+use App\Infrastructure\State\Processor\SendContactProcessor;
 use App\Ui\Form\Data\ContactDto;
 use App\Ui\Form\Type\ContactType;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,8 +26,7 @@ use Symfony\UX\Turbo\TurboBundle;
 final class ContactController extends AbstractController
 {
     public function __construct(
-        private readonly ContactServiceInterface $contactService,
-        private readonly LoggerInterface $logger,
+        private readonly SendContactProcessor $processor,
     ) {
     }
 
@@ -39,31 +37,25 @@ final class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $success = true;
+            $success = $this->processor->process($form->getData());
 
-            try {
-                /** @var ContactDto $dto */
-                $dto = $form->getData();
+            $this->addAlert(
+                status: $success ? AlertStatusEnum::Success : AlertStatusEnum::Error,
+                message: $success ? 'contact.send.success' : 'contact.send.error',
+            );
 
-                $this->contactService->notify($dto);
-            } catch (\Exception $exception) {
-                $success = false;
+            if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
+                $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
 
-                $this->logger->critical($exception->getMessage(), $exception->getTrace());
-            } finally {
-                if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
-                    $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
-
-                    return true === $success
-                        ? $this->renderBlock('app/website/contact.html.twig', 'form_success')
-                        : $this->renderBlock('app/website/contact.html.twig', 'form_error');
-                }
-
-                return $this->redirectToRoute(route: RouteNameEnum::WebsiteHome->value, status: Response::HTTP_SEE_OTHER);
+                return $this->renderBlock('app/website/contact.html.twig', 'update', [
+                    'form' => $this->createContactForm(),
+                ]);
             }
+
+            return $this->redirectToRoute(route: RouteNameEnum::WebsiteHome->value, status: Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderBlock('app/website/contact.html.twig', 'form', [
+        return $this->renderBlock('app/website/contact.html.twig', 'new', [
             'form' => $form,
         ]);
     }
@@ -73,19 +65,9 @@ final class ContactController extends AbstractController
      */
     private function createContactForm(): FormInterface
     {
-        return $this
-            ->createForm(type: ContactType::class, options: [
-                'action' => $this->generateUrl(RouteNameEnum::WebsiteContact->value),
-                'method' => Request::METHOD_POST,
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'button.send',
-                'attr' => [
-                    'class' => 'w-full md:w-auto',
-                ],
-                'row_attr' => [
-                    'class' => 'flex justify-end',
-                ],
-            ]);
+        return $this->createForm(type: ContactType::class, options: [
+            'action' => $this->generateUrl(RouteNameEnum::WebsiteContact->value),
+            'method' => Request::METHOD_POST,
+        ]);
     }
 }

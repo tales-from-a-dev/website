@@ -2,23 +2,23 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    
+
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         users_in_memory:
             memory:
                 users:
                     '%env(USER_EMAIL)%': { password: '%env(USER_PASSWORD)%', roles: [ !php/enum App\Domain\Enum\UserRoleEnum::User->value ] }
-    
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        
+
         main:
             lazy: true
             provider: users_in_memory
-            
+
             form_login:
                 username_parameter: _email
                 form_only: true
@@ -27,13 +27,13 @@ security:
                 check_path: app_website_login
                 default_target_path: app_website_settings
                 always_use_default_target_path: true
-                
+
             logout:
                 path: app_website_logout
                 enable_csrf: true
                 # where to redirect after logout
                 target: app_website_home
-            
+
             login_throttling: ~
 
             # activate different ways to authenticate
@@ -60,7 +60,7 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
-        
+
         firewalls:
             main:
                 login_throttling:

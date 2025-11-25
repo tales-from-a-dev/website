@@ -1,0 +1,39 @@
+{%- props form -%}
+
+{#- Template -#}
+
+<div
+    data-slot="contact-form"
+    {{ attributes }}
+>
+    {{ form_start(form) }}
+        <twig:Card:Card>
+            <twig:Card:CardHeader>
+                <twig:Card:CardDescription>
+                    {{ 'home.section.contact.text'|trans }}
+                </twig:Card:CardDescription>
+            </twig:Card:CardHeader>
+            <twig:Card:CardContent class="grid gap-4">
+                {% for alert in app.flashes('alert') %}
+                    <twig:Alert:Alert :variant="alert.status.value">
+                        <twig:Ux:Icon :name="alert.status.icon"/>
+                        <twig:Alert:AlertTitle>
+                            {{ alert.message|trans }}
+                        </twig:Alert:AlertTitle>
+                    </twig:Alert:Alert>
+                {% endfor %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {{ form_row(form.fullName) }}
+                    {{ form_row(form.company) }}
+                </div>
+                {{ form_row(form.email) }}
+                {{ form_row(form.content) }}
+            </twig:Card:CardContent>
+            <twig:Card:CardFooter class="justify-end">
+                <twig:Button name="submit" type="submit" class="w-full md:w-auto">
+                    {{ 'button.send'|trans(domain: 'form') }}
+                </twig:Button>
+            </twig:Card:CardFooter>
+        </twig:Card:Card>
+    {{ form_end(form) }}
+</div>

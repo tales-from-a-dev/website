@@ -1,6 +1,14 @@
-<div {{ attributes.defaults({
-    'data-slot': 'card',
-    class: 'flex flex-col gap-6 py-6 rounded-md bg-gray-50',
-}) }}>
-    {% block content %}{% endblock %}
+{%- set classes = html_classes(
+    'flex flex-col gap-6 py-6 rounded-md bg-gray-50',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="card"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </div>

@@ -12,6 +12,12 @@
     },
 ) -%}
 
-<button {{ attributes.defaults({class: ctx.apply({size: size, variant: variant})}) }}>
+{#- Template -#}
+
+<button
+    data-slot="button"
+    class="{{ ctx.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes }}
+>
     {%- block content %}{% endblock -%}
 </button>

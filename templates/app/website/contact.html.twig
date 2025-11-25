@@ -1,43 +1,11 @@
-{% block form %}
+{% block new %}
     <twig:Turbo:Frame id="contact-form-container">
-        <twig:Card:Card class="w-full">
-            <twig:Card:CardHeader>
-                <twig:Card:CardDescription>
-                    {{ 'home.section.contact.text'|trans }}
-                </twig:Card:CardDescription>
-            </twig:Card:CardHeader>
-            <twig:Card:CardContent class="grid gap-4">
-                {{ form_start(form, {attr: {id: 'contact-form'}}) }}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-3">
-                        {{ form_row(form.fullName) }}
-                        {{ form_row(form.company) }}
-                    </div>
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.content) }}
-                {{ form_end(form) }}
-            </twig:Card:CardContent>
-        </twig:Card:Card>
+        <twig:Form:ContactForm :form="form" />
     </twig:Turbo:Frame>
 {% endblock %}
 
-{% block form_success %}
-    <twig:Turbo:Stream:Replace target="#contact-form">
-        <twig:Alert:Alert variant="success">
-            <twig:Ux:Icon name="tabler:circle-check"/>
-            <twig:Alert:AlertTitle>
-                {{ 'contact.send.success'|trans(domain: 'alert') }}
-            </twig:Alert:AlertTitle>
-        </twig:Alert:Alert>
-    </twig:Turbo:Stream:Replace>
-{% endblock %}
-
-{% block form_error %}
-    <twig:Turbo:Stream:Replace target="#contact-form">
-        <twig:Alert:Alert variant="error">
-            <twig:Ux:Icon name="tabler:circle-x"/>
-            <twig:Alert:AlertTitle>
-                {{ 'contact.send.error'|trans(domain: 'alert') }}
-            </twig:Alert:AlertTitle>
-        </twig:Alert:Alert>
+{% block update %}
+    <twig:Turbo:Stream:Replace target="[data-slot='contact-form']">
+        <twig:Form:ContactForm :form="form" />
     </twig:Turbo:Stream:Replace>
 {% endblock %}

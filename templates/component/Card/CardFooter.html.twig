@@ -1,6 +1,14 @@
-<div {{ attributes.defaults({
-    'data-slot': 'card-footer',
-    class: 'flex items-center px-6',
-}) }}>
-    {% block content %}{% endblock %}
+{%- set classes = html_classes(
+    'flex items-center px-6 [.border-t]:pt-6',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="card-footer"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </div>

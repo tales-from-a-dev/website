@@ -1,5 +1,8 @@
-<div {{ attributes.defaults({
-    'data-slot': 'section-header',
-}) }}>
-    {% block content %}{% endblock %}
+{#- Template -#}
+
+<div
+    data-slot="section-header"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </div>

@@ -1,6 +1,14 @@
-<p {{ attributes.defaults({
-    'data-slot': 'section-description',
-    class: 'font-normal text-gray-500 text-base',
-}) }}>
-    {% block content %}{% endblock %}
+{%- set classes = html_classes(
+    'font-normal text-gray-500 text-base',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<p
+    data-slot="section-description"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </p>

@@ -11,9 +11,12 @@
     },
 ) -%}
 
-<td {{ attributes.defaults({
-    'data-slot': 'table-cell',
-    class: ctx.apply({align: align}),
-}) }}>
-    {% block content %}{% endblock %}
+{#- Template -#}
+
+<td
+    data-slot="table-cell"
+    class="{{ ctx.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </td>

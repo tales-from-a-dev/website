@@ -43,7 +43,7 @@ final class SettingsControllerTest extends WebTestCase
             ->uncheckField('settings_available')
             ->fillField('settings_availableAt', \IntlDateFormatter::formatObject($availableAt = new \DateTimeImmutable('tomorrow'), 'yyyy-MM-dd'))
             ->fillField('settings_averageDailyRate', '100')
-            ->click('settings_submit')
+            ->click('submit')
             ->assertSuccessful();
 
         $settings = self::getContainer()->get(SettingsRepository::class)->findFirst();
@@ -66,7 +66,7 @@ final class SettingsControllerTest extends WebTestCase
             ->uncheckField('settings_available')
             ->fillField('settings_availableAt', \IntlDateFormatter::formatObject(new \DateTimeImmutable('yesterday'), 'yyyy-MM-dd'))
             ->fillField('settings_averageDailyRate', '-100')
-            ->click('settings_submit')
+            ->click('submit')
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertElementCount('p[id=settings_availableAt_error_0]', 1)
             ->assertSeeIn(

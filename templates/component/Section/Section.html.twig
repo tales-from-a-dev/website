@@ -1,7 +1,15 @@
-<section {{ attributes.defaults({
-    'data-slot': 'section',
-    class: 'py-8 md:py-16',
-}) }}>
+{%- set classes = html_classes(
+    'py-8 md:py-16',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<section
+    data-slot="section"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
     <div class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16">
         {% block content %}{% endblock %}
     </div>

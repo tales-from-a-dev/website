@@ -1,6 +1,9 @@
-<div {{ attributes.defaults({
-    'data-slot': 'card-title',
-    class: 'leading-none font-semibold',
-}) }}>
-    {% block content %}{% endblock %}
+{#- Template -#}
+
+<div
+    data-slot="card-title"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </div>

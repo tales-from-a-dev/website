@@ -1,6 +1,14 @@
-<h3 {{ attributes.defaults({
-    'data-slot': 'faq-title',
-    class: 'font-normal text-gray-700 text-3xl md:text-4xl mb-5',
-}) }}>
+{%- set classes = html_classes(
+    'font-normal text-gray-700 text-3xl md:text-4xl mb-5',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<h3
+    data-slot="faq-title"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
     {% block content %}{% endblock %}
 </h3>

@@ -1,4 +1,7 @@
-<div {{ attributes.defaults({class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}) }}>
+<div
+    data-slot="github-projects"
+    {{ attributes.defaults({class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}) }}
+>
     {% for project in this.projects %}
         <twig:Card:Card class="group relative justify-between">
             <twig:Card:CardHeader>

@@ -1,5 +1,8 @@
-<tr {{ attributes.defaults({
-    'data-slot': 'table-row',
-}) }}>
-    {% block content %}{% endblock %}
+{#- Template -#}
+
+<tr
+    data-slot="table-row"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
 </tr>
