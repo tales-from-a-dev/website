@@ -8,6 +8,10 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+###> symfony/mercure-bundle ###
+/bolt.db
+###< symfony/mercure-bundle ###
+
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
@@ -17,10 +21,6 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
-
-###> phpstan/phpstan ###
-phpstan.neon
-###< phpstan/phpstan ###
 
 ###> phpunit/phpunit ###
 /phpunit.xml

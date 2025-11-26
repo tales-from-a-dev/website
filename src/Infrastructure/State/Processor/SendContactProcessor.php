@@ -24,7 +24,6 @@ final readonly class SendContactProcessor implements ProcessorInterface
     public function process(mixed $data, array $context = []): bool
     {
         Assert::isInstanceOf($data, ContactDto::class);
-
         Assert::notNull($data->fullName);
         Assert::notNull($data->email);
         Assert::notNull($data->content);
