@@ -7,9 +7,9 @@ namespace App\Ui\Controller;
 use App\Domain\Entity\Settings;
 use App\Domain\Enum\AlertStatusEnum;
 use App\Domain\Enum\RouteNameEnum;
+use App\Infrastructure\State\Processor\UpdateSettingsProcessor;
 use App\Ui\Form\Data\SettingsDto;
 use App\Ui\Form\Type\SettingsType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,8 +27,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class SettingsController extends AbstractController
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
         private readonly ObjectMapperInterface $objectMapper,
+        private readonly UpdateSettingsProcessor $processor,
     ) {
     }
 
@@ -43,8 +43,7 @@ final class SettingsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->objectMapper->map($form->getData(), $settings);
-            $this->entityManager->flush();
+            $this->processor->process($form->getData(), ['previous_data' => $settings]);
 
             $this->addAlert(AlertStatusEnum::Success, 'settings.update.success');
 
