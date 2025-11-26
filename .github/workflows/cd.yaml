@@ -50,7 +50,6 @@ jobs:
             git fetch --all --tags --prune
             git rev-parse --verify "refs/tags/${{ inputs.tag }}" >/dev/null 2>&1 || { echo "Tag '${{ inputs.tag }}' not found"; exit 1; }
             git reset --hard
-            git clean -fdx
             git checkout -f --detach "tags/${{ inputs.tag }}"
 
             docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
