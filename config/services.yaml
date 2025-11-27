@@ -7,7 +7,7 @@ parameters:
     app.default_locale: 'en'
     app.contact_email: '%env(CONTACT_EMAIL)%'
     app.contact_phone: '%env(CONTACT_PHONE)%'
-    
+
     # locales
     app.enabled_locales: [ 'en', 'fr' ]
 
@@ -29,13 +29,13 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Domain/*/Entity/'
             - '../src/Kernel.php'
-    
+
     Fixtures\:
         resource: '../fixtures/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    
+
     # Doctrine serializer
     serializer_doctrine:
         alias: serializer
@@ -45,8 +45,3 @@ services:
     App\Infrastructure\Service\GitHubService:
         arguments:
             $githubUsername: '%env(GITHUB_USERNAME)%'
-
-when@test:
-    parameters:
-        user.email: '%env(USER_EMAIL)%'
-        user.password: '%env(USER_PASSWORD)%'

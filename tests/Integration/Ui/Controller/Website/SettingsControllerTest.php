@@ -4,22 +4,26 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Ui\Controller\Website;
 
-use App\Domain\Enum\UserRoleEnum;
 use App\Infrastructure\Repository\SettingsRepository;
+use App\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\User\InMemoryUser;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Zenstruck\Browser\Test\HasBrowser;
+use Zenstruck\Foundry\Test\Factories;
 
 final class SettingsControllerTest extends WebTestCase
 {
+    use Factories;
     use HasBrowser;
 
     public function testItCanViewSettingsPage(): void
     {
+        $user = UserFactory::createOne();
+
+        self::ensureKernelShutdown();
+
         $translator = self::getContainer()->get(TranslatorInterface::class);
-        $user = $this->getUser();
 
         $this->browser()
             ->actingAs($user)
@@ -35,7 +39,9 @@ final class SettingsControllerTest extends WebTestCase
 
     public function testItCanUpdateSettings(): void
     {
-        $user = $this->getUser();
+        $user = UserFactory::createOne();
+
+        self::ensureKernelShutdown();
 
         $this->browser()
             ->actingAs($user)
@@ -55,8 +61,11 @@ final class SettingsControllerTest extends WebTestCase
 
     public function testItTriggerErrorsWithInvalidData(): void
     {
+        $user = UserFactory::createOne();
+
+        self::ensureKernelShutdown();
+
         $translator = self::getContainer()->get(TranslatorInterface::class);
-        $user = $this->getUser();
 
         $formatter = new \IntlDateFormatter(\Locale::getDefault(), \IntlDateFormatter::MEDIUM, \IntlDateFormatter::SHORT, 'UTC');
 
@@ -88,14 +97,5 @@ final class SettingsControllerTest extends WebTestCase
                 )
             )
         ;
-    }
-
-    private function getUser(): InMemoryUser
-    {
-        return new InMemoryUser(
-            username: 'user@example.com',
-            password: '$2y$13$.HTrY6My5GMKXPtBaAo4yuYxi3w2VvstIOWveXCwjbTusEGc6NR8m',
-            roles: [UserRoleEnum::User->value],
-        );
     }
 }
