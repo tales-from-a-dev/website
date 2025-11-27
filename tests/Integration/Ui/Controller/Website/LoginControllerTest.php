@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Ui\Controller\Website;
 
+use App\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Zenstruck\Browser\Test\HasBrowser;
+use Zenstruck\Foundry\Test\Factories;
 
 final class LoginControllerTest extends WebTestCase
 {
+    use Factories;
     use HasBrowser;
 
     public function testItCanViewLoginPage(): void
@@ -29,9 +32,13 @@ final class LoginControllerTest extends WebTestCase
 
     public function testItCanLogin(): void
     {
+        $user = UserFactory::createOne();
+
+        self::ensureKernelShutdown();
+
         $this->browser()
             ->visit('/login')
-            ->fillField('_email', 'user@example.com')
+            ->fillField('_email', $user->email)
             ->fillField('_password', 'password')
             ->click('submit')
             ->assertSuccessful()

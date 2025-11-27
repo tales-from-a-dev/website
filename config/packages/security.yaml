@@ -5,10 +5,10 @@ security:
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory:
-            memory:
-                users:
-                    '%env(USER_EMAIL)%': { password: '%env(USER_PASSWORD)%', roles: [ !php/enum App\Domain\Enum\UserRoleEnum::User->value ] }
+        app_user_provider:
+            entity:
+                class: App\Domain\Entity\User
+                property: 'email'
 
     firewalls:
         dev:
@@ -17,7 +17,7 @@ security:
 
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
 
             form_login:
                 username_parameter: _email
