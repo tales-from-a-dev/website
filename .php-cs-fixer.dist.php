@@ -2,16 +2,18 @@
 
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
-$finder = (new PhpCsFixer\Finder())
+$finder = new PhpCsFixer\Finder()
     ->in(__DIR__)
     ->exclude([
         'config/secrets',
-        'node_modules',
         'var',
+    ])
+    ->notPath([
+        'config/reference.php',
     ])
 ;
 
-return (new PhpCsFixer\Config())
+return new PhpCsFixer\Config()
     ->setParallelConfig(ParallelConfigFactory::detect())
     ->setRules([
         '@Symfony' => true,
