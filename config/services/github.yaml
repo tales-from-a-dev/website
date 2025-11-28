@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\GitHub\:
+        resource: '../../src/GitHub/*'
+        exclude:
+            # domain
+            - '../../src/GitHub/Domain/ValueObject'
+
+    # GitHub service
+    App\GitHub\Infrastructure\Service\GitHubService:
+        arguments:
+            $githubUsername: '%env(GITHUB_USERNAME)%'

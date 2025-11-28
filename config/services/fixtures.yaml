@@ -1,0 +1,10 @@
+when@dev: &dev
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        Fixtures\:
+            resource: '../../fixtures/*'
+            
+when@test: *dev

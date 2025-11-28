@@ -1,0 +1,15 @@
+parameters:
+    app.contact_email: '%env(CONTACT_EMAIL)%'
+    app.contact_phone: '%env(CONTACT_PHONE)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+        bind:
+            string $contactEmail: '%app.contact_email%'
+            string $contactPhone: '%app.contact_phone%'
+
+    App\Contact\:
+        resource: '../../src/Contact/*'

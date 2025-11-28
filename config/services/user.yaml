@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\User\:
+        resource: '../../src/User/*'
+        exclude:
+            # domain
+            - '../../src/User/Domain/Entity'
+
+            # test
+            - '../../src/User/Test'
