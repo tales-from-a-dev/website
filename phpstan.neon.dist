@@ -3,7 +3,7 @@ includes:
 
 parameters:
 	symfony:
-		containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+		containerXmlPath: var/cache/dev/App_Shared_Infrastructure_KernelDevDebugContainer.xml
 
 	doctrine:
 		objectManagerLoader: tests/object-manager.php

@@ -9,7 +9,7 @@ doctrine:
         profiling_collect_backtrace: '%kernel.debug%'
 
         types:
-            project_metadata: App\Infrastructure\Dbal\Types\ProjectMetadataType
+            project_metadata: App\Shared\Infrastructure\Dbal\Types\ProjectMetadataType
 
     orm:
         validate_xml_mapping: true
@@ -18,12 +18,21 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
-            App\Domain\Entity:
+            Experience:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Domain/Entity'
-                prefix: 'App\Domain\Entity'
-                alias: Domain
+                dir: '%kernel.project_dir%/src/Experience/Domain/Entity'
+                prefix: 'App\Experience\Domain\Entity'
+            Settings:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Settings/Domain/Entity'
+                prefix: 'App\Settings\Domain\Entity'
+            User:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/User/Domain/Entity'
+                prefix: 'App\User\Domain\Entity'
         controller_resolver:
             auto_mapping: false
 

@@ -4,4 +4,4 @@ parameters:
 			message: '#^Parameter \#2 \$array of function array_map expects array, array\<int, array\<string, array\<string, array\<int, array\<string, string\>\>\>\|int\|string\>\>\|null given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/Infrastructure/Service/GitHubService.php
+			path: src/GitHub/Infrastructure/Service/GitHubService.php
