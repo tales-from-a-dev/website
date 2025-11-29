@@ -15,6 +15,7 @@ final class SettingsDto
         #[Assert\NotNull]
         public ?bool $available = null,
 
+        #[Assert\NotBlank(allowNull: true)]
         #[Assert\GreaterThanOrEqual('today')]
         public ?\DateTimeInterface $availableAt = null,
 

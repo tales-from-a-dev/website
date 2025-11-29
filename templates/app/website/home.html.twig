@@ -126,6 +126,17 @@
 
                             {{- 'home.section.faq.dl.dd_1'|trans({available: available})|raw -}}
                         </twig:Faq:FaqDescription>
+                        {% if not settings.available and settings.availableAt %}
+                            {%- set availableAt -%}
+                                <twig:TextHighlight class="mx-0.5">
+                                    {{- settings.availableAt|format_date(pattern: 'MMMM Y') -}}
+                                </twig:TextHighlight>
+                            {%- endset -%}
+
+                            <twig:Faq:FaqDescription>
+                                {{- 'home.section.faq.dl.dd_1_available_at'|trans({available_at: availableAt})|raw -}}
+                            </twig:Faq:FaqDescription>
+                        {% endif %}
                     </twig:Faq:Faq>
                     <twig:Faq:Faq number="02">
                         <twig:Faq:FaqTitle>{{ 'home.section.faq.dl.dt_2'|trans }}</twig:Faq:FaqTitle>

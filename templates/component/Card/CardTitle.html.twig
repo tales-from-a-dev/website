@@ -1,3 +1,8 @@
+{%- set classes = html_classes(
+    'leading-none font-semibold',
+    attributes.render('class')|default(''),
+) -%}
+
 {#- Template -#}
 
 <div

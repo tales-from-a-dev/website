@@ -61,6 +61,7 @@ home:
                         yes {available}
                         other {unavailable}
                     }
+                dd_1_available_at: 'My next availability will be from {available_at}.'
                 dt_2: 'What are your rates?'
                 dd_2: 'My daily rate is around {daily_price}.'
                 dd_2_price: '{price} € / day'
@@ -83,7 +84,7 @@ login:
 logout:
     title: 'Logout'
 
-# settings                
+# settings
 settings:
     title: 'Settings'
 

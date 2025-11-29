@@ -29,7 +29,6 @@ final readonly class UpdateSettingsProcessor implements ProcessorInterface
     {
         Assert::isInstanceOf($data, SettingsDto::class);
         Assert::notNull($data->available);
-        Assert::notNull($data->availableAt);
         Assert::notNull($data->averageDailyRate);
 
         $previousData = $context['previous_data'] ?? null;

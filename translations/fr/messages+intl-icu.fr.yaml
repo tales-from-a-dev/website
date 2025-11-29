@@ -61,6 +61,7 @@ home:
                         yes {disponible}
                         other {indisponible}
                     }
+                dd_1_available_at: 'Ma prochaine disponibilité sera à partir de {available_at}.'
                 dt_2: 'Quels sont tes tarifs ?'
                 dd_2: 'Mon tarif journalier se situe aux alentours de {daily_price}.'
                 dd_2_price: '{price} € / jour'
@@ -74,16 +75,16 @@ home:
                     company: 'Société'
                     position: 'Poste'
                     year: 'Année'
-                    
+
 # login
 login:
     title: 'Connexion'
-    
+
 # logout
 logout:
     title: 'Déconnexion'
 
-# settings                
+# settings
 settings:
     title: 'Paramètres'
 
