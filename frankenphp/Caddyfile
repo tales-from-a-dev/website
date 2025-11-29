@@ -30,6 +30,12 @@
 	root /app/public
 	encode zstd br gzip
 
+	@assets {
+		file
+		path *.css *.js *.svg *.png *.jpg *.jpeg *.gif *.webp *.ico *.woff *.woff2 *.ttf *.otf *.eot
+	}
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+
 	mercure {
 		# Publisher JWT key
 		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
