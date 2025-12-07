@@ -14,8 +14,8 @@ final class CreateCommandTest extends KernelTestCase
 {
     public function testItSuccessfullyExecuteCommand(): void
     {
-        $kernel = self::bootKernel();
-        $application = new Application($kernel);
+        self::bootKernel();
+        $application = new Application(self::$kernel);
 
         $command = $application->find('app:user:create');
         $commandTester = new CommandTester($command);
@@ -35,8 +35,8 @@ final class CreateCommandTest extends KernelTestCase
 
     public function testItFailedExecuteCommandWithWeakPassword(): void
     {
-        $kernel = self::bootKernel();
-        $application = new Application($kernel);
+        self::bootKernel();
+        $application = new Application(self::$kernel);
 
         $command = $application->find('app:user:create');
         $commandTester = new CommandTester($command);
@@ -56,8 +56,8 @@ final class CreateCommandTest extends KernelTestCase
 
         self::ensureKernelShutdown();
 
-        $kernel = self::bootKernel();
-        $application = new Application($kernel);
+        self::bootKernel();
+        $application = new Application(self::$kernel);
 
         $command = $application->find('app:user:create');
         $commandTester = new CommandTester($command);
