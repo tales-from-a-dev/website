@@ -30,15 +30,9 @@ final readonly class GitHubService implements GitHubServiceInterface
     public function getPinnedRepositories(): array
     {
         try {
+            // Cannot use caching HttpClient because it does not support POST requests
             return $this->cache->get('github_pinned_repositories', function (ItemInterface $item): array {
                 $item->expiresAfter(60 * 60);
-
-                $response = $this->githubClient->request(Request::METHOD_POST, '/graphql', [
-                    'json' => [
-                        'query' => $this->getPinnedRepositoriesQuery(),
-                        'variables' => json_encode(['login' => $this->githubUsername], \JSON_THROW_ON_ERROR),
-                    ],
-                ]);
 
                 /** @var array{
                  *     data: array{
@@ -58,13 +52,21 @@ final readonly class GitHubService implements GitHubServiceInterface
                  *             }
                  *         }
                  *     }
-                 * } $json
+                 * } $data
                  */
-                $json = json_decode($response->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+                $data = $this->githubClient
+                    ->request(Request::METHOD_POST, '/graphql', [
+                        'json' => [
+                            'query' => $this->getPinnedRepositoriesQuery(),
+                            'variables' => json_encode(['login' => $this->githubUsername], \JSON_THROW_ON_ERROR),
+                        ],
+                    ])
+                    ->toArray()
+                ;
 
                 return array_map(
                     static fn (array $value): GitHubProject => GitHubProject::fromArray($value),
-                    $json['data']['user']['pinnedItems']['nodes']
+                    $data['data']['user']['pinnedItems']['nodes']
                 );
             });
         } catch (\Exception $exception) {
