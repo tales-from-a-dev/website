@@ -25,7 +25,7 @@ return [
         'version' => '3.2.2',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.20',
+        'version' => '8.0.21',
     ],
     'mini-svg-data-uri' => [
         'version' => '1.4.4',
