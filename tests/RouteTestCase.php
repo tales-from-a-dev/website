@@ -37,7 +37,7 @@ abstract class RouteTestCase extends WebTestCase
             $statusCode = $browser->getResponse()->getStatusCode();
             $routeName = $browser->getRequest()->attributes->get('_route', 'unknown');
 
-            static::assertLessThan(
+            $this->assertLessThan(
                 500,
                 $statusCode,
                 \sprintf('Request "%s %s" for %s route returned an internal error.', $method, $url, $routeName),
