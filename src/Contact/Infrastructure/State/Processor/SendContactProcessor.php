@@ -33,7 +33,7 @@ final readonly class SendContactProcessor implements ProcessorInterface
         try {
             $this->contactService->notify($data);
         } catch (\Exception $exception) {
-            $this->logger->error($exception->getMessage());
+            $this->logger->error($exception->getMessage(), $exception->getTrace());
 
             $success = false;
         } finally {
