@@ -6,12 +6,16 @@ namespace App\Tests\Integration\Contact\Ui\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Messenger\SendEmailMessage;
+use Symfony\Component\Notifier\Message\SmsMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Zenstruck\Browser\Test\HasBrowser;
+use Zenstruck\Messenger\Test\InteractsWithMessenger;
 
 final class ContactControllerTest extends WebTestCase
 {
     use HasBrowser;
+    use InteractsWithMessenger;
 
     public function testItCanViewContactPage(): void
     {
@@ -34,6 +38,27 @@ final class ContactControllerTest extends WebTestCase
             ->fillField('contact_content', 'Hello World')
             ->click('submit')
             ->assertSuccessful()
+        ;
+
+        $this->transport('async')
+            ->queue()
+                ->assertNotEmpty()
+                ->assertContains(SendEmailMessage::class, 1)
+                ->assertContains(SmsMessage::class, 1)
+            ->back()
+            ->process()
+            ->dispatched()
+                ->assertContains(SendEmailMessage::class, 1)
+                ->assertContains(SmsMessage::class, 1)
+            ->back()
+            ->acknowledged()
+                ->assertContains(SendEmailMessage::class, 1)
+                ->assertContains(SmsMessage::class, 1)
+            ->back()
+            ->rejected()
+                ->assertEmpty()
+            ->back()
+            ->reset()
         ;
     }
 

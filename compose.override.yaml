@@ -7,6 +7,7 @@ services:
       target: frankenphp_dev
     volumes:
       - ./:/app
+      - ./var:/app/var
       - ./frankenphp/Caddyfile:/etc/frankenphp/Caddyfile:ro
       - ./frankenphp/conf.d/20-app.dev.ini:/usr/local/etc/php/app.conf.d/20-app.dev.ini:ro
       # If you develop on Mac or Windows you can remove the vendor/ directory
@@ -21,6 +22,28 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
     tty: true
+
+  php-worker:
+    profiles:
+      - donotstart
+
+  php-worker-async:
+    extends:
+      file: compose.yaml
+      service: php-worker
+    image: ${IMAGES_PREFIX:-}app-php-worker-async
+    build:
+      context: .
+      target: frankenphp_dev
+    command: [ 'bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M' ]
+    volumes:
+      - ./:/app
+      - /app/var/
+    depends_on:
+      php:
+        condition: service_healthy
+      database:
+        condition: service_healthy
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
