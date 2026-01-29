@@ -58,7 +58,7 @@ jobs:
             SERVER_NAME="${{ secrets.SERVER_NAME }}" \
             APP_SECRET="${{ secrets.APP_SECRET }}" \
             CADDY_MERCURE_JWT_SECRET="${{ secrets.JWT_SECRET }}" \
-            docker compose -f compose.yaml -f compose.prod.yaml up --wait
+            docker compose -f compose.yaml -f compose.prod.yaml up --detach
           EOF
 
       - name: Delete SSH

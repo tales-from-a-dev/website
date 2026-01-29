@@ -60,7 +60,7 @@ jobs:
         run: >
           GITHUB_USERNAME=${{ secrets.GH_USERNAME }}
           GITHUB_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }}
-          docker compose up --wait --no-build
+          docker compose up --detach --no-build
 
       - name: Build assets
         run: make asset-build
