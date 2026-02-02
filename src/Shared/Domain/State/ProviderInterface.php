@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\State;
 
-use Symfony\Component\HttpFoundation\Request;
-
 /**
  * @template T of object
  */
 interface ProviderInterface
 {
     /**
-     * @param array<string, mixed>|array{request?: Request, entity?: string, pagination?: array{page?: int, itemsPerPage?: int}} $context
+     * @param array<string, mixed> $context
      *
      * @return T|null
      */

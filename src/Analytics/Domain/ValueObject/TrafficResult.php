@@ -8,11 +8,12 @@ final class TrafficResult
 {
     public function __construct(
         public int $score,
-        public string $path,
+        public string $url,
         public string $method,
+        public string $server,
         public string $ip,
         public string $userAgent,
-        public string $referer,
+        public ?string $referer = null,
         public bool $verifiedCrawler = false,
     ) {
     }

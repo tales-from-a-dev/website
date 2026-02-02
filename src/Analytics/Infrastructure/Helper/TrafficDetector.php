@@ -35,8 +35,8 @@ final class TrafficDetector
 
         // routes
         '/contact',
-        '/settings',
-        '/login',
+        '/logout',
+        '/dashboard',
         '/robots.txt',
     ];
 
@@ -235,11 +235,12 @@ final class TrafficDetector
     {
         return new TrafficResult(
             score: min($score, 10),
-            path: $request->getPathInfo(),
+            url: $request->getPathInfo(),
             method: $request->getMethod(),
+            server: $request->server->get('SERVER_NAME', ''),
             ip: IpUtils::anonymize($request->getClientIp() ?? ''),
             userAgent: $request->headers->get('User-Agent', ''),
-            referer: $request->headers->get('Referer', ''),
+            referer: $request->headers->get('Referer'),
         );
     }
 }

@@ -7,16 +7,14 @@ namespace App\Analytics\Infrastructure\State\Provider;
 use App\Analytics\Domain\Repository\PageViewRepositoryInterface;
 use App\Analytics\Domain\ValueObject\Dataset;
 use App\Shared\Domain\State\ProviderInterface;
-use App\Shared\Infrastructure\Helper\DateHelper;
 
 /**
  * @implements ProviderInterface<Dataset>
  */
-final readonly class VisitsPerMonthProvider implements ProviderInterface
+final readonly class VisitsPerDayProvider implements ProviderInterface
 {
     public function __construct(
         private PageViewRepositoryInterface $pageViewRepository,
-        private DateHelper $dateHelper,
     ) {
     }
 
@@ -24,27 +22,28 @@ final readonly class VisitsPerMonthProvider implements ProviderInterface
     {
         $date = $context['date'] ?? new \DateTime('today');
 
-        $visitsPerMonth = $this->pageViewRepository->countByMonth(
+        $visitsPerDay = $this->pageViewRepository->countByDay(
+            month: $date->format('m'),
             year: $date->format('Y'),
         );
 
-        $labels = $this->dateHelper->getMonths();
-        $data = array_fill_keys(array_keys($labels), null);
+        $labels = range(1, (int) $date->format('t'));
+        $data = array_fill_keys($labels, null);
 
-        foreach ($visitsPerMonth as $visit) {
+        foreach ($visitsPerDay as $visit) {
             $timestamp = strtotime($visit['period']);
             if (false === $timestamp) {
                 continue;
             }
 
-            $monthNumber = (int) date('n', $timestamp);
-            if (\array_key_exists($monthNumber, $data)) {
-                $data[$monthNumber] = $visit['count'];
+            $dayNumber = (int) date('j', $timestamp);
+            if (\array_key_exists($dayNumber, $data)) {
+                $data[$dayNumber] = $visit['count'];
             }
         }
 
         return new Dataset(
-            labels: array_values(array_map(ucfirst(...), $labels)),
+            labels: $labels,
             data: array_values($data),
         );
     }

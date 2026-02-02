@@ -43,7 +43,7 @@ final class TrafficDetectorTest extends TestCase
         $result = $this->trafficDetector->detect($request);
 
         $this->assertEquals(0, $result->score);
-        $this->assertEquals('/home', $result->path);
+        $this->assertEquals('/home', $result->url);
         $this->assertEquals('GET', $result->method);
         $this->assertEquals('1.1.1.0', $result->ip); // Anonymized
     }

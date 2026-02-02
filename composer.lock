@@ -8,21 +8,20 @@
     "packages": [
         {
             "name": "async-aws/core",
-            "version": "1.28.0",
+            "version": "1.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/async-aws/core.git",
-                "reference": "0d5f4d650b74a8366bca1fb400b6cfb694c3b217"
+                "reference": "e8b02ac30b17afaf1352cbd352dceb789d792d39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/async-aws/core/zipball/0d5f4d650b74a8366bca1fb400b6cfb694c3b217",
-                "reference": "0d5f4d650b74a8366bca1fb400b6cfb694c3b217",
+                "url": "https://api.github.com/repos/async-aws/core/zipball/e8b02ac30b17afaf1352cbd352dceb789d792d39",
+                "reference": "e8b02ac30b17afaf1352cbd352dceb789d792d39",
                 "shasum": ""
             },
             "require": {
                 "ext-hash": "*",
-                "ext-json": "*",
                 "ext-simplexml": "*",
                 "php": "^8.2",
                 "psr/cache": "^1.0 || ^2.0 || ^3.0",
@@ -65,7 +64,7 @@
                 "sts"
             ],
             "support": {
-                "source": "https://github.com/async-aws/core/tree/1.28.0"
+                "source": "https://github.com/async-aws/core/tree/1.28.1"
             },
             "funding": [
                 {
@@ -77,25 +76,24 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-16T22:28:05+00:00"
+            "time": "2026-02-16T10:24:54+00:00"
         },
         {
             "name": "async-aws/ses",
-            "version": "1.14.0",
+            "version": "1.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/async-aws/ses.git",
-                "reference": "c5b1d6c0c8ba32ea4f961b40b9e411aeca783302"
+                "reference": "8ba4c7f5bbb4d1055f3ebedcf0ea1b8b79393e5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/async-aws/ses/zipball/c5b1d6c0c8ba32ea4f961b40b9e411aeca783302",
-                "reference": "c5b1d6c0c8ba32ea4f961b40b9e411aeca783302",
+                "url": "https://api.github.com/repos/async-aws/ses/zipball/8ba4c7f5bbb4d1055f3ebedcf0ea1b8b79393e5b",
+                "reference": "8ba4c7f5bbb4d1055f3ebedcf0ea1b8b79393e5b",
                 "shasum": ""
             },
             "require": {
                 "async-aws/core": "^1.9",
-                "ext-json": "*",
                 "php": "^8.2"
             },
             "require-dev": {
@@ -127,7 +125,7 @@
                 "ses"
             ],
             "support": {
-                "source": "https://github.com/async-aws/ses/tree/1.14.0"
+                "source": "https://github.com/async-aws/ses/tree/1.14.1"
             },
             "funding": [
                 {
@@ -139,7 +137,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-16T22:28:05+00:00"
+            "time": "2026-02-16T10:24:54+00:00"
         },
         {
             "name": "composer/semver",
@@ -9635,16 +9633,16 @@
         },
         {
             "name": "tales-from-a-dev/tailwind-merge-php",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tales-from-a-dev/tailwind-merge-php.git",
-                "reference": "dbf99fb623411a4db549fe8aac44a9ed350edd51"
+                "reference": "0ecc60f2c2a877fe9555779bd289af70163ccc3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/tailwind-merge-php/zipball/dbf99fb623411a4db549fe8aac44a9ed350edd51",
-                "reference": "dbf99fb623411a4db549fe8aac44a9ed350edd51",
+                "url": "https://api.github.com/repos/tales-from-a-dev/tailwind-merge-php/zipball/0ecc60f2c2a877fe9555779bd289af70163ccc3e",
+                "reference": "0ecc60f2c2a877fe9555779bd289af70163ccc3e",
                 "shasum": ""
             },
             "require": {
@@ -9687,9 +9685,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tales-from-a-dev/tailwind-merge-php/issues",
-                "source": "https://github.com/tales-from-a-dev/tailwind-merge-php/tree/v0.1.0"
+                "source": "https://github.com/tales-from-a-dev/tailwind-merge-php/tree/v0.1.1"
             },
-            "time": "2025-11-20T17:56:36+00:00"
+            "time": "2026-02-16T10:54:42+00:00"
         },
         {
             "name": "tales-from-a-dev/twig-tailwind-extra",
@@ -10173,16 +10171,16 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "ce6a2f100c404b2d32a1dd1270f9b59ad4f57649"
+                "reference": "6976757ba8dd70bf8cbaea0914ad84d8b51a9f46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/ce6a2f100c404b2d32a1dd1270f9b59ad4f57649",
-                "reference": "ce6a2f100c404b2d32a1dd1270f9b59ad4f57649",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/6976757ba8dd70bf8cbaea0914ad84d8b51a9f46",
+                "reference": "6976757ba8dd70bf8cbaea0914ad84d8b51a9f46",
                 "shasum": ""
             },
             "require": {
@@ -10229,9 +10227,9 @@
             ],
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/2.1.2"
+                "source": "https://github.com/webmozarts/assert/tree/2.1.3"
             },
-            "time": "2026-01-13T14:02:24+00:00"
+            "time": "2026-02-13T21:01:40+00:00"
         }
     ],
     "packages-dev": [
@@ -11926,16 +11924,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.5.11",
+            "version": "12.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9b518cb40f9474572c9f0178e96ff3dc1cf02bf1"
+                "reference": "418e06b3b46b0d54bad749ff4907fc7dfb530199"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9b518cb40f9474572c9f0178e96ff3dc1cf02bf1",
-                "reference": "9b518cb40f9474572c9f0178e96ff3dc1cf02bf1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/418e06b3b46b0d54bad749ff4907fc7dfb530199",
+                "reference": "418e06b3b46b0d54bad749ff4907fc7dfb530199",
                 "shasum": ""
             },
             "require": {
@@ -12004,7 +12002,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.11"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.12"
             },
             "funding": [
                 {
@@ -12028,7 +12026,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-10T12:32:02+00:00"
+            "time": "2026-02-16T08:34:36+00:00"
         },
         {
             "name": "pierstoval/smoke-testing",

@@ -60,6 +60,7 @@ dashboard:
             description: 'Résumé des visites sur le site.'
             chart:
                 monthly: 'Visites mensuelles'
+                daily: 'Visites quotidiennes'
 
     experience:
         index:
@@ -75,6 +76,7 @@ dashboard:
     shared:
         index:
             title:
+                meta: 'Dashboard'
                 page: 'Accueil'
 
     settings:
