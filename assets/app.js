@@ -6,4 +6,4 @@
  */
 import './styles/app.css';
 
-import './bootstrap.js';
+import './stimulus_bootstrap.js';

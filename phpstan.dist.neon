@@ -8,7 +8,11 @@ parameters:
 	doctrine:
 		objectManagerLoader: tests/object-manager.php
 
+	scanDirectories:
+	    - var/cache/dev/Symfony/Config
+
 	scanFiles:
+		- vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php
 		- vendor/twig/twig/src/Extension/CoreExtension.php
 
 	paths:

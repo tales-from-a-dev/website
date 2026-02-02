@@ -20,7 +20,7 @@ final class ProjectMetadataTest extends KernelTestCase
     #[\Override]
     protected function setUp(): void
     {
-        $this->platform = $this->createMock(AbstractPlatform::class);
+        $this->platform = $this->createStub(AbstractPlatform::class);
         $this->type = new ProjectMetadataType();
     }
 
