@@ -236,19 +236,19 @@ linter: ## Twig / Yaml & check DB mapping
 ##
 test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
 	@$(eval f ?=)
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --testdox $(f)
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --no-coverage --testdox $(f)
 .PHONY: test
 
 test-unit: ## Run all unit tests
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --testsuite unit --testdox
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --no-coverage --testsuite unit --testdox
 .PHONY: test-unit
 
 test-functional: ## Run all functional tests
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --testsuite functional --testdox
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --no-coverage --testsuite functional --testdox
 .PHONY: test-functional
 
 test-integration: ## Run all integration tests
-	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --testsuite integration --testdox
+	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --no-coverage --testsuite integration --testdox
 .PHONY: test-integration
 
 coverage: ## Run tests with code coverage

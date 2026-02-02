@@ -10,6 +10,8 @@
          bootstrap="tests/bootstrap.php"
          testdox="true"
          cacheDirectory=".phpunit.cache"
+         displayDetailsOnPhpunitDeprecations="true"
+         displayDetailsOnPhpunitNotices="true"
 >
     <php>
         <ini name="display_errors" value="1"/>
@@ -48,24 +50,19 @@
         </include>
 
         <deprecationTrigger>
+            <method>Doctrine\Deprecations\Deprecation::trigger</method>
+            <method>Doctrine\Deprecations\Deprecation::delegateTriggerToBackend</method>
             <function>trigger_deprecation</function>
         </deprecationTrigger>
     </source>
 
-    <!-- Run `composer require symfony/panther` before enabling this extension -->
     <extensions>
         <bootstrap class="Symfony\Bridge\PhpUnit\SymfonyExtension">
             <parameter name="clock-mock-namespaces" value="App"/>
             <parameter name="dns-mock-namespaces" value="App"/>
         </bootstrap>
-        <!--
-            <bootstrap class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-        -->
         <bootstrap class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
         <bootstrap class="Zenstruck\Browser\Test\BrowserExtension"/>
         <bootstrap class="Zenstruck\Foundry\PHPUnit\FoundryExtension" />
-        <!--
-            <bootstrap class="Symfony\Component\Panther\ServerExtension" />
-        -->
     </extensions>
 </phpunit>
