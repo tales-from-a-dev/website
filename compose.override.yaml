@@ -54,6 +54,12 @@ services:
       - "5432"
 ###< doctrine/doctrine-bundle ###
 
+###> symfony/cache ###
+  cache:
+    ports:
+      - "6379"
+###< symfony/cache ###
+
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit

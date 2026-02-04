@@ -47,6 +47,9 @@ stop: ## Stop the docker hub
 	@$(DOCKER_COMP) stop
 .PHONY: stop
 
+restart: stop up ## Restart the docker hub in detached mode (no logs)
+.PHONY: restart
+
 down: ## Stop the docker hub and remove all containers, networks, volumes, and images
 	@$(DOCKER_COMP) down --remove-orphans
 .PHONY: down

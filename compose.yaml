@@ -69,6 +69,7 @@ services:
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
+###> symfony/cache ###
   cache:
     image: valkey/valkey:${VALKEY_VERSION:-9.0}-alpine
     restart: unless-stopped
@@ -77,8 +78,9 @@ services:
       timeout: 5s
       retries: 5
       start_period: 60s
-    ports:
-      - "6379"
+    volumes:
+      - cache_data:/data
+###< symfony/cache ###
 
 volumes:
   caddy_data:
@@ -89,3 +91,7 @@ volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
+
+###> symfony/cache ###
+  cache_data:
+###< symfony/cache ###

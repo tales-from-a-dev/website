@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Analytics\:
+        resource: '../../src/Analytics/*'
+
+    App\Analytics\Infrastructure\Logger\Processor\TrafficProcessor:
+        tags:
+            - { name: monolog.processor, handler: traffic }

@@ -27,8 +27,3 @@ services:
     serializer_doctrine:
         alias: serializer
         public: true
-
-    # add Monolog processors
-    Symfony\Bridge\Monolog\Processor\WebProcessor:
-        tags:
-            - { name: monolog.processor, handler: visit }

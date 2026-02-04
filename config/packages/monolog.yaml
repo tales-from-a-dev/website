@@ -3,12 +3,12 @@ monolog:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
 
     handlers:
-        visit:
-            type: stream
-            path: "%kernel.logs_dir%/visit.log"
+        traffic:
+            type: rotating_file
+            path: "%kernel.logs_dir%/traffic.log"
             level: info
             channels: [ "request" ]
-            buffer_size: 50
+            max_files: 10
 
 when@dev:
     monolog:
