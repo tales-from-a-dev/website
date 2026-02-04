@@ -355,6 +355,36 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     enable_static_query_cache?: bool|Param, // Default: true
  *     connection_keys?: list<mixed>,
  * }
+ * @psalm-type DbToolsConfig = array{
+ *     anonymization?: array<string, mixed>,
+ *     anonymization_files?: array<string, scalar|Param|null>,
+ *     anonymizer_paths?: list<scalar|Param|null>,
+ *     backup_binary?: scalar|Param|null, // Default: null
+ *     backup_excluded_tables?: list<scalar|Param|null>,
+ *     backup_expiration_age?: scalar|Param|null,
+ *     backup_options?: scalar|Param|null, // Default: null
+ *     backup_timeout?: scalar|Param|null,
+ *     restore_binary?: scalar|Param|null, // Default: null
+ *     restore_options?: scalar|Param|null, // Default: null
+ *     restore_timeout?: scalar|Param|null,
+ *     storage_directory?: scalar|Param|null, // Default: null
+ *     storage_filename_strategy?: scalar|Param|null, // Default: null
+ *     connections?: array<string, string|array{ // Default: []
+ *         url?: scalar|Param|null, // Default: null
+ *         backup_binary?: scalar|Param|null, // Default: null
+ *         backup_excluded_tables?: list<scalar|Param|null>,
+ *         backup_expiration_age?: scalar|Param|null,
+ *         backup_options?: scalar|Param|null, // Default: null
+ *         backup_timeout?: scalar|Param|null,
+ *         restore_binary?: scalar|Param|null, // Default: null
+ *         restore_options?: scalar|Param|null, // Default: null
+ *         restore_timeout?: scalar|Param|null,
+ *         storage_directory?: scalar|Param|null, // Default: null
+ *         storage_filename_strategy?: scalar|Param|null, // Default: null
+ *     }>,
+ *     workdir?: scalar|Param|null, // Directory path all other files will be relative to, if none provided then the configuration file directory will be used instead. // Default: null
+ *     default_connection?: scalar|Param|null, // Default connection name. If none provided, first one is used instead. // Default: null
+ * }
  * @psalm-type AntispamConfig = array{
  *     passive?: bool|Param, // Global default for whether included components should cause hard failures // Default: false
  *     stealth?: bool|Param, // Global default for whether included components issue verbose or stealthy error messages // Default: false
@@ -739,7 +769,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     scheduler?: bool|array{ // Scheduler configuration
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *     },
  *     disallow_search_engine_index?: bool|Param, // Enabled by default when debug is enabled. // Default: true
  *     http_client?: bool|array{ // HTTP Client configuration
@@ -1639,6 +1669,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     doctrine?: DoctrineConfig,
  *     doctrine_migrations?: DoctrineMigrationsConfig,
  *     elao_enum?: ElaoEnumConfig,
+ *     db_tools?: DbToolsConfig,
  *     antispam?: AntispamConfig,
  *     framework?: FrameworkConfig,
  *     monolog?: MonologConfig,
@@ -1658,6 +1689,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
  *         elao_enum?: ElaoEnumConfig,
+ *         db_tools?: DbToolsConfig,
  *         antispam?: AntispamConfig,
  *         debug?: DebugConfig,
  *         framework?: FrameworkConfig,
@@ -1682,6 +1714,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
  *         elao_enum?: ElaoEnumConfig,
+ *         db_tools?: DbToolsConfig,
  *         antispam?: AntispamConfig,
  *         framework?: FrameworkConfig,
  *         monolog?: MonologConfig,
@@ -1703,6 +1736,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         doctrine_migrations?: DoctrineMigrationsConfig,
  *         elao_enum?: ElaoEnumConfig,
  *         dama_doctrine_test?: DamaDoctrineTestConfig,
+ *         db_tools?: DbToolsConfig,
  *         antispam?: AntispamConfig,
  *         framework?: FrameworkConfig,
  *         monolog?: MonologConfig,
