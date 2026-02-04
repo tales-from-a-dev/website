@@ -35,7 +35,7 @@ services:
     build:
       context: .
       target: frankenphp_dev
-    command: [ 'bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M' ]
+    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', 'async', 'failed' ]
     volumes:
       - ./:/app
       - /app/var/
