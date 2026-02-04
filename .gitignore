@@ -1,3 +1,7 @@
+###> tales-from-a-dev/website ###
+/.junie/
+###< tales-from-a-dev/website ###
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
