@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ba382f66d6a865343717d237643b274",
+    "content-hash": "33046755e626f6ff395c6fa5e22c956f",
     "packages": [
         {
             "name": "async-aws/core",
@@ -1820,6 +1820,154 @@
                 }
             ],
             "time": "2022-12-11T20:36:23+00:00"
+        },
+        {
+            "name": "makinacorpus/db-tools-bundle",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/makinacorpus/DbToolsBundle.git",
+                "reference": "391ee40906778a022f0d43d6e8c1374dd1a3d156"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/makinacorpus/DbToolsBundle/zipball/391ee40906778a022f0d43d6e8c1374dd1a3d156",
+                "reference": "391ee40906778a022f0d43d6e8c1374dd1a3d156",
+                "shasum": ""
+            },
+            "require": {
+                "makinacorpus/query-builder": "^1.6.2",
+                "php": ">=8.1",
+                "psr/log": "^3.0",
+                "symfony/config": "^6.0|^7.0",
+                "symfony/console": "^6.0|^7.0",
+                "symfony/filesystem": "^6.0|^7.0",
+                "symfony/finder": "^6.0|^7.0",
+                "symfony/options-resolver": "^6.0|^7.0",
+                "symfony/process": "^6.0|^7.0",
+                "symfony/yaml": "^6.0|^7.0"
+            },
+            "conflict": {
+                "composer/pcre": "<3.1|>=4.0",
+                "doctrine/dbal": "<3.0|>=5.0",
+                "doctrine/orm": "<2.15|>=4.0",
+                "seld/phar-utils": "<1.2|>=2.0",
+                "symfony/password-hasher": "<6.0|>=8.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^2.10.0",
+                "doctrine/orm": "^2.15|^3.0",
+                "friendsofphp/php-cs-fixer": "^3.34",
+                "laravel/framework": "^10.0|^11.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.4",
+                "symfony/dependency-injection": "^6.0|^7.0",
+                "symfony/framework-bundle": "^6.0|^7.0",
+                "symfony/password-hasher": "^6.0|^7.0",
+                "symfony/validator": "^6.3|^7.0"
+            },
+            "suggest": {
+                "db-tools-bundle/pack-faker": "FakerPHP/Faker bridge anonyzer pack",
+                "db-tools-bundle/pack-fr-fr": "French anonymizers pack",
+                "symfony/password-hasher": "In order to use the password hash anonymizer"
+            },
+            "bin": [
+                "bin/db-tools"
+            ],
+            "type": "symfony-bundle",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MakinaCorpus\\DbToolsBundle\\Bridge\\Laravel\\DbToolsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MakinaCorpus\\DbToolsBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Makina Corpus",
+                    "homepage": "http://makina-corpus.com"
+                }
+            ],
+            "description": "A set of Symfony commands to dump/restore/anonymize database",
+            "support": {
+                "issues": "https://github.com/makinacorpus/DbToolsBundle/issues",
+                "source": "https://github.com/makinacorpus/DbToolsBundle/tree/2.0.3"
+            },
+            "time": "2025-04-09T08:48:47+00:00"
+        },
+        {
+            "name": "makinacorpus/query-builder",
+            "version": "1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/makinacorpus/php-query-builder.git",
+                "reference": "997e768515305fc62d90a470e55d3864cd3984f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/makinacorpus/php-query-builder/zipball/997e768515305fc62d90a470e55d3864cd3984f1",
+                "reference": "997e768515305fc62d90a470e55d3864cd3984f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/polyfill-php83": "^1.33"
+            },
+            "conflict": {
+                "doctrine/dbal": "<3.7"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^3.7|^4.0",
+                "friendsofphp/php-cs-fixer": "^3.40",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.5.60",
+                "ramsey/uuid": ">=3.9.2",
+                "symfony/uid": ">=6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MakinaCorpus\\QueryBuilder\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre RINEAU",
+                    "email": "pierre.rineau@processus.org"
+                },
+                {
+                    "name": "Makina Corpus",
+                    "email": "pierre.rineau@processus.org"
+                }
+            ],
+            "description": "Driver agnostic SQL query builder.",
+            "homepage": "http://github.com/makinacorpus/php-query-builder",
+            "keywords": [
+                "mysql",
+                "postgresql",
+                "query-builder",
+                "sql",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/makinacorpus/php-query-builder/issues",
+                "source": "https://github.com/makinacorpus/php-query-builder/tree/1.7.1"
+            },
+            "time": "2026-01-23T08:46:37+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7119,6 +7267,91 @@
                 }
             ],
             "time": "2025-12-05T14:04:53+00:00"
+        },
+        {
+            "name": "symfony/scheduler",
+            "version": "v7.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/scheduler.git",
+                "reference": "caa4688dd72c0d22d52ddd45315eb602ff97a42b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/scheduler/zipball/caa4688dd72c0d22d52ddd45315eb602ff97a42b",
+                "reference": "caa4688dd72c0d22d52ddd45315eb602ff97a42b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/clock": "^6.4|^7.0|^8.0"
+            },
+            "require-dev": {
+                "dragonmantank/cron-expression": "^3.1",
+                "symfony/cache": "^6.4|^7.0|^8.0",
+                "symfony/console": "^6.4|^7.0|^8.0",
+                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+                "symfony/event-dispatcher": "^6.4|^7.0|^8.0",
+                "symfony/lock": "^6.4|^7.0|^8.0",
+                "symfony/messenger": "^6.4|^7.0|^8.0",
+                "symfony/serializer": "^6.4|^7.1|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Scheduler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Rabochiy",
+                    "email": "upyx.00@gmail.com"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides scheduling through Symfony Messenger",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "cron",
+                "schedule",
+                "scheduler"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/scheduler/tree/v7.4.4"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-01-19T10:50:45+00:00"
         },
         {
             "name": "symfony/security-bundle",

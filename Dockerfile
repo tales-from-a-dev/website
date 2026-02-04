@@ -20,6 +20,7 @@ VOLUME /app/var/
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	file \
 	git \
+	postgresql-client \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \

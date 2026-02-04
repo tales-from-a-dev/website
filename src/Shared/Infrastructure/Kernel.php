@@ -22,6 +22,11 @@ class Kernel extends BaseKernel
         ProjectMetadataType::setSerializer($this->getContainer()->get('serializer_doctrine'));
     }
 
+    public function getShareDir(): string
+    {
+        return $this->getProjectDir().'/var/share/'.$this->environment;
+    }
+
     protected function configureContainer(ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder): void
     {
         $configDir = $this->getConfigDir();

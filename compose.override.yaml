@@ -27,18 +27,36 @@ services:
     profiles:
       - donotstart
 
-  php-worker-async:
+  php-consumer:
     extends:
       file: compose.yaml
       service: php-worker
-    image: ${IMAGES_PREFIX:-}app-php-worker-async
+    image: ${IMAGES_PREFIX:-}app-php-consumer
     build:
       context: .
       target: frankenphp_dev
-    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', 'async', 'failed' ]
+    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', '-vvv', 'async', 'failed' ]
     volumes:
       - ./:/app
       - /app/var/
+    depends_on:
+      php:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+
+  php-scheduler:
+    extends:
+      file: compose.yaml
+      service: php-worker
+    image: ${IMAGES_PREFIX:-}app-php-scheduler
+    build:
+      context: .
+      target: frankenphp_dev
+    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', '-vvv', 'scheduler_default' ]
+    volumes:
+      - ./:/app
+      - ./var/share:/app/var/share
     depends_on:
       php:
         condition: service_healthy

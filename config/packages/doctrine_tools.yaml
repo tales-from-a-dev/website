@@ -1,0 +1,4 @@
+db_tools:
+    storage_directory: '%kernel.share_dir%/database/backup'
+    storage_filename_strategy: default
+    backup_expiration_age: '1 week ago' # default '3 months ago'
