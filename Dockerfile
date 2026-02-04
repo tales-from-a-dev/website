@@ -28,6 +28,7 @@ RUN set -eux; \
 		apcu \
 		intl \
 		opcache \
+        redis \
         xml \
 		zip \
 	;

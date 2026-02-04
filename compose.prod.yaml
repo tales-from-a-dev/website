@@ -17,7 +17,6 @@ services:
       - donotstart
 
   php-worker-async:
-    scale: 2
     extends:
       file: compose.yaml
       service: php-worker
@@ -25,9 +24,15 @@ services:
     build:
       context: .
       target: frankenphp_prod
-    command: [ 'bin/console', 'messenger:consume', 'async', '-vv', '--time-limit=60', '--limit=10', '--memory-limit=128M' ]
+    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', 'async', 'failed' ]
     depends_on:
       php:
         condition: service_healthy
       database:
         condition: service_healthy
+
+###> doctrine/doctrine-bundle ###
+  database:
+    volumes:
+      - ./docker/db/data:/var/lib/postgresql/data:rw
+###< doctrine/doctrine-bundle ###
