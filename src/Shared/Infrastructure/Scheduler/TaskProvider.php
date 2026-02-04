@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Scheduler;
 
+use App\Analytics\Application\Message\ProcessDailyTrafficMessage;
 use Symfony\Component\Console\Messenger\RunCommandMessage;
 use Symfony\Component\Scheduler\Attribute\AsSchedule;
 use Symfony\Component\Scheduler\RecurringMessage;
@@ -29,6 +30,11 @@ final readonly class TaskProvider implements ScheduleProviderInterface
                     frequency: '1 day',
                     message: new RunCommandMessage('db-tools:backup --quiet'),
                     from: '02:07',
+                ),
+                RecurringMessage::every(
+                    frequency: '1 day',
+                    message: new ProcessDailyTrafficMessage(),
+                    from: '01:13',
                 )
             )
         ;

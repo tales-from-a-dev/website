@@ -20,6 +20,7 @@ services:
     App\Shared\:
         resource: '../../src/Shared/*'
         exclude:
+            - '../../src/Shared/Domain/Entity'
             - '../../src/Shared/Domain/ValueObject'
             - '../../src/Shared/Infrastructure/Kernel.php'
 
