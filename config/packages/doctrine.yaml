@@ -18,6 +18,11 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
+            Analytics:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Analytics/Domain'
+                prefix: 'App\Analytics\Domain'
             Experience:
                 type: attribute
                 is_bundle: false
@@ -28,6 +33,11 @@ doctrine:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Settings/Domain/Entity'
                 prefix: 'App\Settings\Domain\Entity'
+            Shared:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Shared/Domain'
+                prefix: 'App\Shared\Domain'
             User:
                 type: attribute
                 is_bundle: false

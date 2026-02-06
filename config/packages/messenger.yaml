@@ -1,5 +1,14 @@
 framework:
     messenger:
+        buses:
+            messenger.bus.default:
+                middleware:
+                    - doctrine_ping_connection
+                    - router_context
+                    - validation
+                    - doctrine_close_connection
+                    - doctrine_transaction
+
         # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
         failure_transport: failed
 

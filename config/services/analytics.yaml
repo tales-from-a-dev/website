@@ -5,6 +5,10 @@ services:
 
     App\Analytics\:
         resource: '../../src/Analytics/*'
+        exclude:
+            # domain
+            - '../../src/Analytics/Domain/Entity'
+            - '../../src/Analytics/Domain/ValueObject'
 
     App\Analytics\Infrastructure\Logger\Processor\TrafficProcessor:
         tags:
