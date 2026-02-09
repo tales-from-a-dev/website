@@ -1,7 +1,13 @@
+{%- set classes = html_classes(
+    'flex flex-col gap-4',
+    attributes.render('class')|default(''),
+) -%}
+
 {#- Template -#}
 
 <div
     data-slot="section-header"
+    class="{{ classes|tailwind_merge }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

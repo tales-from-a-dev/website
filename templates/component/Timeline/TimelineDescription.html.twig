@@ -1,14 +1,14 @@
 {%- set classes = html_classes(
-    'font-normal text-muted-foreground text-base',
+    'text-muted-foreground text-sm leading-normal',
     attributes.render('class')|default(''),
 ) -%}
 
 {#- Template -#}
 
-<p
-    data-slot="section-description"
+<div
+    data-slot="timeline-description"
     class="{{ classes|tailwind_merge }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}
-</p>
+</div>

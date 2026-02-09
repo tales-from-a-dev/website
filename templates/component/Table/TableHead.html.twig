@@ -1,7 +1,7 @@
 {%- props align = 'left' -%}
 
-{%- set ctx = html_cva(
-    base: 'px-2 py-8 text-gray-400 align-middle font-medium uppercase whitespace-nowrap',
+{%- set style = html_cva(
+    base: 'px-2 py-8 text-muted-foreground align-middle font-medium uppercase whitespace-nowrap',
     variants: {
         align: {
             left: 'text-left',
@@ -16,7 +16,7 @@
 <th
     data-slot="table-head"
     scope="col"
-    class="{{ ctx.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

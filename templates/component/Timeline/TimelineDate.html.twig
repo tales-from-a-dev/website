@@ -1,12 +1,12 @@
 {%- set classes = html_classes(
-    'flex flex-col gap-6 py-6 rounded-md bg-gray-50',
+    'relative pl-12 lg:pl-0 lg:pr-20 lg:pt-6',
     attributes.render('class')|default(''),
 ) -%}
 
 {#- Template -#}
 
 <div
-    data-slot="card"
+    data-slot="timeline-date"
     class="{{ classes|tailwind_merge }}"
     {{ attributes }}
 >

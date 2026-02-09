@@ -1,6 +1,6 @@
 {%- props align = 'left' -%}
 
-{%- set ctx = html_cva(
+{%- set style = html_cva(
     base: 'px-2 py-8 align-middle whitespace-nowrap',
     variants: {
         align: {
@@ -15,7 +15,7 @@
 
 <td
     data-slot="table-cell"
-    class="{{ ctx.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

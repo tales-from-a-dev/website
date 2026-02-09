@@ -7,7 +7,7 @@
     {{ attributes }}
 >
     {{ form_start(form) }}
-        <twig:Card:Card>
+        <twig:Card size="lg">
             <twig:Card:CardHeader>
                 <twig:Card:CardDescription>
                     {{ 'home.section.contact.text'|trans }}
@@ -15,12 +15,12 @@
             </twig:Card:CardHeader>
             <twig:Card:CardContent class="grid gap-4">
                 {% for alert in app.flashes('alert') %}
-                    <twig:Alert:Alert :variant="alert.status.value">
-                        <twig:Ux:Icon :name="alert.status.icon"/>
+                    <twig:Alert :variant="alert.status.value">
+                        <twig:Ux:Icon :name="alert.status.icon" />
                         <twig:Alert:AlertTitle>
                             {{ alert.message|trans }}
                         </twig:Alert:AlertTitle>
-                    </twig:Alert:Alert>
+                    </twig:Alert>
                 {% endfor %}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {{ form_row(form.fullName) }}
@@ -34,6 +34,6 @@
                     {{ 'button.send'|trans(domain: 'form') }}
                 </twig:Button>
             </twig:Card:CardFooter>
-        </twig:Card:Card>
+        </twig:Card>
     {{ form_end(form) }}
 </div>

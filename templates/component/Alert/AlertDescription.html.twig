@@ -1,12 +1,12 @@
 {%- set classes = html_classes(
-    'px-4 group-data-[size=sm]/card:px-3 group-data-[size=lg]/card:px-6',
+    'text-muted-foreground text-sm text-balance md:text-pretty [&_p:not(:last-child)]:mb-4 [&_a]:hover:text-foreground [&_a]:underline [&_a]:underline-offset-3',
     attributes.render('class')|default(''),
 ) -%}
 
 {#- Template -#}
 
 <div
-    data-slot="card-content"
+    data-slot="alert-description"
     class="{{ classes|tailwind_merge }}"
     {{ attributes }}
 >
