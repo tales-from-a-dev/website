@@ -1,0 +1,8 @@
+dashboard_user_controllers:
+    resource:
+        path: ../../src/User/Ui/Controller/Dashboard
+        namespace: App\User\Ui\Controller\Dashboard
+    type: attribute
+    prefix: '/dashboard'
+    name_prefix: app_dashboard_user_
+    trailing_slash_on_root: false

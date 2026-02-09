@@ -24,7 +24,7 @@ final class ContactControllerTest extends WebTestCase
         $this->browser()
             ->visit('/contact')
             ->assertSuccessful()
-            ->assertSeeIn('[data-slot=card-description]', $translator->trans('home.section.contact.text'))
+            ->assertSeeIn('[data-slot=card-description]', $translator->trans('website.index.section.contact.text'))
         ;
     }
 

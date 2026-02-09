@@ -1,0 +1,25 @@
+# btn
+btn:
+    add: 'Add'
+    login: 'Login'
+    save: 'Save'
+    send: 'Send'
+    logout: 'Logout'
+
+# label
+label:
+    available: 'Available'
+    available_at: 'Next availability'
+    average_daily_rate: 'Average daily rate'
+    company: 'Company'
+    content: 'Content'
+    email: 'Email'
+    full_name: 'Name'
+    password: 'Password'
+
+# placeholder
+placeholder:
+    contact:
+        name: 'First & last name'
+        email: 'Email'
+        content: 'Description of your project'

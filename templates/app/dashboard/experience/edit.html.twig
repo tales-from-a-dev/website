@@ -1,0 +1,23 @@
+{% extends 'app/base_dashboard.html.twig' %}
+
+{% block meta_title %}
+    {{ 'dashboard.experience.edit.title.page'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    {{ form_start(form) }}
+    <twig:Card size="lg">
+        <twig:Card:CardHeader>
+            <twig:Card:CardTitle>{{ 'dashboard.experience.edit.title.page'|trans }}</twig:Card:CardTitle>
+        </twig:Card:CardHeader>
+        <twig:Card:CardContent>
+            {{ form(form) }}
+        </twig:Card:CardContent>
+        <twig:Card:CardFooter>
+            <twig:Button size="lg" name="submit" type="submit">
+                {{ 'btn.save'|trans({}, 'forms') }}
+            </twig:Button>
+        </twig:Card:CardFooter>
+    </twig:Card>
+    {{ form_end(form) }}
+{% endblock %}

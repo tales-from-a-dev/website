@@ -35,64 +35,52 @@ error:
             other {Ola mon brave !}
         }
 
-# home
-home:
-    title: 'Romain Monteil - Senior Back-end Developer'
-    section:
-        about:
-            surtitle: 'Romain Monteil'
-            title: 'Senior Back-end Developer'
-            subtitle: "A passionate developer with 15 years' experience, I work mainly on {php} with {symfony}."
-        github:
-            title: 'Github Projects'
-            subtitle: "Here are some of the projects I have created and am currently maintaining"
-        contact:
-            title: 'Contact Me'
-            subtitle: "Please do not hesitate to contact me for a quotation."
-            text: 'So that I can best respond to your request and correctly assess the workload, please give as much detail as possible about the project. This will also enable me to give you an initial estimate as close as possible to the final quote.'
-        faq:
-            title: 'Faq'
-            subtitle: 'Frequently asked questions'
-            dl:
-                dt_1: "What's your availability?"
-                dd_1: "I am currently {available}."
-                dd_1_available: >-
-                    {available, select,
-                        yes {available}
-                        other {unavailable}
-                    }
-                dd_1_available_at: 'My next availability will be from {available_at}.'
-                dt_2: 'What are your rates?'
-                dd_2: 'My daily rate is around {daily_price}.'
-                dd_2_price: '{price} € / day'
-                dt_3: 'Do you work on site?'
-                dd_3: "I do all my work remotely."
-        experience:
-            title: 'Experiences'
-            subtitle: 'A summary of my professional experience'
-            table:
-                col:
-                    company: 'Company'
-                    position: 'Position'
-                    year: 'Year'
+# website
+website:
+    index:
+        title: 'Romain Monteil - Senior Back-end Developer'
+        section:
+            about:
+                surtitle: 'Romain Monteil'
+                title: 'Senior Back-end Developer'
+                subtitle: "A passionate developer with 15 years' experience, I work mainly on {php} with {symfony}."
+            open_source:
+                title: 'Open Source'
+                subtitle: "Here are some of the projects I have created and am currently maintaining"
+            contact:
+                title: 'Contact Me'
+                subtitle: "Please do not hesitate to contact me for a quotation."
+                text: 'So that I can best respond to your request and correctly assess the workload, please give as much detail as possible about the project. This will also enable me to give you an initial estimate as close as possible to the final quote.'
+            faq:
+                title: 'Faq'
+                subtitle: 'Frequently asked questions'
+                dl:
+                    dt_1: "What's your availability?"
+                    dd_1: "I am currently {available}."
+                    dd_1_available: >-
+                        {available, select,
+                            yes {available}
+                            other {unavailable}
+                        }
+                    dd_1_available_at: 'My next availability will be from {available_at}.'
+                    dt_2: 'What are your rates?'
+                    dd_2: 'My daily rate is around {daily_price}.'
+                    dd_2_price: '{price} € / day'
+                    dt_3: 'Do you work on site?'
+                    dd_3: "I do all my work remotely."
+            experience:
+                title: 'Experiences'
+                subtitle: 'A summary of my professional experience'
 
-# login
-login:
-    title: 'Login'
+    # contact
+    contact:
+        text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
+        title: 'Me contacter'
+
+    # footer
+    footer:
+        copyright: '© {year} Romain Monteil. All rights reserved.'
 
 # logout
 logout:
     title: 'Logout'
-
-# settings
-settings:
-    title: 'Settings'
-
-# contact
-contact:
-    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
-    title: 'Me contacter'
-
-# footer
-footer:
-    copyright: '© {year} Romain Monteil. All rights reserved.'

@@ -1,13 +1,13 @@
 {%- props variant = 'yellow' -%}
 
 {%- set ctx = html_cva(
-    base: 'relative inline-block font-semibold z-10 before:absolute before:-z-10 before:-inset-1 before:-skew-y-3',
+    base: 'relative inline-block font-semibold z-10 before:absolute before:-z-10 before:-inset-1 before:-skew-y-3 before:rounded-md',
     variants: {
         variant: {
-            yellow: 'before:bg-[#eab308] text-white',
+            yellow: 'before:bg-jade-4 text-white',
             purple: 'before:bg-[#4f5b93] text-white',
             black: 'before:bg-primary text-primary-foreground',
-            red: 'before:bg-destructive text-primary-foreground',
+            red: 'before:bg-jade-6 text-primary-foreground',
         },
     },
 ) -%}

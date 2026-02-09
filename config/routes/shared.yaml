@@ -1,0 +1,17 @@
+dashboard_shared_controllers:
+    resource:
+        path: ../../src/Shared/Ui/Controller/Dashboard
+        namespace: App\Shared\Ui\Controller\Dashboard
+    type: attribute
+    prefix: '/dashboard'
+    name_prefix: app_dashboard_shared_
+    trailing_slash_on_root: false
+
+website_shared_controllers:
+    resource:
+        path: ../../src/Shared/Ui/Controller/Website
+        namespace: App\Shared\Ui\Controller\Website
+    type: attribute
+    prefix: '/'
+    name_prefix: app_website_shared_
+    trailing_slash_on_root: false

@@ -33,7 +33,8 @@ final class SettingsType extends AbstractType
             ->add('averageDailyRate', NumberType::class, [
                 'label' => 'label.average_daily_rate',
                 'html5' => true,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -41,9 +42,10 @@ final class SettingsType extends AbstractType
         $resolver->setDefaults([
             'data_class' => SettingsDto::class,
             'empty_data' => new SettingsDto(),
-            'translation_domain' => 'form',
+            'translation_domain' => 'forms',
             'attr' => [
-                'class' => 'w-full',
+                'data-slot' => 'field-group',
+                'class' => 'group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4',
             ],
         ]);
     }

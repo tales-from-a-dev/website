@@ -1,0 +1,17 @@
+{% extends 'app/base.html.twig' %}
+
+{% block meta_title %}
+    {{ 'dashboard.user.login.title.page'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+        <twig:Form:LoginForm
+            class="w-full max-w-sm"
+            :lastUsername="last_username"
+            :lastError="last_error"
+        />
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

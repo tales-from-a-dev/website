@@ -1,0 +1,35 @@
+{% extends 'app/base.html.twig' %}
+
+{% block body_attributes %}class="flex flex-col min-h-screen bg-sidebar"{% endblock %}
+
+{% block body %}
+    {% block main %}{% endblock %}
+
+    {% block footer %}
+        <footer class="bg-jade-1">
+            <div class="container max-w-(--breakpoint-xl) mx-auto px-6 py-16 flex flex-col md:flex-row items-center md:justify-between">
+                <div class="flex items-center justify-center space-x-4 md:order-2">
+                    <a href="https://github.com/ker0x" target="_blank" class="text-primary-foreground hover:text-primary-foreground/90">
+                        <span class="sr-only">Github</span>
+                        <twig:Ux:Icon name="simple-icons:github" class="size-6" />
+                    </a>
+                    <a href="https://bsky.app/profile/ker0x.bsky.social" target="_blank" class="text-primary-foreground hover:text-primary-foreground/90">
+                        <span class="sr-only">Bluesky</span>
+                        <twig:Ux:Icon name="simple-icons:bluesky" class="size-6" />
+                    </a>
+                    <a href="https://x.com/ker0x" target="_blank" class="text-primary-foreground hover:text-primary-foreground/90">
+                        <span class="sr-only">X</span>
+                        <twig:Ux:Icon name="simple-icons:x" class="size-6" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/romain-monteil/" target="_blank" class="text-primary-foreground hover:text-primary-foreground/90">
+                        <span class="sr-only">Linkedin</span>
+                        <twig:Ux:Icon name="simple-icons:linkedin" class="size-6" />
+                    </a>
+                </div>
+                <p class="mt-8 text-sm/6 text-primary-foreground md:order-1 md:mt-0">
+                    {{ 'website.footer.copyright'|trans({year: 'now'|date('Y')}) }}
+                </p>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}

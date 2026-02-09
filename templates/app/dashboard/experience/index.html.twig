@@ -1,0 +1,49 @@
+{% extends 'app/base_dashboard.html.twig' %}
+
+{% block meta_title %}
+    {{ 'dashboard.experience.index.title.page'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    {%- if experiences is not empty -%}
+        <twig:Card size="lg">
+            <twig:Card:CardHeader>
+                <twig:Card:CardTitle>{{ 'dashboard.experience.index.title.page'|trans }}</twig:Card:CardTitle>
+                <twig:Card:CardAction class="self-center">
+                    <twig:Button href="{{ path('app_dashboard_experience_new') }}" size="lg">
+                        <twig:Ux:Icon name="lucide:circle-plus" data-icon="inline-end" />
+                        {{ 'btn.add'|trans({}, 'forms') }}
+                    </twig:Button>
+                </twig:Card:CardAction>
+            </twig:Card:CardHeader>
+            <twig:Card:CardContent>
+                <twig:Table variant="outline">
+                    <twig:Table:TableHeader class="bg-muted">
+                        <twig:Table:TableRow>
+                            <twig:Table:TableHead>{{ 'common.col.company'|trans }}</twig:Table:TableHead>
+                            <twig:Table:TableHead>{{ 'common.col.experience_position'|trans }}</twig:Table:TableHead>
+                            <twig:Table:TableHead>{{ 'common.col.period'|trans }}</twig:Table:TableHead>
+                            <twig:Table:TableHead />
+                        </twig:Table:TableRow>
+                    </twig:Table:TableHeader>
+                    <twig:Table:TableBody>
+                        {% for experience in experiences %}
+                            <twig:Table:TableRow>
+                                <twig:Table:TableCell>
+                                    <a href="{{ path('app_dashboard_experience_edit', {id: experience.id}) }}" class="focus:outline-hidden">
+                                        <span class="absolute inset-0" aria-hidden="true"></span>
+                                        {{ experience.company }}
+                                        <span class="font-normal text-sm text-muted-foreground">/ {{ experience.type|trans }}</span>
+                                    </a>
+                                </twig:Table:TableCell>
+                                <twig:Table:TableCell>{{ experience.position|trans }}</twig:Table:TableCell>
+                                <twig:Table:TableCell>{{ experience.startAt|format_date(pattern: 'MMM Y') }} - {{ experience?.endAt|format_date(pattern: 'MMM Y') }}</twig:Table:TableCell>
+                                <twig:Table:TableCell></twig:Table:TableCell>
+                            </twig:Table:TableRow>
+                        {% endfor %}
+                    </twig:Table:TableBody>
+                </twig:Table>
+            </twig:Card:CardContent>
+        </twig:Card>
+    {%- endif -%}
+{% endblock %}

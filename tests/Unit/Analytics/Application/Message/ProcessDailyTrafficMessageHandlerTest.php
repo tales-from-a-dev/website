@@ -251,8 +251,7 @@ final class ProcessDailyTrafficMessageHandlerTest extends TestCase
             '/_wdt/123',
             '/_profiler/abc',
             '/contact',
-            '/settings',
-            '/login',
+            '/dashboard',
             '/robots.txt',
         ];
 

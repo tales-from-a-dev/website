@@ -1,0 +1,31 @@
+# btn
+btn:
+    add: 'Ajouter'
+    login: 'Se connecter'
+    save: 'Enregistrer'
+    send: 'Envoyer'
+    logout: 'Deconnexion'
+
+# label
+label:
+    available: 'Disponible'
+    available_at: 'Prochaine disponibilité'
+    average_daily_rate: 'Taux journalier moyen'
+    company: 'Société'
+    content: 'Contenu'
+    description: 'Description'
+    email: 'Email'
+    experience_type: 'Type'
+    experience_position: 'Poste'
+    full_name: 'Nom & Prénom'
+    password: 'Mot de passe'
+    start_at: 'Date de début'
+    end_at: 'Date de fin'
+    technologies: 'Technologies'
+
+# placeholder
+placeholder:
+    contact:
+        name: 'Nom & prénom'
+        email: 'Email'
+        content: 'Description de votre projet'

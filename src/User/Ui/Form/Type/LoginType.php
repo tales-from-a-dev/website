@@ -32,7 +32,7 @@ final class LoginType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'translation_domain' => 'form',
+            'translation_domain' => 'forms',
             'csrf_token_id' => 'authenticate',
             'csrf_field_name' => '_csrf_token',
             'attr' => [

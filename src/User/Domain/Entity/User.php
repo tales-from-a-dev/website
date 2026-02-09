@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[Orm\Table(name: '`user`')]
 #[Orm\Entity(repositoryClass: UserRepository::class)]
 #[Orm\UniqueConstraint(columns: ['email'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     #[Orm\Id]
     #[Orm\GeneratedValue]
@@ -39,6 +39,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
             return array_unique($roles);
         }
+    }
+
+    public function __toString(): string
+    {
+        return $this->getUserIdentifier();
     }
 
     /**

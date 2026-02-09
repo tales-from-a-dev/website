@@ -4,6 +4,17 @@ app:
         description: 'Développeur back-end senior freelance à Limoges. Je développe des applications PHP sur les frameworks Symfony et Laravel.'
         title: 'Tales from a Dev'
 
+# common
+common:
+    col:
+        company: 'Société'
+        experience_position: 'Poste'
+        ip: 'IP'
+        method: 'Méthode'
+        period: 'Période'
+        url: 'Url'
+        visited_at: 'Visité le'
+
 # enum
 enum:
     project_type:
@@ -35,64 +46,90 @@ error:
             other {Ola mon brave !}
         }
 
-# home
-home:
-    title: 'Romain Monteil - Développeur Back-end Senior'
-    section:
-        about:
-            surtitle: 'Romain Monteil'
-            title: 'Développeur Back-end Senior'
-            subtitle: "Développeur passionné avec 15 ans d'expériences, je travaille principalement sur {php} avec {symfony}"
-        github:
-            title: 'Projets Github'
-            subtitle: "Voici quelques-uns des projets que j'ai créés et que je maintiens actuellement"
-        contact:
-            title: 'Me contacter'
-            subtitle: "N'hésitez pas à me contacter pour toute demande de devis."
-            text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
-        faq:
-            title: 'Faq'
-            subtitle: 'Quelques questions fréquentes'
-            dl:
-                dt_1: 'Quels sont tes disponibilités ?'
-                dd_1: 'Je suis actuellement {available}.'
-                dd_1_available: >-
-                    {available, select,
-                        yes {disponible}
-                        other {indisponible}
-                    }
-                dd_1_available_at: 'Ma prochaine disponibilité sera à partir de {available_at}.'
-                dt_2: 'Quels sont tes tarifs ?'
-                dd_2: 'Mon tarif journalier se situe aux alentours de {daily_price}.'
-                dd_2_price: '{price} € / jour'
-                dt_3: 'Te deplaces-tu en mission chez le client ?'
-                dd_3: "J'effectue l'ensemble de mes missions à distance."
-        experience:
-            title: 'Expériences'
-            subtitle: 'Un résumé des mes expériences professionnelles'
-            table:
-                col:
-                    company: 'Société'
-                    position: 'Poste'
-                    year: 'Année'
+# dashboard
+dashboard:
+    sidebar:
+        group:
+            dashboard: 'Tableau de bord'
+            other: 'Autre'
 
-# login
-login:
-    title: 'Connexion'
+    analytics:
+        index:
+            title:
+                page: 'Statistiques'
+            description: 'Résumé des visites sur le site.'
+            chart:
+                monthly: 'Visites mensuelles'
 
-# logout
-logout:
-    title: 'Déconnexion'
+    experience:
+        index:
+            title:
+                page: 'Expériences professionnelles'
+        new:
+            title:
+                page: 'Ajouter une expérience professionnelle'
+        edit:
+            title:
+                page: 'Modifier une expérience professionnelle'
 
-# settings
-settings:
-    title: 'Paramètres'
+    shared:
+        index:
+            title:
+                page: 'Accueil'
 
-# contact
-contact:
-    text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
-    title: 'Me contacter'
+    settings:
+        index:
+            title:
+                page: 'Paramètres'
+            description: 'Mettre à jour mes disponibilités et mon TJM.'
 
-# footer
-footer:
-    copyright: '© {year} Romain Monteil. Tous droits réservés.'
+    user:
+        login:
+            title:
+                page: 'Connexion'
+
+# website
+website:
+    index:
+        title: 'Romain Monteil - Développeur Back-end Senior'
+        section:
+            about:
+                surtitle: 'Romain Monteil'
+                title: 'Développeur Back-end Senior'
+                subtitle: "Développeur passionné avec 15 ans d'expériences, je travaille principalement sur {php} avec {symfony}"
+            open_source:
+                title: 'Open Source'
+                subtitle: "Voici quelques-uns des projets que j'ai créés et que je maintiens actuellement"
+            contact:
+                title: 'Me contacter'
+                subtitle: "N'hésitez pas à me contacter pour toute demande de devis."
+                text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
+            faq:
+                title: 'Faq'
+                subtitle: 'Quelques questions fréquentes'
+                dl:
+                    dt_1: 'Quels sont tes disponibilités ?'
+                    dd_1: 'Je suis actuellement {available}.'
+                    dd_1_available: >-
+                        {available, select,
+                            yes {disponible}
+                            other {indisponible}
+                        }
+                    dd_1_available_at: 'Ma prochaine disponibilité sera à partir de {available_at}.'
+                    dt_2: 'Quels sont tes tarifs ?'
+                    dd_2: 'Mon tarif journalier se situe aux alentours de {daily_price}.'
+                    dd_2_price: '{price} € / jour'
+                    dt_3: 'Te deplaces-tu en mission chez le client ?'
+                    dd_3: "J'effectue l'ensemble de mes missions à distance."
+            experience:
+                title: 'Expériences'
+                subtitle: 'Un résumé des mes expériences professionnelles'
+
+    # contact
+    contact:
+        text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
+        title: 'Me contacter'
+
+    # footer
+    footer:
+        copyright: '© {year} Romain Monteil. Tous droits réservés.'

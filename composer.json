@@ -47,6 +47,7 @@
         "symfony/translation": "7.4.*",
         "symfony/twig-bundle": "7.4.*",
         "symfony/uid": "7.4.*",
+        "symfony/ux-chartjs": "^2.32",
         "symfony/ux-icons": "^2.23",
         "symfony/ux-turbo": "^2.23",
         "symfony/ux-twig-component": "^2.23",
@@ -58,7 +59,7 @@
         "twig/extra-bundle": "^3.22",
         "twig/html-extra": "^3.22",
         "twig/intl-extra": "^3.22",
-        "twig/markdown-extra": "^3.22",
+        "twig/markdown-extra": "^3.23",
         "twig/string-extra": "^3.22",
         "twig/twig": "^3.22"
     },

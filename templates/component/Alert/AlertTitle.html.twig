@@ -1,8 +1,14 @@
+{%- set classes = html_classes(
+    'font-medium group-has-[>svg]/alert:col-start-2 [&_a]:hover:text-foreground [&_a]:underline [&_a]:underline-offset-3',
+    attributes.render('class')|default(''),
+) -%}
+
 {#- Template -#}
 
-<h3
+<div
     data-slot="alert-title"
-    {{ attributes.defaults({class: 'col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight'}) }}
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
 >
     {% block content %}{% endblock %}
-</h3>
+</div>

@@ -6,5 +6,5 @@ namespace App\Settings\Domain\Enum;
 
 enum SettingsRouteNameEnum: string
 {
-    case WebsiteSettings = 'app_settings_index';
+    case DashboardSettings = 'app_dashboard_settings_index';
 }

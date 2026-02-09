@@ -5,20 +5,22 @@
 {% endblock %}
 
 {% block body %}
-    <div class="h-dvh container max-w-screen-xl mx-auto flex flex-col items-center justify-center px-4 md:px-8 lg:px-16">
-        <p class="font-medium text-gray-600 text-lg md:text-2xl uppercase mb-8">{{- status_code -}}</p>
-        <h1 class="font-normal text-gray-900 text-4xl md:text-7xl leading-none mb-8">
+    <div class="flex flex-col min-h-svh w-full items-center justify-center p-6 md:p-10">
+        <p class="font-medium text-muted-foreground text-lg md:text-2xl uppercase mb-8">{{- status_code -}}</p>
+        <h1 class="font-normal text-4xl md:text-7xl leading-none mb-8">
             {{- 'error.title'|trans({status_code: status_code}) -}}
         </h1>
-        <p class="font-normal text-gray-600 text-md md:text-xl leading-loose mb-16">
+        <p class="font-normal text-muted-foreground text-md md:text-xl leading-loose mb-16">
             {{- 'error.text'|trans({status_code: status_code, status_text: status_text}) -}}
         </p>
-        <a
-            class="px-7 py-3 md:px-9 md:py-4 font-medium md:font-semibold bg-gray-900 text-white shadow-xs hover:bg-gray-900/90 text-sm rounded-md transition ease-linear duration-500"
-            href="{{ path('app_shared_home') }}"
+        <twig:Button
+            size="lg"
+            href="{{ path('app_website_shared_index') }}"
+            class="h-12 px-7 py-3 md:px-9 md:py-4"
         >
+            <twig:Ux:Icon name="lucide:move-left" />
             {{- 'error.back'|trans -}}
-        </a>
+        </twig:Button>
     </div>
 {% endblock %}
 

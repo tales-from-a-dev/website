@@ -8,3 +8,6 @@ services:
         exclude:
             # domain
             - '../../src/Experience/Domain/Entity'
+
+            # test
+            - '../../src/Experience/Test'

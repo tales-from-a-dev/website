@@ -1,0 +1,8 @@
+dashboard_experience_controllers:
+    resource:
+        path: ../../src/Experience/Ui/Controller/Dashboard
+        namespace: App\Experience\Ui\Controller\Dashboard
+    type: attribute
+    prefix: '/dashboard/experience'
+    name_prefix: app_dashboard_experience_
+    trailing_slash_on_root: false

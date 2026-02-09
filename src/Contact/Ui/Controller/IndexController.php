@@ -54,7 +54,7 @@ final class IndexController extends AbstractController
                 ]);
             }
 
-            return $this->redirectToRoute(route: SharedRouteNameEnum::WebsiteHome->value, status: Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(route: SharedRouteNameEnum::WebsiteIndex->value, status: Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderBlock('app/website/contact.html.twig', 'new', [
