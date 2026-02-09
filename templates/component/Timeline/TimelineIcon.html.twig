@@ -1,12 +1,12 @@
 {%- set classes = html_classes(
-    'px-4 group-data-[size=sm]/card:px-3 group-data-[size=lg]/card:px-6',
+    'absolute -top-1 left-0 size-9 -translate-x-1/2 rounded-full bg-[#eab308] text-primary-foreground flex items-center justify-center lg:top-4 lg:left-[calc(100%-(--spacing(8)))]',
     attributes.render('class')|default(''),
 ) -%}
 
 {#- Template -#}
 
 <div
-    data-slot="card-content"
+    data-slot="timeline-icon"
     class="{{ classes|tailwind_merge }}"
     {{ attributes }}
 >

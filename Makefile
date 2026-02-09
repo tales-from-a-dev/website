@@ -176,7 +176,7 @@ db-seed: ## Seed the database
 .PHONY: db-seed
 
 db-update: ## Force database update
-	@$(SYMFONY) doctrine:schema:update --complete --force
+	@$(SYMFONY) doctrine:schema:update --force
 .PHONY: db-update
 
 db-validate: ## Check the ORM mapping
@@ -186,7 +186,7 @@ db-validate: ## Check the ORM mapping
 db-test: ## Create test database
 	@$(SYMFONY) --env=test doctrine:database:drop --if-exists --force
 	@$(SYMFONY) --env=test doctrine:database:create --if-not-exists
-	@$(SYMFONY) --env=test doctrine:schema:update --complete --force
+	@$(SYMFONY) --env=test doctrine:migration:migrate -n
 	@$(SYMFONY) --env=test app:database:seed
 .PHONY: db-test
 
@@ -239,6 +239,8 @@ linter: ## Twig / Yaml & check DB mapping
 ##
 test: ## Run tests with code coverage or pass the parameter "f=" to test a specific file, example: make test f=tests/Unit/Entity/ProjectTest.php
 	@$(eval f ?=)
+	@$(SYMFONY) cache:clear -e test
+	@$(SYMFONY) cache:warmup -e test
 	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --no-coverage --testdox $(f)
 .PHONY: test
 
@@ -251,9 +253,13 @@ test-functional: ## Run all functional tests
 .PHONY: test-functional
 
 test-integration: ## Run all integration tests
+	@$(SYMFONY) cache:clear -e test
+	@$(SYMFONY) cache:warmup -e test
 	@$(DOCKER_COMP) exec -e XDEBUG_MODE=off -e APP_ENV=test php ./vendor/bin/phpunit --no-coverage --testsuite integration --testdox
 .PHONY: test-integration
 
 coverage: ## Run tests with code coverage
+	@$(SYMFONY) cache:clear -e test
+	@$(SYMFONY) cache:warmup -e test
 	@$(DOCKER_COMP) exec -e XDEBUG_MODE=coverage -e APP_ENV=test php ./vendor/bin/phpunit
 .PHONY: coverage

@@ -3,35 +3,37 @@
     {{ attributes.defaults({class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}) }}
 >
     {% for project in this.projects %}
-        <twig:Card:Card class="group relative justify-between">
-            <twig:Card:CardHeader>
-                <twig:Card:CardTitle class="text-gray-700 text-lg">
+        <twig:Card size="lg" class="relative justify-between">
+            <twig:Card:CardHeader class="items-center">
+                <twig:Card:CardTitle class="text-lg">
                     <h4>{{ project.name }}</h4>
                 </twig:Card:CardTitle>
                 <twig:Card:CardAction>
-                    <a class="text-gray-300 group-hover:text-gray-400"
-                       href="{{ project.url }}"
-                       target="_blank"
-                       title="{{ project.name }}"
+                    <twig:Button
+                        variant="muted"
+                        size="icon"
+                        href="{{ project.url }}"
+                        target="_blank"
+                        title="{{ project.name }}"
                     >
                         <span class="absolute inset-0" aria-hidden="true"></span>
-                        <twig:Ux:Icon name="tabler:arrow-up-right" class="size-6" />
-                    </a>
+                        <twig:Ux:Icon name="lucide:arrow-up-right" class="size-6 transition-transform group-hover/button:-translate-y-1/4 group-hover/button:translate-x-1/4" />
+                    </twig:Button>
                 </twig:Card:CardAction>
             </twig:Card:CardHeader>
-            <twig:Card:CardContent class="font-normal text-gray-500 text-md">
-                <p>{{ project.description }}</p>
+            <twig:Card:CardContent>
+                <twig:Card:CardDescription class="font-normal text-base">{{ project.description }}</twig:Card:CardDescription>
             </twig:Card:CardContent>
-            <twig:Card:CardFooter class="gap-4 text-gray-500">
-                <div class="inline-flex items-center gap-x-1.5">
-                    <twig:Ux:Icon name="tabler:star" class="size-5" />
+            <twig:Card:CardFooter class="gap-4 *:inline-flex *:items-center *:gap-x-1.5">
+                <twig:Card:CardDescription>
+                    <twig:Ux:Icon name="lucide:star" class="size-5" />
                     {{ project.stargazerCount }}
-                </div>
-                <div class="inline-flex items-center gap-x-1.5">
-                    <twig:Ux:Icon name="tabler:git-fork" class="size-5" />
+                </twig:Card:CardDescription>
+                <twig:Card:CardDescription>
+                    <twig:Ux:Icon name="lucide:git-fork" class="size-5" />
                     {{ project.forkCount }}
-                </div>
+                </twig:Card:CardDescription>
             </twig:Card:CardFooter>
-        </twig:Card:Card>
+        </twig:Card>
     {% endfor %}
 </div>

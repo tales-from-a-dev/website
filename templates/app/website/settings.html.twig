@@ -7,7 +7,7 @@
 {% block body %}
     <div class="w-full max-w-sm mx-auto flex justify-center py-4 md:py-6">
         {{ form_start(form) }}
-            <twig:Card:Card class="w-full max-w-sm">
+            <twig:Card variant="outline" size="lg" class="w-full max-w-md">
                 <twig:Card:CardHeader>
                     <twig:Card:CardTitle class="text-xl">
                         {{ 'settings.title'|trans }}
@@ -19,18 +19,18 @@
                             title="{{ 'logout.title'|trans }}"
                             data-turbo="false"
                         >
-                            <twig:Ux:Icon name="tabler:logout" class="size-5"/>
+                            <twig:Ux:Icon name="lucide:log-out" class="size-5"/>
                         </a>
                     </twig:Card:CardAction>
                 </twig:Card:CardHeader>
                 <twig:Card:CardContent class="grid gap-4">
                     {% for alert in app.flashes('alert') %}
-                        <twig:Alert:Alert :variant="alert.status.value">
-                            <twig:Ux:Icon name="tabler:circle-check"/>
+                        <twig:Alert :variant="alert.status.value">
+                            <twig:Ux:Icon :name="alert.status.icon" />
                             <twig:Alert:AlertTitle>
                                 {{ alert.message|trans(domain: 'alert') }}
                             </twig:Alert:AlertTitle>
-                        </twig:Alert:Alert>
+                        </twig:Alert>
                     {% endfor %}
                     {{ form_rest(form) }}
                 </twig:Card:CardContent>
@@ -39,7 +39,7 @@
                         {{ 'button.save'|trans(domain: 'form') }}
                     </twig:Button>
                 </twig:Card:CardFooter>
-            </twig:Card:Card>
+            </twig:Card>
         {{ form_end(form) }}
     </div>
 {% endblock %}

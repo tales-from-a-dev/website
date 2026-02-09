@@ -5,7 +5,7 @@
     {{ attributes }}
 >
     {{ form_start(form) }}
-        <twig:Card:Card>
+        <twig:Card variant="outline" size="lg">
             <twig:Card:CardHeader>
                 <twig:Card:CardTitle class="text-xl">
                     {{ 'login.title'|trans }}
@@ -13,20 +13,25 @@
             </twig:Card:CardHeader>
             <twig:Card:CardContent class="grid gap-4">
                 {%- if last_error -%}
-                    <twig:Alert:Alert variant="error">
-                        <twig:Ux:Icon name="tabler:exclamation-circle" />
+                    <twig:Alert variant="error">
+                        <twig:Ux:Icon name="lucide:circle-alert" />
                         <twig:Alert:AlertTitle>
                             {{ last_error.messageKey|trans(last_error.messageData, 'security') }}
                         </twig:Alert:AlertTitle>
-                    </twig:Alert:Alert>
+                    </twig:Alert>
                 {%- endif -%}
                 {{ form_rest(form) }}
             </twig:Card:CardContent>
             <twig:Card:CardFooter>
-                <twig:Button name="submit" type="submit" class="w-full">
+                <twig:Button
+                    size="lg"
+                    name="submit"
+                    type="submit"
+                    class="w-full"
+                >
                     {{ 'button.login'|trans(domain: 'form') }}
                 </twig:Button>
             </twig:Card:CardFooter>
-        </twig:Card:Card>
+        </twig:Card>
     {{ form_end(form) }}
 </div>

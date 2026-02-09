@@ -1,0 +1,28 @@
+{%- props variant = 'default', size = 'default', -%}
+
+{%- set style = html_cva(
+    base: 'bg-card text-card-foreground overflow-hidden rounded-md text-sm ring-1 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-md *:[img:last-child]:rounded-b-md group/card flex flex-col',
+    variants: {
+        variant: {
+            default: 'ring-card',
+            outline: 'ring-foreground/10',
+        },
+        size: {
+            default: 'gap-4 py-4',
+            lg: 'gap-6 py-6',
+            sm: 'gap-3 py-3',
+        },
+    },
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="card"
+    data-variant="{{ variant }}"
+    data-size="{{ size }}"
+    class="{{ style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</div>
