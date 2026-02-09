@@ -33,4 +33,11 @@ return [
     '@stimulus-components/scroll-to' => [
         'version' => '5.0.1',
     ],
+    'inter-ui' => [
+        'version' => '4.1.1',
+    ],
+    'inter-ui/inter.min.css' => [
+        'version' => '4.1.1',
+        'type' => 'css',
+    ],
 ];

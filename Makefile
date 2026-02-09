@@ -129,7 +129,7 @@ asset-build: ## Build assets
 .PHONY: asset-build
 
 asset-watch: ## Watch and build assets
-	@$(SYMFONY) tailwind:build --watch --poll
+	@$(SYMFONY) tailwind:build --watch
 .PHONY: asset-watch
 
 asset-outdated: ## List outdated JavaScript packages and their latest versions
