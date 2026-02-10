@@ -17,13 +17,14 @@ VOLUME /app/var/
 
 # persistent / runtime deps
 # hadolint ignore=DL3008
-RUN apt-get update && apt-get install -y --no-install-recommends \
-	file \
-	git \
-	postgresql-client \
-	&& rm -rf /var/lib/apt/lists/*
-
 RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        file \
+        git \
+        postgresql-client \
+    ; \
+    rm -rf /var/lib/apt/lists/*; \
 	install-php-extensions \
 		@composer \
 		apcu \
@@ -51,7 +52,7 @@ COPY --link frankenphp/Caddyfile /etc/frankenphp/Caddyfile
 
 ENTRYPOINT ["docker-entrypoint"]
 
-HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
+HEALTHCHECK --start-period=60s CMD curl http://localhost:2019/metrics --silent --show-error --fail --output /dev/null || exit 1
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]
 
 # Dev FrankenPHP image
@@ -94,7 +95,9 @@ RUN set -eux; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
-	chmod +x bin/console; \
     bin/console cache:warmup; \
-	bin/console tailwind:build --minify; \
-	bin/console asset-map:compile; sync;
+    bin/console tailwind:build --minify; \
+    if [ -f importmap.php ]; then \
+        php bin/console asset-map:compile; \
+    fi; \
+	chmod +x bin/console; sync;
