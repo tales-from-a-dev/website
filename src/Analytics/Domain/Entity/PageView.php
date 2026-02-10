@@ -4,16 +4,9 @@ declare(strict_types=1);
 
 namespace App\Analytics\Domain\Entity;
 
-use App\Analytics\Domain\Entity\Field\PageViewId;
-use App\Analytics\Domain\Entity\Field\PageViewIp;
-use App\Analytics\Domain\Entity\Field\PageViewMethod;
-use App\Analytics\Domain\Entity\Field\PageViewReferer;
-use App\Analytics\Domain\Entity\Field\PageViewServer;
-use App\Analytics\Domain\Entity\Field\PageViewUrl;
-use App\Analytics\Domain\Entity\Field\PageViewUserAgent;
-use App\Analytics\Domain\Entity\Field\PageViewVisitedAt;
-use App\Shared\Domain\Entity\CreatedAt;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as Orm;
+use Symfony\Component\Clock\Clock;
 
 #[Orm\Entity]
 #[Orm\Index(name: 'url_idx', columns: ['url'])]
@@ -21,35 +14,36 @@ use Doctrine\ORM\Mapping as Orm;
 #[Orm\Index(name: 'created_at_idx', columns: ['created_at'])]
 class PageView
 {
-    #[Orm\Embedded(columnPrefix: false)]
-    public PageViewId $id;
+    #[Orm\Id]
+    #[Orm\GeneratedValue]
+    #[Orm\Column(type: Types::INTEGER, options: ['unsigned' => true])]
+    public ?int $id = null;
 
-    #[Orm\Embedded(columnPrefix: false)]
-    public CreatedAt $createdAt;
+    #[Orm\Column(type: Types::DATETIME_IMMUTABLE)]
+    public \DateTimeImmutable $createdAt;
 
     public function __construct(
-        #[Orm\Embedded(columnPrefix: false)]
-        public PageViewUrl $url,
+        #[Orm\Column(type: Types::STRING, length: 255)]
+        public string $url,
 
-        #[Orm\Embedded(columnPrefix: false)]
-        public PageViewMethod $method,
+        #[Orm\Column(type: Types::STRING, length: 10)]
+        public string $method,
 
-        #[Orm\Embedded(columnPrefix: false)]
-        public PageViewServer $server,
+        #[Orm\Column(type: Types::STRING, length: 255)]
+        public string $server,
 
-        #[Orm\Embedded(columnPrefix: false)]
-        public PageViewIp $ip,
+        #[Orm\Column(type: Types::STRING, length: 255)]
+        public string $ip,
 
-        #[Orm\Embedded(columnPrefix: false)]
-        public PageViewUserAgent $userAgent,
+        #[Orm\Column(type: Types::STRING, length: 255)]
+        public string $userAgent,
 
-        #[Orm\Embedded(columnPrefix: false)]
-        public PageViewReferer $referer,
+        #[Orm\Column(type: Types::STRING, length: 255, nullable: true)]
+        public ?string $referer,
 
-        #[Orm\Embedded(columnPrefix: false)]
-        public PageViewVisitedAt $visitedAt,
+        #[Orm\Column(type: Types::DATETIME_IMMUTABLE)]
+        public \DateTimeImmutable $visitedAt,
     ) {
-        $this->id = new PageViewId();
-        $this->createdAt = new CreatedAt();
+        $this->createdAt = Clock::get()->now();
     }
 }

@@ -35,7 +35,7 @@ final class ProcessDailyTrafficMessageHandlerTest extends TestCase
 
         $this->handler = new ProcessDailyTrafficMessageHandler(
             logParser: $this->logParser,
-            cache: $this->cache,
+            analyticsCache: $this->cache,
             pageViewRepository: $this->pageViewRepository,
             logsDir: $this->logsDir
         );
