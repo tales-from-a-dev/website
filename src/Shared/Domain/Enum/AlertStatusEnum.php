@@ -18,14 +18,14 @@ enum AlertStatusEnum: string implements TranslatableEnumInterface
 
     #[EnumCase(
         extras: [
-            'icon' => 'tabler:circle-x',
+            'icon' => 'lucide:circle-x',
         ]
     )]
     case Error = 'error';
 
     #[EnumCase(
         extras: [
-            'icon' => 'tabler:circle-check',
+            'icon' => 'lucide:circle-check',
         ]
     )]
     case Success = 'success';

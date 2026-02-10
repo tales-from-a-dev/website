@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 namespace App\Analytics\Application\Message;
 
-use App\Analytics\Domain\Entity\Field\PageViewIp;
-use App\Analytics\Domain\Entity\Field\PageViewMethod;
-use App\Analytics\Domain\Entity\Field\PageViewReferer;
-use App\Analytics\Domain\Entity\Field\PageViewServer;
-use App\Analytics\Domain\Entity\Field\PageViewUrl;
-use App\Analytics\Domain\Entity\Field\PageViewUserAgent;
-use App\Analytics\Domain\Entity\Field\PageViewVisitedAt;
 use App\Analytics\Domain\Entity\PageView;
 use App\Analytics\Domain\Repository\PageViewRepositoryInterface;
 use App\Shared\Domain\Logger\Parser\LogParserInterface;
@@ -65,7 +58,7 @@ final readonly class ProcessDailyTrafficMessageHandler
 
     public function __construct(
         private LogParserInterface $logParser,
-        private CacheInterface $cache,
+        private CacheInterface $analyticsCache,
         private PageViewRepositoryInterface $pageViewRepository,
         #[Autowire(value: '%kernel.logs_dir%')]
         private string $logsDir,
@@ -78,7 +71,7 @@ final readonly class ProcessDailyTrafficMessageHandler
     public function __invoke(ProcessDailyTrafficMessage $message): array
     {
         $cacheKey = 'last_traffic_parsed_files';
-        $lastParsedFiles = $this->cache->get($cacheKey, static fn () => []);
+        $lastParsedFiles = $this->analyticsCache->get($cacheKey, static fn () => []);
 
         $finder = new Finder()
             ->in($this->logsDir)
@@ -126,13 +119,13 @@ final readonly class ProcessDailyTrafficMessageHandler
                     $referer = s($logEntry->extra['referrer'] ?? '');
 
                     $pageView = new PageView(
-                        url: new PageViewUrl($url->toString()),
-                        method: new PageViewMethod($method->toString()),
-                        server: new PageViewServer($server->toString()),
-                        ip: new PageViewIp($ip->toString()),
-                        userAgent: new PageViewUserAgent($userAgent->toString()),
-                        referer: new PageViewReferer($referer->isEmpty() ? null : $referer->toString()),
-                        visitedAt: new PageViewVisitedAt($logEntry->datetime),
+                        url: $url->toString(),
+                        method: $method->toString(),
+                        server: $server->toString(),
+                        ip: IpUtils::anonymize($ip->toString()),
+                        userAgent: $userAgent->toString(),
+                        referer: $referer->isEmpty() ? null : $referer->toString(),
+                        visitedAt: $logEntry->datetime,
                     );
 
                     $this->pageViewRepository->add($pageView);
@@ -144,8 +137,8 @@ final readonly class ProcessDailyTrafficMessageHandler
         }
 
         if ([] !== $parsedFiles) {
-            $this->cache->delete($cacheKey);
-            $this->cache->get($cacheKey, static fn () => $parsedFiles);
+            $this->analyticsCache->delete($cacheKey);
+            $this->analyticsCache->get($cacheKey, static fn () => $parsedFiles);
         }
 
         return $parsedFiles;

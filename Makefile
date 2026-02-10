@@ -151,7 +151,7 @@ asset-compile: ## Compile assets
 ##
 ## —— Database 🔮 ——————————————————————————————————————————————————————————————
 ##
-db: db-create db-update db-seed ## Create the database and seed it
+db: db-create db-migrate db-load db-seed ## Create the database and seed it
 .PHONY: db
 
 db-create: ## Create database
