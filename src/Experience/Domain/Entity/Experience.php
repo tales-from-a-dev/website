@@ -30,6 +30,12 @@ class Experience
     #[Orm\Column(type: Types::TEXT, length: 255, options: ['default' => ''])]
     public string $description = '';
 
+    /**
+     * @var string[]
+     */
+    #[Orm\Column(type: Types::JSONB, options: ['jsonb' => true, 'default' => '[]'])]
+    public array $technologies = [];
+
     #[Orm\Column(type: Types::DATE_IMMUTABLE)]
     public \DateTimeImmutable $startAt;
 

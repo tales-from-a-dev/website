@@ -83,12 +83,14 @@ final readonly class SeedCommand
             )
         );
 
-        foreach ($this->getExperienceData() as [$company, $type, $position, $startAt, $endAt]) {
+        foreach ($this->getExperienceData() as [$company, $type, $position, $description, $technologies, $startAt, $endAt]) {
             if (!$this->entityManager->getRepository(Experience::class)->findOneBy(['company' => $company])) {
                 $experience = new Experience();
                 $experience->company = $company;
                 $experience->type = $type;
                 $experience->position = $position;
+                $experience->description = $description;
+                $experience->technologies = $technologies;
                 $experience->startAt = $startAt;
                 $experience->endAt = $endAt;
 
@@ -106,6 +108,8 @@ final readonly class SeedCommand
             'KaGames',
             ExperienceTypeEnum::PermanentContract,
             ExperiencePositionEnum::FullstackDeveloper,
+            '',
+            ['PHP', 'Zend Framework', 'jQuery', 'MySQL'],
             new \DateTimeImmutable('2010-11-01'),
             new \DateTimeImmutable('2011-06-01'),
         ];
@@ -113,6 +117,8 @@ final readonly class SeedCommand
             'Keops Infocentre',
             ExperienceTypeEnum::PermanentContract,
             ExperiencePositionEnum::FullstackDeveloper,
+            '',
+            ['PHP', 'CakePHP', 'jQuery', 'MySQL'],
             new \DateTimeImmutable('2012-06-01'),
             new \DateTimeImmutable('2015-03-01'),
         ];
@@ -120,6 +126,8 @@ final readonly class SeedCommand
             'Emakina',
             ExperienceTypeEnum::PermanentContract,
             ExperiencePositionEnum::BackendDeveloper,
+            '',
+            ['Proximis', 'Symfony', 'Zend Framework', 'MySQL', 'Docker', 'AWS'],
             new \DateTimeImmutable('2015-11-01'),
             new \DateTimeImmutable('2020-10-01'),
         ];
@@ -127,6 +135,8 @@ final readonly class SeedCommand
             'Pixine',
             ExperienceTypeEnum::PermanentContract,
             ExperiencePositionEnum::BackendDeveloper,
+            '',
+            ['PHP', 'Symfony', 'API Platform', 'Laravel', 'Docker', 'AWS'],
             new \DateTimeImmutable('2020-12-01'),
             new \DateTimeImmutable('2022-10-01'),
         ];
@@ -134,6 +144,8 @@ final readonly class SeedCommand
             'Obat',
             ExperienceTypeEnum::Freelance,
             ExperiencePositionEnum::BackendDeveloper,
+            "Mission de 4 mois afin d'aider à maintenir un legacy en Symfony 5.4 / API Platform 2.6 et à développer de nouvelles fonctionnalités sur une architecture macro service en suivant les modèles de conception DDD / CQRS.",
+            ['PHP', 'Symfony', 'API Platform', 'DDD', 'CQRS'],
             new \DateTimeImmutable('2024-05-01'),
             new \DateTimeImmutable('2024-10-01'),
         ];
@@ -141,6 +153,8 @@ final readonly class SeedCommand
             'DotWorld',
             ExperienceTypeEnum::Freelance,
             ExperiencePositionEnum::FullstackDeveloper,
+            "Durant une mission de 6 mois, j'ai contribué au sein de plusieurs squads de DotWorld, à mettre en conformité RGPD plusieurs sites ainsi qu'à faire des montées de versions vers Laravel 11 et Livewire 3",
+            ['PHP', 'Laravel', 'Livewire', 'Tailwind CSS'],
             new \DateTimeImmutable('2024-12-01'),
             new \DateTimeImmutable('2025-06-01'),
         ];
