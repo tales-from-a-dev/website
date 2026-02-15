@@ -9,4 +9,14 @@ use App\Analytics\Domain\Entity\PageView;
 interface PageViewRepositoryInterface
 {
     public function add(PageView $pageView): void;
+
+    /**
+     * @return list<array{period: string, count: int}>
+     */
+    public function countByMonth(?string $year = null): array;
+
+    /**
+     * @return list<array{period: string, count: int}>
+     */
+    public function countByDay(?string $year = null): array;
 }

@@ -1,0 +1,32 @@
+{% extends 'app/base_dashboard.html.twig' %}
+
+{% block meta_title %}
+    {{ 'dashboard.settings.index.title.page'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    {{ form_start(form) }}
+    <twig:Card size="lg">
+        <twig:Card:CardHeader>
+            <twig:Card:CardTitle>{{ 'dashboard.settings.index.title.page'|trans }}</twig:Card:CardTitle>
+            <twig:Card:CardDescription>{{ 'dashboard.settings.index.description'|trans }}</twig:Card:CardDescription>
+        </twig:Card:CardHeader>
+        <twig:Card:CardContent class="grid gap-4">
+            {% for alert in app.flashes('alert') %}
+                <twig:Alert :variant="alert.status.value">
+                    <twig:Ux:Icon :name="alert.status.icon" />
+                    <twig:Alert:AlertTitle>
+                        {{ alert.message|trans(domain: 'alert') }}
+                    </twig:Alert:AlertTitle>
+                </twig:Alert>
+            {% endfor %}
+            {{ form(form) }}
+        </twig:Card:CardContent>
+        <twig:Card:CardFooter>
+            <twig:Button size="lg" name="submit" type="submit">
+                {{ 'btn.save'|trans({}, 'forms') }}
+            </twig:Button>
+        </twig:Card:CardFooter>
+    </twig:Card>
+    {{ form_end(form) }}
+{% endblock %}

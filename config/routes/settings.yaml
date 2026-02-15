@@ -1,0 +1,8 @@
+dashboard_settings_controllers:
+    resource:
+        path: ../../src/Settings/Ui/Controller/Dashboard
+        namespace: App\Settings\Ui\Controller\Dashboard
+    type: attribute
+    prefix: '/dashboard'
+    name_prefix: app_dashboard_settings_
+    trailing_slash_on_root: false

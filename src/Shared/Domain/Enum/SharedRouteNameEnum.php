@@ -6,5 +6,9 @@ namespace App\Shared\Domain\Enum;
 
 enum SharedRouteNameEnum: string
 {
-    case WebsiteHome = 'app_shared_home';
+    // website
+    case WebsiteIndex = 'app_website_shared_index';
+
+    // dashboard
+    case DashboardIndex = 'app_dashboard_shared_index';
 }

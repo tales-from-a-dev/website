@@ -1,0 +1,89 @@
+{% extends 'app/base.html.twig' %}
+
+{% block meta_social %}{% endblock %}
+
+{% block main_attributes %}class="mx-auto w-full max-w-6xl flex flex-1 flex-col gap-4 p-4"{% endblock %}
+
+{% block body %}
+    <twig:Sidebar:SidebarWrapper style="--sidebar-width:16rem;--sidebar-width-icon:3rem;">
+        {%- set main = outerBlocks.main -%}
+        {%- set main_attributes = outerBlocks.main_attributes -%}
+        <twig:Sidebar>
+            <twig:Sidebar:SidebarHeader>
+                <twig:Sidebar:SidebarMenu>
+                    <twig:Sidebar:SidebarMenuItem>
+                        <twig:Sidebar:SidebarMenuButton
+                            href="{{ path('app_dashboard_shared_index') }}"
+                            size="lg"
+                        >
+                            <div class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-md">
+                                <twig:Ux:Icon name="lucide:gallery-vertical-end" class="size-4" />
+                            </div>
+                            <span class="truncate font-medium">{{ app.user }}</span>
+                        </twig:Sidebar:SidebarMenuButton>
+                    </twig:Sidebar:SidebarMenuItem>
+                </twig:Sidebar:SidebarMenu>
+            </twig:Sidebar:SidebarHeader>
+            <twig:Sidebar:SidebarContent>
+                <twig:Sidebar:SidebarGroup>
+                    <twig:Sidebar:SidebarGroupLabel>
+                        {{- 'dashboard.sidebar.group.dashboard'|trans -}}
+                    </twig:Sidebar:SidebarGroupLabel>
+                    <twig:Sidebar:SidebarMenu>
+                        <twig:Sidebar:SidebarMenuItem>
+                            <twig:Sidebar:SidebarMenuButton
+                                href="{{ path('app_dashboard_shared_index') }}"
+                                active="{{ is_active_path('app_dashboard_shared_index') }}"
+                            >
+                                <twig:Ux:Icon name="lucide:layout-dashboard" />
+                                {{- 'dashboard.shared.index.title.page'|trans -}}
+                            </twig:Sidebar:SidebarMenuButton>
+                        </twig:Sidebar:SidebarMenuItem>
+                        <twig:Sidebar:SidebarMenuItem>
+                            <twig:Sidebar:SidebarMenuButton
+                                href="{{ path('app_dashboard_experience_index') }}"
+                                active="{{ is_active_path('app_dashboard_experience_index') }}"
+                            >
+                                <twig:Ux:Icon name="lucide:book-user" />
+                                {{- 'dashboard.experience.index.title.page'|trans -}}
+                            </twig:Sidebar:SidebarMenuButton>
+                        </twig:Sidebar:SidebarMenuItem>
+                    </twig:Sidebar:SidebarMenu>
+                </twig:Sidebar:SidebarGroup>
+                <twig:Sidebar:SidebarGroup>
+                    <twig:Sidebar:SidebarGroupLabel>
+                        {{- 'dashboard.sidebar.group.other'|trans -}}
+                    </twig:Sidebar:SidebarGroupLabel>
+                    <twig:Sidebar:SidebarMenu>
+                        <twig:Sidebar:SidebarMenuItem>
+                            <twig:Sidebar:SidebarMenuButton
+                                href="{{ path('app_dashboard_settings_index') }}"
+                                active="{{ is_active_path('app_dashboard_settings_index') }}"
+                            >
+                                <twig:Ux:Icon name="lucide:settings" />
+                                {{- 'dashboard.settings.index.title.page'|trans -}}
+                            </twig:Sidebar:SidebarMenuButton>
+                        </twig:Sidebar:SidebarMenuItem>
+                    </twig:Sidebar:SidebarMenu>
+                </twig:Sidebar:SidebarGroup>
+            </twig:Sidebar:SidebarContent>
+            <twig:Sidebar:SidebarRail />
+        </twig:Sidebar>
+        <twig:Sidebar:SidebarInset>
+            <header class="flex h-16 shrink-0 items-center justify-end gap-2 border-b px-4">
+                <twig:Button
+                    variant="ghost"
+                    size="icon"
+                    href="{{ logout_path() }}"
+                    title="{{ 'btn.logout'|trans({}, 'forms') }}"
+                    data-turbo="false"
+                >
+                    <twig:Ux:Icon name="lucide:log-out" />
+                </twig:Button>
+            </header>
+            <div {{ block(main_attributes) }}>
+                {{ block(main) }}
+            </div>
+        </twig:Sidebar:SidebarInset>
+    </twig:Sidebar:SidebarWrapper>
+{% endblock %}

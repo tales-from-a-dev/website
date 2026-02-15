@@ -1,0 +1,15 @@
+{%- set classes = html_classes(
+    'group/menu-item relative',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<li
+    data-slot="sidebar-menu-item"
+    data-sidebar="menu-item"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</li>

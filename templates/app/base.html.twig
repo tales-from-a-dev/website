@@ -1,18 +1,18 @@
-{% set current_route = app.current_route %}
-{% set current_route_params = app.current_route_parameters %}
-{% set current_locale = app.request.locale %}
-
 <!DOCTYPE html>
-<html lang="{{ current_locale }}">
+<html lang="{{ app.locale }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
-
         <meta name="title" content="{{ block('meta_title') }}">
         <meta name="description" content="{% block meta_description %}{{ 'app.meta.description'|trans }}{% endblock %}">
         <meta name="author" content="Romain Monteil">
+        <meta name="view-transition" content="same-origin">
+
+        {% block meta_turbo %}
+            <!-- turbo -->
+            <meta name="turbo-refresh-method" content="morph">
+            <meta name="turbo-refresh-scroll" content="preserve">
+        {% endblock %}
 
         {% block meta_social %}
             <!-- open graph / facebook -->
@@ -21,7 +21,7 @@
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="{{ 'app.meta.title'|trans }}">
             <meta property="og:url" content="{{ block('meta_canonical') }}">
-            <meta property="og:locale" content="{{ current_locale }}">
+            <meta property="og:locale" content="{{ app.locale }}">
 
             <!-- twitter -->
             <meta name="twitter:card" content="summary">
@@ -30,6 +30,8 @@
             <meta name="twitter:site" content="@ker0x">
             <meta name="twitter:creator" content="@ker0x">
         {% endblock %}
+
+        <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
 
         {% block stylesheets %}{% endblock %}
 
@@ -42,36 +44,9 @@
         <link rel="icon"
               href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🔮</text></svg>">
         <link rel="canonical"
-              href="{% block meta_canonical current_route ? url(current_route, current_route_params) : '' %}" />
+              href="{% block meta_canonical app.current_route ? url(app.current_route, app.current_route_parameters) : '' %}" />
     </head>
-    <body class="bg-gray-100">
+    <body class="bg-muted">
         {% block body %}{% endblock %}
-        {% block footer %}
-            <footer class="bg-gray-900">
-                <div class="container max-w-(--breakpoint-xl) mx-auto px-6 py-16 flex flex-col md:flex-row items-center md:justify-between">
-                    <div class="flex items-center justify-center space-x-4 md:order-2">
-                        <a href="https://github.com/ker0x" target="_blank" class="text-gray-400 hover:text-gray-300">
-                            <span class="sr-only">Github</span>
-                            <twig:Ux:Icon name="simple-icons:github" class="size-6" />
-                        </a>
-                        <a href="https://bsky.app/profile/ker0x.bsky.social" target="_blank" class="text-gray-400 hover:text-gray-300">
-                            <span class="sr-only">Bluesky</span>
-                            <twig:Ux:Icon name="simple-icons:bluesky" class="size-6" />
-                        </a>
-                        <a href="https://x.com/ker0x" target="_blank" class="text-gray-400 hover:text-gray-300">
-                            <span class="sr-only">X</span>
-                            <twig:Ux:Icon name="simple-icons:x" class="size-6" />
-                        </a>
-                        <a href="https://www.linkedin.com/in/romain-monteil/" target="_blank" class="text-gray-400 hover:text-gray-300">
-                            <span class="sr-only">Linkedin</span>
-                            <twig:Ux:Icon name="simple-icons:linkedin" class="size-6" />
-                        </a>
-                    </div>
-                    <p class="mt-8 text-sm/6 text-gray-400 md:order-1 md:mt-0">
-                        {{ 'footer.copyright'|trans({year: 'now'|date('Y')}) }}
-                    </p>
-                </div>
-            </footer>
-        {% endblock %}
     </body>
 </html>

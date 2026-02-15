@@ -53,7 +53,7 @@ final class ContactType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ContactDto::class,
             'empty_data' => new ContactDto(),
-            'translation_domain' => 'form',
+            'translation_domain' => 'forms',
             'antispam_profile' => 'default',
             'attr' => [
                 'id' => 'contact-form',

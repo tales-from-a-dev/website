@@ -10,7 +10,7 @@
         <twig:Card size="lg">
             <twig:Card:CardHeader>
                 <twig:Card:CardDescription>
-                    {{ 'home.section.contact.text'|trans }}
+                    {{ 'website.index.section.contact.text'|trans }}
                 </twig:Card:CardDescription>
             </twig:Card:CardHeader>
             <twig:Card:CardContent class="grid gap-4">
@@ -30,8 +30,9 @@
                 {{ form_row(form.content) }}
             </twig:Card:CardContent>
             <twig:Card:CardFooter class="justify-end">
-                <twig:Button name="submit" type="submit" class="w-full md:w-auto">
-                    {{ 'button.send'|trans(domain: 'form') }}
+                <twig:Button size="lg" name="submit" type="submit" class="w-full md:w-auto">
+                    <twig:Ux:Icon name="lucide:send" data-icon="inline-end" />
+                    {{ 'btn.send'|trans({}, 'forms') }}
                 </twig:Button>
             </twig:Card:CardFooter>
         </twig:Card>

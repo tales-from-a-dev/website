@@ -6,5 +6,5 @@ namespace App\User\Domain\Enum;
 
 enum UserRouteNameEnum: string
 {
-    case WebsiteLogin = 'app_user_login';
+    case DashboardLogin = 'app_dashboard_user_login';
 }

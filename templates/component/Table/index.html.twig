@@ -1,0 +1,19 @@
+{%- set classes = html_classes(
+    'w-full caption-bottom text-sm',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="table-container"
+    class="relative w-full overflow-x-auto rounded-md border"
+>
+    <table
+        data-slot="table"
+        class="{{ classes|tailwind_merge }}"
+        {{ attributes }}
+    >
+        {%- block content %}{% endblock -%}
+    </table>
+</div>

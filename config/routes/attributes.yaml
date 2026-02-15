@@ -7,29 +7,6 @@ controllers_contact:
     name_prefix: app_contact_
     trailing_slash_on_root: false
 
-controllers_settings:
-    resource:
-        path: ../../src/Settings/Ui/Controller
-        namespace: App\Settings\Ui\Controller
-    type: attribute
-    prefix: '/settings'
-    name_prefix: app_settings_
-    trailing_slash_on_root: false
-
-controllers_shared:
-    resource:
-        path: ../../src/Shared/Ui/Controller
-        namespace: App\Shared\Ui\Controller
-    type: attribute
-    name_prefix: app_shared_
-
-controllers_user:
-    resource:
-        path: ../../src/User/Ui/Controller
-        namespace: App\User\Ui\Controller
-    type: attribute
-    name_prefix: app_user_
-
 kernel:
     resource: App\Shared\Infrastructure\Kernel
     type: attribute

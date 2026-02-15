@@ -23,16 +23,16 @@ security:
                 username_parameter: _email
                 form_only: true
                 enable_csrf: true
-                login_path: app_user_login
-                check_path: app_user_login
-                default_target_path: app_settings_index
+                login_path: app_dashboard_user_login
+                check_path: app_dashboard_user_login
+                default_target_path: app_dashboard_shared_index
                 always_use_default_target_path: true
 
             logout:
                 path: /logout
                 enable_csrf: true
                 # where to redirect after logout
-                target: app_shared_home
+                target: app_website_shared_index
 
             login_throttling: ~
 
@@ -45,7 +45,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/settings, roles: !php/enum App\User\Domain\Enum\UserRoleEnum::User->value, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/dashboard/login, roles: !php/enum App\User\Domain\Enum\UserRoleEnum::Public->value, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/dashboard, roles: !php/enum App\User\Domain\Enum\UserRoleEnum::User->value, requires_channel: '%env(SECURE_SCHEME)%' }
+
         - { path: ^/, roles: !php/enum App\User\Domain\Enum\UserRoleEnum::Public->value, requires_channel: '%env(SECURE_SCHEME)%' }
 
 when@test:
@@ -64,4 +66,4 @@ when@test:
         firewalls:
             main:
                 login_throttling:
-                    max_attempts: 1
+                    max_attempts: 2

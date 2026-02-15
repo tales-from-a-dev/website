@@ -1,0 +1,15 @@
+{%- set classes = html_classes(
+    'bg-sidebar-border mx-2 w-auto',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    role="separator"
+    aria-orientation="horizontal"
+    data-slot="sidebar-divider"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+</div>

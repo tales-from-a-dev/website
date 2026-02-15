@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstract
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatableMessage;
 
 abstract class AbstractController extends BaseAbstractController
@@ -37,5 +39,29 @@ abstract class AbstractController extends BaseAbstractController
     protected function createFormNamed(string $name, string $type = FormType::class, mixed $data = null, array $options = []): FormInterface
     {
         return $this->container->get('form.factory')->createNamed($name, $type, $data, $options);
+    }
+
+    /**
+     * Returns a RedirectResponse to the given route with the given parameters.
+     *
+     * @param array<string, mixed> $parameters
+     */
+    protected function redirectToRoute(\BackedEnum|string $route, array $parameters = [], int $status = Response::HTTP_FOUND): RedirectResponse
+    {
+        if ($route instanceof \BackedEnum) {
+            $route = (string) $route->value;
+        }
+
+        return parent::redirectToRoute($route, $parameters, $status);
+    }
+
+    /**
+     * Returns a RedirectResponse to the given route with the given parameters with a 303 status code.
+     *
+     * @param array<string, mixed> $parameters
+     */
+    protected function redirectAfterSubmit(\BackedEnum|string $route, array $parameters = [], int $status = Response::HTTP_SEE_OTHER): RedirectResponse
+    {
+        return $this->redirectToRoute($route, $parameters, $status);
     }
 }

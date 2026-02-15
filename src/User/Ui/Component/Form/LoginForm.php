@@ -39,7 +39,7 @@ final class LoginForm extends AbstractController
                 '_email' => $lastUsername,
             ],
             options: [
-                'action' => $this->generateUrl(UserRouteNameEnum::WebsiteLogin->value),
+                'action' => $this->generateUrl(UserRouteNameEnum::DashboardLogin->value),
                 'method' => Request::METHOD_POST,
             ]
         );

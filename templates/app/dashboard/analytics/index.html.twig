@@ -1,0 +1,18 @@
+{% extends 'app/base_dashboard.html.twig' %}
+
+{% block meta_title %}
+    {{ 'dashboard.analytics.index.title.page'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <div class="grid grid-cols-2 gap-4">
+        <twig:Card variant="outline" size="lg">
+            <twig:Card:CardHeader>
+                <twig:Card:CardTitle>{{ 'dashboard.analytics.index.chart.monthly'|trans }}</twig:Card:CardTitle>
+            </twig:Card:CardHeader>
+            <twig:Card:CardContent>
+                {{ render_chart(monthly_chart) }}
+            </twig:Card:CardContent>
+        </twig:Card>
+    </div>
+{% endblock %}

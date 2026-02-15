@@ -1,0 +1,15 @@
+{%- set classes = html_classes(
+    'p-2 relative flex w-full min-w-0 flex-col',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="sidebar-group"
+    data-sidebar="group"
+    class="{{ classes|tailwind_merge }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</div>

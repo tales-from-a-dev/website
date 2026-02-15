@@ -1,0 +1,15 @@
+{#- Template -#}
+
+{% component 'Ui:Button' with {
+    variant: 'ghost',
+    size: 'icon',
+}|merge(attributes.defaults({
+    'data-slot': 'sidebar-trigger',
+    'data-sidebar': 'trigger',
+    class: 'size-7',
+}).all) %}
+    {% block content %}
+        <twig:Ux:Icon name="lucide:panel-left" />
+        <span class="sr-only">{{ 'btn.toggle_sidebar'|trans(domain: 'forms') }}</span>
+    {% endblock %}
+{% endcomponent %}
