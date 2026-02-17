@@ -18,5 +18,5 @@ interface PageViewRepositoryInterface
     /**
      * @return list<array{period: string, count: int}>
      */
-    public function countByDay(?string $year = null): array;
+    public function countByDay(?string $month = null, ?string $year = null): array;
 }

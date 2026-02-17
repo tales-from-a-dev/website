@@ -35,6 +35,7 @@ final readonly class ProcessDailyTrafficMessageHandler
 
         // routes
         '/contact',
+        '/logout',
         '/dashboard',
         '/robots.txt',
     ];

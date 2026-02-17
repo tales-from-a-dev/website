@@ -14,17 +14,30 @@ use Symfony\Component\Translation\LocaleSwitcher;
 
 final class VisitsPerMonthProviderTest extends TestCase
 {
+    private PageViewRepositoryInterface&MockObject $pageViewRepository;
+    private DateHelper&MockObject $dateHelper;
+
+    private VisitsPerMonthProvider $provider;
+
+    protected function setUp(): void
+    {
+        $this->pageViewRepository = $this->createMock(PageViewRepositoryInterface::class);
+        $this->dateHelper = $this->createDateHelperMock();
+
+        $this->provider = new VisitsPerMonthProvider(
+            pageViewRepository: $this->pageViewRepository,
+            dateHelper: $this->dateHelper
+        );
+    }
+
     public function testProvideReturnsDatasetWithMappedData(): void
     {
-        $pageViewRepository = $this->createMock(PageViewRepositoryInterface::class);
-        $dateHelper = $this->createDateHelperMock();
-
         $visitsPerMonth = [
             ['period' => '2024-01-01', 'count' => 10],
             ['period' => '2024-03-15', 'count' => 25],
         ];
 
-        $pageViewRepository
+        $this->pageViewRepository
             ->expects($this->once())
             ->method('countByMonth')
             ->willReturn($visitsPerMonth);
@@ -36,13 +49,12 @@ final class VisitsPerMonthProviderTest extends TestCase
             4 => 'april',
         ];
 
-        $dateHelper
+        $this->dateHelper
             ->expects($this->once())
             ->method('getMonths')
             ->willReturn($months);
 
-        $provider = new VisitsPerMonthProvider($pageViewRepository, $dateHelper);
-        $dataset = $provider->provide();
+        $dataset = $this->provider->provide();
 
         $this->assertInstanceOf(Dataset::class, $dataset);
         $this->assertSame(['January', 'February', 'March', 'April'], $dataset->labels);

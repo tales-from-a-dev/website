@@ -7,8 +7,8 @@ namespace App\Analytics\Domain\ValueObject;
 final class Dataset
 {
     /**
-     * @param string[]       $labels
-     * @param list<int|null> $data
+     * @param list<int|string> $labels
+     * @param list<int|null>   $data
      */
     public function __construct(
         public array $labels,

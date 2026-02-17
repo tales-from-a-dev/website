@@ -27,26 +27,13 @@ final class PageViewRepository extends ServiceEntityRepository implements PageVi
 
     public function countByMonth(?string $year = null): array
     {
-        return $this->countBy('month', $year);
-    }
-
-    public function countByDay(?string $year = null): array
-    {
-        return $this->countBy('day', $year);
-    }
-
-    /**
-     * @return list<array{period: string, count: int}>
-     */
-    private function countBy(string $field, ?string $year = null): array
-    {
         $year ??= date('Y');
 
         $connection = $this->getEntityManager()->getConnection();
 
         $query = $connection->createQueryBuilder();
         $query
-            ->select(\sprintf("DATE_TRUNC('%s', pv.visited_at) as period", $field))
+            ->select("DATE_TRUNC('month', pv.visited_at) as period")
             ->addSelect('COUNT(pv.id) as count')
             ->from(
                 $this->getEntityManager()->getClassMetadata(PageView::class)->getTableName()/* @type PageView */,
@@ -57,6 +44,43 @@ final class PageViewRepository extends ServiceEntityRepository implements PageVi
             ->andWhere('pv.visited_at <= CURRENT_DATE')
             ->groupBy('period')
             ->orderBy('period', 'DESC')
+            ->setParameter('year', $year)
+        ;
+
+        try {
+            /** @var list<array{period: string, count: int}> $result */
+            $result = $connection
+                ->executeQuery($query->getSQL(), $query->getParameters(), $query->getParameterTypes())
+                ->fetchAllAssociative();
+
+            return $result;
+        } catch (Exception) {
+            return [];
+        }
+    }
+
+    public function countByDay(?string $month = null, ?string $year = null): array
+    {
+        $month ??= date('m');
+        $year ??= date('Y');
+
+        $connection = $this->getEntityManager()->getConnection();
+
+        $query = $connection->createQueryBuilder();
+        $query
+            ->select("DATE_TRUNC('day', pv.visited_at) as period")
+            ->addSelect('COUNT(pv.id) as count')
+            ->from(
+                $this->getEntityManager()->getClassMetadata(PageView::class)->getTableName()/* @type PageView */,
+                'pv'
+            )
+            ->where('pv.visited_at IS NOT NULL')
+            ->andWhere('EXTRACT(MONTH FROM pv.visited_at) = :month')
+            ->andWhere('EXTRACT(YEAR FROM pv.visited_at) = :year')
+            ->andWhere('pv.visited_at <= CURRENT_DATE')
+            ->groupBy('period')
+            ->orderBy('period', 'DESC')
+            ->setParameter('month', $month)
             ->setParameter('year', $year)
         ;
 
