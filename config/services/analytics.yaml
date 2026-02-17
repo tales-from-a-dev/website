@@ -9,7 +9,3 @@ services:
             # domain
             - '../../src/Analytics/Domain/Entity'
             - '../../src/Analytics/Domain/ValueObject'
-
-    App\Analytics\Infrastructure\Logger\Processor\TrafficProcessor:
-        tags:
-            - { name: monolog.processor, handler: traffic }
