@@ -15,7 +15,9 @@ enum:
         fullstack_developer: 'Fullstack Developer'
     experience_type:
         freelance: 'Freelance'
+        part_time: 'Part-time'
         permanent_contract: 'Permanent contract'
+        personal: 'Personal'
 
 # error
 error:

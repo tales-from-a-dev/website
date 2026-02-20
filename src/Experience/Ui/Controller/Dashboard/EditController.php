@@ -9,6 +9,7 @@ use App\Experience\Domain\Enum\ExperienceRouteNameEnum;
 use App\Experience\Infrastructure\State\Processor\UpdateExperienceProcessor;
 use App\Experience\Ui\Form\Data\ExperienceDto;
 use App\Experience\Ui\Form\Type\ExperienceType;
+use App\Shared\Domain\Enum\AlertStatusEnum;
 use App\Shared\Ui\Controller\AbstractController;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +48,11 @@ class EditController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $experience = $this->processor->process($form->getData(), ['previous_data' => $experience]);
+
+            $this->addAlert(
+                status: AlertStatusEnum::Success,
+                message: 'experience.update.success',
+            );
 
             return $this->redirectAfterSubmit(ExperienceRouteNameEnum::DashboardEdit, [
                 'id' => $experience->id,

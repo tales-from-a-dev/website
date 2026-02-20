@@ -49,6 +49,8 @@ final class SettingsControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
         $this->browser()
             ->actingAs($user)
             ->visit('/dashboard/settings')
@@ -56,7 +58,15 @@ final class SettingsControllerTest extends WebTestCase
             ->fillField('settings_availableAt', \IntlDateFormatter::formatObject($availableAt = new \DateTimeImmutable('tomorrow'), 'yyyy-MM-dd'))
             ->fillField('settings_averageDailyRate', '100')
             ->click('submit')
-            ->assertSuccessful();
+            ->assertSuccessful()
+            ->assertSeeIn(
+                'div[data-slot=alert-title]',
+                $translator->trans(
+                    id: 'settings.update.success',
+                    domain: 'alert'
+                )
+            )
+        ;
 
         $settings = self::getContainer()->get(SettingsRepository::class)->findFirst();
 

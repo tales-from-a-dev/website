@@ -51,6 +51,8 @@ final class NewControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
         $this->browser()
             ->actingAs($user)
             ->visit('/dashboard/experience/new')
@@ -63,6 +65,13 @@ final class NewControllerTest extends WebTestCase
             ->fillField('experience_endAt', \IntlDateFormatter::formatObject($endAt = new \DateTimeImmutable('today'), 'yyyy-MM-dd'))
             ->click('submit')
             ->assertSuccessful()
+            ->assertSeeIn(
+                'div[data-slot=alert-title]',
+                $translator->trans(
+                    id: 'experience.add.success',
+                    domain: 'alert'
+                )
+            )
         ;
 
         $experience = ExperienceFactory::last();

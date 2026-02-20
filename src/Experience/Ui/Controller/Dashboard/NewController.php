@@ -7,6 +7,7 @@ namespace App\Experience\Ui\Controller\Dashboard;
 use App\Experience\Domain\Enum\ExperienceRouteNameEnum;
 use App\Experience\Infrastructure\State\Processor\CreateExperienceProcessor;
 use App\Experience\Ui\Form\Type\ExperienceType;
+use App\Shared\Domain\Enum\AlertStatusEnum;
 use App\Shared\Ui\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,11 @@ class NewController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $experience = $this->processor->process($form->getData());
+
+            $this->addAlert(
+                status: AlertStatusEnum::Success,
+                message: 'experience.add.success',
+            );
 
             return $this->redirectAfterSubmit(ExperienceRouteNameEnum::DashboardEdit, [
                 'id' => $experience->id,
