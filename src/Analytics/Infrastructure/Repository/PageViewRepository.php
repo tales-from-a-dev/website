@@ -7,6 +7,7 @@ namespace App\Analytics\Infrastructure\Repository;
 use App\Analytics\Domain\Entity\PageView;
 use App\Analytics\Domain\Repository\PageViewRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Order;
 use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -23,6 +24,17 @@ final class PageViewRepository extends ServiceEntityRepository implements PageVi
     public function add(PageView $pageView): void
     {
         $this->getEntityManager()->persist($pageView);
+    }
+
+    public function findLatest(int $limit): array
+    {
+        return $this->findBy(
+            criteria: [],
+            orderBy: [
+                'createdAt' => Order::Descending->value,
+            ],
+            limit: $limit,
+        );
     }
 
     public function countByMonth(?string $year = null): array

@@ -71,6 +71,8 @@
                                 <twig:Timeline:TimelineIcon>
                                     {% if experience.type.isFreelance %}
                                         <twig:Ux:Icon name="lucide:briefcase-business" class="size-5"/>
+                                    {% elseif experience.type.isPersonal %}
+                                        <twig:Ux:Icon name="lucide:spotlight" class="size-5"/>
                                     {% else %}
                                         <twig:Ux:Icon name="lucide:building" class="size-5"/>
                                     {% endif %}

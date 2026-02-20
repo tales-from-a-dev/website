@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Ui\Controller\Dashboard;
 
+use App\Analytics\Infrastructure\State\Provider\PageViewCollectionProvider;
 use App\Analytics\Infrastructure\State\Provider\VisitsPerDayProvider;
 use App\Analytics\Infrastructure\State\Provider\VisitsPerMonthProvider;
 use App\Shared\Ui\Controller\AbstractController;
@@ -25,6 +26,7 @@ class IndexController extends AbstractController
     public function __construct(
         private readonly VisitsPerMonthProvider $visitsPerMonthProvider,
         private readonly VisitsPerDayProvider $visitsPerDayProvider,
+        private readonly PageViewCollectionProvider $pageViewCollectionProvider,
         private readonly ChartBuilderInterface $chartBuilder,
     ) {
     }
@@ -34,6 +36,7 @@ class IndexController extends AbstractController
         return $this->render('app/dashboard/index.html.twig', [
             'monthly_chart' => $this->buildMonthlyChart(),
             'daily_chart' => $this->buildDailyChart(),
+            'page_views' => $this->pageViewCollectionProvider->provide(),
         ]);
     }
 

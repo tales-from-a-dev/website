@@ -57,6 +57,8 @@ final class EditControllerTest extends WebTestCase
 
         self::ensureKernelShutdown();
 
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
         $this->browser()
             ->actingAs($user)
             ->visit("/dashboard/experience/edit/$experience->id")
@@ -67,6 +69,13 @@ final class EditControllerTest extends WebTestCase
             ->fillField('experience_endAt', \IntlDateFormatter::formatObject($endAt = new \DateTimeImmutable('today'), 'yyyy-MM-dd'))
             ->click('submit')
             ->assertSuccessful()
+            ->assertSeeIn(
+                'div[data-slot=alert-title]',
+                $translator->trans(
+                    id: 'experience.update.success',
+                    domain: 'alert'
+                )
+            )
         ;
 
         $this->assertSame($startAt->format(\DateTimeInterface::ATOM), $experience->startAt->format(\DateTimeInterface::ATOM));

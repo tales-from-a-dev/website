@@ -12,7 +12,7 @@ interface ProviderInterface
     /**
      * @param array<string, mixed> $context
      *
-     * @return T|null
+     * @return T|iterable<T>|null
      */
-    public function provide(array $context = []): ?object;
+    public function provide(array $context = []): object|array|null;
 }

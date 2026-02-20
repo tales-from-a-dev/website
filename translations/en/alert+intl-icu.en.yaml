@@ -7,3 +7,9 @@ contact:
 settings:
     update:
         success: 'Settings saved'
+
+experience:
+    add:
+        success: 'Experience added'
+    update:
+        success: 'Experience updated'

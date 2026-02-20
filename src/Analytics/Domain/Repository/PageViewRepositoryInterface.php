@@ -11,6 +11,11 @@ interface PageViewRepositoryInterface
     public function add(PageView $pageView): void;
 
     /**
+     * @return PageView[]
+     */
+    public function findLatest(int $limit): array;
+
+    /**
      * @return list<array{period: string, count: int}>
      */
     public function countByMonth(?string $year = null): array;

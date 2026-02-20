@@ -12,7 +12,9 @@ common:
         ip: 'IP'
         method: 'Méthode'
         period: 'Période'
+        referer: 'Référent'
         url: 'Url'
+        user_agent: 'User Agent'
         visited_at: 'Visité le'
 
 # enum
@@ -26,7 +28,9 @@ enum:
         fullstack_developer: 'Développeur Fullstack'
     experience_type:
         freelance: 'Freelance'
+        part_time: 'Temps partiel'
         permanent_contract: 'CDI'
+        personal_project: 'Personnel'
 
 # error
 error:
@@ -61,6 +65,8 @@ dashboard:
             chart:
                 monthly: 'Visites mensuelles'
                 daily: 'Visites quotidiennes'
+            card:
+                page_views: 'Pages vues'
 
     experience:
         index:

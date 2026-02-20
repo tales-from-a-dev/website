@@ -14,15 +14,27 @@ enum ExperienceTypeEnum: string implements TranslatableEnumInterface
     use TranslatableEnumTrait;
 
     case Freelance = 'freelance';
+    case PartTime = 'part_time';
     case PermanentContract = 'permanent_contract';
+    case Personal = 'personal';
 
     public function isPermanentContract(): bool
     {
         return self::PermanentContract === $this;
     }
 
+    public function isPartTime(): bool
+    {
+        return self::PartTime === $this;
+    }
+
     public function isFreelance(): bool
     {
         return self::Freelance === $this;
+    }
+
+    public function isPersonal(): bool
+    {
+        return self::Personal === $this;
     }
 }

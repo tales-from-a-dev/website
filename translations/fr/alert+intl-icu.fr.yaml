@@ -7,3 +7,9 @@ contact:
 settings:
     update:
         success: 'Paramètres sauvegardés'
+
+experience:
+    add:
+        success: 'Experience sauvegardé'
+    update:
+        success: 'Experience mise à jour'
