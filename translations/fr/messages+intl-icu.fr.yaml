@@ -30,7 +30,7 @@ enum:
         freelance: 'Freelance'
         part_time: 'Temps partiel'
         permanent_contract: 'CDI'
-        personal_project: 'Personnel'
+        personal: 'Personnel'
 
 # error
 error:
