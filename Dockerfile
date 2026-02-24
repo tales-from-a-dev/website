@@ -95,8 +95,8 @@ RUN set -eux; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
-    bin/console cache:warmup; \
-    bin/console tailwind:build --minify; \
+    php bin/console cache:warmup; \
+    php bin/console tailwind:build --minify; \
     if [ -f importmap.php ]; then \
         php bin/console asset-map:compile; \
     fi; \
