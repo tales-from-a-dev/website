@@ -24,24 +24,7 @@ services:
     build:
       context: .
       target: frankenphp_prod
-    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', 'async', 'failed' ]
-    depends_on:
-      php:
-        condition: service_healthy
-      database:
-        condition: service_healthy
-
-  php-scheduler:
-    extends:
-      file: compose.yaml
-      service: php-worker
-    image: ${IMAGES_PREFIX:-}app-php-scheduler
-    build:
-      context: .
-      target: frankenphp_prod
-    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', 'scheduler_default' ]
-    volumes:
-      - ./var/share:/app/var/share
+    command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', '--all' ]
     depends_on:
       php:
         condition: service_healthy
