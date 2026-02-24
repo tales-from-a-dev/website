@@ -5,9 +5,7 @@
     {% for project in this.projects %}
         <twig:Card size="lg" class="relative justify-between">
             <twig:Card:CardHeader class="items-center">
-                <twig:Card:CardTitle class="text-lg">
-                    <h4>{{ project.name }}</h4>
-                </twig:Card:CardTitle>
+                <twig:Card:CardTitle class="text-lg" as="h3">{{ project.name }}</twig:Card:CardTitle>
                 <twig:Card:CardAction>
                     <twig:Button
                         variant="muted"
