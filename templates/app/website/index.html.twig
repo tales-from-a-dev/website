@@ -7,13 +7,27 @@
 {% block main %}
     <header
         class="h-svh container max-w-screen-xl mx-auto flex flex-col items-center justify-center p-4 md:px-8 lg:px-16">
-        <picture class="size-80 mb-8 lg:mb-16">
-            <img
-                class="size-full rounded-full bg-jade-4"
-                src="{{ asset('images/profile.webp') }}"
-                alt=""
+        <picture class="size-80 mb-8 lg:size-125 lg:mb-16">
+            <source
+                srcset="{{ asset('images/profile_lg.webp') }}"
+                media="(width >= 64rem)"
+                type="image/webp"
                 width="500"
                 height="500"
+            />
+            <source
+                srcset="{{ asset('images/profile_md.webp') }}"
+                media="(width < 64rem)"
+                type="image/webp"
+                width="320"
+                height="320"
+            />
+            <img
+                class="size-full rounded-full bg-jade-4"
+                src="{{ asset('images/profile_md.webp') }}"
+                alt="{{ 'website.index.section.about.surtitle'|trans }}"
+                width="320"
+                height="320"
                 fetchpriority="high"
             >
         </picture>
@@ -65,7 +79,8 @@
                         <twig:Timeline:TimelineItem>
                             <twig:Timeline:TimelineDate>
                                 <twig:Timeline:TimelineDescription class="lg:text-end">
-                                    {{ experience.startAt|format_date(pattern: 'MMM Y') }} - {{ experience.endAt|format_date(pattern: 'MMM Y') }}
+                                    {{ experience.startAt|format_date(pattern: 'MMM Y') }}
+                                    - {{ experience.endAt|format_date(pattern: 'MMM Y') }}
                                 </twig:Timeline:TimelineDescription>
                                 <twig:Timeline:TimelineIcon>
                                     {% if experience.type.isFreelance %}
@@ -82,9 +97,11 @@
                                     <twig:Card:CardHeader>
                                         <twig:Card:CardTitle>
                                             {{ experience.company }}
-                                            <span class="font-normal text-sm text-muted-foreground">/ {{ experience.type|trans }}</span>
+                                            <span
+                                                class="font-normal text-sm text-muted-foreground">/ {{ experience.type|trans }}</span>
                                         </twig:Card:CardTitle>
-                                        <twig:Card:CardDescription class="italic">{{ experience.position|trans }}</twig:Card:CardDescription>
+                                        <twig:Card:CardDescription
+                                            class="italic">{{ experience.position|trans }}</twig:Card:CardDescription>
                                     </twig:Card:CardHeader>
                                     {% if experience.technologies is not empty or experience.description is not empty %}
                                         <twig:Card:CardContent class="flex flex-col gap-6">
