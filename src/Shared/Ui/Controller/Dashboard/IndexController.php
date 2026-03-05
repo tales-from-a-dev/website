@@ -51,6 +51,9 @@ class IndexController extends AbstractController
                 'datasets' => [
                     [
                         'data' => $monthlyChartDataset->data,
+                        'fill' => true,
+                        'cubicInterpolationMode' => 'monotone',
+                        'tension' => 0.4,
                     ],
                 ],
             ])
@@ -82,6 +85,9 @@ class IndexController extends AbstractController
                 'datasets' => [
                     [
                         'data' => $dailyChartDataset->data,
+                        'fill' => true,
+                        'cubicInterpolationMode' => 'monotone',
+                        'tension' => 0.4,
                     ],
                 ],
             ])

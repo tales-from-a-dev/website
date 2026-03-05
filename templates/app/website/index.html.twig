@@ -6,8 +6,8 @@
 
 {% block main %}
     <header
-        class="h-svh container max-w-screen-xl mx-auto flex flex-col items-center justify-center p-4 md:px-8 lg:px-16">
-        <picture class="size-80 mb-8 lg:size-125 lg:mb-16">
+        class="h-svh max-w-screen-xl mx-auto flex flex-col gap-8 p-4 md:p-8 *:h-1/2">
+        <picture class="flex items-center justify-center">
             <source
                 srcset="{{ asset('images/profile_lg.webp') }}"
                 media="(width >= 64rem)"
@@ -23,7 +23,7 @@
                 height="320"
             />
             <img
-                class="size-full rounded-full bg-jade-4"
+                class="size-80 rounded-full bg-jade-4 2xl:size-125"
                 src="{{ asset('images/profile_md.webp') }}"
                 alt="{{ 'website.index.section.about.surtitle'|trans }}"
                 width="320"
@@ -80,7 +80,7 @@
                             <twig:Timeline:TimelineDate>
                                 <twig:Timeline:TimelineDescription class="lg:text-end">
                                     {{ experience.startAt|format_date(pattern: 'MMM Y') }}
-                                    - {{ experience.endAt|format_date(pattern: 'MMM Y') }}
+                                    - {{ experience.endAt ? experience.endAt|format_date(pattern: 'MMM Y') : 'website.index.section.experience.today'|trans }}
                                 </twig:Timeline:TimelineDescription>
                                 <twig:Timeline:TimelineIcon>
                                     {% if experience.type.isFreelance %}

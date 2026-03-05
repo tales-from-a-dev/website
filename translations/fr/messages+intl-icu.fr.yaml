@@ -132,6 +132,7 @@ website:
             experience:
                 title: 'Expériences'
                 subtitle: 'Un résumé des mes expériences professionnelles'
+                today: "aujourd'hui"
 
     # contact
     contact:

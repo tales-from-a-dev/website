@@ -51,7 +51,7 @@
                                 <twig:Table:TableCell>{{ page_view.ip }}</twig:Table:TableCell>
                                 <twig:Table:TableCell>{{ page_view.userAgent }}</twig:Table:TableCell>
                                 <twig:Table:TableCell>{{ page_view.referer }}</twig:Table:TableCell>
-                                <twig:Table:TableCell>{{ page_view.visitedAt|date }}</twig:Table:TableCell>
+                                <twig:Table:TableCell>{{ page_view.visitedAt|format_datetime(timezone: 'Europe/Paris') }}</twig:Table:TableCell>
                             </twig:Table:TableRow>
                         {% endfor %}
                     </twig:Table:TableBody>

@@ -1,6 +1,7 @@
 # btn
 btn:
     add: 'Ajouter'
+    cancel: 'Annuler'
     login: 'Se connecter'
     save: 'Enregistrer'
     send: 'Envoyer'
