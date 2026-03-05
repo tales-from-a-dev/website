@@ -73,6 +73,7 @@ website:
             experience:
                 title: 'Experiences'
                 subtitle: 'A summary of my professional experience'
+                today: 'Today'
 
     # contact
     contact:

@@ -16,7 +16,7 @@ framework:
     #fragments: true
     php_errors:
         log: true
-        
+
     ide: 'phpstorm://open?url=file://%%f&line=%%l'
 
 when@test:
@@ -24,3 +24,7 @@ when@test:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+
+when@prod:
+    framework:
+        http_cache: true
