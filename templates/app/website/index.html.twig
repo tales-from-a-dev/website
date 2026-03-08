@@ -6,8 +6,8 @@
 
 {% block main %}
     <header
-        class="h-svh max-w-screen-xl mx-auto flex flex-col gap-8 p-4 md:p-8 *:h-1/2">
-        <picture class="flex items-center justify-center">
+        class="h-svh max-w-screen-xl mx-auto flex flex-col gap-8 p-4 md:p-8 *:h-1/2 *:flex *:items-center *:justify-center">
+        <picture>
             <source
                 srcset="{{ asset('images/profile_lg.webp') }}"
                 media="(width >= 64rem)"
@@ -31,7 +31,7 @@
                 fetchpriority="high"
             >
         </picture>
-        <div class="text-center">
+        <div class="flex-col *:text-center">
             <h6 class="font-medium text-muted-foreground text-lg md:text-xl lg:text-2xl uppercase mb-8">{{- 'website.index.section.about.surtitle'|trans -}}</h6>
             <h1 class="font-normal text-primary text-4xl md:text-5xl lg:text-7xl leading-none mb-8">{{- 'website.index.section.about.title'|trans -}}</h1>
             <p class="font-normal text-muted-foreground text-md md:text-lg lg:text-xl leading-loose mb-16">
