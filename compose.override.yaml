@@ -38,6 +38,7 @@ services:
     command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', '-vvv', '--all' ]
     volumes:
       - ./:/app
+      - ./var/share:/app/var/share
       - /app/var/
     depends_on:
       php:
