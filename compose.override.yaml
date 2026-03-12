@@ -2,6 +2,7 @@
 # Development environment override
 services:
   php:
+    image: ${IMAGES_PREFIX:-}app-php-dev
     build:
       context: .
       target: frankenphp_dev
@@ -24,6 +25,7 @@ services:
     tty: true
 
   php-worker:
+    image: ${IMAGES_PREFIX:-}app-php-dev-worker
     profiles:
       - donotstart
 
@@ -31,7 +33,7 @@ services:
     extends:
       file: compose.yaml
       service: php-worker
-    image: ${IMAGES_PREFIX:-}app-php-consumer
+    image: ${IMAGES_PREFIX:-}app-php-dev-consumer
     build:
       context: .
       target: frankenphp_dev

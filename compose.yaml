@@ -1,7 +1,6 @@
 ---
 services:
   php:
-    image: ${IMAGES_PREFIX:-}app-php
     restart: unless-stopped
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
@@ -14,9 +13,12 @@ services:
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
       MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}/.well-known/mercure}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
-      # The two next lines can be removed after initial installation
+      ###> dunglas/symfony-docker ###
+      # Next lines are only used during initial installation
+      # This block will remove itself after the installation
       SYMFONY_VERSION: ${SYMFONY_VERSION:-}
       STABILITY: ${STABILITY:-stable}
+      ###< dunglas/symfony-docker ###
     volumes:
       - caddy_data:/data
       - caddy_config:/config
@@ -35,7 +37,6 @@ services:
         protocol: udp
 
   php-worker:
-    image: ${IMAGES_PREFIX:-}app-php-worker
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-17}&charset=${POSTGRES_CHARSET:-utf8}

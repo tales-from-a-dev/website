@@ -1,6 +1,7 @@
 # Test environment override
 services:
   php:
+    image: ${IMAGES_PREFIX:-}app-php-test
     environment:
       GITHUB_USERNAME: ${GITHUB_USERNAME:-app}
       GITHUB_ACCESS_TOKEN: ${GITHUB_ACCESS_TOKEN:-!ChangeMe!}

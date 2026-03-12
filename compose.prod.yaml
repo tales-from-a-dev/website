@@ -2,6 +2,7 @@
 # Production environment override
 services:
   php:
+    image: ${IMAGES_PREFIX:-}app-php-prod
     build:
       context: .
       target: frankenphp_prod
@@ -13,6 +14,7 @@ services:
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
 
   php-worker:
+    image: ${IMAGES_PREFIX:-}app-php-prod-worker
     profiles:
       - donotstart
 
@@ -20,7 +22,7 @@ services:
     extends:
       file: compose.yaml
       service: php-worker
-    image: ${IMAGES_PREFIX:-}app-php-consumer
+    image: ${IMAGES_PREFIX:-}app-php-prod-consumer
     build:
       context: .
       target: frankenphp_prod
