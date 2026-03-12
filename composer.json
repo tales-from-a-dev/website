@@ -40,7 +40,7 @@
         "symfony/rate-limiter": "7.4.*",
         "symfony/runtime": "7.4.*",
         "symfony/scheduler": "7.4.*",
-        "symfony/security-bundle": "7.4.*",
+        "symfony/security-bundle": "8.0.*",
         "symfony/serializer": "7.4.*",
         "symfony/stimulus-bundle": "^2.13",
         "symfony/string": "7.4.*",
