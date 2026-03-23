@@ -91,7 +91,7 @@ COPY --link --exclude=frankenphp/ . ./
 RUN <<-EOF
 	mkdir -p var/cache var/log var/share
 	composer dump-autoload --classmap-authoritative --no-dev
-	composer dump-env prod
+	composer dump-env prod --empty
 	composer run-script --no-dev post-install-cmd
 	php bin/console cache:warmup
     php bin/console tailwind:build --minify
