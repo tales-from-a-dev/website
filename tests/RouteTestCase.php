@@ -24,7 +24,7 @@ abstract class RouteTestCase extends WebTestCase
     {
         $routeName = \is_string($routeName) ? $routeName : (string) $routeName->value;
 
-        $this->runFunctionalTest(FunctionalTestData::withUrl($url)
+        self::runFunctionalTest(FunctionalTestData::withUrl($url)
             ->withMethod($method)
             ->expectRouteName($routeName)
             ->appendCallableExpectation(self::assertStatusCodeLessThan500($method, $url))
@@ -33,11 +33,11 @@ abstract class RouteTestCase extends WebTestCase
 
     public static function assertStatusCodeLessThan500(string $method, string $url): \Closure
     {
-        return function (KernelBrowser $browser) use ($method, $url) {
+        return static function (KernelBrowser $browser) use ($method, $url) {
             $statusCode = $browser->getResponse()->getStatusCode();
             $routeName = $browser->getRequest()->attributes->get('_route', 'unknown');
 
-            $this->assertLessThan(
+            self::assertLessThan(
                 500,
                 $statusCode,
                 \sprintf('Request "%s %s" for %s route returned an internal error.', $method, $url, $routeName),
