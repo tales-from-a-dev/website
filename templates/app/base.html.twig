@@ -31,14 +31,25 @@
             <meta name="twitter:creator" content="@ker0x">
         {% endblock %}
 
+        {% block meta_frankenphp %}
+            {% if app.request.server.has('FRANKENPHP_HOT_RELOAD') %}
+                <meta name="frankenphp-hot-reload:url" content="{{ app.request.server.get('FRANKENPHP_HOT_RELOAD') }}">
+            {% endif %}
+        {% endblock %}
+
         <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
 
         {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            {% block importmap %}
+                {{ importmap('app') }}
+            {% endblock %}
 
-        {% block importmap %}
-            {{ importmap('app') }}
+            {% if app.request.server.has('FRANKENPHP_HOT_RELOAD') %}
+                <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+                <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+            {% endif %}
         {% endblock %}
 
         <link rel="icon"
