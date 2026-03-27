@@ -60,6 +60,8 @@ jobs:
             CADDY_MERCURE_JWT_SECRET="${{ secrets.JWT_SECRET }}" \
             POSTGRES_PASSWORD="${{ secrets.DB_PASSWORD }}" \
             docker compose -f compose.yaml -f compose.prod.yaml up --detach
+
+            docker system prune --force
           EOF
 
       - name: Delete SSH
