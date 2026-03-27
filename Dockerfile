@@ -63,9 +63,26 @@ ENV APP_ENV=dev
 ENV XDEBUG_MODE=off
 ENV FRANKENPHP_WORKER_CONFIG=watch
 
+# dev dependencies
+# hadolint ignore=DL3008
 RUN <<-EOF
 	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+	apt-get update
+	apt-get install -y --no-install-recommends \
+		aggregate \
+		curl \
+		dnsmasq \
+		dnsutils \
+		iproute2 \
+		ipset \
+		iptables \
+		jq \
+		sudo
 	install-php-extensions xdebug
+	rm -rf /var/lib/apt/lists/*
+	useradd -m -s /bin/bash nonroot
+	echo "nonroot ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nonroot
+	git config --system --add safe.directory /app
 EOF
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
@@ -91,7 +108,7 @@ COPY --link --exclude=frankenphp/ . ./
 RUN <<-EOF
 	mkdir -p var/cache var/log var/share
 	composer dump-autoload --classmap-authoritative --no-dev
-	composer dump-env prod --empty
+	composer dump-env prod
 	composer run-script --no-dev post-install-cmd
 	php bin/console cache:warmup
     php bin/console tailwind:build --minify
@@ -152,7 +169,8 @@ RUN <<-EOF
 	find / -perm /6000 -type f -exec chmod a-s {} + 2>/dev/null || true
 EOF
 
-COPY --from=frankenphp_prod_builder --chown=www-data:www-data /app /app
+COPY --link --exclude=var --from=frankenphp_prod_builder /app /app
+COPY --link --chown=www-data:www-data --from=frankenphp_prod_builder /app/var /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 
