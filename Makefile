@@ -28,19 +28,19 @@ build: ## Builds the Docker images
 .PHONY: build
 
 up: ## Start the docker hub in detached mode (no logs)
-	@$(DOCKER_COMP) up --detach
+	@$(DOCKER_COMP) up --detach --wait
 .PHONY: up
 
 up-dev: ## Start the docker hub in detached mode (no logs) for debugging
-	@XDEBUG_MODE=debug $(DOCKER_COMP) up --detach
+	@XDEBUG_MODE=debug $(DOCKER_COMP) up --detach --wait
 .PHONY: up-dev
 
 up-test: ## Start the docker hub in detached mode (no logs) for testing
-	@XDEBUG_MODE=coverage $(DOCKER_COMP) -f compose.yaml -f compose.override.yaml -f compose.test.yaml up --detach
+	@XDEBUG_MODE=coverage $(DOCKER_COMP) -f compose.yaml -f compose.override.yaml -f compose.test.yaml up --detach --wait
 .PHONY: up-test
 
 up-prod: ## Start the docker hub in detached mode (no logs) for production
-	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml up --detach
+	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml up --detach --wait
 .PHONY: up-prod
 
 stop: ## Stop the docker hub
