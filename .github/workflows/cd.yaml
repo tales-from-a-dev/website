@@ -53,13 +53,12 @@ jobs:
             git checkout -f --detach "tags/${{ inputs.tag }}"
 
             docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
-            docker compose -f compose.yaml -f compose.prod.yaml down --remove-orphans
 
             SERVER_NAME="${{ secrets.SERVER_NAME }}" \
             APP_SECRET="${{ secrets.APP_SECRET }}" \
             CADDY_MERCURE_JWT_SECRET="${{ secrets.JWT_SECRET }}" \
             POSTGRES_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-            docker compose -f compose.yaml -f compose.prod.yaml up --detach
+            docker compose -f compose.yaml -f compose.prod.yaml up --remove-orphans --detach --wait
 
             docker system prune --force
           EOF
