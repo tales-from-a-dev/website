@@ -163,6 +163,9 @@ COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.
 ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
 
 RUN <<-EOF
+	apt-get update
+	apt-get install -y --no-install-recommends postgresql-client
+	rm -rf /var/lib/apt/lists/*
 	mkdir -p /data/caddy /config/caddy
 	chown -R www-data:www-data /data /config
 	# Remove setuid/setgid bits
