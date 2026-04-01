@@ -1,0 +1,83 @@
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    :root {
+        --spacing: 0.2rem;
+
+        --text-xs: 0.7rem;
+        --text-xs--line-height: calc(1 / 0.7);
+        --text-sm: 0.8rem;
+        --text-sm--line-height: calc(1.25 / 0.8);
+        --text-base: 0.875rem;
+        --text-base--line-height: calc(1.5 / 0.875);
+        --text-lg: 1rem;
+        --text-lg--line-height: calc(1.75 / 1);
+        --text-xl: 1.125rem;
+        --text-xl--line-height: calc(1.75 / 1.125);
+        --text-2xl: 1.25rem;
+        --text-2xl--line-height: calc(2 / 1.25);
+        --text-3xl: 1.5rem;
+        --text-3xl--line-height: calc(2.25 / 1.5);
+        --text-4xl: 1.875rem;
+        --text-4xl--line-height: calc(2.25 / 1.875);
+    }
+
+    * {
+        print-color-adjust: exact;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    [data-slot="section"] {
+        @apply break-inside-avoid
+    }
+
+    [data-slot="section-header"] {
+        @apply gap-2 mb-2
+    }
+
+    [data-slot="card"] {
+        @apply gap-2 py-2
+    }
+
+    [data-slot="card-header"] {
+        @apply px-2
+    }
+
+    [data-slot="card-content"] {
+        @apply gap-2 px-2
+    }
+
+    [data-slot="timeline"] {
+        @apply gap-4 py-3
+    }
+
+    [data-slot="timeline-item"] {
+        @apply gap-3
+    }
+
+    [data-slot="timeline-date"] {
+        @apply pl-6
+    }
+
+    [data-slot="timeline-icon"] {
+        @apply size-6 top-0.5
+    }
+
+    [data-slot="timeline-icon"] & svg {
+        @apply size-3
+    }
+
+    [data-slot="timeline-content"] {
+        @apply pl-6
+    }
+
+    [data-slot="badge"] {
+        @apply rounded-sm
+    }
+}

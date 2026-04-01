@@ -1,5 +1,7 @@
+{%- props size = 'default', -%}
+
 {%- set classes = html_classes(
-    'py-8 md:py-16',
+    'group/section',
     attributes.render('class')|default(''),
 ) -%}
 
@@ -7,6 +9,7 @@
 
 <section
     data-slot="section"
+    data-size="{{ size }}"
     class="{{ classes|tailwind_merge }}"
     {{ attributes }}
 >

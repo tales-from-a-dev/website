@@ -59,8 +59,8 @@
         </div>
     </header>
     <main class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16">
-        <twig:Section id="open-source-projects">
-            <twig:Section:SectionHeader class="mb-10 lg:mb-20">
+        <twig:Section id="open-source-projects" size="lg" class="py-8 md:py-16">
+            <twig:Section:SectionHeader>
                 <twig:Section:SectionTitle>{{ 'website.index.section.open_source.title'|trans }}</twig:Section:SectionTitle>
                 <twig:Section:SectionDescription>{{ 'website.index.section.open_source.subtitle'|trans }}</twig:Section:SectionDescription>
             </twig:Section:SectionHeader>
@@ -68,8 +68,8 @@
                 <twig:GithubProjects/>
             </twig:Section:SectionContent>
         </twig:Section>
-        <twig:Section id="experience">
-            <twig:Section:SectionHeader class="mb-10 lg:mb-20">
+        <twig:Section id="experience" size="lg" class="py-8 md:py-16">
+            <twig:Section:SectionHeader>
                 <twig:Section:SectionTitle>{{ 'website.index.section.experience.title'|trans }}</twig:Section:SectionTitle>
                 <twig:Section:SectionDescription>{{ 'website.index.section.experience.subtitle'|trans }}</twig:Section:SectionDescription>
             </twig:Section:SectionHeader>
@@ -127,9 +127,9 @@
                 </twig:Timeline>
             </twig:Section:SectionContent>
         </twig:Section>
-        <twig:Section id="contact">
+        <twig:Section id="contact" size="lg" class="py-8 md:py-16">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <twig:Section:SectionHeader class="mb-10 lg:mb-0">
+                <twig:Section:SectionHeader class="lg:mb-0">
                     <twig:Section:SectionTitle>{{ 'website.index.section.contact.title'|trans }}</twig:Section:SectionTitle>
                     <twig:Section:SectionDescription>{{ 'website.index.section.contact.subtitle'|trans }}</twig:Section:SectionDescription>
                 </twig:Section:SectionHeader>
@@ -143,9 +143,9 @@
                 </twig:Section:SectionContent>
             </div>
         </twig:Section>
-        <twig:Section id="faq">
+        <twig:Section id="faq" size="lg" class="py-8 md:py-16">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <twig:Section:SectionHeader class="mb-10 lg:mb-0">
+                <twig:Section:SectionHeader class="lg:mb-0">
                     <twig:Section:SectionTitle>{{ 'website.index.section.faq.title'|trans }}</twig:Section:SectionTitle>
                     <twig:Section:SectionDescription>{{ 'website.index.section.faq.subtitle'|trans }}</twig:Section:SectionDescription>
                 </twig:Section:SectionHeader>

@@ -1,0 +1,8 @@
+website_resume_controllers:
+    resource:
+        path: ../../src/Resume/Ui/Controller/Website
+        namespace: App\Resume\Ui\Controller\Website
+    type: attribute
+    prefix: '/cv'
+    name_prefix: app_website_resume_
+    trailing_slash_on_root: false

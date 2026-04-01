@@ -18,6 +18,9 @@ enum:
         part_time: 'Part-time'
         permanent_contract: 'Permanent contract'
         personal: 'Personal'
+    language_level:
+        native: 'Native'
+        professional: 'Professional'
 
 # error
 error:
@@ -79,6 +82,43 @@ website:
     contact:
         text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
         title: 'Me contacter'
+
+    # resume
+    resume:
+        title: 'Romain Monteil - Resume'
+        name: 'Romain Monteil'
+        professional_title: 'Senior Back-end Developer'
+        contact:
+            location: 'Limoges, France (Remote)'
+        action:
+            print: 'Print / Save as PDF'
+        section:
+            experience:
+                title: 'Career'
+                today: 'Today'
+            skills:
+                title: 'Skills'
+                backend:
+                    title: 'Backend'
+                frontend:
+                    title: 'Frontend'
+                devops:
+                    title: 'DevOps'
+                architecture:
+                    title: 'Architecture'
+                methodology:
+                    title: 'Methodology'
+            certifications:
+                title: 'Certifications'
+            education:
+                title: 'Education'
+            languages:
+                title: 'Languages'
+            other:
+                title: 'Other'
+                item:
+                    afup: 'Member of AFUP, Association Française des Utilisateurs de PHP'
+                    oss: 'Open Source Contributor'
 
     # footer
     footer:
