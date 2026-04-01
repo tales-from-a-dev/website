@@ -1,0 +1,251 @@
+{% extends 'app/base.html.twig' %}
+
+{% block meta_title %}{{ 'website.resume.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block body_attributes %}class="bg-white"{% endblock %}
+
+{% block body %}
+    <div class="container max-w-screen-xl mx-auto min-h-screen p-4 print:max-w-[794px]">
+        {# Header — Print button #}
+        <header class="flex justify-end mb-8 print:hidden">
+            <twig:Button
+                variant="outline"
+                size="icon"
+                title="{{ 'website.resume.action.print'|trans }}"
+                onclick="window.print()"
+            >
+                <twig:Ux:Icon name="lucide:printer"/>
+            </twig:Button>
+        </header>
+        <main class="grid grid-cols-[2fr_4fr] gap-8 print:gap-4">
+            {# Left column — Name, Contact, Skills, Certifications, Languages, Other #}
+            <div class="flex flex-col gap-6 print:gap-4">
+                {# Name #}
+                <div id="name">
+                    <h1 class="text-4xl font-bold mb-1">{{ 'website.resume.name'|trans }}</h1>
+                    <p class="text-lg text-muted-foreground">{{ 'website.resume.professional_title'|trans }}</p>
+                </div>
+
+                {# Contact #}
+                <twig:Section id="contact">
+                    <twig:Section:SectionContent class="flex flex-col *:px-0 *:gap-2.5 *:justify-start">
+                        <span class="h-7 inline-flex items-center text-[0.8rem] text-primary font-medium">
+                            <twig:Ux:Icon name="lucide:map-pin" class="size-3.5"/>
+                            {{ 'website.resume.contact.location'|trans }}
+                        </span>
+                        <twig:Button
+                            variant="link"
+                            size="sm"
+                            href="mailto:monteil.romain@gmail.com"
+                        >
+                            <twig:Ux:Icon name="lucide:mail"/>
+                            monteil.romain@gmail.com
+                        </twig:Button>
+                        <twig:Button
+                            variant="link"
+                            size="sm"
+                            href="https://talesfroma.dev"
+                            target="_blank"
+                        >
+                            <twig:Ux:Icon name="lucide:globe"/>
+                            talesfroma.dev
+                        </twig:Button>
+                        <twig:Button
+                            variant="link"
+                            size="sm"
+                            href="https://github.com/ker0x"
+                            target="_blank"
+                        >
+                            <twig:Ux:Icon name="simple-icons:github"/>
+                            github.com/ker0x
+                        </twig:Button>
+                        <twig:Button
+                            variant="link"
+                            size="sm"
+                            href="https://www.linkedin.com/in/romain-monteil/"
+                            target="_blank"
+                        >
+                            <twig:Ux:Icon name="simple-icons:linkedin"/>
+                            linkedin.com/in/romain-monteil/
+                        </twig:Button>
+                    </twig:Section:SectionContent>
+                </twig:Section>
+
+                {# Skills #}
+                <twig:Section id="skills">
+                    <twig:Section:SectionHeader>
+                        <twig:Section:SectionTitle>{{ 'website.resume.section.skills.title'|trans }}</twig:Section:SectionTitle>
+                    </twig:Section:SectionHeader>
+                    <twig:Section:SectionContent class="flex flex-col gap-4">
+                        {% for key, skill in skills %}
+                            <twig:Card size="sm">
+                                <twig:Card:CardHeader>
+                                    <twig:Card:CardTitle>{{ ('website.resume.section.skills.' ~ key ~ '.title')|trans }}</twig:Card:CardTitle>
+                                </twig:Card:CardHeader>
+                                <twig:Card:CardContent class="flex flex-wrap gap-1.5">
+                                    {% for item in skill %}
+                                        <twig:Badge variant="secondary" class="h-5">{{ item }}</twig:Badge>
+                                    {% endfor %}
+                                </twig:Card:CardContent>
+                            </twig:Card>
+                        {% endfor %}
+                    </twig:Section:SectionContent>
+                </twig:Section>
+
+                {# Certifications #}
+                <twig:Section id="certifications">
+                    <twig:Section:SectionHeader>
+                        <twig:Section:SectionTitle>{{ 'website.resume.section.certifications.title'|trans }}</twig:Section:SectionTitle>
+                    </twig:Section:SectionHeader>
+                    <twig:Section:SectionContent class="flex flex-col gap-4">
+                        <twig:Card size="sm">
+                            <twig:Card:CardContent>
+                                <div class="flex flex-col gap-2">
+                                    {% for certification in certifications %}
+                                        <span class="text-sm text-primary font-medium">{{ certification.name }}</span>
+                                    {% endfor %}
+                                </div>
+                            </twig:Card:CardContent>
+                        </twig:Card>
+                    </twig:Section:SectionContent>
+                </twig:Section>
+
+                {# Languages #}
+                <twig:Section id="languages">
+                    <twig:Section:SectionHeader>
+                        <twig:Section:SectionTitle>{{ 'website.resume.section.languages.title'|trans }}</twig:Section:SectionTitle>
+                    </twig:Section:SectionHeader>
+                    <twig:Section:SectionContent>
+                        <twig:Card size="sm">
+                            <twig:Card:CardContent>
+                                <dl class="grid grid-cols-[1fr_4fr] gap-2">
+                                    {% for language in languages %}
+                                        <dt class="text-sm text-primary font-medium capitalize">{{ language.code|language_name }}</dt>
+                                        <dd class="text-sm text-muted-foreground text-sm">{{ ('enum.language_level.' ~ language.level)|trans }}</dd>
+                                    {% endfor %}
+                                </dl>
+                            </twig:Card:CardContent>
+                        </twig:Card>
+                    </twig:Section:SectionContent>
+                </twig:Section>
+
+                {# Other #}
+                <twig:Section id="other">
+                    <twig:Section:SectionHeader>
+                        <twig:Section:SectionTitle>{{ 'website.resume.section.other.title'|trans }}</twig:Section:SectionTitle>
+                    </twig:Section:SectionHeader>
+                    <twig:Section:SectionContent>
+                        <twig:Card size="sm">
+                            <twig:Card:CardContent>
+                                <div class="flex flex-col gap-2">
+                                    {% for item in other %}
+                                        <span class="text-sm text-primary font-medium">{{ ('website.resume.section.other.item.' ~ item)|trans }}</span>
+                                    {% endfor %}
+                                </div>
+                            </twig:Card:CardContent>
+                        </twig:Card>
+                    </twig:Section:SectionContent>
+                </twig:Section>
+            </div>
+
+            {# Right column — Work Experience, Educations #}
+            <div class="flex flex-col gap-6 print:gap-4">
+                <twig:Section id="experience">
+                    <twig:Section:SectionHeader>
+                        <twig:Section:SectionTitle>{{ 'website.resume.section.experience.title'|trans }}</twig:Section:SectionTitle>
+                    </twig:Section:SectionHeader>
+                    <twig:Section:SectionContent>
+                        <twig:Timeline>
+                            {% for experience in experiences %}
+                                <twig:Timeline:TimelineItem>
+                                    <twig:Timeline:TimelineDate>
+                                        <twig:Timeline:TimelineDescription>
+                                            {{ experience.startAt|format_date(pattern: 'MMM Y') }}
+                                            - {{ experience.endAt ? experience.endAt|format_date(pattern: 'MMM Y') : 'website.index.section.experience.today'|trans }}
+                                        </twig:Timeline:TimelineDescription>
+                                        <twig:Timeline:TimelineIcon>
+                                            {% if experience.type.isFreelance %}
+                                                <twig:Ux:Icon name="lucide:briefcase-business" class="size-5 print:size-4"/>
+                                            {% elseif experience.type.isPersonal %}
+                                                <twig:Ux:Icon name="lucide:spotlight" class="size-5 print:size-4"/>
+                                            {% else %}
+                                                <twig:Ux:Icon name="lucide:building" class="size-5 print:size-4"/>
+                                            {% endif %}
+                                        </twig:Timeline:TimelineIcon>
+                                    </twig:Timeline:TimelineDate>
+                                    <twig:Timeline:TimelineContent>
+                                        <twig:Card size="sm">
+                                            <twig:Card:CardHeader>
+                                                <twig:Card:CardTitle>
+                                                    {{ experience.company }}
+                                                    <span class="font-normal text-sm text-muted-foreground">/ {{ experience.type|trans }}</span>
+                                                </twig:Card:CardTitle>
+                                                <twig:Card:CardDescription class="italic">{{ experience.position|trans }}</twig:Card:CardDescription>
+                                            </twig:Card:CardHeader>
+                                            {% if experience.technologies is not empty or experience.description is not empty %}
+                                                <twig:Card:CardContent class="flex flex-col gap-3">
+                                                    {% if experience.technologies is not empty %}
+                                                        <div class="flex flex-wrap gap-2 print:gap-1">
+                                                            {% for technology in experience.technologies %}
+                                                                <twig:Badge variant="secondary" class="print:text-2xs print:px-1">
+                                                                    {{ technology }}
+                                                                </twig:Badge>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
+
+                                                    {% if experience.description is not empty %}
+                                                        <div class="print:hidden">
+                                                            {{ experience.description|markdown_to_html }}
+                                                        </div>
+                                                    {% endif %}
+                                                </twig:Card:CardContent>
+                                            {% endif %}
+                                        </twig:Card>
+                                    </twig:Timeline:TimelineContent>
+                                </twig:Timeline:TimelineItem>
+                            {% endfor %}
+                        </twig:Timeline>
+                    </twig:Section:SectionContent>
+                </twig:Section>
+
+                {# Education #}
+                <twig:Section id="education">
+                    <twig:Section:SectionHeader>
+                        <twig:Section:SectionTitle>{{ 'website.resume.section.education.title'|trans }}</twig:Section:SectionTitle>
+                    </twig:Section:SectionHeader>
+                    <twig:Section:SectionContent>
+                        <twig:Timeline>
+                            {% for education in educations %}
+                                <twig:Timeline:TimelineItem>
+                                    <twig:Timeline:TimelineDate>
+                                        <twig:Timeline:TimelineDescription>
+                                            {{ "#{education.startAt} - #{education.endAt}" }}
+                                        </twig:Timeline:TimelineDescription>
+                                        <twig:Timeline:TimelineIcon variant="secondary">
+                                            <twig:Ux:Icon name="lucide:graduation-cap" class="size-5 print:size-4"/>
+                                        </twig:Timeline:TimelineIcon>
+                                    </twig:Timeline:TimelineDate>
+                                    <twig:Timeline:TimelineContent>
+                                        <twig:Card size="sm">
+                                            <twig:Card:CardHeader>
+                                                <twig:Card:CardTitle>
+                                                    {{ education.title }}
+                                                    <span
+                                                        class="font-normal text-sm text-muted-foreground">/ {{ education.description }}</span>
+                                                </twig:Card:CardTitle>
+                                                <twig:Card:CardDescription class="italic">
+                                                    {{ "#{education.school}, #{education.place}" }}
+                                                </twig:Card:CardDescription>
+                                            </twig:Card:CardHeader>
+                                        </twig:Card>
+                                    </twig:Timeline:TimelineContent>
+                                </twig:Timeline:TimelineItem>
+                            {% endfor %}
+                        </twig:Timeline>
+                    </twig:Section:SectionContent>
+                </twig:Section>
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -1,6 +1,8 @@
 {%- set classes = html_classes(
     'rounded-b-md p-4 flex items-center',
-    'group-data-[size=sm]/card:p-3 group-data-[size=lg]/card:p-6 group-data-[variant=outline]/card:bg-muted/50 group-data-[variant=outline]/card:border-t',
+    'group-data-[variant=outline]/card:bg-muted/50 group-data-[variant=outline]/card:border-t',
+    'group-data-[size=sm]/card:p-3',
+    'group-data-[size=lg]/card:p-6',
     attributes.render('class')|default(''),
 ) -%}
 
