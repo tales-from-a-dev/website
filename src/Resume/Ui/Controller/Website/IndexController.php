@@ -38,6 +38,9 @@ final class IndexController extends AbstractController
             ],
             'certifications' => [
                 [
+                    'name' => 'Symfony 8 Certified Developer (Expert)',
+                ],
+                [
                     'name' => 'Twig 3 Certified Designer',
                 ],
             ],
