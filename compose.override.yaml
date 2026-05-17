@@ -11,6 +11,8 @@ services:
       - ./var:/app/var
       - ./frankenphp/Caddyfile:/etc/frankenphp/Caddyfile:ro
       - ./frankenphp/conf.d/20-app.dev.ini:/usr/local/etc/php/app.conf.d/20-app.dev.ini:ro
+      # Keep var/ off the bind-mount for faster I/O on Mac/Windows; comment to inspect from the host.
+      - /app/var
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
@@ -48,6 +50,22 @@ services:
       php:
         condition: service_healthy
       database:
+        condition: service_healthy
+
+  php-tailwind:
+    extends:
+      file: compose.yaml
+      service: php-worker
+    image: ${IMAGES_PREFIX:-}app-php-dev-tailwind
+    build:
+      context: .
+      target: frankenphp_dev
+    command: [ 'bin/console', 'tailwind:build', '--watch' ]
+    volumes:
+      - ./:/app
+      - ./var/tailwind:/app/var/tailwind
+    depends_on:
+      php:
         condition: service_healthy
 
 ###> symfony/mercure-bundle ###

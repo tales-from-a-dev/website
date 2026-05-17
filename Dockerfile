@@ -15,8 +15,6 @@ SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 WORKDIR /app
 
-VOLUME /app/var/
-
 # persistent deps
 # hadolint ignore=DL3008
 RUN <<-EOF
@@ -115,7 +113,9 @@ RUN <<-EOF
 	if [ -f importmap.php ]; then
 		php bin/console asset-map:compile
 	fi
-	chmod +x bin/console; sync
+	chmod +x bin/console
+	chmod -R g=u var
+	sync
 EOF
 
 # Collect shared libraries needed by FrankenPHP and PHP extensions
@@ -131,7 +131,6 @@ RUN <<-'EOF'
 			[ -f "$lib" ] && cp -n "$lib" /tmp/libs/
 		done
 	done
-	sed -i 's/opcache.preload_user = root/opcache.preload_user = www-data/' "$PHP_INI_DIR/app.conf.d/20-app.prod.ini"
 	rm -rf /var/lib/apt/lists/*
 EOF
 
@@ -157,10 +156,11 @@ COPY --from=frankenphp_prod_builder /etc/frankenphp/Caddyfile /etc/frankenphp/Ca
 
 # CA certificates for TLS, file/libmagic for Symfony MIME type detection
 COPY --from=frankenphp_prod_builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=frankenphp_prod_builder /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
 COPY --from=frankenphp_prod_builder /usr/bin/file /usr/bin/file
 COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.mgc
 
-ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
+ENV  OPENSSL_CONF=/etc/ssl/openssl.cnf XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
 
 RUN <<-EOF
 	apt-get update
@@ -173,11 +173,11 @@ RUN <<-EOF
 EOF
 
 COPY --link --exclude=var --from=frankenphp_prod_builder /app /app
-COPY --link --chown=www-data:www-data --from=frankenphp_prod_builder /app/var /app/var
+# Group 0 + g=u for arbitrary-UID runtimes (e.g. OpenShift).
+COPY --chown=www-data:0 --from=frankenphp_prod_builder /app/var /app/var
+RUN chmod g=u /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-
-VOLUME /app/var/
 
 USER www-data
 
