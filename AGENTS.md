@@ -9,7 +9,7 @@ Tales From a Dev is a portfolio website built with **Symfony 7.4** and **PHP 8.5
 ## Stack
 
 - **Backend**: PHP 8.5 / Symfony 7.4 / Doctrine ORM 3.5
-- **Frontend**: Tailwind CSS 4.2 / Stimulus / Symfony AssetMapper / Twig Components / Turbo
+- **Frontend**: Tailwind CSS 4.3 / Stimulus / Symfony AssetMapper / Twig Components / Turbo
 - **Server**: FrankenPHP (Caddy-based, with Mercure built in)
 - **Database**: PostgreSQL 17
 - **Cache**: Valkey 9.0 (Redis-compatible)

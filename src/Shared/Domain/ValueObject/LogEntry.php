@@ -14,12 +14,12 @@ final readonly class LogEntry
      *     method: string,
      * } $context
      * @param array{
-     *     url: string,
-     *     ip: string,
-     *     http_method: string,
-     *     server: string,
-     *     referrer: string,
-     *     user_agent: string,
+     *     url?: string,
+     *     ip?: string,
+     *     http_method?: string,
+     *     server?: string,
+     *     referrer?: string,
+     *     user_agent?: string,
      * } $extra
      */
     public function __construct(

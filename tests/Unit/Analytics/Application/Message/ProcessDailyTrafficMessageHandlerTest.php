@@ -559,7 +559,7 @@ final class ProcessDailyTrafficMessageHandlerTest extends TestCase
             ->expects($this->once())
             ->method('add')
             ->with($this->callback(static function (PageView $pageView) {
-                return null === $pageView->referer->value;
+                return null === $pageView->referer;
             }))
         ;
 

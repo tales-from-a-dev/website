@@ -155,8 +155,10 @@ db: db-create db-migrate db-load db-seed ## Create the database and seed it
 .PHONY: db
 
 db-create: ## Create database
+	@$(DOCKER_COMP) stop php-consumer
 	@$(SYMFONY) doctrine:database:drop --if-exists --force
 	@$(SYMFONY) doctrine:database:create --if-not-exists
+	@$(DOCKER_COMP) start php-consumer
 .PHONY: db-create
 
 db-diff: ## Generate a migration by comparing your current database to your mapping information
@@ -194,11 +196,11 @@ db-test: ## Create test database
 ## —— Linter 💫 ————————————————————————————————————————————————————————————————
 ##
 phpcsfixer-dry: ## Check coding style in dry mode
-	@$(DOCKER_COMP) exec php ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
+	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
 .PHONY: phpcsfixer-dry
 
 phpcsfixer: ## Check coding style
-	@$(DOCKER_COMP) exec php ./vendor/bin/php-cs-fixer fix --verbose --ansi
+	@$(PHP_CONT) ./vendor/bin/php-cs-fixer fix --verbose --ansi
 .PHONY: phpcsfixer
 
 phpstan: ## Perform static analysis
