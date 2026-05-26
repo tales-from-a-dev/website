@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Tests\Functional;
+
 use App\Experience\Domain\Enum\ExperienceRouteNameEnum;
 use App\Settings\Domain\Enum\SettingsRouteNameEnum;
 use App\Shared\Domain\Enum\SharedRouteNameEnum;
@@ -14,7 +16,7 @@ final class DashboardRouteTest extends RouteTestCase
     /**
      * @return iterable<array<int, mixed>>
      */
-    #[Override]
+    #[\Override]
     public static function urlsProvider(): iterable
     {
         yield 'GET /dashboard' => ['/dashboard', Request::METHOD_GET, SharedRouteNameEnum::DashboardIndex];
