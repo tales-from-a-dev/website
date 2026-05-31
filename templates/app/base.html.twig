@@ -15,29 +15,21 @@
         {% endblock %}
 
         {% block meta_social %}
-            <!-- open graph / facebook -->
+            <!-- open graph -->
             <meta property="og:title" content="{{ block('meta_title') }}">
             <meta property="og:description" content="{{ block('meta_description') }}">
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="{{ 'app.meta.title'|trans }}">
             <meta property="og:url" content="{{ block('meta_canonical') }}">
             <meta property="og:locale" content="{{ app.locale }}">
-
-            <!-- twitter -->
-            <meta name="twitter:card" content="summary">
-            <meta name="twitter:title" content="{{ block('meta_title') }}">
-            <meta name="twitter:description" content="{{ block('meta_description') }}">
-            <meta name="twitter:site" content="@ker0x">
-            <meta name="twitter:creator" content="@ker0x">
-        {% endblock %}
-
-        {% block meta_frankenphp %}
-            {% if app.request.server.has('FRANKENPHP_HOT_RELOAD') %}
-                <meta name="frankenphp-hot-reload:url" content="{{ app.request.server.get('FRANKENPHP_HOT_RELOAD') }}">
-            {% endif %}
+            {% block meta_og_image %}{% endblock %}
         {% endblock %}
 
         <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
+
+        {% block fonts %}
+            <link rel="preload" href="{{ preload('https://cdn.jsdelivr.net/fontsource/fonts/inter:vf@latest/latin-wght-normal.woff2', {as: 'font'}) }}">
+        {% endblock %}
 
         {% block stylesheets %}{% endblock %}
 
@@ -45,12 +37,14 @@
             {% block importmap %}
                 {{ importmap('app') }}
             {% endblock %}
-
-            {% if app.request.server.has('FRANKENPHP_HOT_RELOAD') %}
-                <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-                <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-            {% endif %}
         {% endblock %}
+
+        {% if app.request.server.has('FRANKENPHP_HOT_RELOAD') %}
+            <!-- FrankenPHP Hot Reload -->
+            <meta name="frankenphp-hot-reload:url" content="{{ app.request.server.get('FRANKENPHP_HOT_RELOAD') }}">
+            <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+            <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+        {% endif %}
 
         <link rel="icon"
               href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🔮</text></svg>">

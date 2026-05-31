@@ -5,6 +5,5 @@
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
-import './vendor/inter-ui/inter.min.css';
 
 import './stimulus_bootstrap.js';

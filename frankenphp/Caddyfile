@@ -24,12 +24,6 @@
 	root /app/public
 	encode zstd br gzip
 
-	@assets {
-		file
-		path *.css *.js *.svg *.png *.jpg *.jpeg *.gif *.webp *.ico *.woff *.woff2 *.ttf *.otf *.eot
-	}
-	header @assets Cache-Control "public, max-age=31536000, immutable"
-
 	mercure {
 		# Publisher JWT key
 		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
@@ -49,6 +43,12 @@
 
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
+
+	@assets path /assets/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+	file_server @assets {
+		precompressed zstd br gzip
+	}
 
 	@phpRoute {
 		not path /.well-known/mercure*
