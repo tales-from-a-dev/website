@@ -1,6 +1,7 @@
 # btn
 btn:
     add: 'Add'
+    cancel: 'Cancel'
     login: 'Login'
     save: 'Save'
     send: 'Send'
@@ -13,13 +14,20 @@ label:
     average_daily_rate: 'Average daily rate'
     company: 'Company'
     content: 'Content'
+    description: 'Description'
     email: 'Email'
+    experience_type: 'Type'
+    experience_position: 'Position'
     full_name: 'Name'
     password: 'Password'
+    start_at: 'Start at'
+    end_at: 'End at'
+    technologies: 'Technologies'
+    website: 'Website'
 
 # placeholder
 placeholder:
     contact:
         name: 'First & last name'
         email: 'Email'
-        content: 'Description of your project'
+        content: 'Describe your project'

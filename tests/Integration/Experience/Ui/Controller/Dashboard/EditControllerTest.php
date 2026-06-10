@@ -63,6 +63,7 @@ final class EditControllerTest extends WebTestCase
             ->actingAs($user)
             ->visit("/dashboard/experience/edit/$experience->id")
             ->fillField('experience_company', 'Facebook')
+            ->fillField('experience_website', 'https://facebook.com')
             ->selectField('experience_type', ExperienceTypeEnum::PermanentContract->value)
             ->selectField('experience_position', ExperiencePositionEnum::BackendDeveloper->value)
             ->fillField('experience_startAt', \IntlDateFormatter::formatObject($startAt = new \DateTimeImmutable('today last year'), 'yyyy-MM-dd'))
@@ -78,11 +79,12 @@ final class EditControllerTest extends WebTestCase
             )
         ;
 
-        $this->assertSame($startAt->format(\DateTimeInterface::ATOM), $experience->startAt->format(\DateTimeInterface::ATOM));
-        $this->assertSame($endAt->format(\DateTimeInterface::ATOM), $experience->endAt?->format(\DateTimeInterface::ATOM));
         $this->assertSame('Facebook', $experience->company);
+        $this->assertSame('https://facebook.com', $experience->website);
         $this->assertSame(ExperienceTypeEnum::PermanentContract, $experience->type);
         $this->assertSame(ExperiencePositionEnum::BackendDeveloper, $experience->position);
+        $this->assertSame($startAt->format(\DateTimeInterface::ATOM), $experience->startAt->format(\DateTimeInterface::ATOM));
+        $this->assertSame($endAt->format(\DateTimeInterface::ATOM), $experience->endAt?->format(\DateTimeInterface::ATOM));
     }
 
     public function testItTriggerErrorsWithInvalidData(): void

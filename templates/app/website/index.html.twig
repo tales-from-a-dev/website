@@ -9,14 +9,14 @@
         class="max-w-screen-xl mx-auto flex flex-col gap-8 p-4 md:p-8 lg:h-svh *:h-1/2 *:flex *:items-center *:justify-center">
         <picture>
             <source
-                srcset="{{ asset('images/profile_lg.webp') }}"
+                srcset="{{ preload(asset('images/profile_lg.webp'), {as: 'image', type: 'image/webp'}) }}"
                 media="(width >= 64rem)"
                 type="image/webp"
                 width="500"
                 height="500"
             />
             <source
-                srcset="{{ asset('images/profile_md.webp') }}"
+                srcset="{{ preload(asset('images/profile_md.webp'), {as: 'image', type: 'image/webp'}) }}"
                 media="(width < 64rem)"
                 type="image/webp"
                 width="320"
@@ -96,12 +96,14 @@
                                 <twig:Card size="lg">
                                     <twig:Card:CardHeader>
                                         <twig:Card:CardTitle>
-                                            {{ experience.company }}
-                                            <span
-                                                class="font-normal text-sm text-muted-foreground">/ {{ experience.type|trans }}</span>
+                                            {% if experience.website %}
+                                                <a href="{{ experience.website }}" target="_blank" class="hover:underline">{{ experience.company }}</a>
+                                            {% else %}
+                                                {{ experience.company }}
+                                            {% endif %}
+                                            <span class="font-normal text-sm text-muted-foreground">/ {{ experience.type|trans }}</span>
                                         </twig:Card:CardTitle>
-                                        <twig:Card:CardDescription
-                                            class="italic">{{ experience.position|trans }}</twig:Card:CardDescription>
+                                        <twig:Card:CardDescription class="italic">{{ experience.position|trans }}</twig:Card:CardDescription>
                                     </twig:Card:CardHeader>
                                     {% if experience.technologies is not empty or experience.description is not empty %}
                                         <twig:Card:CardContent class="flex flex-col gap-6">

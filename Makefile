@@ -67,6 +67,10 @@ sh: ## Connect to the PHP FPM container
 	@$(PHP_CONT) sh
 .PHONY: sh
 
+chown: ## Fix files permissions
+	@$(DOCKER_COMP) run --rm php chown -R $$(id -u):$$(id -g) .
+.PHONY: chown
+
 ##
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 ##
