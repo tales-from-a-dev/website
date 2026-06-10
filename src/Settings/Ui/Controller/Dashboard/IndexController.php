@@ -51,7 +51,7 @@ final class IndexController extends AbstractController
             return $this->redirectToRoute(SettingsRouteNameEnum::DashboardSettings->value);
         }
 
-        return $this->render('app/dashboard/settings.html.twig', [
+        return $this->render('app/dashboard/settings/index.html.twig', [
             'form' => $form,
         ]);
     }

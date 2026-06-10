@@ -49,7 +49,7 @@ final class IndexController extends AbstractController
             if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
                 $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
 
-                return $this->renderBlock('app/website/contact.html.twig', 'update', [
+                return $this->renderBlock('app/website/contact/index.html.twig', 'update', [
                     'form' => $this->createContactForm(),
                 ]);
             }
@@ -57,7 +57,7 @@ final class IndexController extends AbstractController
             return $this->redirectToRoute(route: SharedRouteNameEnum::WebsiteIndex->value, status: Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderBlock('app/website/contact.html.twig', 'new', [
+        return $this->renderBlock('app/website/contact/index.html.twig', 'new', [
             'form' => $form,
         ]);
     }

@@ -1,0 +1,7 @@
+website_analytics_controllers:
+    resource:
+        path: ../../src/Analytics/Ui/Controller/Website
+        namespace: App\Analytics\Ui\Controller\Website
+    type: attribute
+    name_prefix: app_website_analytics_
+    trailing_slash_on_root: false

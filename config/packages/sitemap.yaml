@@ -1,0 +1,7 @@
+presta_sitemap:
+    defaults:
+        priority: 0.5
+        changefreq: weekly
+        lastmod: now
+
+    dump_directory: '%kernel.project_dir%/var/sitemaps'

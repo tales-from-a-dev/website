@@ -7,6 +7,7 @@
         <meta name="description" content="{% block meta_description %}{{ 'app.meta.description'|trans }}{% endblock %}">
         <meta name="author" content="Romain Monteil">
         <meta name="view-transition" content="same-origin">
+        <meta name="robots" content="{% block meta_robots %}{{ 'index, follow' }}{% endblock %}">
 
         {% block meta_turbo %}
             <!-- turbo -->
@@ -24,6 +25,8 @@
             <meta property="og:locale" content="{{ app.locale }}">
             {% block meta_og_image %}{% endblock %}
         {% endblock %}
+
+        {% block meta_jsonld %}{% endblock %}
 
         <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
 

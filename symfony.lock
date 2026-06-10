@@ -134,6 +134,9 @@
     "pierstoval/smoke-testing": {
         "version": "v0.6.0"
     },
+    "presta/sitemap-bundle": {
+        "version": "v4.3.0"
+    },
     "symfony/amazon-mailer": {
         "version": "6.2",
         "recipe": {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Scheduler;
 
 use App\Analytics\Application\Message\ProcessDailyTrafficMessage;
+use Presta\SitemapBundle\Messenger\DumpSitemapMessage;
 use Symfony\Component\Console\Messenger\RunCommandMessage;
 use Symfony\Component\Scheduler\Attribute\AsSchedule;
 use Symfony\Component\Scheduler\RecurringMessage;
@@ -35,7 +36,12 @@ final readonly class TaskProvider implements ScheduleProviderInterface
                     frequency: '1 day',
                     message: new ProcessDailyTrafficMessage(),
                     from: '01:13',
-                )
+                ),
+                RecurringMessage::every(
+                    frequency: '1 day',
+                    message: new DumpSitemapMessage(),
+                    from: '05:23',
+                ),
             )
         ;
     }

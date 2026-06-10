@@ -9,6 +9,21 @@ parameters:
     # locales
     app.enabled_locales: [ 'en', 'fr' ]
 
+    # social media
+    app.social_accounts:
+        -
+            name: 'github'
+            url: 'https://github.com/ker0x'
+        -
+            name: 'bluesky'
+            url: 'https://bsky.app/profile/ker0x.bsky.social'
+        -
+            name: 'x'
+            url: 'https://x.com/ker0x'
+        -
+            name: 'linkedin'
+            url: 'https://www.linkedin.com/in/romain-monteil/'
+
 services:
     # default configuration for services in *this* file
     _defaults:

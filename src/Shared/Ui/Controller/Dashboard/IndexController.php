@@ -33,7 +33,7 @@ class IndexController extends AbstractController
 
     public function __invoke(): Response
     {
-        return $this->render('app/dashboard/index.html.twig', [
+        return $this->render('app/dashboard/shared/index.html.twig', [
             'monthly_chart' => $this->buildMonthlyChart(),
             'daily_chart' => $this->buildDailyChart(),
             'page_views' => $this->pageViewCollectionProvider->provide(),

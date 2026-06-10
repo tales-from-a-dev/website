@@ -4,6 +4,16 @@
     {{ 'website.index.title'|trans }} | {{ parent() }}
 {% endblock %}
 
+{% block meta_og_image %}
+    <meta property="og:image" content="{{ absolute_url(asset('images/profile_lg.webp')) }}">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+{% endblock %}
+
+{% block meta_jsonld %}
+    <script type="application/ld+json">{{ structured_data|serialize('jsonld')|raw }}</script>
+{% endblock %}
+
 {% block main %}
     <header
         class="max-w-screen-xl mx-auto flex flex-col gap-8 p-4 md:p-8 lg:h-svh *:h-1/2 *:flex *:items-center *:justify-center">
