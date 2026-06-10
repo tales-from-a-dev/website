@@ -17,6 +17,6 @@ final readonly class Alert implements \Stringable
 
     public function __toString(): string
     {
-        return (string) $this->message;
+        return $this->message->getMessage();
     }
 }
