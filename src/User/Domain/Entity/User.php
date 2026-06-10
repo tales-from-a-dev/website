@@ -73,12 +73,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
         return $this->email;
     }
-
-    /**
-     * @see UserInterface
-     */
-    #[\Deprecated]
-    public function eraseCredentials(): void
-    {
-    }
 }

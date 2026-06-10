@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Domain\ValueObject;
 
 use App\GitHub\Domain\ValueObject\GitHubProject;
-use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
+use Symfony\Component\Serializer\Attribute\DiscriminatorMap;
 
 /**
  * @template T
