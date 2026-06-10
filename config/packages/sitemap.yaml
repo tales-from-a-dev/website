@@ -4,4 +4,10 @@ presta_sitemap:
         changefreq: weekly
         lastmod: now
 
+    alternate:
+        enabled: true
+        default_locale: '%app.default_locale%'
+        locales: '%app.enabled_locales%'
+        i18n: symfony
+
     dump_directory: '%kernel.project_dir%/var/sitemaps'

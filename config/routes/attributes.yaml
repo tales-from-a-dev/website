@@ -3,7 +3,9 @@ controllers_contact:
         path: ../../src/Contact/Ui/Controller
         namespace: App\Contact\Ui\Controller
     type: attribute
-    prefix: '/contact'
+    prefix:
+        en: '/contact'
+        fr: '/fr/contact'
     name_prefix: app_contact_
     trailing_slash_on_root: false
 

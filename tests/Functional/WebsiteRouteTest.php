@@ -19,10 +19,15 @@ final class WebsiteRouteTest extends RouteTestCase
     public static function urlsProvider(): iterable
     {
         yield 'GET /' => ['/', Request::METHOD_GET, SharedRouteNameEnum::WebsiteIndex];
+        yield 'GET /fr' => ['/fr', Request::METHOD_GET, SharedRouteNameEnum::WebsiteIndex];
 
         yield 'GET /cv' => ['/cv', Request::METHOD_GET, ResumeRouteNameEnum::WebsiteResume];
+        yield 'GET /fr/cv' => ['/fr/cv', Request::METHOD_GET, ResumeRouteNameEnum::WebsiteResume];
 
         yield 'GET /contact' => ['/contact', Request::METHOD_GET, ContactRouteNameEnum::WebsiteContact];
+        yield 'GET /fr/contact' => ['/fr/contact', Request::METHOD_GET, ContactRouteNameEnum::WebsiteContact];
+
         yield 'POST /contact' => ['/contact', Request::METHOD_POST, ContactRouteNameEnum::WebsiteContact];
+        yield 'POST /fr/contact' => ['/fr/contact', Request::METHOD_POST, ContactRouteNameEnum::WebsiteContact];
     }
 }

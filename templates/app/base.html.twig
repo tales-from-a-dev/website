@@ -55,10 +55,31 @@
             <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
 
-        <link rel="icon"
-              href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🔮</text></svg>">
-        <link rel="canonical"
-              href="{% block meta_canonical app.current_route ? url(app.current_route, app.current_route_parameters) : '' %}" />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🔮</text></svg>"
+        />
+        <link
+            rel="canonical"
+            href="{% block meta_canonical app.current_route ? url(app.current_route, app.current_route_parameters) : '' %}"
+        />
+
+        {% block meta_hreflang %}
+            {% if app.current_route %}
+                {% for locale in enabled_locales %}
+                    <link
+                        rel="alternate"
+                        hreflang="{{ locale }}"
+                        href="{{ url(app.current_route, app.current_route_parameters|merge({_locale: locale})) }}"
+                    />
+                {% endfor %}
+                <link
+                    rel="alternate"
+                    hreflang="x-default"
+                    href="{{ url(app.current_route, app.current_route_parameters|merge({_locale: default_locale})) }}"
+                />
+            {% endif %}
+        {% endblock %}
     </head>
     <body class="bg-muted">
         {% block body %}{% endblock %}
