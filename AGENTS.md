@@ -4,11 +4,11 @@ Welcome, AI assistant. Please follow these guidelines when contributing to this 
 
 ## Project Overview
 
-Tales From a Dev is a portfolio website built with **Symfony 7.4** and **PHP 8.5+**, following **Domain-Driven Design (DDD)** principles with a layered architecture.
+Tales From a Dev is a portfolio website built with **Symfony 8.1** and **PHP 8.5+**, following **Domain-Driven Design (DDD)** principles with a layered architecture. The site is bilingual (English / French) with locale-prefixed routes and ships SEO primitives (sitemap, JSON-LD, robots).
 
 ## Stack
 
-- **Backend**: PHP 8.5 / Symfony 7.4 / Doctrine ORM 3.5
+- **Backend**: PHP 8.5 / Symfony 8.1 / Doctrine ORM 3.5
 - **Frontend**: Tailwind CSS 4.3 / Stimulus / Symfony AssetMapper / Twig Components / Turbo
 - **Server**: FrankenPHP (Caddy-based, with Mercure built in)
 - **Database**: PostgreSQL 17
@@ -58,19 +58,34 @@ The app uses a **modular DDD structure** — each domain is self-contained under
 
 | Module | Purpose |
 |--------|---------|
-| `Analytics/` | Page view tracking |
+| `Analytics/` | Page view tracking + dynamic `robots.txt` |
 | `Contact/` | Contact form + email |
-| `Experience/` | Portfolio / experience entries |
+| `Experience/` | Portfolio / experience entries (timeline) |
 | `GitHub/` | GitHub API sync |
+| `Resume/` | CV page (served under `/cv` and `/fr/cv`) |
 | `Settings/` | Site settings |
 | `User/` | Authentication |
-| `Shared/` | Value objects, base classes, shared interfaces |
+| `Shared/` | Value objects, base classes, shared interfaces, SEO (JSON-LD encoder, structured data builders) |
 
 Each module has its own services registered in `config/services/<module>.yaml` and routes in `config/routes/`.
 
-Templates live in `templates/` with a parallel structure: `component/` for Twig Components, `app/` for page templates.
+Templates live in `templates/` with a parallel structure: `component/` for Twig Components, `app/` for page templates. Page templates are grouped per module (e.g. `templates/app/website/contact/index.html.twig`, `templates/app/website/shared/index.html.twig`).
 
 Tests mirror this structure under `tests/Unit/`, `tests/Integration/`, and `tests/Functional/`.
+
+## Internationalization
+
+- Default locale: `en`. Enabled locales: `en`, `fr` (see `app.default_locale` / `app.enabled_locales` in `config/services.yaml`).
+- Website routes are declared per-locale with French prefixed by `/fr` (e.g. `/contact` ↔ `/fr/contact`, `/cv` ↔ `/fr/cv`). Dashboard routes stay locale-agnostic.
+- `base.html.twig` emits `hreflang` alternates (including `x-default`) for every enabled locale on the current route.
+- All user-facing strings go through `|trans`; translations live under `translations/{en,fr}/`.
+
+## SEO
+
+- `PrestaSitemapBundle` exposes the XML sitemap (`presta:sitemaps:dump` / `PrestaSitemapBundle_index` route). Alternate locales are emitted via `alternate.i18n: symfony`.
+- `App\Analytics\Ui\Controller\Website\RobotController` serves `/robots.txt` and links the sitemap absolute URL.
+- `App\Shared\Infrastructure\Seo\HomepageStructuredDataBuilder` produces the homepage `Person` JSON-LD; rendered in `base.html.twig` via the `meta_jsonld` block.
+- `App\Shared\Infrastructure\Serializer\Encoder\JsonLdEncoder` registers the `jsonld` format with the Symfony Serializer (HTML-safe encoding flags).
 
 ## PHP Code Standards
 
