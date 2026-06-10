@@ -1,6 +1,6 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/tales-from-a-dev/website/ci.yaml?style=for-the-badge)](https://github.com/tales-from-a-dev/website/actions/workflows/ci.yml)
 ![PHP Version](https://img.shields.io/badge/php-8.5-4f5b93.svg?style=for-the-badge)
-![Symfony Version](https://img.shields.io/badge/symfony-7.4-000.svg?style=for-the-badge)
+![Symfony Version](https://img.shields.io/badge/symfony-8.1-000.svg?style=for-the-badge)
 ![Tailwind Version](https://img.shields.io/badge/tailwind-4.3-00bcff.svg?style=for-the-badge)
 ![PostgreSQL Version](https://img.shields.io/badge/postgresql-17-6395be.svg?style=for-the-badge)
 
@@ -10,10 +10,12 @@ A personal website built with Symfony showcasing development experiences, projec
 
 ## 📋 Overview
 
-This is a modern web application built with Symfony 7.4 and PHP 8.5, featuring:
-- **Modular Architecture**: Organized into domain modules (Analytics, Contact, Experience, GitHub, Settings, User)
+This is a modern web application built with Symfony 8.1 and PHP 8.5, featuring:
+- **Modular Architecture**: Organized into domain modules (Analytics, Contact, Experience, GitHub, Resume, Settings, User)
+- **Internationalization**: English (default) and French, with locale-prefixed routes (`/fr/...`)
+- **SEO**: XML sitemap (PrestaSitemapBundle), JSON-LD structured data, dynamic `robots.txt`, hreflang alternate links
 - **Real-time Features**: Mercure integration for live updates
-- **Modern Frontend**: Tailwind CSS 4.1 with Symfony AssetMapper and Stimulus
+- **Modern Frontend**: Tailwind CSS 4.3 with Symfony AssetMapper and Stimulus
 - **Message Queue**: Symfony Messenger with Doctrine transport
 - **Caching**: Valkey (Redis-compatible) for application cache
 - **Database**: PostgreSQL 17 with Doctrine ORM
@@ -23,13 +25,13 @@ This is a modern web application built with Symfony 7.4 and PHP 8.5, featuring:
 
 ### Backend
 - **Language**: PHP 8.5
-- **Framework**: Symfony 7.4
+- **Framework**: Symfony 8.1
 - **ORM**: Doctrine ORM 3.5
 - **Server**: FrankenPHP
 - **Package Manager**: Composer
 
 ### Frontend
-- **CSS Framework**: Tailwind CSS 4.2
+- **CSS Framework**: Tailwind CSS 4.3
 - **JavaScript**: Stimulus (via Symfony UX)
 - **Asset Management**: Symfony AssetMapper
 - **Components**: Twig Components, Turbo
@@ -276,13 +278,14 @@ make coverage
 ├── public/              # Web root
 │   └── index.php        # Application entry point
 ├── src/                 # Application source code
-│   ├── Analytics/       # Analytics module
-│   ├── Contact/         # Contact module
-│   ├── Experience/      # Experience module
+│   ├── Analytics/       # Page view tracking + robots.txt
+│   ├── Contact/         # Contact form
+│   ├── Experience/      # Professional timeline
 │   ├── GitHub/          # GitHub integration module
-│   ├── Settings/        # Settings module
-│   ├── Shared/          # Shared/common code
-│   └── User/            # User module
+│   ├── Resume/          # CV page
+│   ├── Settings/        # Application settings
+│   ├── Shared/          # Shared/common code (SEO, kernel, base entities)
+│   └── User/            # Authentication and user management
 ├── templates/           # Twig templates
 ├── tests/               # Test files
 │   ├── Fixtures/        # Test fixtures

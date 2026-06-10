@@ -84,6 +84,10 @@ Each module is split into:
 
 **Ui layer** controllers use `renderBlock()` for Turbo Stream responses and fall back to redirects for plain requests, checking against `TurboBundle::STREAM_FORMAT`.
 
+**Localization.** Default locale `en`, enabled locales `en` + `fr` (see `config/services.yaml`). Website routes are declared per-locale in `config/routes/*.yaml` with French prefixed by `/fr` (e.g. `/contact` ↔ `/fr/contact`, `/cv` ↔ `/fr/cv`); dashboard routes stay locale-agnostic. All user-facing text goes through `|trans` — translations live under `translations/{en,fr}/`. `base.html.twig` emits `hreflang` alternates including `x-default` for every enabled locale.
+
+**SEO.** `PrestaSitemapBundle` exposes the XML sitemap (alternates configured via `alternate.i18n: symfony` in `config/packages/sitemap.yaml`). `App\Analytics\Ui\Controller\Website\RobotController` serves `/robots.txt`. JSON-LD structured data is built by `App\Shared\Infrastructure\Seo\HomepageStructuredDataBuilder` and serialized through `App\Shared\Infrastructure\Serializer\Encoder\JsonLdEncoder` (registered with format `jsonld`, HTML-safe flags). Templates render it via the `meta_jsonld` block in `base.html.twig`.
+
 ## Test organization
 
 - `tests/Unit/` — Pure PHPUnit, no container. Mirror `src/` namespace structure.
