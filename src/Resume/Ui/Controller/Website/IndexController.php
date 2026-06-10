@@ -7,6 +7,7 @@ namespace App\Resume\Ui\Controller\Website;
 use App\Experience\Infrastructure\Repository\ExperienceRepository;
 use App\Shared\Ui\Controller\AbstractController;
 use Doctrine\Common\Collections\Order;
+use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,6 +15,12 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(
     path: '/',
     name: 'index',
+    options: [
+        'sitemap' => [
+            'priority' => 0.8,
+            'changefreq' => UrlConcrete::CHANGEFREQ_MONTHLY,
+        ],
+    ],
     methods: [
         Request::METHOD_GET,
     ]

@@ -24,7 +24,7 @@ final class LoginController extends AbstractController
         Request $request,
         AuthenticationUtils $authenticationUtils,
     ): Response {
-        return $this->render('app/dashboard/login.html.twig', [
+        return $this->render('app/dashboard/user/login.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'last_error' => $authenticationUtils->getLastAuthenticationError(),
         ]);

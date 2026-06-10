@@ -1,5 +1,9 @@
 # app
 app:
+    name: 'Tales from a Dev'
+    author: 'Romain Monteil'
+    job_title: 'Développeur Back-end Senior'
+
     meta:
         description: 'Développeur back-end senior freelance à Limoges. Je développe des applications PHP sur les frameworks Symfony et Laravel.'
         title: 'Tales from a Dev'
