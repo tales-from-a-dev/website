@@ -21,6 +21,9 @@ class Experience
     #[Orm\Column(type: Types::STRING, length: 255)]
     public string $company;
 
+    #[Orm\Column(type: Types::TEXT, length: 255, nullable: true)]
+    public ?string $website = null;
+
     #[Orm\Column(type: Types::STRING, length: 255, enumType: ExperienceTypeEnum::class)]
     public ExperienceTypeEnum $type;
 

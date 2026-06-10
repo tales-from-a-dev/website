@@ -19,6 +19,10 @@ final class ExperienceDto
         #[Assert\Length(min: 1, max: 255)]
         public ?string $company = null,
 
+        #[Assert\Type(type: 'string')]
+        #[Assert\Url(protocols: ['https'], requireTld: true)]
+        public ?string $website = null,
+
         #[Assert\Type(type: ExperienceTypeEnum::class)]
         public ?ExperienceTypeEnum $type = null,
 

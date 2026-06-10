@@ -57,6 +57,7 @@ final class NewControllerTest extends WebTestCase
             ->actingAs($user)
             ->visit('/dashboard/experience/new')
             ->fillField('experience_company', 'Facebook')
+            ->fillField('experience_website', 'https://facebook.com')
             ->selectField('experience_type', ExperienceTypeEnum::PermanentContract->value)
             ->selectField('experience_position', ExperiencePositionEnum::BackendDeveloper->value)
             ->fillField('experience_technologies', 'Symfony, Stimulus, Turbo, Tailwind CSS')
@@ -77,6 +78,7 @@ final class NewControllerTest extends WebTestCase
         $experience = ExperienceFactory::last();
 
         $this->assertSame('Facebook', $experience->company);
+        $this->assertSame('https://facebook.com', $experience->website);
         $this->assertSame(ExperienceTypeEnum::PermanentContract, $experience->type);
         $this->assertSame(ExperiencePositionEnum::BackendDeveloper, $experience->position);
         $this->assertSame(['Symfony', 'Stimulus', 'Turbo', 'Tailwind CSS'], $experience->technologies);

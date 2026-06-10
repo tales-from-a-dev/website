@@ -23,10 +23,11 @@ label:
     start_at: 'Date de début'
     end_at: 'Date de fin'
     technologies: 'Technologies'
+    website: 'Site internet'
 
 # placeholder
 placeholder:
     contact:
         name: 'Nom & prénom'
         email: 'Email'
-        content: 'Description de votre projet'
+        content: 'Décrivez votre projet'

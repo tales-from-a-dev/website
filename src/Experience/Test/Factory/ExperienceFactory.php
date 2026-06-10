@@ -25,6 +25,7 @@ final class ExperienceFactory extends PersistentObjectFactory
     {
         return [
             'company' => self::faker()->company(),
+            'website' => self::faker()->url(),
             'type' => self::faker()->randomElement(ExperienceTypeEnum::cases()),
             'position' => self::faker()->randomElement(ExperiencePositionEnum::cases()),
             'description' => self::faker()->text(255),
