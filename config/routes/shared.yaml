@@ -12,6 +12,8 @@ website_shared_controllers:
         path: ../../src/Shared/Ui/Controller/Website
         namespace: App\Shared\Ui\Controller\Website
     type: attribute
-    prefix: '/'
+    prefix:
+        en: ''
+        fr: '/fr'
     name_prefix: app_website_shared_
     trailing_slash_on_root: false

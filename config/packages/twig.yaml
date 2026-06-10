@@ -6,6 +6,8 @@ twig:
 
     globals:
         social_accounts: '%app.social_accounts%'
+        enabled_locales: '%app.enabled_locales%'
+        default_locale: '%app.default_locale%'
 
 when@test:
     twig:
