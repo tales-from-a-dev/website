@@ -28,7 +28,13 @@
         <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
 
         {% block fonts %}
-            <link rel="preload" href="{{ preload('https://cdn.jsdelivr.net/fontsource/fonts/inter:vf@latest/latin-wght-normal.woff2', {as: 'font'}) }}">
+            <link
+                rel="preload"
+                href="{{ preload(asset('vendor/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2'), {as: 'font', type: 'font/woff2', crossorigin: 'anonymous', importance: 'high'}) }}"
+                as="font"
+                type="font/woff2"
+                crossorigin
+            >
         {% endblock %}
 
         {% block stylesheets %}{% endblock %}

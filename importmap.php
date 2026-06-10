@@ -39,4 +39,11 @@ return [
     '@kurkle/color' => [
         'version' => '0.4.0',
     ],
+    '@fontsource-variable/inter' => [
+        'version' => '5.2.8',
+    ],
+    '@fontsource-variable/inter/index.min.css' => [
+        'version' => '5.2.8',
+        'type' => 'css',
+    ],
 ];
