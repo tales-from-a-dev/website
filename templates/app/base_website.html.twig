@@ -10,7 +10,11 @@
             <div class="container max-w-(--breakpoint-xl) mx-auto px-6 py-16 flex flex-col md:flex-row items-center md:justify-between">
                 <div class="flex items-center justify-center space-x-4 md:order-2">
                     {% for social_account in social_accounts %}
-                        <a href="{{ social_account.url }}" target="_blank" class="text-primary-foreground hover:text-primary-foreground/90">
+                        <a
+                            class="text-primary-foreground hover:text-primary-foreground/90"
+                            href="{{ social_account.url }}"
+                            target="_blank"
+                        >
                             <span class="sr-only">{{ social_account.name|capitalize }}</span>
                             <twig:Ux:Icon name="simple-icons:{{ social_account.name }}" class="size-6" />
                         </a>
@@ -22,10 +26,14 @@
                             {% if locale == app.locale %}
                                 <span class="font-semibold uppercase">{{ locale }}</span>
                             {% else %}
-                                <a href="{{ app.current_route
-                                    ? url(app.current_route, app.current_route_parameters|merge({_locale: locale}))
-                                    : url('app_website_shared_index', {_locale: locale}) }}"
-                                   class="uppercase hover:underline">{{ locale }}</a>
+                                <a
+                                    class="uppercase hover:underline"
+                                    lang="{{ locale }}"
+                                    hreflang="{{ locale }}"
+                                    href="{{ path(app.current_route ?? 'app_website_shared_index', app.current_route_parameters|merge({_locale: locale})) }}"
+                                >
+                                    {{ locale }}
+                                </a>
                             {% endif %}
                         </li>
                     {% endfor %}
