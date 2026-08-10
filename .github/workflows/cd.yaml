@@ -1,64 +1,88 @@
 ---
 name: cd
 
-run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
+run-name: Deploy to ${{ github.event.inputs.environment }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target deployment environment'
+        description: Target environment
+        required: true
         type: environment
-        required: true
-
       tag:
-        description: 'Tag to deploy'
-        type: string
+        description: Git tag to deploy
         required: true
+        type: string
+
+concurrency:
+  group: deploy-${{ github.event.inputs.environment }}
+  cancel-in-progress: false
 
 jobs:
   deployment:
-    name: Deploy ${{ inputs.environment }}
+    name: Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
 
     runs-on: ubuntu-latest
 
-    environment: ${{ inputs.environment }}
+    environment: ${{ github.event.inputs.environment }}
 
     permissions:
       contents: read
 
-    concurrency:
-      group: cd-${{ inputs.environment }}
-      cancel-in-progress: false
-
     steps:
       - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            echo "::warning::SSH_KNOWN_HOSTS not set; falling back to TOFU ssh-keyscan"
+            ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          fi
+          chmod 600 ~/.ssh/known_hosts
 
-      - name: Deploy to droplet
+      - name: Deploy ${{ github.event.inputs.tag }}
+        env:
+          TAG: ${{ github.event.inputs.tag }}
+          APP_PATH: ${{ vars.APP_PATH }}
+          SERVER_NAME: ${{ vars.SERVER_NAME }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          DATABASE_SECRET: ${{ secrets.DB_PASSWORD }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" <<'EOF'
+          SSH_OPTS="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
+
+          printf '%s\n' \
+            "SERVER_NAME=$SERVER_NAME" \
+            "APP_SECRET=$APP_SECRET" \
+            "CADDY_MERCURE_JWT_SECRET=$JWT_SECRET" \
+            "POSTGRES_PASSWORD=$DATABASE_SECRET" \
+            | ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" "umask 077 && cat > '$APP_PATH/.env.deploy'"
+
+          ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" << EOF
             set -Eeuo pipefail
-            cd app
+
+            cd "$APP_PATH"
 
             git fetch --all --tags --prune
-            git rev-parse --verify "refs/tags/${{ inputs.tag }}" >/dev/null 2>&1 || { echo "Tag '${{ inputs.tag }}' not found"; exit 1; }
+            git rev-parse --verify "refs/tags/$TAG" >/dev/null 2>&1 || { echo "Tag '$TAG' not found"; exit 1; }
             git reset --hard
-            git checkout -f --detach "tags/${{ inputs.tag }}"
+            git checkout -f --detach "tags/$TAG"
+
+            trap 'rm -f .env.deploy' EXIT
 
             docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
-
-            SERVER_NAME="${{ secrets.SERVER_NAME }}" \
-            APP_SECRET="${{ secrets.APP_SECRET }}" \
-            CADDY_MERCURE_JWT_SECRET="${{ secrets.JWT_SECRET }}" \
-            POSTGRES_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-            docker compose -f compose.yaml -f compose.prod.yaml up --remove-orphans --detach --wait
+            docker compose -f compose.yaml -f compose.prod.yaml --env-file .env --env-file .env.deploy up --remove-orphans --wait
 
             docker system prune --force
           EOF

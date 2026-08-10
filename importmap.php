@@ -33,6 +33,6 @@ return [
     '@stimulus-components/scroll-to' => ['version' => '5.0.1'],
     'chart.js' => ['version' => '4.5.1'],
     '@kurkle/color' => ['version' => '0.4.0'],
-    '@fontsource-variable/inter' => ['version' => '5.2.8'],
-    '@fontsource-variable/inter/index.min.css' => ['version' => '5.2.8', 'type' => 'css'],
+    '@fontsource-variable/inter' => ['version' => '5.3.0'],
+    '@fontsource-variable/inter/index.min.css' => ['version' => '5.3.0', 'type' => 'css'],
 ];
