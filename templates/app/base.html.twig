@@ -26,8 +26,6 @@
             {% block meta_og_image %}{% endblock %}
         {% endblock %}
 
-        {% block meta_jsonld %}{% endblock %}
-
         <title>{% block meta_title %}{{ 'app.meta.title'|trans }}{% endblock %}</title>
 
         {% block fonts %}
@@ -61,7 +59,7 @@
         />
         <link
             rel="canonical"
-            href="{% block meta_canonical app.current_route ? url(app.current_route, app.current_route_parameters) : '' %}"
+            href="{% block meta_canonical app.current_route ? url(app.current_route, app.current_route_parameters) : absolute_url('/') %}"
         />
 
         {% block meta_hreflang %}
@@ -83,5 +81,10 @@
     </head>
     <body class="bg-muted">
         {% block body %}{% endblock %}
+        {% if block('meta_jsonld') %}
+            <script type="application/ld+json">
+              {%- block meta_jsonld %}{% endblock -%}
+            </script>
+        {% endif %}
     </body>
 </html>
