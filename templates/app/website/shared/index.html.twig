@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block meta_jsonld %}
-    <script type="application/ld+json">{{ structured_data|serialize('jsonld')|raw }}</script>
+    {{ structured_data|serialize('jsonld')|raw }}
 {% endblock %}
 
 {% block main %}
