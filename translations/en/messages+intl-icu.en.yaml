@@ -91,6 +91,10 @@ website:
         published_at: 'Published on {date}'
         back_to_index: 'Back to all articles'
         empty: 'No article published yet.'
+        tag:
+            title: 'Articles tagged {tag}'
+        tags:
+            title: 'Browse by tag'
 
     # contact
     contact:

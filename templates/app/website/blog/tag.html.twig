@@ -1,0 +1,37 @@
+{% extends 'app/base_website.html.twig' %}
+
+{% block meta_title %}{{ 'website.blog.tag.title'|trans({tag: tag}) }} | {{ parent() }}{% endblock %}
+
+{% block meta_description %}{{ 'website.blog.meta.description'|trans }}{% endblock %}
+
+{#- Thin, duplicated content: crawlable for the links it carries, never indexed. -#}
+{% block meta_robots %}noindex, follow{% endblock %}
+
+{% block main %}
+    <main class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
+        <twig:Section id="blog-tag" size="lg">
+            <twig:Section:SectionHeader>
+                {%- set tag_badge -%}
+                    <twig:Badge variant="secondary" class="align-middle px-2.5 py-1 text-base">{{ tag }}</twig:Badge>
+                {%- endset -%}
+
+                <h1 class="font-medium text-3xl md:text-4xl">
+                    {{- 'website.blog.tag.title'|trans({tag: tag_badge})|raw -}}
+                </h1>
+            </twig:Section:SectionHeader>
+            <twig:Section:SectionContent>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {% for post in posts %}
+                        <twig:Blog:PostCard :post="post" />
+                    {% endfor %}
+                </div>
+            </twig:Section:SectionContent>
+        </twig:Section>
+        <footer class="mt-16">
+            <twig:Button variant="link" href="{{ path('app_website_blog_index') }}">
+                <twig:Ux:Icon name="lucide:arrow-left" />
+                {{ 'website.blog.back_to_index'|trans }}
+            </twig:Button>
+        </footer>
+    </main>
+{% endblock %}

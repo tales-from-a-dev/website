@@ -34,8 +34,11 @@ final class IndexController extends AbstractController
 
     public function __invoke(Request $request): Response
     {
+        $locale = $request->getLocale();
+
         return $this->render('app/website/blog/index.html.twig', [
-            'posts' => $this->blogPostRepository->findAll($request->getLocale()),
+            'posts' => $this->blogPostRepository->findAll($locale),
+            'tags' => $this->blogPostRepository->findTags($locale),
         ]);
     }
 }

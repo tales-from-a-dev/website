@@ -150,6 +150,10 @@ website:
         published_at: 'Publié le {date}'
         back_to_index: 'Retour aux articles'
         empty: 'Aucun article publié pour le moment.'
+        tag:
+            title: 'Articles tagués {tag}'
+        tags:
+            title: 'Parcourir par tag'
 
     # contact
     contact:
