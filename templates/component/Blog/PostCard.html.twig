@@ -1,0 +1,30 @@
+{%- props post -%}
+
+{#- Template -#}
+
+<twig:Card size="lg" class="h-full">
+    <twig:Card:CardHeader>
+        <twig:Card:CardTitle as="h2" class="text-lg">
+            <a href="{{ path('app_website_blog_show', {slug: post.slug}) }}" class="hover:underline">
+                {{- post.title -}}
+            </a>
+        </twig:Card:CardTitle>
+        <twig:Card:CardDescription>
+            <time datetime="{{ post.publishedAt|date('Y-m-d') }}">
+                {{- 'website.blog.published_at'|trans({date: post.publishedAt|format_date(pattern: 'd MMMM Y')}) -}}
+            </time>
+        </twig:Card:CardDescription>
+    </twig:Card:CardHeader>
+    {% if post.description is not empty %}
+        <twig:Card:CardContent>
+            <p class="text-muted-foreground">{{ post.description }}</p>
+        </twig:Card:CardContent>
+    {% endif %}
+    {% if post.tags is not empty %}
+        <twig:Card:CardFooter class="flex-wrap gap-2">
+            {% for tag in post.tags %}
+                <twig:Badge variant="secondary">{{ tag }}</twig:Badge>
+            {% endfor %}
+        </twig:Card:CardFooter>
+    {% endif %}
+</twig:Card>

@@ -82,6 +82,16 @@ website:
                 subtitle: 'A summary of my professional experience'
                 today: 'Today'
 
+    # blog
+    blog:
+        title: 'Blog'
+        subtitle: 'Notes on PHP, Symfony and the things I run into while building for the web.'
+        meta:
+            description: 'Articles about PHP, Symfony and web development, written by Romain Monteil, freelance senior back-end developer.'
+        published_at: 'Published on {date}'
+        back_to_index: 'Back to all articles'
+        empty: 'No article published yet.'
+
     # contact
     contact:
         text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'

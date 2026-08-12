@@ -1,0 +1,27 @@
+{% extends 'app/base_website.html.twig' %}
+
+{% block meta_title %}{{ 'website.blog.title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block meta_description %}{{ 'website.blog.meta.description'|trans }}{% endblock %}
+
+{% block main %}
+    <main class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
+        <twig:Section id="blog" size="lg">
+            <twig:Section:SectionHeader>
+                <h1 class="font-medium text-3xl md:text-4xl">{{ 'website.blog.title'|trans }}</h1>
+                <twig:Section:SectionDescription>{{ 'website.blog.subtitle'|trans }}</twig:Section:SectionDescription>
+            </twig:Section:SectionHeader>
+            <twig:Section:SectionContent>
+                {% if posts is empty %}
+                    <p class="text-muted-foreground">{{ 'website.blog.empty'|trans }}</p>
+                {% else %}
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {% for post in posts %}
+                            <twig:Blog:PostCard :post="post" />
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </twig:Section:SectionContent>
+        </twig:Section>
+    </main>
+{% endblock %}
