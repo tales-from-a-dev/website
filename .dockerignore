@@ -32,3 +32,6 @@ vendor/
 .env.local
 .env.local.php
 .env.test
+
+# blog posts are content, not documentation: keep them past the **/*.md rule
+!content/**/*.md

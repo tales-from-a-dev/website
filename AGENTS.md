@@ -59,6 +59,7 @@ The app uses a **modular DDD structure** — each domain is self-contained under
 | Module | Purpose |
 |--------|---------|
 | `Analytics/` | Page view tracking + dynamic `robots.txt` |
+| `Blog/` | Blog posts read from markdown files in `content/blog/<locale>/` |
 | `Contact/` | Contact form + email |
 | `Experience/` | Portfolio / experience entries (timeline) |
 | `GitHub/` | GitHub API sync |
