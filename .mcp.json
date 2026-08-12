@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+        "postgres-dev": {
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/mcp/postgres-dev.sh",
+            "args": [],
+            "env": {}
+        }
+    }
+}
