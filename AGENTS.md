@@ -71,21 +71,66 @@ Each module has its own services registered in `config/services/<module>.yaml` a
 
 Templates live in `templates/` with a parallel structure: `component/` for Twig Components, `app/` for page templates. Page templates are grouped per module (e.g. `templates/app/website/contact/index.html.twig`, `templates/app/website/shared/index.html.twig`).
 
+Website pages extend `app/base_website.html.twig`, dashboard pages extend `app/base_dashboard.html.twig`; both of those extend `app/base.html.twig`, which owns the `hreflang` alternates and the `meta_jsonld` block. Standalone pages that want no surrounding chrome extend `app/base.html.twig` directly — the CV (`app/website/resume/index.html.twig`), the login screen and the error template do this.
+
 Tests mirror this structure under `tests/Unit/`, `tests/Integration/`, and `tests/Functional/`.
 
 ## Internationalization
 
 - Default locale: `en`. Enabled locales: `en`, `fr` (see `app.default_locale` / `app.enabled_locales` in `config/services.yaml`).
 - Website routes are declared per-locale with French prefixed by `/fr` (e.g. `/contact` ↔ `/fr/contact`, `/cv` ↔ `/fr/cv`). Dashboard routes stay locale-agnostic.
-- `base.html.twig` emits `hreflang` alternates (including `x-default`) for every enabled locale on the current route.
+- `templates/app/base.html.twig` emits `hreflang` alternates (including `x-default`) for every enabled locale on the current route.
 - All user-facing strings go through `|trans`; translations live under `translations/{en,fr}/`.
 
 ## SEO
 
 - `PrestaSitemapBundle` exposes the XML sitemap (`presta:sitemaps:dump` / `PrestaSitemapBundle_index` route). Alternate locales are emitted via `alternate.i18n: symfony`.
 - `App\Analytics\Ui\Controller\Website\RobotController` serves `/robots.txt` and links the sitemap absolute URL.
-- `App\Shared\Infrastructure\Seo\HomepageStructuredDataBuilder` produces the homepage `Person` JSON-LD; rendered in `base.html.twig` via the `meta_jsonld` block.
+- `App\Shared\Infrastructure\Seo\HomepageStructuredDataBuilder` produces the homepage `Person` JSON-LD; rendered in `templates/app/base.html.twig` via the `meta_jsonld` block.
 - `App\Shared\Infrastructure\Serializer\Encoder\JsonLdEncoder` registers the `jsonld` format with the Symfony Serializer (HTML-safe encoding flags).
+
+## Git and Pull Requests
+
+### Commit Messages
+- Use imperative mood: "Add feature" not "Added feature"
+- First line: concise summary (50 chars max)
+- Reference issues when applicable: "Fix #123"
+- No period at end of subject line
+
+### Branch Naming
+- Feature: `feat/issue-<issue number>` (e.g., `feat/issue-123`)
+- Bug fix: `fix/issue-<issue number>` (e.g., `fix/issue-123`)
+- Epic: `epic/issue-<epic number>-<slug>` (e.g., `epic/issue-1441-search-filter`)
+- Other: `tech/issue-000-<commit summary>` (e.g., `tech/issue-000-add-tests`)
+- Use `main` for production code
+- Use lowercase with dashes for branch names
+- **Always create a branch** following the naming convention above before making any code changes; never commit directly to `main`
+- **Never push directly to `main`**; all changes go through a branch and pull request
+
+### Epics and Sub-Issues
+
+Use an **epic** to plan a large feature that spans several pull requests. Open it from the **🗺️ Epic** issue template (`.github/ISSUE_TEMPLATE/epic.yml`); its title is prefixed `[Epic]: `.
+
+An epic issue captures the *plan*, not the code. Fill each section:
+- **Goal** — the outcome in a few sentences (what, not how).
+- **Why** — the problem it solves and what prompted it.
+- **Design** — the technical approach: the request/data flow, the key classes and files (reference existing code with paths), and any patterns being reused.
+- **Scope decisions** — explicit in/out-of-scope calls and trade-offs (e.g. "classic GET submit, no LiveComponent").
+- **Outcome** — the observable end state once every sub-issue is merged.
+- **Sequencing** — the order sub-issues should land and their dependencies (foundation first).
+- **Subtasks** — a checklist linking each sub-issue.
+- **Risks** — known unknowns and cross-cutting concerns that could bite during execution.
+
+Break the epic into small, independently reviewable **sub-issues**, each a User Story or Technical Story. Title them `<Epic short> <n>/<total> — <description>` (e.g. `Search page filter 3/5 — Apply search filters in the guest-session search builder`). Each sub-issue body opens with `Part of #<epic>` and follows **Goal / Context / Tasks / Acceptance criteria / Notes**, with concrete file paths.
+
+Link every sub-issue to the epic as a **native GitHub sub-issue** (not just the checklist) so progress rolls up:
+
+```bash
+gh api --method POST repos/tales-from-a-dev/website/issues/<epic>/sub_issues \
+  -F sub_issue_id="$(gh api repos/tales-from-a-dev/website/issues/<sub-issue> --jq .id)"
+```
+
+Give the epic and its sub-issues the same context label (e.g. `search`) plus `feature`/`tech`. Work the epic on one `epic/issue-<epic>-<slug>` branch and open a single PR that closes every sub-issue.
 
 ## PHP Code Standards
 
@@ -141,7 +186,7 @@ Tests mirror this structure under `tests/Unit/`, `tests/Integration/`, and `test
 - Modern HTML5 and Twig syntax
 - All user-facing text via `|trans` filter (no hardcoded strings)
 - Translation logic in templates, not PHP (use `TranslatableInterface`)
-- Use components from `templates/components/` when available
+- Use components from `templates/component/` when available
 - Accessibility: `aria-*` attributes, semantic tags, labels
 
 ## Testing
@@ -175,6 +220,48 @@ Test environment uses `compose.test.yaml`. Run `make db-test` to prepare the tes
 - **Twig CS Fixer** (`.twig-cs-fixer.dist.php`)
 
 CI runs all checks on every push/PR via `.github/workflows/ci.yaml`.
+
+## Agent Tooling
+
+`.claude/` is committed and shared. It automates the conventions in this
+document so they are enforced rather than merely remembered.
+
+### Hooks (`.claude/settings.json`)
+
+Both scripts shell into the `php` container, since the toolchain exists nowhere
+else. They no-op silently when the stack is down.
+
+| Hook | Event | Behaviour |
+|---|---|---|
+| `hooks/fix-style.sh` | after `Edit`/`Write` | Runs PHP CS Fixer or Twig CS Fixer on the edited file. Skips `vendor/`, `var/`, generated assets and `migrations/`. |
+| `hooks/guard-protected-files.sh` | before `Edit`/`Write` | Refuses edits to already-applied migrations and to `.env*.local`. Creating a *new* migration file is still allowed. |
+
+Style is therefore fixed on write. Don't hand-format to satisfy PHP CS Fixer —
+`@Symfony:risky` already handles Yoda conditions, `declare(strict_types=1)`,
+trailing commas and the blank line before `return`.
+
+### Skills
+
+| Skill | Use |
+|---|---|
+| `/ci-check` | Runs the CI pipeline locally in `ci.yaml` order, with the container-up and `make cc` preflight that CI gets for free. Run before pushing. |
+| `/new-module` | Scaffolds a DDD module across all eight places it must touch, with templates under `.claude/skills/new-module/templates/`. |
+
+### Subagents
+
+| Agent | Use |
+|---|---|
+| `ddd-boundary-reviewer` | Layer boundaries, cross-module coupling, class naming. Carries an allow-list of accepted deviations — read it before "fixing" a reported non-issue. |
+| `i18n-parity-reviewer` | `en`/`fr` catalogue parity, hardcoded user-facing strings, per-locale route coverage. |
+
+Both review the diff, not the whole tree.
+
+### MCP
+
+`postgres-dev` (`.mcp.json`) gives read-only access to the dev database.
+`compose.override.yaml` publishes Postgres on a random host port, so the wrapper
+resolves the port and credentials from the running container at launch —
+nothing is hardcoded and no password is stored in the repo. Requires `make up`.
 
 ## Anti-Patterns
 

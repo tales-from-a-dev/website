@@ -56,7 +56,7 @@ final class IndexController extends AbstractController
                     'school' => 'IUT de Bayonne',
                     'place' => 'Anglet',
                     'title' => 'LP SIL',
-                    'description' => 'Spécialisation développement d’applications distribuées orientées Web',
+                    'description' => 'Spécialisation développement d\'applications distribuées orientées Web',
                     'startAt' => '2009',
                     'endAt' => '2010',
                 ],

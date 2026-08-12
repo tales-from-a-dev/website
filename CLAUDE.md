@@ -48,6 +48,18 @@ make asset-watch  # Watch and rebuild
 
 **PHPUnit configuration notes:** `failOnWarning`, `failOnNotice`, and `failOnDeprecation` are all enabled. PHP warnings (e.g. undefined array key) will cause test failures, not just yellow markers.
 
+## Committed tooling
+
+`.claude/` and `.mcp.json` are checked in and apply to every session. Full detail in AGENTS.md → *Agent Tooling*.
+
+**Two hooks are active.** After every `Edit`/`Write`, `.claude/hooks/fix-style.sh` runs PHP CS Fixer or Twig CS Fixer on that file inside the `php` container — so **don't hand-format for style**; write the logic and let the fixer apply Yoda conditions, `declare(strict_types=1)`, trailing commas and blank-line-before-`return`. Before every `Edit`/`Write`, `.claude/hooks/guard-protected-files.sh` blocks edits to applied migrations (change the entity and run `make db-diff` instead) and to `.env*.local`. Both no-op when containers are down, so a passing edit is not proof the style was fixed — run `make up` first if it matters.
+
+**Skills:** `/ci-check` runs the CI pipeline locally in `ci.yaml` order with the preflight CI gets for free — use it before pushing. `/new-module` scaffolds a DDD module across all eight places it touches.
+
+**Subagents:** `ddd-boundary-reviewer` (layer boundaries, cross-module coupling, naming) and `i18n-parity-reviewer` (`en`/`fr` parity, hardcoded strings, per-locale routes). Both review the diff. The DDD agent has an explicit allow-list of accepted deviations — Doctrine `repositoryClass` imports, `elao/enum`, `Clock`, Security interfaces in `Domain/` are all deliberate, so don't "fix" them.
+
+**MCP:** `postgres-dev` gives read-only access to the dev database; requires `make up`, since it resolves Postgres' randomly-assigned host port from the running container.
+
 ## Architecture
 
 The codebase follows **Domain-Driven Design** with a strict four-layer structure inside each module:
@@ -72,9 +84,9 @@ Each module is split into:
 
 ## Key patterns
 
-**Entities** use Doctrine attribute mapping directly on constructor-promoted properties. `Clock::get()->now()` is used for `$createdAt` timestamps (allows clock mocking in tests).
+**Entities** map Doctrine attributes directly onto public typed properties, and stay non-`final` so Doctrine can proxy them. Constructor promotion is used only where the entity has required construction arguments (`PageView`); `Experience`, `Settings` and `User` declare plain public properties. `Clock::get()->now()` is used for `$createdAt` timestamps (allows clock mocking in tests).
 
-**Repository interfaces** live in Domain, implementations in Infrastructure extending `ServiceEntityRepository`.
+**Repositories** are implemented in `Infrastructure/Repository/` extending `ServiceEntityRepository`. A matching Domain interface is the exception, not the rule — only `Analytics` has one (`PageViewRepositoryInterface`). Add one when a `Domain/` service consumes the repository, since that is where the indirection actually buys decoupling; otherwise inject the concrete class as the existing modules do.
 
 **Async processing** uses Symfony Messenger. Message classes sit in `Application/Message/`, handlers in the same namespace with `#[AsMessageHandler]`.
 
@@ -84,9 +96,9 @@ Each module is split into:
 
 **Ui layer** controllers use `renderBlock()` for Turbo Stream responses and fall back to redirects for plain requests, checking against `TurboBundle::STREAM_FORMAT`.
 
-**Localization.** Default locale `en`, enabled locales `en` + `fr` (see `config/services.yaml`). Website routes are declared per-locale in `config/routes/*.yaml` with French prefixed by `/fr` (e.g. `/contact` ↔ `/fr/contact`, `/cv` ↔ `/fr/cv`); dashboard routes stay locale-agnostic. All user-facing text goes through `|trans` — translations live under `translations/{en,fr}/`. `base.html.twig` emits `hreflang` alternates including `x-default` for every enabled locale.
+**Localization.** Default locale `en`, enabled locales `en` + `fr` (see `config/services.yaml`). Website routes are declared per-locale in `config/routes/*.yaml` with French prefixed by `/fr` (e.g. `/contact` ↔ `/fr/contact`, `/cv` ↔ `/fr/cv`); dashboard routes stay locale-agnostic. All user-facing text goes through `|trans` — translations live under `translations/{en,fr}/`. `templates/app/base.html.twig` emits `hreflang` alternates including `x-default` for every enabled locale. Website pages extend `app/base_website.html.twig`, dashboard pages extend `app/base_dashboard.html.twig`; both of those extend `app/base.html.twig`. Chrome-less pages (the CV, login, error) extend `app/base.html.twig` directly.
 
-**SEO.** `PrestaSitemapBundle` exposes the XML sitemap (alternates configured via `alternate.i18n: symfony` in `config/packages/sitemap.yaml`). `App\Analytics\Ui\Controller\Website\RobotController` serves `/robots.txt`. JSON-LD structured data is built by `App\Shared\Infrastructure\Seo\HomepageStructuredDataBuilder` and serialized through `App\Shared\Infrastructure\Serializer\Encoder\JsonLdEncoder` (registered with format `jsonld`, HTML-safe flags). Templates render it via the `meta_jsonld` block in `base.html.twig`.
+**SEO.** `PrestaSitemapBundle` exposes the XML sitemap (alternates configured via `alternate.i18n: symfony` in `config/packages/sitemap.yaml`). `App\Analytics\Ui\Controller\Website\RobotController` serves `/robots.txt`. JSON-LD structured data is built by `App\Shared\Infrastructure\Seo\HomepageStructuredDataBuilder` and serialized through `App\Shared\Infrastructure\Serializer\Encoder\JsonLdEncoder` (registered with format `jsonld`, HTML-safe flags). Templates render it via the `meta_jsonld` block in `templates/app/base.html.twig`.
 
 ## Test organization
 

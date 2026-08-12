@@ -1,5 +1,6 @@
 ###> tales-from-a-dev/website ###
 /.junie/
+/.claude/settings.local.json
 ###< tales-from-a-dev/website ###
 
 ###> symfony/framework-bundle ###

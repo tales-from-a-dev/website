@@ -180,7 +180,7 @@ website:
             other:
                 title: 'Autre'
                 item:
-                    afup: 'Membre de l’AFUP, Association Française des Utilisateurs de PHP'
+                    afup: "Membre de l'AFUP, Association Française des Utilisateurs de PHP"
                     oss: 'Contributeur open source'
 
     # footer
