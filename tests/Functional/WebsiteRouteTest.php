@@ -28,6 +28,9 @@ final class WebsiteRouteTest extends RouteTestCase
         yield 'GET /blog/{slug}' => ['/blog/first-post', Request::METHOD_GET, BlogRouteNameEnum::WebsiteShow];
         yield 'GET /fr/blog/{slug}' => ['/fr/blog/premier-article', Request::METHOD_GET, BlogRouteNameEnum::WebsiteShow];
 
+        yield 'GET /blog/tag/{tag}' => ['/blog/tag/symfony', Request::METHOD_GET, BlogRouteNameEnum::WebsiteTag];
+        yield 'GET /fr/blog/tag/{tag}' => ['/fr/blog/tag/symfony', Request::METHOD_GET, BlogRouteNameEnum::WebsiteTag];
+
         yield 'GET /cv' => ['/cv', Request::METHOD_GET, ResumeRouteNameEnum::WebsiteResume];
         yield 'GET /fr/cv' => ['/fr/cv', Request::METHOD_GET, ResumeRouteNameEnum::WebsiteResume];
 

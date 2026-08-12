@@ -59,6 +59,20 @@ final class IndexControllerTest extends WebTestCase
         ;
     }
 
+    public function testItLinksEveryPublishedTagToItsArchive(): void
+    {
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
+        $this->browser()
+            ->visit('/blog')
+            ->assertSuccessful()
+            ->assertSee($translator->trans('website.blog.tags.title'))
+            ->assertElementCount('[data-slot=blog-tags] a[data-slot=badge]', 2)
+            ->assertSeeElement('[data-slot=blog-tags] a[href="/blog/tag/symfony"]')
+            ->assertNotSeeElement('[data-slot=blog-tags] a[href="/blog/tag/draft-only"]')
+        ;
+    }
+
     public function testItHidesDraftsFromTheIndex(): void
     {
         $this->browser()
