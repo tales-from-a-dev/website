@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+
+@import "./highlight.css";
 @import "./print.css";
 
 /*
@@ -189,6 +192,37 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(0.269 0 0);
     --sidebar-ring: oklch(0.439 0 0);
+}
+
+/*
+ * Prose
+ *
+ * Maps the typography plugin onto the design tokens above, so the post body
+ * follows the light/dark theme without needing `dark:prose-invert`.
+ */
+
+.prose {
+    /*
+     * `--border` collapses onto `--muted`, which the website body sits on, so
+     * rules and bars are mixed from the foreground to stay visible in the dark
+     * theme
+     */
+    --prose-rule: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+
+    --tw-prose-body: var(--foreground);
+    --tw-prose-headings: var(--foreground);
+    --tw-prose-lead: var(--muted-foreground);
+    --tw-prose-links: var(--primary);
+    --tw-prose-bold: var(--foreground);
+    --tw-prose-counters: var(--muted-foreground);
+    --tw-prose-bullets: var(--muted-foreground);
+    --tw-prose-hr: var(--prose-rule);
+    --tw-prose-quotes: var(--muted-foreground);
+    --tw-prose-quote-borders: var(--prose-rule);
+    --tw-prose-captions: var(--muted-foreground);
+    --tw-prose-code: var(--foreground);
+    --tw-prose-th-borders: var(--prose-rule);
+    --tw-prose-td-borders: var(--prose-rule);
 }
 
 @layer base {
