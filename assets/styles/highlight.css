@@ -1,0 +1,104 @@
+/*
+ * Syntax highlighting for tempest/highlight.
+ *
+ * The `.hl-*` classes are emitted server side and never appear in a template,
+ * so they are written as plain CSS rules: as utilities the Tailwind scanner
+ * would purge them.
+ *
+ * Each colour keeps the chroma and hue of a jade token declared in app.css and
+ * only moves the lightness, so code carries the site's palette while staying
+ * legible on the light and the dark code surface.
+ */
+
+[data-slot="post-content"] {
+    --hl-comment: var(--muted-foreground);
+    --hl-keyword: oklch(from var(--jade-6) 0.47 c h);
+    --hl-type: oklch(from var(--jade-5) 0.47 c h);
+    --hl-variable: oklch(from var(--jade-4) 0.47 c h);
+    --hl-property: oklch(from var(--jade-3) 0.47 c h);
+    --hl-value: oklch(from var(--jade-2) 0.47 c h);
+    --hl-generic: oklch(from var(--jade-1) 0.47 calc(c * 2) h);
+}
+
+.dark [data-slot="post-content"] {
+    --hl-keyword: oklch(from var(--jade-6) 0.8 c h);
+    --hl-type: oklch(from var(--jade-5) 0.8 c h);
+    --hl-variable: oklch(from var(--jade-4) 0.8 c h);
+    --hl-property: oklch(from var(--jade-3) 0.8 c h);
+    --hl-value: oklch(from var(--jade-2) 0.8 c h);
+    --hl-generic: oklch(from var(--jade-1) 0.8 calc(c * 2) h);
+}
+
+/*
+ * Blocks
+ *
+ * `tempest/highlight` emits the tokens straight inside `<pre>`, with no `<code>`
+ * wrapper, so the block chrome goes on `<pre>` itself. These rules sit outside
+ * `@layer`, which is what lets them win over the `prose` defaults for `pre`.
+ */
+
+/* `--card`, not `--muted`: the website body already sits on `bg-muted` */
+[data-slot="post-content"] pre {
+    color: var(--card-foreground);
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) - 2px);
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    tab-size: 4;
+}
+
+[data-slot="post-content"] :not(pre) > code {
+    color: var(--card-foreground);
+    background-color: var(--card);
+    border-radius: calc(var(--radius) - 4px);
+    padding: 0.15em 0.35em;
+    font-weight: 500;
+}
+
+/* `prose` wraps inline code in backticks; the background already sets it apart */
+[data-slot="post-content"] :not(pre) > code::before,
+[data-slot="post-content"] :not(pre) > code::after {
+    content: none;
+}
+
+/*
+ * Tokens
+ */
+
+[data-slot="post-content"] .hl-comment {
+    color: var(--hl-comment);
+}
+
+[data-slot="post-content"] .hl-keyword,
+[data-slot="post-content"] .hl-operator {
+    color: var(--hl-keyword);
+}
+
+[data-slot="post-content"] .hl-type {
+    color: var(--hl-type);
+}
+
+[data-slot="post-content"] .hl-attribute {
+    color: var(--hl-type);
+    font-style: italic;
+}
+
+[data-slot="post-content"] .hl-variable {
+    color: var(--hl-variable);
+}
+
+[data-slot="post-content"] .hl-property {
+    color: var(--hl-property);
+}
+
+[data-slot="post-content"] .hl-value,
+[data-slot="post-content"] .hl-literal,
+[data-slot="post-content"] .hl-number {
+    color: var(--hl-value);
+}
+
+[data-slot="post-content"] .hl-generic,
+[data-slot="post-content"] .hl-injection {
+    color: var(--hl-generic);
+}
