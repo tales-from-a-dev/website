@@ -1,0 +1,36 @@
+{% extends 'app/base_website.html.twig' %}
+
+{% block meta_title %}{{ post.title }} | {{ parent() }}{% endblock %}
+
+{% block meta_description %}{{ post.description|default('app.meta.description'|trans) }}{% endblock %}
+
+{% block main %}
+    <main class="container max-w-screen-md mx-auto px-4 md:px-8 py-16 md:py-24">
+        <article>
+            <header class="flex flex-col gap-4 mb-10">
+                <h1 class="font-medium text-3xl md:text-4xl">{{ post.title }}</h1>
+                <p class="text-muted-foreground">
+                    <time datetime="{{ post.publishedAt|date('Y-m-d') }}">
+                        {{- 'website.blog.published_at'|trans({date: post.publishedAt|format_date(pattern: 'd MMMM Y')}) -}}
+                    </time>
+                </p>
+                {% if post.tags is not empty %}
+                    <div class="flex flex-wrap gap-2">
+                        {% for tag in post.tags %}
+                            <twig:Badge variant="secondary">{{ tag }}</twig:Badge>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </header>
+            <div data-slot="post-content">
+                {{ content|raw }}
+            </div>
+        </article>
+        <footer class="mt-16">
+            <twig:Button variant="link" href="{{ path('app_website_blog_index') }}">
+                <twig:Ux:Icon name="lucide:arrow-left" />
+                {{ 'website.blog.back_to_index'|trans }}
+            </twig:Button>
+        </footer>
+    </main>
+{% endblock %}
