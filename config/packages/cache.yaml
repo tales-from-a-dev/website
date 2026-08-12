@@ -19,3 +19,5 @@ framework:
         pools:
             analytics.cache:
                 adapter: cache.app
+            blog.cache:
+                adapter: cache.app
