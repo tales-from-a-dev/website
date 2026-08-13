@@ -4,6 +4,25 @@
 
 {% block meta_description %}{{ post.description|default('app.meta.description'|trans) }}{% endblock %}
 
+{% block meta_og_image %}
+    {% if post.cover %}
+        <meta property="og:image" content="{{ absolute_url(asset(post.cover)) }}">
+    {% endif %}
+{% endblock %}
+
+{#- The base block merges _locale into the current route parameters, which keeps the
+    English slug on the French URL; posts resolve theirs through translation_key. -#}
+{% block meta_hreflang %}
+    {% for locale, href in alternates %}
+        <link rel="alternate" hreflang="{{ locale }}" href="{{ href }}" />
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ alternates[default_locale]|default(alternates[app.locale]) }}" />
+{% endblock %}
+
+{% block meta_jsonld %}
+    {{ structured_data|serialize('jsonld')|raw }}
+{% endblock %}
+
 {% block main %}
     <main class="container max-w-screen-md mx-auto px-4 md:px-8 py-16 md:py-24">
         <article>
