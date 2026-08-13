@@ -20,17 +20,29 @@
                         </a>
                     {% endfor %}
                 </div>
-                <ul class="flex items-center space-x-3 mt-8 md:mt-0 md:order-3 text-sm text-primary-foreground">
+                <ul
+                    data-slot="locale-switcher"
+                    class="flex items-center space-x-3 mt-8 md:mt-0 md:order-3 text-sm text-primary-foreground"
+                >
                     {% for locale in enabled_locales %}
+                        {#- A page whose route parameters are locale-dependent — a blog post slug — passes
+                            `alternates`, keyed by locale: merging _locale into the current parameters would
+                            keep the source locale's slug and link to a 404. A locale missing from the map
+                            has no counterpart to link to. -#}
+                        {% set locale_url = alternates is defined
+                            ? alternates[locale]|default(null)
+                            : path(app.current_route ?? 'app_website_shared_index', app.current_route_parameters|merge({_locale: locale})) %}
                         <li>
                             {% if locale == app.locale %}
                                 <span class="font-semibold uppercase">{{ locale }}</span>
+                            {% elseif locale_url is null %}
+                                <span class="uppercase opacity-50" aria-disabled="true">{{ locale }}</span>
                             {% else %}
                                 <a
                                     class="uppercase hover:underline"
                                     lang="{{ locale }}"
                                     hreflang="{{ locale }}"
-                                    href="{{ path(app.current_route ?? 'app_website_shared_index', app.current_route_parameters|merge({_locale: locale})) }}"
+                                    href="{{ locale_url }}"
                                 >
                                     {{ locale }}
                                 </a>
