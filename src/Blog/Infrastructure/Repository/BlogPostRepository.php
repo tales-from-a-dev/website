@@ -61,6 +61,17 @@ final readonly class BlogPostRepository
         return null;
     }
 
+    public function findOneByTranslationKey(string $locale, string $translationKey): ?BlogPost
+    {
+        foreach ($this->findAll($locale) as $post) {
+            if ($post->translationKey === $translationKey) {
+                return $post;
+            }
+        }
+
+        return null;
+    }
+
     public function findContent(BlogPost $post): string
     {
         $path = \sprintf(

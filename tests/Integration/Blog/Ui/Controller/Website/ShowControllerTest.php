@@ -46,6 +46,71 @@ final class ShowControllerTest extends WebTestCase
         ;
     }
 
+    public function testItPointsHreflangAtTheTranslatedSlug(): void
+    {
+        $this->browser()
+            ->visit('/blog/first-post')
+            ->assertSuccessful()
+            ->assertElementAttributeContains(
+                'head link[rel=alternate][hreflang=en]',
+                'href',
+                'https://localhost/blog/first-post'
+            )
+            ->assertElementAttributeContains(
+                'head link[rel=alternate][hreflang=fr]',
+                'href',
+                'https://localhost/fr/blog/premier-article'
+            )
+            ->assertElementAttributeContains(
+                'head link[rel=alternate][hreflang=x-default]',
+                'href',
+                'https://localhost/blog/first-post'
+            )
+        ;
+    }
+
+    public function testItSelfReferencesHreflangForAnUntranslatedPost(): void
+    {
+        $this->browser()
+            ->visit('/blog/untranslated-post')
+            ->assertSuccessful()
+            ->assertElementCount('head link[rel=alternate][hreflang=en]', 1)
+            ->assertElementCount('head link[rel=alternate][hreflang=fr]', 0)
+            ->assertElementAttributeContains(
+                'head link[rel=alternate][hreflang=x-default]',
+                'href',
+                'https://localhost/blog/untranslated-post'
+            )
+        ;
+    }
+
+    public function testItEmitsBlogPostingStructuredData(): void
+    {
+        $this->browser()
+            ->visit('/blog/first-post')
+            ->assertSuccessful()
+            ->assertSeeIn('script[type="application/ld+json"]', '"@type":"BlogPosting"')
+            ->assertSeeIn('script[type="application/ld+json"]', '"headline":"First post"')
+            ->assertSeeIn('script[type="application/ld+json"]', '"datePublished":"2026-01-15"')
+            ->assertSeeIn('script[type="application/ld+json"]', '"inLanguage":"en"')
+        ;
+    }
+
+    public function testItEmitsOpenGraphImageOnlyWhenThePostHasACover(): void
+    {
+        $this->browser()
+            ->visit('/blog/untranslated-post')
+            ->assertSuccessful()
+            ->assertElementCount('head meta[property="og:image"]', 1)
+        ;
+
+        $this->browser()
+            ->visit('/blog/first-post')
+            ->assertSuccessful()
+            ->assertElementCount('head meta[property="og:image"]', 0)
+        ;
+    }
+
     public function testItReturnsNotFoundForADraftPost(): void
     {
         $this->browser()
