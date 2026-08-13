@@ -84,6 +84,29 @@ final class ShowControllerTest extends WebTestCase
         ;
     }
 
+    public function testItSwitchesLocaleToTheTranslatedSlug(): void
+    {
+        $this->browser()
+            ->visit('/blog/first-post')
+            ->assertSuccessful()
+            ->assertElementAttributeContains(
+                '[data-slot=locale-switcher] a[hreflang=fr]',
+                'href',
+                '/fr/blog/premier-article'
+            )
+        ;
+    }
+
+    public function testItOffersNoLocaleSwitchForAnUntranslatedPost(): void
+    {
+        $this->browser()
+            ->visit('/blog/untranslated-post')
+            ->assertSuccessful()
+            ->assertElementCount('[data-slot=locale-switcher] a[hreflang=fr]', 0)
+            ->assertElementCount('[data-slot=locale-switcher] [aria-disabled=true]', 1)
+        ;
+    }
+
     public function testItEmitsBlogPostingStructuredData(): void
     {
         $this->browser()

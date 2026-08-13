@@ -34,4 +34,13 @@ final class IndexControllerTest extends WebTestCase
             ->assertElementCount('section', 4)
         ;
     }
+
+    public function testItSwitchesLocaleOnARouteWithoutParameters(): void
+    {
+        $this->browser()
+            ->visit('/')
+            ->assertSuccessful()
+            ->assertElementAttributeContains('[data-slot=locale-switcher] a[hreflang=fr]', 'href', '/fr')
+        ;
+    }
 }
