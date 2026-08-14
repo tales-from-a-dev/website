@@ -67,6 +67,22 @@ final class BlogPostRepositoryTest extends KernelTestCase
         self::assertNull($this->blogPostRepository->findOneBySlug('en', 'draft-post'));
     }
 
+    public function testItCapsTheLatestPostsToTheRequestedLimit(): void
+    {
+        self::assertSame(
+            ['untranslated-post', 'second-post'],
+            $this->slugsOf($this->blogPostRepository->findLatest('en', 2)),
+        );
+    }
+
+    public function testItReturnsEveryPostWhenTheLimitExceedsTheCorpus(): void
+    {
+        self::assertSame(
+            $this->slugsOf($this->blogPostRepository->findAll('en')),
+            $this->slugsOf($this->blogPostRepository->findLatest('en', 6)),
+        );
+    }
+
     public function testItFindsOnePostBySlug(): void
     {
         $post = $this->blogPostRepository->findOneBySlug('en', 'first-post');

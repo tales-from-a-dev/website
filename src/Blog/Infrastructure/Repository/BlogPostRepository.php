@@ -42,6 +42,14 @@ final readonly class BlogPostRepository
     /**
      * @return list<BlogPost>
      */
+    public function findLatest(string $locale, int $limit): array
+    {
+        return \array_slice($this->findAll($locale), 0, $limit);
+    }
+
+    /**
+     * @return list<BlogPost>
+     */
     public function findByTag(string $locale, string $tag): array
     {
         return array_values(array_filter(

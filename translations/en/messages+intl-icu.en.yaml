@@ -53,6 +53,10 @@ website:
                 surtitle: 'Romain Monteil'
                 title: 'Senior Back-end Developer'
                 subtitle: "A passionate developer with 15 years' experience, I work mainly on {php} with {symfony}."
+            blog:
+                title: 'From the blog'
+                subtitle: 'My latest notes on PHP, Symfony and building for the web'
+                all: 'Read all articles'
             open_source:
                 title: 'Open Source'
                 subtitle: "Here are some of the projects I have created and am currently maintaining"

@@ -19,10 +19,3 @@ services:
 when@test:
     parameters:
         app.blog_content_dir: '%kernel.project_dir%/tests/Fixtures/Blog/content'
-
-    services:
-        # no consumer until the controllers land, so without this reference the
-        # repository is removed as unused and the test container cannot see it
-        test.blog_post_repository:
-            alias: App\Blog\Infrastructure\Repository\BlogPostRepository
-            public: true

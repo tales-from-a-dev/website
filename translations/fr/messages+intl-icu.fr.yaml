@@ -112,6 +112,10 @@ website:
                 surtitle: 'Romain Monteil'
                 title: 'Développeur Back-end Senior'
                 subtitle: "Développeur passionné avec 15+ ans d'expériences, je travaille principalement sur {php} avec {symfony}"
+            blog:
+                title: 'Sur le blog'
+                subtitle: 'Mes dernières notes sur PHP, Symfony et le développement web'
+                all: 'Lire tous les articles'
             open_source:
                 title: 'Open Source'
                 subtitle: "Voici quelques-uns des projets que j'ai créés et que je maintiens actuellement"

@@ -9,12 +9,13 @@ use App\Shared\Ui\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 #[Route(
     path: '/tag/{tag}',
     name: 'tag',
     requirements: [
-        'tag' => '[a-z0-9-]+',
+        'tag' => Requirement::ASCII_SLUG,
     ],
     methods: [
         Request::METHOD_GET,

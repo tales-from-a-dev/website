@@ -46,8 +46,6 @@ final readonly class BlogSitemapListener
 
         foreach ($this->enabledLocales as $locale) {
             foreach ($this->blogPostRepository->findAll($locale) as $post) {
-                // findAll() keeps drafts visible under kernel.debug so they can
-                // be previewed locally; they never belong in a sitemap.
                 if ($post->draft) {
                     continue;
                 }

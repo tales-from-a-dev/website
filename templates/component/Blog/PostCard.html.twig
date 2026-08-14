@@ -1,10 +1,10 @@
-{%- props post -%}
+{%- props post, heading = 'h2' -%}
 
 {#- Template -#}
 
 <twig:Card size="lg" class="h-full">
     <twig:Card:CardHeader>
-        <twig:Card:CardTitle as="h2" class="text-lg">
+        <twig:Card:CardTitle as="{{ heading }}" class="text-lg">
             <a href="{{ path('app_website_blog_show', {slug: post.slug}) }}" class="hover:underline">
                 {{- post.title -}}
             </a>

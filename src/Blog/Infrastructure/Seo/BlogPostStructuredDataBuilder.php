@@ -40,8 +40,6 @@ final readonly class BlogPostStructuredDataBuilder
             '@context' => 'https://schema.org',
             '@type' => 'BlogPosting',
             'headline' => $post->title,
-            // The filename carries a date and no time, so the date is all that
-            // can honestly be published.
             'datePublished' => $post->publishedAt->format('Y-m-d'),
             'inLanguage' => $post->locale,
             'author' => [
