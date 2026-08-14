@@ -1,0 +1,21 @@
+parameters:
+    app.blog_content_dir: '%kernel.project_dir%/content/blog'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+        bind:
+            string $blogContentDir: '%app.blog_content_dir%'
+
+    App\Blog\:
+        resource: '../../src/Blog/*'
+        exclude:
+            # domain
+            - '../../src/Blog/Domain/Exception'
+            - '../../src/Blog/Domain/ValueObject'
+
+when@test:
+    parameters:
+        app.blog_content_dir: '%kernel.project_dir%/tests/Fixtures/Blog/content'

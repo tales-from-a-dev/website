@@ -69,6 +69,26 @@
         </div>
     </header>
     <main class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16">
+        {% if posts is not empty %}
+            <twig:Section id="blog" size="lg" class="py-8 md:py-16">
+                <twig:Section:SectionHeader>
+                    <twig:Section:SectionTitle>{{ 'website.index.section.blog.title'|trans }}</twig:Section:SectionTitle>
+                    <twig:Section:SectionDescription>{{ 'website.index.section.blog.subtitle'|trans }}</twig:Section:SectionDescription>
+                </twig:Section:SectionHeader>
+                <twig:Section:SectionContent class="flex flex-col gap-10">
+                    <div data-slot="blog-posts" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {% for post in posts %}
+                            <twig:Blog:PostCard :post="post" heading="h3" />
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <twig:Button variant="outline" href="{{ path('app_website_blog_index') }}">
+                            {{- 'website.index.section.blog.all'|trans -}}
+                        </twig:Button>
+                    </div>
+                </twig:Section:SectionContent>
+            </twig:Section>
+        {% endif %}
         <twig:Section id="open-source-projects" size="lg" class="py-8 md:py-16">
             <twig:Section:SectionHeader>
                 <twig:Section:SectionTitle>{{ 'website.index.section.open_source.title'|trans }}</twig:Section:SectionTitle>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Blog\Domain\Enum\BlogRouteNameEnum;
 use App\Contact\Domain\Enum\ContactRouteNameEnum;
 use App\Resume\Domain\Enum\ResumeRouteNameEnum;
 use App\Shared\Domain\Enum\SharedRouteNameEnum;
@@ -20,6 +21,15 @@ final class WebsiteRouteTest extends RouteTestCase
     {
         yield 'GET /' => ['/', Request::METHOD_GET, SharedRouteNameEnum::WebsiteIndex];
         yield 'GET /fr' => ['/fr', Request::METHOD_GET, SharedRouteNameEnum::WebsiteIndex];
+
+        yield 'GET /blog' => ['/blog', Request::METHOD_GET, BlogRouteNameEnum::WebsiteIndex];
+        yield 'GET /fr/blog' => ['/fr/blog', Request::METHOD_GET, BlogRouteNameEnum::WebsiteIndex];
+
+        yield 'GET /blog/{slug}' => ['/blog/first-post', Request::METHOD_GET, BlogRouteNameEnum::WebsiteShow];
+        yield 'GET /fr/blog/{slug}' => ['/fr/blog/premier-article', Request::METHOD_GET, BlogRouteNameEnum::WebsiteShow];
+
+        yield 'GET /blog/tag/{tag}' => ['/blog/tag/symfony', Request::METHOD_GET, BlogRouteNameEnum::WebsiteTag];
+        yield 'GET /fr/blog/tag/{tag}' => ['/fr/blog/tag/symfony', Request::METHOD_GET, BlogRouteNameEnum::WebsiteTag];
 
         yield 'GET /cv' => ['/cv', Request::METHOD_GET, ResumeRouteNameEnum::WebsiteResume];
         yield 'GET /fr/cv' => ['/fr/cv', Request::METHOD_GET, ResumeRouteNameEnum::WebsiteResume];

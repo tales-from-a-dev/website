@@ -1,0 +1,10 @@
+website_blog_controllers:
+    resource:
+        path: ../../src/Blog/Ui/Controller/Website
+        namespace: App\Blog\Ui\Controller\Website
+    type: attribute
+    prefix:
+        en: '/blog'
+        fr: '/fr/blog'
+    name_prefix: app_website_blog_
+    trailing_slash_on_root: false

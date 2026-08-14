@@ -67,6 +67,7 @@ The codebase follows **Domain-Driven Design** with a strict four-layer structure
 ```
 src/
 ├── Analytics/      # Page view tracking and traffic processing
+├── Blog/           # Markdown posts read from content/blog/<locale>/
 ├── Contact/        # Contact form
 ├── Experience/     # Professional timeline
 ├── GitHub/         # GitHub profile integration
