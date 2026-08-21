@@ -11,7 +11,7 @@ app:
 # enum
 enum:
     blog_category:
-        ai: 'Ai'
+        ai: 'AI'
         architecture: 'Architecture'
         career: 'Career'
         dev-ops: 'DevOps'

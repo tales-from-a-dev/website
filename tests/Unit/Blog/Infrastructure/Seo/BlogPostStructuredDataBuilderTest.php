@@ -34,7 +34,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
             ->method('trans')
             ->willReturnCallback(static fn (string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string => match (true) {
                 'app.author' === $id => 'Romain Monteil',
-                'enum.blog_category.ai' === $id => 'fr' === $locale ? 'Ia' : 'Ai',
+                'enum.blog_category.ai' === $id => 'fr' === $locale ? 'IA' : 'AI',
                 default => $id,
             });
 
@@ -69,7 +69,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
             'headline' => 'First post',
             'datePublished' => '2026-01-15',
             'inLanguage' => 'en',
-            'articleSection' => 'Ai',
+            'articleSection' => 'AI',
             'author' => [
                 '@type' => 'Person',
                 'name' => 'Romain Monteil',
@@ -88,7 +88,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
         $data = $this->builder->build($this->post(slug: 'premier-article', locale: 'fr'));
 
         self::assertSame('fr', $data['inLanguage']);
-        self::assertSame('Ia', $data['articleSection']);
+        self::assertSame('IA', $data['articleSection']);
         self::assertSame(
             ['@type' => 'WebPage', '@id' => 'https://talesfroma.dev/fr/blog/premier-article'],
             $data['mainEntityOfPage'],
