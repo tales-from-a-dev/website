@@ -13,6 +13,20 @@ final class ShowControllerTest extends WebTestCase
 {
     use HasBrowser;
 
+    public function testItLinksTheCategoryToItsArchive(): void
+    {
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
+        $this->browser()
+            ->visit('/blog/first-post')
+            ->assertSuccessful()
+            ->assertSeeIn(
+                'article header a[href="/blog/category/architecture"]',
+                $translator->trans('enum.blog_category.architecture'),
+            )
+        ;
+    }
+
     public function testItCanViewBlogPostPage(): void
     {
         $translator = self::getContainer()->get(TranslatorInterface::class);

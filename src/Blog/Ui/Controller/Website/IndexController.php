@@ -38,6 +38,7 @@ final class IndexController extends AbstractController
 
         return $this->render('app/website/blog/index.html.twig', [
             'posts' => $this->blogPostRepository->findAll($locale),
+            'categories' => $this->blogPostRepository->findCategories($locale),
             'tags' => $this->blogPostRepository->findTags($locale),
         ]);
     }

@@ -1,0 +1,44 @@
+{% extends 'app/base_website.html.twig' %}
+
+{% block meta_title %}{{ 'website.blog.category.title'|trans({category: category|trans}) }} | {{ parent() }}{% endblock %}
+
+{% block meta_description %}{{ 'website.blog.category.meta.description'|trans({category: category|trans}) }}{% endblock %}
+
+{#- Indexable, unlike the tag archive, so it cannot inherit the base block's
+    `_locale` merge: the slug is locale invariant and the archive 404s where the
+    locale has no post. -#}
+{% block meta_hreflang %}
+    {% for locale, href in alternates %}
+        <link rel="alternate" hreflang="{{ locale }}" href="{{ href }}" />
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ alternates[default_locale]|default(alternates[app.locale]) }}" />
+{% endblock %}
+
+{% block main %}
+    <main class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
+        <twig:Section id="blog-category" size="lg">
+            <twig:Section:SectionHeader>
+                {%- set category_badge -%}
+                    <twig:Badge class="align-middle px-2.5 py-1 text-base">{{ category|trans }}</twig:Badge>
+                {%- endset -%}
+
+                <h1 class="font-medium text-3xl md:text-4xl">
+                    {{- 'website.blog.category.title'|trans({category: category_badge})|raw -}}
+                </h1>
+            </twig:Section:SectionHeader>
+            <twig:Section:SectionContent>
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {% for post in posts %}
+                        <twig:Blog:PostCard :post="post" />
+                    {% endfor %}
+                </div>
+            </twig:Section:SectionContent>
+        </twig:Section>
+        <footer class="mt-16">
+            <twig:Button variant="link" href="{{ path('app_website_blog_index') }}">
+                <twig:Ux:Icon name="lucide:arrow-left" />
+                {{ 'website.blog.back_to_index'|trans }}
+            </twig:Button>
+        </footer>
+    </main>
+{% endblock %}

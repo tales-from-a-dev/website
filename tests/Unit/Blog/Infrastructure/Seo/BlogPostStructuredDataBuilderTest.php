@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Blog\Infrastructure\Seo;
 
+use App\Blog\Domain\Enum\BlogCategoryEnum;
 use App\Blog\Domain\Enum\BlogRouteNameEnum;
 use App\Blog\Domain\ValueObject\BlogPost;
 use App\Blog\Infrastructure\Seo\BlogPostStructuredDataBuilder;
@@ -28,11 +29,14 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push(Request::create(self::BASE_URL.'/blog/first-post'));
 
-        $translator = $this->createMock(TranslatorInterface::class);
+        $translator = $this->createStub(TranslatorInterface::class);
         $translator
             ->method('trans')
-            ->with('app.author')
-            ->willReturn('Romain Monteil');
+            ->willReturnCallback(static fn (string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string => match (true) {
+                'app.author' === $id => 'Romain Monteil',
+                'enum.blog_category.ai' === $id => 'fr' === $locale ? 'Ia' : 'Ai',
+                default => $id,
+            });
 
         $urlGenerator = $this->createStub(UrlGeneratorInterface::class);
         $urlGenerator
@@ -65,6 +69,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
             'headline' => 'First post',
             'datePublished' => '2026-01-15',
             'inLanguage' => 'en',
+            'articleSection' => 'Ai',
             'author' => [
                 '@type' => 'Person',
                 'name' => 'Romain Monteil',
@@ -83,6 +88,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
         $data = $this->builder->build($this->post(slug: 'premier-article', locale: 'fr'));
 
         self::assertSame('fr', $data['inLanguage']);
+        self::assertSame('Ia', $data['articleSection']);
         self::assertSame(
             ['@type' => 'WebPage', '@id' => 'https://talesfroma.dev/fr/blog/premier-article'],
             $data['mainEntityOfPage'],
@@ -117,6 +123,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
             title: 'en' === $locale ? 'First post' : 'Premier article',
             description: $description,
             tags: ['php'],
+            category: BlogCategoryEnum::Ai,
             translationKey: 'first-post',
             cover: $cover,
         );

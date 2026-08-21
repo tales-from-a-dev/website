@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Blog\Infrastructure\Repository;
 
+use App\Blog\Domain\Enum\BlogCategoryEnum;
 use App\Blog\Domain\ValueObject\BlogPost;
 use App\Blog\Infrastructure\Markdown\BlogPostFactory;
 use App\Blog\Infrastructure\Markdown\MarkdownRenderer;
@@ -41,5 +42,11 @@ final class BlogPostRepositoryTest extends TestCase
     {
         self::assertContains('draft-only', $this->blogPostRepository->findTags('en'));
         self::assertNotEmpty($this->blogPostRepository->findByTag('en', 'draft-only'));
+    }
+
+    public function testItExposesDraftOnlyCategoriesInDebug(): void
+    {
+        self::assertContains(BlogCategoryEnum::Testing, $this->blogPostRepository->findCategories('en'));
+        self::assertNotEmpty($this->blogPostRepository->findByCategory('en', BlogCategoryEnum::Testing));
     }
 }

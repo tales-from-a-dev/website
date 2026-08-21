@@ -49,6 +49,31 @@ final class BlogSitemapListenerTest extends WebTestCase
         self::assertStringNotContainsString('/blog/tag/', $content);
     }
 
+    public function testItListsCategoryArchivesWithTheirAlternates(): void
+    {
+        $content = $this->sitemap();
+
+        self::assertStringContainsString('<loc>https://localhost/blog/category/architecture</loc>', $content);
+        self::assertStringContainsString('<loc>https://localhost/fr/blog/category/architecture</loc>', $content);
+        self::assertStringContainsString(
+            '<xhtml:link rel="alternate" hreflang="fr" href="https://localhost/fr/blog/category/architecture" />',
+            $content,
+        );
+    }
+
+    public function testItSelfReferencesACategoryHeldByASingleLocale(): void
+    {
+        $content = $this->sitemap();
+
+        self::assertStringContainsString('<loc>https://localhost/blog/category/performance</loc>', $content);
+        self::assertStringNotContainsString('https://localhost/fr/blog/category/performance', $content);
+    }
+
+    public function testItExcludesACategoryOnlyHeldByADraft(): void
+    {
+        self::assertStringNotContainsString('/blog/category/testing', $this->sitemap());
+    }
+
     public function testItKeepsTheIndexAlongsideThePosts(): void
     {
         self::assertStringContainsString('<loc>https://localhost/blog</loc>', $this->sitemap());

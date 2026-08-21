@@ -28,11 +28,14 @@
         <article>
             <header class="flex flex-col gap-4 mb-10">
                 <h1 class="font-medium text-3xl md:text-4xl">{{ post.title }}</h1>
-                <p class="text-muted-foreground">
+                <div class="flex flex-wrap items-center gap-3 text-muted-foreground">
+                    <twig:Badge href="{{ path('app_website_blog_category', {category: post.category.value}) }}">
+                        {{- post.category|trans -}}
+                    </twig:Badge>
                     <time datetime="{{ post.publishedAt|date('Y-m-d') }}">
                         {{- 'website.blog.published_at'|trans({date: post.publishedAt|format_date(pattern: 'd MMMM Y')}) -}}
                     </time>
-                </p>
+                </div>
                 {% if post.tags is not empty %}
                     <nav data-slot="blog-tags" aria-label="{{ 'website.blog.tags.title'|trans }}" class="flex flex-wrap gap-2">
                         {% for tag in post.tags %}
