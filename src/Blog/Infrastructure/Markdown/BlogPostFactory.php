@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Infrastructure\Markdown;
 
+use App\Blog\Domain\Enum\BlogCategoryEnum;
 use App\Blog\Domain\Exception\InvalidBlogPostException;
 use App\Blog\Domain\ValueObject\BlogPost;
 
@@ -18,6 +19,7 @@ final class BlogPostFactory
      *     title?: mixed,
      *     description?: mixed,
      *     tags?: mixed,
+     *     category?: mixed,
      *     translation_key?: mixed,
      *     cover?: mixed,
      *     draft?: mixed,
@@ -48,6 +50,7 @@ final class BlogPostFactory
             title: $title,
             description: $this->stringOrNull($frontmatter['description'] ?? null),
             tags: $this->tags($frontmatter['tags'] ?? null),
+            category: $this->category($path, $frontmatter['category'] ?? null),
             translationKey: $this->stringOrNull($frontmatter['translation_key'] ?? null) ?? $slug,
             cover: $this->stringOrNull($frontmatter['cover'] ?? null),
             draft: true === ($frontmatter['draft'] ?? false),
@@ -75,5 +78,20 @@ final class BlogPostFactory
         }
 
         return array_values(array_filter($value, \is_string(...)));
+    }
+
+    private function category(string $path, mixed $value): BlogCategoryEnum
+    {
+        $value = $this->stringOrNull($value);
+        if (null === $value) {
+            throw InvalidBlogPostException::missingCategory($path);
+        }
+
+        $category = BlogCategoryEnum::tryFrom($value);
+        if (null === $category) {
+            throw InvalidBlogPostException::invalidCategory($path, $value);
+        }
+
+        return $category;
     }
 }

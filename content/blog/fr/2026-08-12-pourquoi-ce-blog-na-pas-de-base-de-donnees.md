@@ -2,6 +2,7 @@
 title: "Pourquoi ce blog n'a pas de base de données"
 description: 'Les articles sont des fichiers markdown versionnés dans le dépôt : publier revient à pousser un commit, relire revient à ouvrir une pull request.'
 tags: ['symfony', 'php', 'markdown']
+category: 'architecture'
 translation_key: 'blog-without-a-database'
 draft: false
 ---
@@ -28,6 +29,7 @@ Il ne reste dans le front matter que ce que le nom de fichier ne peut pas porter
 title: "Pourquoi ce blog n'a pas de base de données"
 description: 'Utilisée comme meta description et comme og:description.'
 tags: ['symfony', 'php', 'markdown']
+category: 'architecture'
 translation_key: 'blog-without-a-database'
 ```
 

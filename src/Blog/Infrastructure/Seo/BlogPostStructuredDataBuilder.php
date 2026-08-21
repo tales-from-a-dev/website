@@ -23,6 +23,9 @@ final readonly class BlogPostStructuredDataBuilder
     }
 
     /**
+     * The category label skips `TranslatableEnumTrait::trans()`, which forwards
+     * its `$locale` into the translator's `$domain` argument.
+     *
      * @return array<string, mixed>
      */
     public function build(BlogPost $post): array
@@ -42,6 +45,7 @@ final readonly class BlogPostStructuredDataBuilder
             'headline' => $post->title,
             'datePublished' => $post->publishedAt->format('Y-m-d'),
             'inLanguage' => $post->locale,
+            'articleSection' => $this->translator->trans($post->category->getReadable(), locale: $post->locale),
             'author' => [
                 '@type' => 'Person',
                 'name' => $this->translator->trans('app.author'),

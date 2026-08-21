@@ -59,6 +59,22 @@ final class IndexControllerTest extends WebTestCase
         ;
     }
 
+    public function testItLinksEveryPublishedCategoryToItsArchive(): void
+    {
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
+        $this->browser()
+            ->visit('/blog')
+            ->assertSuccessful()
+            ->assertSee($translator->trans('website.blog.categories.title'))
+            ->assertElementCount('[data-slot=blog-categories] a[data-slot=badge]', 3)
+            ->assertSeeElement('[data-slot=blog-categories] a[href="/blog/category/architecture"]')
+            ->assertSeeElement('[data-slot=blog-categories] a[href="/blog/category/notes"]')
+            ->assertSeeElement('[data-slot=blog-categories] a[href="/blog/category/performance"]')
+            ->assertNotSeeElement('[data-slot=blog-categories] a[href="/blog/category/testing"]')
+        ;
+    }
+
     public function testItLinksEveryPublishedTagToItsArchive(): void
     {
         $translator = self::getContainer()->get(TranslatorInterface::class);

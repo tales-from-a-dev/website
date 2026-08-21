@@ -23,6 +23,15 @@ common:
 
 # enum
 enum:
+    blog_category:
+        ai: 'Ia'
+        architecture: 'Architecture'
+        career: 'Carrière'
+        dev-ops: 'DevOps'
+        notes: 'Notes'
+        performance: 'Performances'
+        security: 'Sécurité'
+        testing: 'Tests'
     project_type:
         customer: 'Client'
         github: 'GitHub'
@@ -154,6 +163,12 @@ website:
         published_at: 'Publié le {date}'
         back_to_index: 'Retour aux articles'
         empty: 'Aucun article publié pour le moment.'
+        category:
+            title: 'Articles dans {category}'
+            meta:
+                description: 'Tous les articles {category} sur PHP, Symfony et le développement web, écrits par Romain Monteil, développeur back-end senior freelance.'
+        categories:
+            title: 'Parcourir par catégorie'
         tag:
             title: 'Articles tagués {tag}'
         tags:

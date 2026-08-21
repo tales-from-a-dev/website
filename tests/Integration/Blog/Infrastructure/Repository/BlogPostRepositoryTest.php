@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Blog\Infrastructure\Repository;
 
+use App\Blog\Domain\Enum\BlogCategoryEnum;
 use App\Blog\Domain\Exception\UnreadableBlogPostException;
 use App\Blog\Domain\ValueObject\BlogPost;
 use App\Blog\Infrastructure\Repository\BlogPostRepository;
@@ -113,6 +114,38 @@ final class BlogPostRepositoryTest extends KernelTestCase
         self::assertSame($html, $this->blogPostRepository->findContent($post));
     }
 
+    public function testItFindsPostsByCategory(): void
+    {
+        self::assertSame(
+            ['first-post'],
+            $this->slugsOf($this->blogPostRepository->findByCategory('en', BlogCategoryEnum::Architecture)),
+        );
+        self::assertSame(
+            ['second-post'],
+            $this->slugsOf($this->blogPostRepository->findByCategory('en', BlogCategoryEnum::Notes)),
+        );
+        self::assertSame([], $this->blogPostRepository->findByCategory('en', BlogCategoryEnum::Ai));
+    }
+
+    public function testItListsOnlyTheCategoriesHoldingAPublishedPost(): void
+    {
+        self::assertSame(
+            [BlogCategoryEnum::Architecture, BlogCategoryEnum::Notes, BlogCategoryEnum::Performance],
+            $this->blogPostRepository->findCategories('en'),
+        );
+        self::assertSame(
+            [BlogCategoryEnum::Architecture, BlogCategoryEnum::Notes],
+            $this->blogPostRepository->findCategories('fr'),
+        );
+    }
+
+    public function testEveryCategoryYieldsAtLeastOnePost(): void
+    {
+        foreach ($this->blogPostRepository->findCategories('en') as $category) {
+            self::assertNotEmpty($this->blogPostRepository->findByCategory('en', $category));
+        }
+    }
+
     public function testItThrowsWhenAPostFileIsMissing(): void
     {
         $post = new BlogPost(
@@ -122,6 +155,7 @@ final class BlogPostRepositoryTest extends KernelTestCase
             title: 'Gone',
             description: null,
             tags: [],
+            category: BlogCategoryEnum::Notes,
             translationKey: 'gone',
             cover: null,
         );
@@ -191,6 +225,7 @@ final class BlogPostRepositoryTest extends KernelTestCase
             ---
             title: '{$title}'
             tags: ['php']
+            category: 'notes'
             ---
 
             {$title} body.

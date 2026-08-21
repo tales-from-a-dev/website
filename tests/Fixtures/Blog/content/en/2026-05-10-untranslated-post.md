@@ -2,6 +2,7 @@
 title: 'Untranslated post'
 description: 'The newest published fixture, with no French counterpart and the only cover.'
 tags: ['php']
+category: 'performance'
 cover: 'images/profile_lg.webp'
 ---
 

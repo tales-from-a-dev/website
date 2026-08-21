@@ -66,7 +66,7 @@ final class IndexControllerTest extends WebTestCase
         self::assertSame(['Untranslated post', 'Second post', 'First post'], $titles);
     }
 
-    public function testEachPostCardShowsItsTitleTagsAndDate(): void
+    public function testEachPostCardShowsItsTitleCategoryTagsAndDate(): void
     {
         $card = $this->browser()
             ->visit('/')
@@ -79,7 +79,7 @@ final class IndexControllerTest extends WebTestCase
         self::assertSame('First post', trim($card->filter('h3[data-slot=card-title]')->text()));
         self::assertSame('2026-01-15', $card->filter('time')->attr('datetime'));
         self::assertSame(
-            ['php', 'symfony'],
+            ['Architecture', 'php', 'symfony'],
             $card->filter('[data-slot=badge]')->each(static fn ($node): string => trim($node->text())),
         );
     }

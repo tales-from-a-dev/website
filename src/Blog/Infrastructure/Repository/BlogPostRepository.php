@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Infrastructure\Repository;
 
+use App\Blog\Domain\Enum\BlogCategoryEnum;
 use App\Blog\Domain\Exception\UnreadableBlogPostException;
 use App\Blog\Domain\ValueObject\BlogPost;
 use App\Blog\Infrastructure\Markdown\BlogPostFactory;
@@ -55,6 +56,17 @@ final readonly class BlogPostRepository
         return array_values(array_filter(
             $this->findAll($locale),
             static fn (BlogPost $post): bool => \in_array($tag, $post->tags, true),
+        ));
+    }
+
+    /**
+     * @return list<BlogPost>
+     */
+    public function findByCategory(string $locale, BlogCategoryEnum $category): array
+    {
+        return array_values(array_filter(
+            $this->findAll($locale),
+            static fn (BlogPost $post): bool => $category === $post->category,
         ));
     }
 
@@ -118,6 +130,25 @@ final readonly class BlogPostRepository
         sort($tags);
 
         return $tags;
+    }
+
+    /**
+     * Ordered by enum declaration, not sorted like `findTags()`: the label is
+     * translated, so sorting on the value orders the French nav by English words.
+     *
+     * @return list<BlogCategoryEnum>
+     */
+    public function findCategories(string $locale): array
+    {
+        $posts = $this->findAll($locale);
+
+        return array_values(array_filter(
+            BlogCategoryEnum::cases(),
+            static fn (BlogCategoryEnum $category): bool => [] !== array_filter(
+                $posts,
+                static fn (BlogPost $post): bool => $category === $post->category,
+            ),
+        ));
     }
 
     /**

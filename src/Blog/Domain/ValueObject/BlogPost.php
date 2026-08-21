@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Domain\ValueObject;
 
+use App\Blog\Domain\Enum\BlogCategoryEnum;
+
 final readonly class BlogPost
 {
     /**
@@ -16,6 +18,7 @@ final readonly class BlogPost
         public string $title,
         public ?string $description,
         public array $tags,
+        public BlogCategoryEnum $category,
         public string $translationKey,
         public ?string $cover,
         public bool $draft = false,

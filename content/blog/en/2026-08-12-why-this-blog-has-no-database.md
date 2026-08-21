@@ -2,6 +2,7 @@
 title: 'Why this blog has no database'
 description: 'Posts live as markdown files committed to the repository, so publishing is a push and reviewing is a pull request.'
 tags: ['symfony', 'php', 'markdown']
+category: 'architecture'
 translation_key: 'blog-without-a-database'
 draft: false
 ---
@@ -28,6 +29,7 @@ What is left in the front matter is only what the filename cannot carry:
 title: 'Why this blog has no database'
 description: 'Shown as the meta description and og:description.'
 tags: ['symfony', 'php', 'markdown']
+category: 'architecture'
 translation_key: 'blog-without-a-database'
 ```
 

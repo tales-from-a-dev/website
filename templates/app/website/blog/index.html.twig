@@ -12,6 +12,20 @@
                 <twig:Section:SectionDescription>{{ 'website.blog.subtitle'|trans }}</twig:Section:SectionDescription>
             </twig:Section:SectionHeader>
             <twig:Section:SectionContent class="flex flex-col gap-10">
+                {% if categories is not empty %}
+                    <nav data-slot="blog-categories" aria-labelledby="blog-categories-title" class="flex flex-col gap-3">
+                        <h2 id="blog-categories-title" class="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                            {{- 'website.blog.categories.title'|trans -}}
+                        </h2>
+                        <div class="flex flex-wrap gap-2">
+                            {% for category in categories %}
+                                <twig:Badge href="{{ path('app_website_blog_category', {category: category.value}) }}">
+                                    {{- category|trans -}}
+                                </twig:Badge>
+                            {% endfor %}
+                        </div>
+                    </nav>
+                {% endif %}
                 {% if tags is not empty %}
                     <nav data-slot="blog-tags" aria-labelledby="blog-tags-title" class="flex flex-col gap-3">
                         <h2 id="blog-tags-title" class="font-medium text-sm text-muted-foreground uppercase tracking-wide">

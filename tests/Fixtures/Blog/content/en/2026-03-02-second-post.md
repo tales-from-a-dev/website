@@ -2,6 +2,7 @@
 title: 'Second post'
 description: 'Shares one tag with the first post.'
 tags: ['symfony']
+category: 'notes'
 translation_key: 'second-post'
 ---
 
