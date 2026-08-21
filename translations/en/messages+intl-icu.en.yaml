@@ -102,6 +102,7 @@ website:
         meta:
             description: 'Articles about PHP, Symfony and web development, written by Romain Monteil, freelance senior back-end developer.'
         published_at: 'Published on {date}'
+        reading_time: '{minutes} min read'
         back_to_index: 'Back to all articles'
         empty: 'No article published yet.'
         category:

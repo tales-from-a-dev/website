@@ -18,6 +18,13 @@ final readonly class BlogPostRepository
 {
     private const string FILE_PATTERN = '*.md';
 
+    /**
+     * Bumped whenever `BlogPost` gains or loses a property: the pool is Redis
+     * backed and survives deploys, so a stale entry would unserialize into the
+     * new shape with uninitialized typed properties.
+     */
+    private const string INDEX_VERSION = 'v2';
+
     public function __construct(
         private MarkdownRenderer $markdownRenderer,
         private BlogPostFactory $blogPostFactory,
@@ -159,7 +166,7 @@ final readonly class BlogPostRepository
      */
     private function index(string $locale): array
     {
-        $key = \sprintf('blog.index.%s.%s', $locale, $this->fingerprint($locale));
+        $key = \sprintf('blog.index.%s.%s.%s', self::INDEX_VERSION, $locale, $this->fingerprint($locale));
 
         return $this->blogCache->get($key, fn () => $this->parse($locale));
     }
@@ -174,10 +181,13 @@ final readonly class BlogPostRepository
         foreach ($this->files($locale) as $file) {
             $path = $file->getPathname();
 
+            $markdown = $this->markdownRenderer->parse($this->read($path));
+
             $posts[] = $this->blogPostFactory->create(
                 $path,
                 $locale,
-                $this->markdownRenderer->parse($this->read($path))->frontmatter,
+                $markdown->frontmatter,
+                $markdown->html,
             );
         }
 

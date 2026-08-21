@@ -44,6 +44,7 @@ final readonly class BlogPostStructuredDataBuilder
             '@type' => 'BlogPosting',
             'headline' => $post->title,
             'datePublished' => $post->publishedAt->format('Y-m-d'),
+            'timeRequired' => \sprintf('PT%dM', $post->readingTime),
             'inLanguage' => $post->locale,
             'articleSection' => $this->translator->trans($post->category->getReadable(), locale: $post->locale),
             'author' => [

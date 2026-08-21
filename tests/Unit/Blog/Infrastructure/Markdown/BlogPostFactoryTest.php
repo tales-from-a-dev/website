@@ -6,6 +6,7 @@ namespace App\Tests\Unit\Blog\Infrastructure\Markdown;
 
 use App\Blog\Domain\Enum\BlogCategoryEnum;
 use App\Blog\Domain\Exception\InvalidBlogPostException;
+use App\Blog\Domain\Service\ReadingTimeCalculator;
 use App\Blog\Infrastructure\Markdown\BlogPostFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -14,11 +15,13 @@ final class BlogPostFactoryTest extends TestCase
 {
     private const string PATH = '/app/content/blog/en/2026-08-12-why-this-blog-has-no-database.md';
 
+    private const string HTML = '<p>A rendered body.</p>';
+
     private BlogPostFactory $factory;
 
     protected function setUp(): void
     {
-        $this->factory = new BlogPostFactory();
+        $this->factory = new BlogPostFactory(new ReadingTimeCalculator());
     }
 
     public function testItCreatesBlogPostFromFilenameAndFrontmatter(): void
@@ -31,7 +34,7 @@ final class BlogPostFactoryTest extends TestCase
             'translation_key' => 'blog-without-a-database',
             'cover' => 'images/blog/cover.webp',
             'draft' => true,
-        ]);
+        ], self::HTML);
 
         self::assertSame('why-this-blog-has-no-database', $blogPost->slug);
         self::assertSame('2026-08-12 00:00:00', $blogPost->publishedAt->format('Y-m-d H:i:s'));
@@ -42,12 +45,13 @@ final class BlogPostFactoryTest extends TestCase
         self::assertSame(BlogCategoryEnum::Ai, $blogPost->category);
         self::assertSame('blog-without-a-database', $blogPost->translationKey);
         self::assertSame('images/blog/cover.webp', $blogPost->cover);
+        self::assertSame(1, $blogPost->readingTime);
         self::assertTrue($blogPost->draft);
     }
 
     public function testItAppliesDefaultsWithOnlyTheRequiredFields(): void
     {
-        $blogPost = $this->factory->create(self::PATH, 'fr', ['title' => 'Un titre', 'category' => 'notes']);
+        $blogPost = $this->factory->create(self::PATH, 'fr', ['title' => 'Un titre', 'category' => 'notes'], self::HTML);
 
         self::assertNull($blogPost->description);
         self::assertSame([], $blogPost->tags);
@@ -56,10 +60,19 @@ final class BlogPostFactoryTest extends TestCase
         self::assertFalse($blogPost->draft);
     }
 
+    public function testItDerivesTheReadingTimeFromTheRenderedContent(): void
+    {
+        $html = \sprintf('<p>%s</p>', implode(' ', array_fill(0, 401, 'word')));
+
+        $blogPost = $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'notes'], $html);
+
+        self::assertSame(3, $blogPost->readingTime);
+    }
+
     #[DataProvider('provideEmptyOptionalFields')]
     public function testItTreatsBlankOptionalFieldsAsAbsent(string $key): void
     {
-        $blogPost = $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'notes', $key => '  ']);
+        $blogPost = $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'notes', $key => '  '], self::HTML);
 
         self::assertNull($blogPost->description);
         self::assertNull($blogPost->cover);
@@ -69,7 +82,7 @@ final class BlogPostFactoryTest extends TestCase
     #[DataProvider('provideUnusableTags')]
     public function testItKeepsOnlyStringTags(mixed $tags): void
     {
-        $blogPost = $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'notes', 'tags' => $tags]);
+        $blogPost = $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'notes', 'tags' => $tags], self::HTML);
 
         self::assertSame([], $blogPost->tags);
     }
@@ -80,7 +93,7 @@ final class BlogPostFactoryTest extends TestCase
             'title' => 'Un titre',
             'category' => 'notes',
             'tags' => ['symfony', 42, null, 'php'],
-        ]);
+        ], self::HTML);
 
         self::assertSame(['symfony', 'php'], $blogPost->tags);
     }
@@ -88,7 +101,7 @@ final class BlogPostFactoryTest extends TestCase
     #[DataProvider('provideNonBooleanDraftValues')]
     public function testItOnlyTreatsBooleanTrueAsADraft(mixed $draft): void
     {
-        $blogPost = $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'notes', 'draft' => $draft]);
+        $blogPost = $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'notes', 'draft' => $draft], self::HTML);
 
         self::assertFalse($blogPost->draft);
     }
@@ -101,7 +114,7 @@ final class BlogPostFactoryTest extends TestCase
         $this->expectException(InvalidBlogPostException::class);
         $this->expectExceptionMessage(\sprintf('Blog post "%s" must be named YYYY-mm-dd-slug.md.', $path));
 
-        $this->factory->create($path, 'en', ['title' => 'Un titre']);
+        $this->factory->create($path, 'en', ['title' => 'Un titre'], self::HTML);
     }
 
     public function testItThrowsWhenThePublicationDateDoesNotExist(): void
@@ -111,7 +124,7 @@ final class BlogPostFactoryTest extends TestCase
         $this->expectException(InvalidBlogPostException::class);
         $this->expectExceptionMessage(\sprintf('Blog post "%s" has an invalid publication date "2026-02-31".', $path));
 
-        $this->factory->create($path, 'en', ['title' => 'Un titre']);
+        $this->factory->create($path, 'en', ['title' => 'Un titre'], self::HTML);
     }
 
     #[DataProvider('provideUnusableTitles')]
@@ -120,7 +133,7 @@ final class BlogPostFactoryTest extends TestCase
         $this->expectException(InvalidBlogPostException::class);
         $this->expectExceptionMessage(\sprintf('Blog post "%s" is missing a title in its front matter.', self::PATH));
 
-        $this->factory->create(self::PATH, 'en', $frontmatter);
+        $this->factory->create(self::PATH, 'en', $frontmatter, self::HTML);
     }
 
     #[DataProvider('provideUnusableCategories')]
@@ -129,7 +142,7 @@ final class BlogPostFactoryTest extends TestCase
         $this->expectException(InvalidBlogPostException::class);
         $this->expectExceptionMessage(\sprintf('Blog post "%s" is missing a category in its front matter.', self::PATH));
 
-        $this->factory->create(self::PATH, 'en', ['title' => 'Un titre'] + $frontmatter);
+        $this->factory->create(self::PATH, 'en', ['title' => 'Un titre'] + $frontmatter, self::HTML);
     }
 
     public function testItThrowsWhenTheCategoryIsNotAKnownCase(): void
@@ -137,7 +150,7 @@ final class BlogPostFactoryTest extends TestCase
         $this->expectException(InvalidBlogPostException::class);
         $this->expectExceptionMessage(\sprintf('Blog post "%s" has an invalid category "engineering".', self::PATH));
 
-        $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'engineering']);
+        $this->factory->create(self::PATH, 'en', ['title' => 'Un titre', 'category' => 'engineering'], self::HTML);
     }
 
     public static function provideEmptyOptionalFields(): iterable

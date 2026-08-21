@@ -45,6 +45,7 @@ final class ShowControllerTest extends WebTestCase
                 'The oldest published fixture.'
             )
             ->assertSeeIn('h1', 'First post')
+            ->assertSeeIn('article header [data-slot=reading-time]', $translator->trans('website.blog.reading_time', ['minutes' => 1]))
             ->assertSeeIn('[data-slot=post-content]', 'The oldest published post')
             ->assertElementCount('[data-slot=post-content] pre', 1)
             ->assertSee($translator->trans('website.blog.back_to_index'))
@@ -129,6 +130,7 @@ final class ShowControllerTest extends WebTestCase
             ->assertSeeIn('script[type="application/ld+json"]', '"@type":"BlogPosting"')
             ->assertSeeIn('script[type="application/ld+json"]', '"headline":"First post"')
             ->assertSeeIn('script[type="application/ld+json"]', '"datePublished":"2026-01-15"')
+            ->assertSeeIn('script[type="application/ld+json"]', '"timeRequired":"PT1M"')
             ->assertSeeIn('script[type="application/ld+json"]', '"inLanguage":"en"')
         ;
     }
