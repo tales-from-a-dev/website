@@ -158,6 +158,7 @@ final class BlogPostRepositoryTest extends KernelTestCase
             category: BlogCategoryEnum::Notes,
             translationKey: 'gone',
             cover: null,
+            readingTime: 1,
         );
 
         $this->expectException(UnreadableBlogPostException::class);

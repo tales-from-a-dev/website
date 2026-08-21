@@ -31,6 +31,11 @@ final class IndexControllerTest extends WebTestCase
             )
             ->assertSeeIn('h1', $translator->trans('website.blog.title'))
             ->assertElementCount('[data-slot=card]', 3)
+            ->assertElementCount('[data-slot=card] [data-slot=reading-time]', 3)
+            ->assertSeeIn(
+                '[data-slot=card] [data-slot=reading-time]',
+                $translator->trans('website.blog.reading_time', ['minutes' => 1])
+            )
         ;
     }
 

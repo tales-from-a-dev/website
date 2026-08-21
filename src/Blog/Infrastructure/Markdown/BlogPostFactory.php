@@ -6,6 +6,7 @@ namespace App\Blog\Infrastructure\Markdown;
 
 use App\Blog\Domain\Enum\BlogCategoryEnum;
 use App\Blog\Domain\Exception\InvalidBlogPostException;
+use App\Blog\Domain\Service\ReadingTimeCalculator;
 use App\Blog\Domain\ValueObject\BlogPost;
 
 final class BlogPostFactory
@@ -13,6 +14,11 @@ final class BlogPostFactory
     private const string FILENAME_PATTERN = '/^(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>[a-z0-9-]+)\.md$/';
 
     private const string DATE_FORMAT = '!Y-m-d';
+
+    public function __construct(
+        private readonly ReadingTimeCalculator $readingTimeCalculator,
+    ) {
+    }
 
     /**
      * @param array{
@@ -25,7 +31,7 @@ final class BlogPostFactory
      *     draft?: mixed,
      * } $frontmatter
      */
-    public function create(string $path, string $locale, array $frontmatter): BlogPost
+    public function create(string $path, string $locale, array $frontmatter, string $html): BlogPost
     {
         if (1 !== preg_match(self::FILENAME_PATTERN, basename($path), $matches)) {
             throw InvalidBlogPostException::invalidFilename($path);
@@ -53,6 +59,7 @@ final class BlogPostFactory
             category: $this->category($path, $frontmatter['category'] ?? null),
             translationKey: $this->stringOrNull($frontmatter['translation_key'] ?? null) ?? $slug,
             cover: $this->stringOrNull($frontmatter['cover'] ?? null),
+            readingTime: $this->readingTimeCalculator->minutes($html),
             draft: true === ($frontmatter['draft'] ?? false),
         );
     }

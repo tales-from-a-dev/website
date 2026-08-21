@@ -68,6 +68,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
             '@type' => 'BlogPosting',
             'headline' => 'First post',
             'datePublished' => '2026-01-15',
+            'timeRequired' => 'PT6M',
             'inLanguage' => 'en',
             'articleSection' => 'AI',
             'author' => [
@@ -81,6 +82,13 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
             ],
             'description' => 'The oldest published fixture.',
         ], $data);
+    }
+
+    public function testItExposesTheReadingTimeAsAnIso8601Duration(): void
+    {
+        $data = $this->builder->build($this->post(readingTime: 12));
+
+        self::assertSame('PT12M', $data['timeRequired']);
     }
 
     public function testItPointsAtTheLocalisedUrlOfATranslatedPost(): void
@@ -115,6 +123,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
         string $locale = 'en',
         ?string $description = 'The oldest published fixture.',
         ?string $cover = null,
+        int $readingTime = 6,
     ): BlogPost {
         return new BlogPost(
             slug: $slug,
@@ -126,6 +135,7 @@ final class BlogPostStructuredDataBuilderTest extends TestCase
             category: BlogCategoryEnum::Ai,
             translationKey: 'first-post',
             cover: $cover,
+            readingTime: $readingTime,
         );
     }
 }

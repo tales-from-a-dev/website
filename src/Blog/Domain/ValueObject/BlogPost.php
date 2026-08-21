@@ -21,6 +21,7 @@ final readonly class BlogPost
         public BlogCategoryEnum $category,
         public string $translationKey,
         public ?string $cover,
+        public int $readingTime,
         public bool $draft = false,
     ) {
     }

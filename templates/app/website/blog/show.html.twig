@@ -35,6 +35,10 @@
                     <time datetime="{{ post.publishedAt|date('Y-m-d') }}">
                         {{- 'website.blog.published_at'|trans({date: post.publishedAt|format_date(pattern: 'd MMMM Y')}) -}}
                     </time>
+                    <span aria-hidden="true">&middot;</span>
+                    <span data-slot="reading-time">
+                        {{- 'website.blog.reading_time'|trans({minutes: post.readingTime}) -}}
+                    </span>
                 </div>
                 {% if post.tags is not empty %}
                     <nav data-slot="blog-tags" aria-label="{{ 'website.blog.tags.title'|trans }}" class="flex flex-wrap gap-2">

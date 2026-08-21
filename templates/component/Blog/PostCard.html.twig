@@ -9,10 +9,14 @@
                 {{- post.title -}}
             </a>
         </twig:Card:CardTitle>
-        <twig:Card:CardDescription>
+        <twig:Card:CardDescription class="flex flex-wrap items-center gap-1.5">
             <time datetime="{{ post.publishedAt|date('Y-m-d') }}">
                 {{- 'website.blog.published_at'|trans({date: post.publishedAt|format_date(pattern: 'd MMMM Y')}) -}}
             </time>
+            <span aria-hidden="true">&middot;</span>
+            <span data-slot="reading-time">
+                {{- 'website.blog.reading_time'|trans({minutes: post.readingTime}) -}}
+            </span>
         </twig:Card:CardDescription>
     </twig:Card:CardHeader>
     {% if post.description is not empty %}

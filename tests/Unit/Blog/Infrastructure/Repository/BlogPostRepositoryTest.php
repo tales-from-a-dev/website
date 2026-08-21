@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Blog\Infrastructure\Repository;
 
 use App\Blog\Domain\Enum\BlogCategoryEnum;
+use App\Blog\Domain\Service\ReadingTimeCalculator;
 use App\Blog\Domain\ValueObject\BlogPost;
 use App\Blog\Infrastructure\Markdown\BlogPostFactory;
 use App\Blog\Infrastructure\Markdown\MarkdownRenderer;
@@ -20,7 +21,7 @@ final class BlogPostRepositoryTest extends TestCase
     {
         $this->blogPostRepository = new BlogPostRepository(
             markdownRenderer: new MarkdownRenderer(),
-            blogPostFactory: new BlogPostFactory(),
+            blogPostFactory: new BlogPostFactory(new ReadingTimeCalculator()),
             blogCache: new ArrayAdapter(),
             blogContentDir: __DIR__.'/../../../../Fixtures/Blog/content',
             debug: true,
