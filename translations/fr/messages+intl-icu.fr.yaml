@@ -24,7 +24,7 @@ common:
 # enum
 enum:
     blog_category:
-        ai: 'Ia'
+        ai: 'IA'
         architecture: 'Architecture'
         career: 'Carrière'
         dev-ops: 'DevOps'
