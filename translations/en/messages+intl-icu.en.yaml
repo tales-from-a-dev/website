@@ -148,8 +148,6 @@ website:
     # resume
     resume:
         title: 'Romain Monteil - Resume'
-        name: 'Romain Monteil'
-        professional_title: 'Senior Back-end Developer'
         contact:
             location: 'Limoges, France (Remote)'
         action:

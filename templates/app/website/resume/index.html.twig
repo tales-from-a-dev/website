@@ -30,6 +30,61 @@
         </twig:Section:SectionHeader>
         <twig:Section:SectionContent class="grid grid-cols-[2fr_4fr] gap-8 print:grid-cols-[2fr_5fr] print:gap-4">
             <div class="flex flex-col gap-8">
+                {# Contact #}
+                <div>
+                    <twig:Card size="sm">
+                        <twig:Card:CardContent class="flex flex-col items-start *:px-0 *:justify-start">
+                            <span class="h-7 inline-flex items-center gap-1 text-[0.8rem] text-primary font-medium">
+                                <twig:Ux:Icon name="lucide:map-pin" class="size-3.5"/>
+                                {{ 'website.resume.contact.location'|trans }}
+                            </span>
+                            <twig:Button
+                                variant="link"
+                                size="sm"
+                                href="mailto:monteil.romain@gmail.com"
+                            >
+                                <twig:Ux:Icon name="lucide:mail"/>
+                                monteil.romain@gmail.com
+                            </twig:Button>
+                            <twig:Button
+                                variant="link"
+                                size="sm"
+                                href="https://talesfroma.dev"
+                                target="_blank"
+                            >
+                                <twig:Ux:Icon name="lucide:globe"/>
+                                talesfroma.dev
+                            </twig:Button>
+                            <twig:Button
+                                variant="link"
+                                size="sm"
+                                href="https://github.com/ker0x"
+                                target="_blank"
+                            >
+                                <twig:Ux:Icon name="simple-icons:github"/>
+                                github.com/ker0x
+                            </twig:Button>
+                            <twig:Button
+                                variant="link"
+                                size="sm"
+                                href="https://www.linkedin.com/in/romain-monteil/"
+                                target="_blank"
+                            >
+                                <twig:Ux:Icon name="simple-icons:linkedin"/>
+                                linkedin.com/in/romain-monteil/
+                            </twig:Button>
+                            <twig:Button
+                                variant="link"
+                                size="sm"
+                                href="https://connect.symfony.com/profile/ker0x"
+                                target="_blank"
+                            >
+                                <twig:Ux:Icon name="simple-icons:symfony"/>
+                                connect.symfony.com/profile/ker0x
+                            </twig:Button>
+                        </twig:Card:CardContent>
+                    </twig:Card>
+                </div>
                 {# Skills #}
                 <div>
                     <h2 class="text-dark-cyan font-bold uppercase">{{ 'website.resume.section.skills.title'|trans }}</h2>
@@ -70,6 +125,19 @@
                                     <dd class="text-sm text-muted-foreground text-sm">{{ ('enum.language_level.' ~ language.level)|trans }}</dd>
                                 {% endfor %}
                             </dl>
+                        </twig:Card:CardContent>
+                    </twig:Card>
+                </div>
+                {# Other #}
+                <div>
+                    <h2 class="text-dark-cyan font-bold uppercase">{{ 'website.resume.section.other.title'|trans }}</h2>
+                    <twig:Card size="sm">
+                        <twig:Card:CardContent>
+                            <div class="flex flex-col gap-2">
+                                {% for item in other %}
+                                    <span class="text-sm text-primary font-medium">{{ ('website.resume.section.other.item.' ~ item)|trans }}</span>
+                                {% endfor %}
+                            </div>
                         </twig:Card:CardContent>
                     </twig:Card>
                 </div>
