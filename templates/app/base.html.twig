@@ -100,7 +100,7 @@
             {% endif %}
         {% endblock %}
     </head>
-    <body {% block body_attributes %}{% endblock %}>
+    <body {% block body_attributes %}class="bg-muted"{% endblock %}>
         {% block body %}{% endblock %}
         {% if block('meta_jsonld') %}
             <script type="application/ld+json">
