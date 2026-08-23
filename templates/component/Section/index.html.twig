@@ -1,5 +1,3 @@
-{%- props size = 'default', -%}
-
 {%- set classes = html_classes(
     'group/section',
     attributes.render('class')|default(''),
@@ -9,8 +7,7 @@
 
 <section
     data-slot="section"
-    data-size="{{ size }}"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {% block content %}{% endblock %}

@@ -1,15 +1,16 @@
+{%- props as = 'h2' -%}
+
 {%- set classes = html_classes(
-    'font-medium text-lg',
-    'group-data-[size=lg]/section:text-3xl md:group-data-[size=lg]/section:text-4xl',
+    'text-2xl font-extrabold md:text-4xl',
     attributes.render('class')|default(''),
 ) -%}
 
 {#- Template -#}
 
-<h2
+<{{ as }}
     data-slot="section-title"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}
-</h2>
+</{{ as }}>

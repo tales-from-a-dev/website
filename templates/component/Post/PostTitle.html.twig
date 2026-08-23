@@ -1,0 +1,17 @@
+{%- props as = 'h1' -%}
+
+{%- set classes = html_classes(
+    'text-3xl font-extrabold md:text-4xl',
+    'group-data-[variant=card]/post:text-lg group-data-[variant=card]/post:font-bold',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<{{ as }}
+    data-slot="post-title"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

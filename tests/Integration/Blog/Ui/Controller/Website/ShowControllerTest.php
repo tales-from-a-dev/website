@@ -105,7 +105,7 @@ final class ShowControllerTest extends WebTestCase
             ->visit('/blog/first-post')
             ->assertSuccessful()
             ->assertElementAttributeContains(
-                '[data-slot=locale-switcher] a[hreflang=fr]',
+                '[data-role=locale-switcher] a[hreflang=fr]',
                 'href',
                 '/fr/blog/premier-article'
             )
@@ -117,8 +117,8 @@ final class ShowControllerTest extends WebTestCase
         $this->browser()
             ->visit('/blog/untranslated-post')
             ->assertSuccessful()
-            ->assertElementCount('[data-slot=locale-switcher] a[hreflang=fr]', 0)
-            ->assertElementCount('[data-slot=locale-switcher] [aria-disabled=true]', 1)
+            ->assertElementCount('[data-role=locale-switcher] a[hreflang=fr]', 0)
+            ->assertElementCount('[data-role=locale-switcher] [aria-disabled=true]', 1)
         ;
     }
 

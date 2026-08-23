@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'flex flex-col items-center',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="timeline-connector"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</div>

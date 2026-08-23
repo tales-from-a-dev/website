@@ -25,7 +25,7 @@ final class IndexControllerTest extends WebTestCase
                 $translator->trans('app.meta.title')
             ))
             ->assertSeeIn('h1', $translator->trans('website.resume.name'))
-            ->assertElementCount('section', 7)
+            ->assertElementCount('section', 1)
         ;
     }
 }

@@ -1,5 +1,5 @@
 {%- set classes = html_classes(
-    'group/timeline-item grid grid-cols-1 gap-6 lg:grid-cols-3',
+    'group/timeline-item grid grid-cols-[16px_1fr] gap-6',
     attributes.render('class')|default(''),
 ) -%}
 
@@ -7,7 +7,7 @@
 
 <div
     data-slot="timeline-item"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

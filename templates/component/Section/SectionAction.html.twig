@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'md:col-start-2 md:row-span-2 md:row-start-1 self-start justify-self-end',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="section-action"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</div>

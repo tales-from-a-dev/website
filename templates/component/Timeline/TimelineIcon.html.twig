@@ -4,8 +4,8 @@
     base: 'absolute -top-1 left-0 size-9 -translate-x-1/2 rounded-full flex items-center justify-center lg:top-4 lg:left-[calc(100%-(--spacing(8)))]',
     variants: {
         variant: {
-            default: 'bg-jade-3 text-primary-foreground',
-            secondary: 'bg-jade-1 text-primary-foreground',
+            default: 'bg-green-calm text-primary-foreground',
+            secondary: 'bg-primary text-primary-foreground',
         },
     },
 ) -%}
@@ -14,7 +14,7 @@
 
 <div
     data-slot="timeline-icon"
-    class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

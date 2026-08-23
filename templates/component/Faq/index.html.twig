@@ -1,20 +1,18 @@
-{% props number = '01' %}
-
 {%- set classes = html_classes(
-    'flex space-x-6',
+    'group/faq border-b last:border-b-0',
+    'details-content:grid details-content:grid-rows-[0fr] details-content:duration-200 details-content:ease-out',
+    'details-content:transition-[grid-template-rows,content-visibility] details-content:transition-discrete',
+    'open:details-content:grid-rows-[1fr]',
+    'motion-reduce:details-content:transition-none',
     attributes.render('class')|default(''),
 ) -%}
 
 {#- Template -#}
 
-<div
+<details
     data-slot="faq"
-    class="{{ classes|tailwind_merge }}"
-    {{ attributes }}
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes.defaults({name: 'faq'}) }}
 >
-    <span class="font-normal text-3xl md:text-4xl">{{ number }}</span>
-    <span class="w-14 h-0.5 bg-border mt-5"></span>
-    <div>
-        {% block content %}{% endblock %}
-    </div>
-</div>
+    {% block content %}{% endblock %}
+</details>

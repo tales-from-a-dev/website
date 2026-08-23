@@ -27,7 +27,7 @@
     data-sidebar="menu-sub-button"
     data-active="{{ active ? 'true' : 'false' }}"
     {% if element == 'button' %}type="button"{% endif %}
-    class="{{ style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

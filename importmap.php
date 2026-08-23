@@ -35,4 +35,6 @@ return [
     '@kurkle/color' => ['version' => '0.4.0'],
     '@fontsource-variable/inter' => ['version' => '5.3.0'],
     '@fontsource-variable/inter/index.min.css' => ['version' => '5.3.0', 'type' => 'css'],
+    '@fontsource-variable/jetbrains-mono' => ['version' => '5.3.0'],
+    '@fontsource-variable/jetbrains-mono/index.min.css' => ['version' => '5.3.0', 'type' => 'css'],
 ];

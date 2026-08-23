@@ -12,21 +12,24 @@
 
 [data-slot="post-content"] {
     --hl-comment: var(--muted-foreground);
-    --hl-keyword: oklch(from var(--jade-6) 0.47 c h);
-    --hl-type: oklch(from var(--jade-5) 0.47 c h);
-    --hl-variable: oklch(from var(--jade-4) 0.47 c h);
-    --hl-property: oklch(from var(--jade-3) 0.47 c h);
-    --hl-value: oklch(from var(--jade-2) 0.47 c h);
-    --hl-generic: oklch(from var(--jade-1) 0.47 calc(c * 2) h);
+    --hl-keyword: oklch(from var(--rusty-spice) 0.47 c h);
+    --hl-type: oklch(from var(--burnt-caramel) 0.47 c h);
+    --hl-variable: oklch(from var(--golden-orange) 0.47 c h);
+    --hl-property: oklch(from var(--green-calm) 0.47 c h);
+    --hl-value: oklch(from var(--dark-cyan) 0.47 c h);
+    --hl-generic: oklch(from var(--dark-teal) 0.47 calc(c * 2) h);
 }
 
-.dark [data-slot="post-content"] {
-    --hl-keyword: oklch(from var(--jade-6) 0.8 c h);
-    --hl-type: oklch(from var(--jade-5) 0.8 c h);
-    --hl-variable: oklch(from var(--jade-4) 0.8 c h);
-    --hl-property: oklch(from var(--jade-3) 0.8 c h);
-    --hl-value: oklch(from var(--jade-2) 0.8 c h);
-    --hl-generic: oklch(from var(--jade-1) 0.8 calc(c * 2) h);
+/* `@media screen` for the same reason as the dark palette in app.css */
+@media screen {
+    .dark [data-slot="post-content"] {
+        --hl-keyword: oklch(from var(--rusty-spice) 0.8 c h);
+        --hl-type: oklch(from var(--burnt-caramel) 0.8 c h);
+        --hl-variable: oklch(from var(--golden-orange) 0.8 c h);
+        --hl-property: oklch(from var(--green-calm) 0.8 c h);
+        --hl-value: oklch(from var(--dark-cyan) 0.8 c h);
+        --hl-generic: oklch(from var(--dark-teal) 0.8 calc(c * 2) h);
+    }
 }
 
 /*

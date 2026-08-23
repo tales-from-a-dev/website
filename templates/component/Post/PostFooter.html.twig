@@ -1,0 +1,18 @@
+{%- props size = 'default', -%}
+
+{%- set classes = html_classes(
+    'flex items-center gap-2.5 pb-8',
+    'group-data-[variant=card]/post:p-6 group-data-[variant=card]/post:mb-0 group-data-[variant=card]/post:border-t',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<footer
+    data-slot="post-footer"
+    data-size="{{ size }}"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {% block content %}{% endblock %}
+</footer>

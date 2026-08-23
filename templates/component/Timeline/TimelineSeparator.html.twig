@@ -1,0 +1,13 @@
+{%- set classes = html_classes(
+    'bg-border w-0.25 flex-1 mt-1.5',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="timeline-separator"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+</div>

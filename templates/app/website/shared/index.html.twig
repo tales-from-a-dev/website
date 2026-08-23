@@ -14,10 +14,11 @@
     {{ structured_data|serialize('jsonld')|raw }}
 {% endblock %}
 
+{% block main_attributes %}class="*:py-16 *:md:py-24 *:even:bg-muted"{% endblock %}
+
 {% block main %}
-    <header
-        class="max-w-screen-xl mx-auto flex flex-col gap-8 p-4 md:p-8 lg:h-svh *:h-1/2 *:flex *:items-center *:justify-center">
-        <picture>
+    <twig:Section id="hero" class="max-w-6xl mx-auto px-4 flex flex-col flex-wrap justify-center items-center gap-12">
+        <picture class="border border-pearl-aqua rounded-full p-2 dark:border-dark-cyan/40">
             <source
                 srcset="{{ preload(asset('images/profile_lg.webp'), {as: 'image', type: 'image/webp'}) }}"
                 media="(width >= 64rem)"
@@ -33,157 +34,205 @@
                 height="320"
             />
             <img
-                class="size-80 rounded-full bg-jade-4 2xl:size-125"
+                class="size-80 rounded-full bg-golden-orange 2xl:size-125"
                 src="{{ asset('images/profile_md.webp') }}"
-                alt="{{ 'website.index.section.about.surtitle'|trans }}"
+                alt="{{ 'app.author'|trans }}"
                 width="320"
                 height="320"
                 fetchpriority="high"
             >
         </picture>
-        <div class="flex-col *:text-center">
-            <h6 class="font-medium text-muted-foreground text-lg md:text-xl lg:text-2xl uppercase mb-8">{{- 'website.index.section.about.surtitle'|trans -}}</h6>
-            <h1 class="font-normal text-primary text-4xl md:text-5xl lg:text-7xl leading-none mb-8">{{- 'website.index.section.about.title'|trans -}}</h1>
-            <p class="font-normal text-muted-foreground text-md md:text-lg lg:text-xl leading-loose mb-16">
-                {%- set php -%}
-                    <twig:TextHighlight variant="purple" class="mx-0.5">PHP</twig:TextHighlight>
-                {%- endset -%}
+        <div class="flex flex-col justify-center items-start gap-4 max-w-2xl">
+            {% if settings.available %}
+                <twig:Badge variant="info" size="lg" class="rounded-full font-body">
+                    <span class="size-1.5 bg-dark-cyan rounded-full animate-pulse"></span>
+                    {{ 'website.index.section.hero.available'|trans }}
+                </twig:Badge>
+            {% endif %}
+            <twig:Section:SectionHeader class="pb-0">
+                <twig:Section:SectionTitle as="h1" class="text-4xl font-extrabold md:text-6xl">
+                    {{- 'app.author'|trans -}}
+                </twig:Section:SectionTitle>
+                <twig:Section:SectionDescription class="font-mono text-dark-cyan md:text-lg">
+                    {{- 'app.job_title'|trans -}}
+                </twig:Section:SectionDescription>
+            </twig:Section:SectionHeader>
+            <twig:Section:SectionContent class="flex flex-col gap-5">
+                <twig:Section:SectionDescription variant="primary" class="text-lg font-medium md:text-2xl">
+                    {{- 'website.index.section.hero.title'|trans -}}
+                </twig:Section:SectionDescription>
+                <twig:Section:SectionDescription class="leading-7">
+                    {%- set php -%}
+                        <twig:TextHighlight variant="purple" class="mx-0.5">PHP</twig:TextHighlight>
+                    {%- endset -%}
 
-                {%- set symfony -%}
-                    <twig:TextHighlight variant="black" class="mx-0.5">Symfony</twig:TextHighlight>
-                {%- endset -%}
+                    {%- set symfony -%}
+                        <twig:TextHighlight variant="black" class="mx-0.5">Symfony</twig:TextHighlight>
+                    {%- endset -%}
 
-                {{- 'website.index.section.about.subtitle'|trans({
-                    php: php,
-                    symfony: symfony,
-                })|raw -}}
-            </p>
-            <twig:Button
-                size="lg"
-                href="#contact"
-                data-controller="scroll-to"
-                class="h-12 px-7 md:px-9"
-            >
-                {{- 'website.index.section.contact.title'|trans -}}
-            </twig:Button>
+                    {{- 'website.index.section.hero.description'|trans({
+                        php: php,
+                        symfony: symfony,
+                    })|raw -}}
+                </twig:Section:SectionDescription>
+                <div class="flex flex-wrap gap-2">
+                    <twig:Button
+                        size="lg"
+                        href="#open-source-projects"
+                        data-controller="scroll-to"
+                        class="h-12 px-7 md:px-9"
+                    >
+                        {{- 'website.index.section.hero.cta.projects'|trans -}}
+                        <twig:Ux:Icon name="lucide:arrow-right"/>
+                    </twig:Button>
+                    <twig:Button
+                        variant="outline"
+                        size="lg"
+                        href="#contact"
+                        data-controller="scroll-to"
+                        class="h-12 px-7 md:px-9"
+                    >
+                        <twig:Ux:Icon name="lucide:mail"/>
+                        {{- 'website.index.section.hero.cta.contact'|trans -}}
+                    </twig:Button>
+                </div>
+            </twig:Section:SectionContent>
         </div>
-    </header>
-    <main class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16">
-        {% if posts is not empty %}
-            <twig:Section id="blog" size="lg" class="py-8 md:py-16">
+    </twig:Section>
+    {% if posts is not empty %}
+        <twig:Section id="blog">
+            <div class="max-w-6xl mx-auto px-4">
                 <twig:Section:SectionHeader>
+                    <twig:Section:SectionDescription variant="surtitle">{{ 'website.index.section.blog.surtitle'|trans }}</twig:Section:SectionDescription>
                     <twig:Section:SectionTitle>{{ 'website.index.section.blog.title'|trans }}</twig:Section:SectionTitle>
-                    <twig:Section:SectionDescription>{{ 'website.index.section.blog.subtitle'|trans }}</twig:Section:SectionDescription>
-                </twig:Section:SectionHeader>
-                <twig:Section:SectionContent class="flex flex-col gap-10">
-                    <div data-slot="blog-posts" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {% for post in posts %}
-                            <twig:Blog:PostCard :post="post" heading="h3" />
-                        {% endfor %}
-                    </div>
-                    <div>
-                        <twig:Button variant="outline" href="{{ path('app_website_blog_index') }}">
-                            {{- 'website.index.section.blog.all'|trans -}}
+                    <twig:Section:SectionDescription>{{ 'website.index.section.blog.description'|trans }}</twig:Section:SectionDescription>
+                    <twig:Section:SectionAction>
+                        <twig:Button
+                            variant="link"
+                            size="lg"
+                            class="px-0 text-dark-cyan font-semibold"
+                            href="{{ path('app_website_blog_index') }}"
+                        >
+                            {{ 'website.index.section.blog.read_all'|trans }}
+                            <twig:Ux:Icon name="lucide:arrow-right"/>
                         </twig:Button>
-                    </div>
+                    </twig:Section:SectionAction>
+                </twig:Section:SectionHeader>
+                <twig:Section:SectionContent class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {% for post in posts %}
+                        <twig:Blog:PostCard :post="post" heading="h3" />
+                    {% endfor %}
                 </twig:Section:SectionContent>
-            </twig:Section>
-        {% endif %}
-        <twig:Section id="open-source-projects" size="lg" class="py-8 md:py-16">
+            </div>
+        </twig:Section>
+    {% endif %}
+    <twig:Section id="open-source-projects">
+        <div class="max-w-6xl mx-auto px-4">
             <twig:Section:SectionHeader>
+                <twig:Section:SectionDescription variant="surtitle">{{ 'website.index.section.open_source.surtitle'|trans }}</twig:Section:SectionDescription>
                 <twig:Section:SectionTitle>{{ 'website.index.section.open_source.title'|trans }}</twig:Section:SectionTitle>
-                <twig:Section:SectionDescription>{{ 'website.index.section.open_source.subtitle'|trans }}</twig:Section:SectionDescription>
+                <twig:Section:SectionDescription>{{ 'website.index.section.open_source.description'|trans }}</twig:Section:SectionDescription>
             </twig:Section:SectionHeader>
             <twig:Section:SectionContent>
                 <twig:GithubProjects/>
             </twig:Section:SectionContent>
-        </twig:Section>
-        <twig:Section id="experience" size="lg" class="py-8 md:py-16">
+        </div>
+    </twig:Section>
+    <twig:Section id="experience">
+        <div class="max-w-4xl mx-auto px-12">
             <twig:Section:SectionHeader>
+                <twig:Section:SectionDescription variant="surtitle">{{ 'website.index.section.experience.surtitle'|trans }}</twig:Section:SectionDescription>
                 <twig:Section:SectionTitle>{{ 'website.index.section.experience.title'|trans }}</twig:Section:SectionTitle>
-                <twig:Section:SectionDescription>{{ 'website.index.section.experience.subtitle'|trans }}</twig:Section:SectionDescription>
+                <twig:Section:SectionDescription>{{ 'website.index.section.experience.description'|trans }}</twig:Section:SectionDescription>
             </twig:Section:SectionHeader>
             <twig:Section:SectionContent>
                 <twig:Timeline>
                     {% for experience in experiences %}
+                        {% set is_last = loop.last %}
                         <twig:Timeline:TimelineItem>
-                            <twig:Timeline:TimelineDate>
-                                <twig:Timeline:TimelineDescription class="lg:text-end">
-                                    {{ experience.startAt|format_date(pattern: 'MMM Y') }}
-                                    - {{ experience.endAt ? experience.endAt|format_date(pattern: 'MMM Y') : 'website.index.section.experience.today'|trans }}
-                                </twig:Timeline:TimelineDescription>
-                                <twig:Timeline:TimelineIcon>
-                                    {% if experience.type.isFreelance %}
-                                        <twig:Ux:Icon name="lucide:briefcase-business" class="size-5"/>
-                                    {% elseif experience.type.isPersonal %}
-                                        <twig:Ux:Icon name="lucide:spotlight" class="size-5"/>
-                                    {% else %}
-                                        <twig:Ux:Icon name="lucide:building" class="size-5"/>
-                                    {% endif %}
-                                </twig:Timeline:TimelineIcon>
-                            </twig:Timeline:TimelineDate>
+                            <twig:Timeline:TimelineConnector>
+                                <twig:Timeline:TimelineDot />
+                                {% if not is_last %}
+                                    <twig:Timeline:TimelineSeparator />
+                                {% endif %}
+                            </twig:Timeline:TimelineConnector>
                             <twig:Timeline:TimelineContent>
-                                <twig:Card size="lg">
-                                    <twig:Card:CardHeader>
-                                        <twig:Card:CardTitle>
-                                            {% if experience.website %}
-                                                <a href="{{ experience.website }}" target="_blank" class="hover:underline">{{ experience.company }}</a>
-                                            {% else %}
-                                                {{ experience.company }}
-                                            {% endif %}
-                                            <span class="font-normal text-sm text-muted-foreground">/ {{ experience.type|trans }}</span>
-                                        </twig:Card:CardTitle>
-                                        <twig:Card:CardDescription class="italic">{{ experience.position|trans }}</twig:Card:CardDescription>
-                                    </twig:Card:CardHeader>
-                                    {% if experience.technologies is not empty or experience.description is not empty %}
-                                        <twig:Card:CardContent class="flex flex-col gap-6">
-                                            {% if experience.technologies is not empty %}
-                                                <div class="flex flex-wrap gap-2">
-                                                    {% for technology in experience.technologies %}
-                                                        <twig:Badge variant="secondary">{{ technology }}</twig:Badge>
-                                                    {% endfor %}
-                                                </div>
-                                            {% endif %}
-
-                                            {% if experience.description is not empty %}
-                                                <div>
-                                                    {{ experience.description|markdown_to_html }}
-                                                </div>
-                                            {% endif %}
-                                        </twig:Card:CardContent>
-                                    {% endif %}
-                                </twig:Card>
+                                <twig:Timeline:TimelineHeader>
+                                    <twig:Timeline:TimelineTitle>{{ experience.position|trans }}</twig:Timeline:TimelineTitle>
+                                    <twig:Timeline:TimelineDate>
+                                        {{ experience.startAt|format_date(pattern: 'MMM Y') }} - {{ experience.endAt ? experience.endAt|format_date(pattern: 'MMM Y') : 'website.index.section.experience.today'|trans }}
+                                    </twig:Timeline:TimelineDate>
+                                </twig:Timeline:TimelineHeader>
+                                {% if experience.website %}
+                                    <twig:Timeline:TimelineDescription
+                                        class="pt-1 pb-3 block underline underline-offset-4"
+                                        href="{{ experience.website }}"
+                                        target="_blank"
+                                    >
+                                        {{ experience.company }}
+                                    </twig:Timeline:TimelineDescription>
+                                {% else %}
+                                    <twig:Timeline:TimelineDescription class="pt-1 pb-3">{{ experience.company }}</twig:Timeline:TimelineDescription>
+                                {% endif %}
+                                {% if experience.description is not empty %}
+                                    <div class="pb-3 text-muted-foreground">
+                                        {{ experience.description|markdown_to_html }}
+                                    </div>
+                                {% endif %}
+                                {% if experience.technologies is not empty %}
+                                    <div class="flex flex-wrap gap-2">
+                                        {% for technology in experience.technologies %}
+                                            <twig:Badge variant="outline">{{ technology }}</twig:Badge>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </twig:Timeline:TimelineContent>
                         </twig:Timeline:TimelineItem>
                     {% endfor %}
                 </twig:Timeline>
             </twig:Section:SectionContent>
-        </twig:Section>
-        <twig:Section id="contact" size="lg" class="py-8 md:py-16">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <twig:Section:SectionHeader class="lg:mb-0">
+        </div>
+    </twig:Section>
+    <twig:Section id="contact">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 gap-14 md:grid-cols-2">
+            <div class="flex flex-col gap-6">
+                <twig:Section:SectionHeader class="pb-0">
+                    <twig:Section:SectionDescription variant="surtitle">{{ 'website.index.section.contact.surtitle'|trans }}</twig:Section:SectionDescription>
                     <twig:Section:SectionTitle>{{ 'website.index.section.contact.title'|trans }}</twig:Section:SectionTitle>
-                    <twig:Section:SectionDescription>{{ 'website.index.section.contact.subtitle'|trans }}</twig:Section:SectionDescription>
+                    <twig:Section:SectionDescription>{{ 'website.index.section.contact.description'|trans }}</twig:Section:SectionDescription>
                 </twig:Section:SectionHeader>
-                <twig:Section:SectionContent class="lg:col-span-2">
-                    <twig:Turbo:Frame
-                        id="contact-form-container"
-                        loading="lazy"
-                        src="{{ path('app_contact_index') }}"
-                        data-slot="contact-form"
-                    />
+                <twig:Section:SectionContent class="flex flex-col gap-4">
+                    <twig:Section:SectionDescription class="flex items-center gap-2">
+                        <twig:Ux:Icon name="lucide:map-pin" class="size-4"/>
+                        {{ 'website.index.section.contact.location'|trans }}
+                    </twig:Section:SectionDescription>
+                    <twig:Section:SectionDescription class="flex items-center gap-2">
+                        <twig:Ux:Icon name="lucide:calendar" class="size-4"/>
+                        {{ 'website.index.section.contact.reply_time'|trans }}
+                    </twig:Section:SectionDescription>
                 </twig:Section:SectionContent>
             </div>
-        </twig:Section>
-        <twig:Section id="faq" size="lg" class="py-8 md:py-16">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <twig:Section:SectionHeader class="lg:mb-0">
-                    <twig:Section:SectionTitle>{{ 'website.index.section.faq.title'|trans }}</twig:Section:SectionTitle>
-                    <twig:Section:SectionDescription>{{ 'website.index.section.faq.subtitle'|trans }}</twig:Section:SectionDescription>
-                </twig:Section:SectionHeader>
-                <twig:Section:SectionContent class="space-y-24 lg:col-span-2">
-                    <twig:Faq>
-                        <twig:Faq:FaqTitle>{{ 'website.index.section.faq.dl.dt_1'|trans }}</twig:Faq:FaqTitle>
+            <twig:Section:SectionContent>
+                <twig:Turbo:Frame
+                    id="contact-form-container"
+                    loading="lazy"
+                    src="{{ path('app_contact_index') }}"
+                    data-slot="contact-form"
+                />
+            </twig:Section:SectionContent>
+        </div>
+    </twig:Section>
+    <twig:Section id="faq">
+        <div class="max-w-3xl mx-auto px-12">
+            <twig:Section:SectionHeader>
+                <twig:Section:SectionDescription variant="surtitle">{{ 'website.index.section.faq.surtitle'|trans }}</twig:Section:SectionDescription>
+                <twig:Section:SectionTitle>{{ 'website.index.section.faq.title'|trans }}</twig:Section:SectionTitle>
+                <twig:Section:SectionDescription>{{ 'website.index.section.faq.description'|trans }}</twig:Section:SectionDescription>
+            </twig:Section:SectionHeader>
+            <twig:Section:SectionContent>
+                <twig:Faq open>
+                    <twig:Faq:FaqTitle>{{ 'website.index.section.faq.dl.dt_1'|trans }}</twig:Faq:FaqTitle>
+                    <twig:Faq:FaqContent>
                         <twig:Faq:FaqDescription>
                             {%- set available -%}
                                 <twig:TextHighlight
@@ -207,9 +256,11 @@
                                 {{- 'website.index.section.faq.dl.dd_1_available_at'|trans({available_at: availableAt})|raw -}}
                             </twig:Faq:FaqDescription>
                         {% endif %}
-                    </twig:Faq>
-                    <twig:Faq number="02">
-                        <twig:Faq:FaqTitle>{{ 'website.index.section.faq.dl.dt_2'|trans }}</twig:Faq:FaqTitle>
+                    </twig:Faq:FaqContent>
+                </twig:Faq>
+                <twig:Faq>
+                    <twig:Faq:FaqTitle>{{ 'website.index.section.faq.dl.dt_2'|trans }}</twig:Faq:FaqTitle>
+                    <twig:Faq:FaqContent>
                         <twig:Faq:FaqDescription>
                             {%- set daily_price -%}
                                 <twig:TextHighlight class="mx-0.5">
@@ -221,15 +272,17 @@
                                 daily_price: daily_price,
                             })|raw -}}
                         </twig:Faq:FaqDescription>
-                    </twig:Faq>
-                    <twig:Faq number="03">
-                        <twig:Faq:FaqTitle>{{ 'website.index.section.faq.dl.dt_3'|trans }}</twig:Faq:FaqTitle>
+                    </twig:Faq:FaqContent>
+                </twig:Faq>
+                <twig:Faq>
+                    <twig:Faq:FaqTitle>{{ 'website.index.section.faq.dl.dt_3'|trans }}</twig:Faq:FaqTitle>
+                    <twig:Faq:FaqContent>
                         <twig:Faq:FaqDescription>
                             {{ 'website.index.section.faq.dl.dd_3'|trans }}
                         </twig:Faq:FaqDescription>
-                    </twig:Faq>
-                </twig:Section:SectionContent>
-            </div>
-        </twig:Section>
-    </main>
+                    </twig:Faq:FaqContent>
+                </twig:Faq>
+            </twig:Section:SectionContent>
+        </div>
+    </twig:Section>
 {% endblock %}

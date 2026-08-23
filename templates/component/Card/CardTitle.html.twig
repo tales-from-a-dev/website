@@ -10,7 +10,7 @@
 
 <{{ as }}
     data-slot="card-title"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

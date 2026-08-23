@@ -57,6 +57,7 @@ final class ContactType extends AbstractType
             'antispam_profile' => 'default',
             'attr' => [
                 'id' => 'contact-form',
+                'class' => 'flex flex-col gap-4',
             ],
         ]);
     }

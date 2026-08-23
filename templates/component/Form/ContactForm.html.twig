@@ -6,17 +6,18 @@
     data-slot="contact-form"
     {{ attributes }}
 >
-    {{ form_start(form) }}
-        <twig:Card size="lg">
-            <twig:Card:CardHeader>
-                <twig:Card:CardDescription>
-                    {{ 'website.index.section.contact.text'|trans }}
-                </twig:Card:CardDescription>
-            </twig:Card:CardHeader>
-            <twig:Card:CardContent class="grid gap-4">
+
+    <twig:Card variant="outline" size="lg" class="shadow-sm">
+        <twig:Card:CardHeader>
+            <twig:Card:CardDescription>
+                {{ 'website.index.section.contact.text'|trans }}
+            </twig:Card:CardDescription>
+        </twig:Card:CardHeader>
+        <twig:Card:CardContent>
+            {{ form_start(form) }}
                 {% for alert in app.flashes('alert') %}
                     <twig:Alert :variant="alert.status.value">
-                        <twig:Ux:Icon :name="alert.status.icon" />
+                        <twig:Ux:Icon :name="alert.status.icon"/>
                         <twig:Alert:AlertTitle>
                             {{ alert.message|trans }}
                         </twig:Alert:AlertTitle>
@@ -28,13 +29,11 @@
                 </div>
                 {{ form_row(form.email) }}
                 {{ form_row(form.content) }}
-            </twig:Card:CardContent>
-            <twig:Card:CardFooter class="justify-end">
-                <twig:Button size="lg" name="submit" type="submit" class="w-full md:w-auto">
-                    <twig:Ux:Icon name="lucide:send" data-icon="inline-end" />
+                <twig:Button variant="ternary" size="lg" name="submit" type="submit" class="w-full">
+                    <twig:Ux:Icon name="lucide:send" data-icon="inline-end"/>
                     {{ 'btn.send'|trans({}, 'forms') }}
                 </twig:Button>
-            </twig:Card:CardFooter>
-        </twig:Card>
-    {{ form_end(form) }}
+            {{ form_end(form) }}
+        </twig:Card:CardContent>
+    </twig:Card>
 </div>

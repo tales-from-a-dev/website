@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'min-h-0 overflow-hidden',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="faq-content"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {% block content %}{% endblock %}
+</div>

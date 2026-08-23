@@ -1,14 +1,23 @@
-{%- set classes = html_classes(
-    'font-normal text-muted-foreground text-base',
-    'group-data-[size=lg]/section:text-lg',
-    attributes.render('class')|default(''),
+{%- props variant = 'default' -%}
+
+{%- set style = html_cva(
+    base: 'text-base/6',
+    variants: {
+        variant: {
+            default: 'text-muted-foreground',
+            primary: 'text-primary',
+            secondary: 'font-mono text-dark-cyan',
+            surtitle: 'font-mono font-semibold text-dark-cyan text-sm uppercase',
+        },
+    },
 ) -%}
 
 {#- Template -#}
 
 <p
     data-slot="section-description"
-    class="{{ classes|tailwind_merge }}"
+    data-variant="{{ variant }}"
+    class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

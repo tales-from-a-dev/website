@@ -36,11 +36,32 @@
                 type="font/woff2"
                 crossorigin
             >
+            <link
+                rel="preload"
+                href="{{ preload(asset('vendor/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-ext-wght-normal.woff2'), {as: 'font', type: 'font/woff2', crossorigin: 'anonymous', importance: 'high'}) }}"
+                as="font"
+                type="font/woff2"
+                crossorigin
+            >
         {% endblock %}
 
         {% block stylesheets %}{% endblock %}
 
         {% block javascripts %}
+            <script type="application/javascript">
+                (() => {
+                    try {
+                        const stored = localStorage.getItem('theme');
+                        const dark = 'dark' === stored
+                            || (null === stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+                        document.documentElement.classList.toggle('dark', dark);
+                    } catch {
+                        // Storage access throws rather than degrades — Safari in private browsing
+                    }
+                })();
+            </script>
+
             {% block importmap %}
                 {{ importmap('app') }}
             {% endblock %}
@@ -79,7 +100,7 @@
             {% endif %}
         {% endblock %}
     </head>
-    <body class="bg-muted">
+    <body {% block body_attributes %}{% endblock %}>
         {% block body %}{% endblock %}
         {% if block('meta_jsonld') %}
             <script type="application/ld+json">

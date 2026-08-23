@@ -25,7 +25,7 @@
     data-size="{{ size }}"
     {% if active %}data-active="true"{% endif %}
     {% if element == 'button' %}type="button"{% endif %}
-    class="{{ style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

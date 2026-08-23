@@ -10,9 +10,9 @@
         --text-xs: 0.7rem;
         --text-xs--line-height: calc(1 / 0.7);
         --text-sm: 0.8rem;
-        --text-sm--line-height: calc(1.25 / 0.8);
+        --text-sm--line-height: calc(1.2 / 0.8);
         --text-base: 0.875rem;
-        --text-base--line-height: calc(1.5 / 0.875);
+        --text-base--line-height: calc(1.35 / 0.875);
         --text-lg: 1rem;
         --text-lg--line-height: calc(1.75 / 1);
         --text-xl: 1.125rem;
@@ -42,7 +42,7 @@
     }
 
     [data-slot="card"] {
-        @apply gap-2 py-2
+        @apply gap-1 py-1
     }
 
     [data-slot="card-header"] {
@@ -50,11 +50,11 @@
     }
 
     [data-slot="card-content"] {
-        @apply gap-2 px-2
+        @apply gap-1 px-2
     }
 
     [data-slot="timeline"] {
-        @apply gap-4 py-3
+        @apply gap-2 py-0
     }
 
     [data-slot="timeline-item"] {
@@ -74,7 +74,11 @@
     }
 
     [data-slot="timeline-content"] {
-        @apply pl-6
+        @apply pl-6 pb-1
+    }
+
+    [data-slot="timeline-description"] {
+        @apply pb-1
     }
 
     [data-slot="badge"] {

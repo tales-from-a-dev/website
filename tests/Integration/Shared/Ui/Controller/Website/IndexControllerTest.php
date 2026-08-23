@@ -29,9 +29,9 @@ final class IndexControllerTest extends WebTestCase
                 'content',
                 $translator->trans('app.meta.description')
             )
-            ->assertSeeIn('h6', $translator->trans('website.index.section.about.surtitle'))
-            ->assertSeeIn('h1', $translator->trans('website.index.section.about.title'))
-            ->assertElementCount('section', 5)
+            ->assertElementCount('section', 6)
+            ->assertSeeIn('#hero h1', $translator->trans('app.author'))
+            ->assertSeeIn('#hero p', $translator->trans('app.job_title'))
         ;
     }
 
@@ -49,7 +49,7 @@ final class IndexControllerTest extends WebTestCase
             ->each(static fn ($node): string => (string) $node->attr('id'))
         ;
 
-        self::assertSame(['blog', 'open-source-projects', 'experience', 'contact', 'faq'], $sections);
+        self::assertSame(['hero', 'blog', 'open-source-projects', 'experience', 'contact', 'faq'], $sections);
     }
 
     public function testItListsTheLatestPostsNewestFirst(): void
@@ -57,9 +57,9 @@ final class IndexControllerTest extends WebTestCase
         $titles = $this->browser()
             ->visit('/')
             ->assertSuccessful()
-            ->assertElementCount('#blog [data-slot=blog-posts] [data-slot=card]', 3)
+            ->assertElementCount('#blog [data-slot=post]', 3)
             ->crawler()
-            ->filter('#blog [data-slot=card-title]')
+            ->filter('#blog [data-slot=post-title]')
             ->each(static fn ($node): string => trim($node->text()))
         ;
 
@@ -72,11 +72,11 @@ final class IndexControllerTest extends WebTestCase
             ->visit('/')
             ->assertSuccessful()
             ->crawler()
-            ->filter('#blog [data-slot=card]')
+            ->filter('#blog [data-slot=post]')
             ->last()
         ;
 
-        self::assertSame('First post', trim($card->filter('h3[data-slot=card-title]')->text()));
+        self::assertSame('First post', trim($card->filter('h3[data-slot=post-title]')->text()));
         self::assertSame('2026-01-15', $card->filter('time')->attr('datetime'));
         self::assertSame(
             ['Architecture', 'php', 'symfony'],
@@ -92,7 +92,7 @@ final class IndexControllerTest extends WebTestCase
             ->assertSuccessful()
             ->assertSee('Premier article')
             ->assertNotSee('Untranslated post')
-            ->assertElementCount('#blog [data-slot=blog-posts] [data-slot=card]', 2)
+            ->assertElementCount('#blog [data-slot=post]', 2)
             ->assertSeeElement('#blog a[data-slot=button][href="/fr/blog"]')
         ;
     }
@@ -102,7 +102,7 @@ final class IndexControllerTest extends WebTestCase
         $this->browser()
             ->visit('/')
             ->assertSuccessful()
-            ->assertElementAttributeContains('[data-slot=locale-switcher] a[hreflang=fr]', 'href', '/fr')
+            ->assertElementAttributeContains('[data-role=locale-switcher] a[hreflang=fr]', 'href', '/fr')
         ;
     }
 }
