@@ -1,14 +1,16 @@
 {%- set classes = html_classes(
-    'text-muted-foreground text-sm leading-normal',
+    'text-dark-cyan text-sm font-semibold',
     attributes.render('class')|default(''),
 ) -%}
 
+{%- set element = attributes.has('href') ? 'a' : 'p' -%}
+
 {#- Template -#}
 
-<div
+<{{ element }}
     data-slot="timeline-description"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}
-</div>
+</{{ element }}>

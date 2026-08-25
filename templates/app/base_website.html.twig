@@ -1,58 +1,136 @@
 {% extends 'app/base.html.twig' %}
 
-{% block body_attributes %}class="flex flex-col min-h-screen bg-sidebar"{% endblock %}
+{% block body_attributes %}class="relative min-h-screen bg-background overflow-x-hidden pb-24 transition duration-300 md:pb-0"{% endblock %}
 
 {% block body %}
-    {% block main %}{% endblock %}
-
+    {% block navigation %}
+        <twig:NavigationMenu:NavigationMenu class="print:hidden">
+            <twig:NavigationMenu:NavigationMenuItem>
+                <twig:NavigationMenu:NavigationMenuButton href="{{ path('app_website_shared_index') }}">
+                    <span class="sr-only">{{ 'website.navigation.home'|trans }}</span>
+                    <twig:Ux:Icon name="lucide:house"/>
+                </twig:NavigationMenu:NavigationMenuButton>
+                <twig:NavigationMenu:NavigationMenuTooltip>
+                    {{- 'website.navigation.home'|trans -}}
+                </twig:NavigationMenu:NavigationMenuTooltip>
+            </twig:NavigationMenu:NavigationMenuItem>
+            <twig:NavigationMenu:NavigationMenuItem>
+                <twig:NavigationMenu:NavigationMenuButton href="{{ path('app_website_blog_index') }}">
+                    <span class="sr-only">{{ 'website.navigation.blog'|trans }}</span>
+                    <twig:Ux:Icon name="lucide:rss"/>
+                </twig:NavigationMenu:NavigationMenuButton>
+                <twig:NavigationMenu:NavigationMenuTooltip>
+                    {{- 'website.navigation.blog'|trans -}}
+                </twig:NavigationMenu:NavigationMenuTooltip>
+            </twig:NavigationMenu:NavigationMenuItem>
+            <twig:NavigationMenu:NavigationMenuItem>
+                <twig:NavigationMenu:NavigationMenuButton href="{{ path('app_website_resume_index') }}">
+                    <span class="sr-only">{{ 'website.navigation.resume'|trans }}</span>
+                    <twig:Ux:Icon name="lucide:file-text"/>
+                </twig:NavigationMenu:NavigationMenuButton>
+                <twig:NavigationMenu:NavigationMenuTooltip>
+                    {{- 'website.navigation.resume'|trans -}}
+                </twig:NavigationMenu:NavigationMenuTooltip>
+            </twig:NavigationMenu:NavigationMenuItem>
+            <twig:NavigationMenu:NavigationMenuSeparator/>
+            <twig:NavigationMenu:NavigationMenuItem data-role="locale-switcher">
+                {% for locale in enabled_locales %}
+                    {#- A page whose route parameters are locale-dependent — a blog post slug — passes
+                            `alternates`, keyed by locale: merging _locale into the current parameters would
+                            keep the source locale's slug and link to a 404. A locale missing from the map
+                            has no counterpart to link to. -#}
+                    {% set locale_url = alternates is defined
+                        ? alternates[locale]|default(null)
+                        : path(app.current_route ?? 'app_website_shared_index', app.current_route_parameters|merge({_locale: locale})) %}
+                    {% if locale !== app.locale %}
+                        {% if locale_url is null %}
+                            <twig:NavigationMenu:NavigationMenuLabel
+                                class="opacity-50"
+                                lang="{{ locale }}"
+                                aria-disabled="true"
+                            >
+                                <span class="sr-only">{{ 'website.navigation.locale_switcher'|trans }}</span>
+                                <twig:Ux:Icon name="lucide:languages"/>
+                                <twig:Badge
+                                    variant="ternary"
+                                    size="xs"
+                                    class="absolute right-0 bottom-0 rounded-[4px] uppercase"
+                                >
+                                    {{- locale -}}
+                                </twig:Badge>
+                            </twig:NavigationMenu:NavigationMenuLabel>
+                        {% else %}
+                            <twig:NavigationMenu:NavigationMenuButton
+                                class="relative"
+                                lang="{{ locale }}"
+                                hreflang="{{ locale }}"
+                                href="{{ locale_url }}"
+                            >
+                                <span class="sr-only">{{ 'website.navigation.locale_switcher'|trans }}</span>
+                                <twig:Ux:Icon name="lucide:languages"/>
+                                <twig:Badge
+                                    variant="ternary"
+                                    size="xs"
+                                    class="absolute right-0 bottom-0 rounded-[4px] uppercase"
+                                >
+                                    {{- locale -}}
+                                </twig:Badge>
+                            </twig:NavigationMenu:NavigationMenuButton>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <twig:NavigationMenu:NavigationMenuTooltip>
+                    {{- 'website.navigation.locale_switcher'|trans -}}
+                </twig:NavigationMenu:NavigationMenuTooltip>
+            </twig:NavigationMenu:NavigationMenuItem>
+            <twig:NavigationMenu:NavigationMenuItem data-role="theme-switcher">
+                <twig:NavigationMenu:NavigationMenuButton
+                    data-controller="theme"
+                    data-action="theme#toggle"
+                >
+                    <span class="contents dark:hidden">
+                        <span class="sr-only">{{ 'website.navigation.theme_switcher'|trans({theme: 'light'}) }}</span>
+                        <twig:Ux:Icon name="lucide:moon"/>
+                    </span>
+                    <span class="hidden dark:contents">
+                        <span class="sr-only">{{ 'website.navigation.theme_switcher'|trans({theme: 'dark'}) }}</span>
+                        <twig:Ux:Icon name="lucide:sun"/>
+                    </span>
+                </twig:NavigationMenu:NavigationMenuButton>
+                <twig:NavigationMenu:NavigationMenuTooltip>
+                    <span class="contents dark:hidden">
+                        {{- 'website.navigation.theme_switcher'|trans({theme: 'light'}) -}}
+                    </span>
+                    <span class="hidden dark:contents">
+                        {{- 'website.navigation.theme_switcher'|trans({theme: 'dark'}) -}}
+                    </span>
+                </twig:NavigationMenu:NavigationMenuTooltip>
+            </twig:NavigationMenu:NavigationMenuItem>
+        </twig:NavigationMenu:NavigationMenu>
+    {% endblock %}
+    <main {% block main_attributes %}class="max-w-6xl mx-auto px-4 pt-27 pb-24 md:pt-47 print:py-0"{% endblock %}>
+        {% block main %}{% endblock %}
+    </main>
     {% block footer %}
-        <footer class="bg-jade-1">
-            <div class="container max-w-(--breakpoint-xl) mx-auto px-6 py-16 flex flex-col md:flex-row items-center md:justify-between">
-                <div class="flex items-center justify-center space-x-4 md:order-2">
+        <footer class="border-t print:hidden">
+            <div
+                class="container max-w-(--breakpoint-xl) mx-auto px-5 py-8 flex flex-wrap items-center justify-between gap-4">
+                <p class="text-sm/6 text-muted-foreground font-mono">
+                    {{ 'website.footer.copyright'|trans({year: 'now'|date('Y')}) }}
+                </p>
+                <div class="flex items-center justify-center gap-2">
                     {% for social_account in social_accounts %}
-                        <a
-                            class="text-primary-foreground hover:text-primary-foreground/90"
+                        <twig:Button
+                            variant="muted"
+                            size="icon-lg"
                             href="{{ social_account.url }}"
                             target="_blank"
                         >
                             <span class="sr-only">{{ social_account.name|capitalize }}</span>
-                            <twig:Ux:Icon name="simple-icons:{{ social_account.name }}" class="size-6" />
-                        </a>
+                            <twig:Ux:Icon name="simple-icons:{{ social_account.name }}"/>
+                        </twig:Button>
                     {% endfor %}
                 </div>
-                <ul
-                    data-slot="locale-switcher"
-                    class="flex items-center space-x-3 mt-8 md:mt-0 md:order-3 text-sm text-primary-foreground"
-                >
-                    {% for locale in enabled_locales %}
-                        {#- A page whose route parameters are locale-dependent — a blog post slug — passes
-                            `alternates`, keyed by locale: merging _locale into the current parameters would
-                            keep the source locale's slug and link to a 404. A locale missing from the map
-                            has no counterpart to link to. -#}
-                        {% set locale_url = alternates is defined
-                            ? alternates[locale]|default(null)
-                            : path(app.current_route ?? 'app_website_shared_index', app.current_route_parameters|merge({_locale: locale})) %}
-                        <li>
-                            {% if locale == app.locale %}
-                                <span class="font-semibold uppercase">{{ locale }}</span>
-                            {% elseif locale_url is null %}
-                                <span class="uppercase opacity-50" aria-disabled="true">{{ locale }}</span>
-                            {% else %}
-                                <a
-                                    class="uppercase hover:underline"
-                                    lang="{{ locale }}"
-                                    hreflang="{{ locale }}"
-                                    href="{{ locale_url }}"
-                                >
-                                    {{ locale }}
-                                </a>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-                <p class="mt-8 text-sm/6 text-primary-foreground md:order-1 md:mt-0">
-                    {{ 'website.footer.copyright'|trans({year: 'now'|date('Y')}) }}
-                </p>
             </div>
         </footer>
     {% endblock %}

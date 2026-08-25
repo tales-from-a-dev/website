@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'flex flex-wrap items-center justify-between gap-4',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="timeline-header"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</div>

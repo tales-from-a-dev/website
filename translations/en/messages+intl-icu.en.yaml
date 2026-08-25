@@ -8,6 +8,11 @@ app:
         description: 'Freelance senior back-end developer based in Limoges. I develop PHP applications using the Symfony and Laravel frameworks.'
         title: 'Tales from a Dev'
 
+# common
+common:
+    cta:
+        back_to_home: "Back to home"
+
 # enum
 enum:
     blog_category:
@@ -55,27 +60,52 @@ error:
 
 # website
 website:
+    navigation:
+        home: 'Home'
+        blog: 'Blog'
+        resume: 'Resume'
+        locale_switcher: 'Français'
+        theme_switcher: >-
+            {theme, select,
+                dark {Switch to light mode}
+                other {Switch to dark mode}
+            }
     index:
         title: 'Romain Monteil - Senior Back-end Developer'
         section:
-            about:
-                surtitle: 'Romain Monteil'
-                title: 'Senior Back-end Developer'
-                subtitle: "A passionate developer with 15 years' experience, I work mainly on {php} with {symfony}."
+            hero:
+                title: 'I design and build fast, accessible web applications'
+                description: "Freelance developer with 15+ years' experience, I work mainly on {php} with {symfony} — based in France, collaborating with teams worldwide. Symfony Certified (Expert) and Twig Certified."
+                available: 'Available for freelance work'
+                cta:
+                    projects: 'See my projects'
+                    contact: 'Get in touch'
             blog:
-                title: 'From the blog'
-                subtitle: 'My latest notes on PHP, Symfony and building for the web'
-                all: 'Read all articles'
+                surtitle: '01 - Writing'
+                title: 'Latest tales'
+                description: 'Notes and lessons from my day-to-day as a developer.'
+                read_all: 'Read all articles'
+                read_more: 'Read more'
             open_source:
-                title: 'Open Source'
-                subtitle: "Here are some of the projects I have created and am currently maintaining"
+                surtitle: '02 - Open source'
+                title: 'Projects I maintain'
+                description: 'Open source tools and libraries, used in production.'
+            experience:
+                surtitle: '03 - Experience'
+                title: "What I've built"
+                description: 'A summary of my professional experience, in startups and freelance.'
+                today: 'Today'
             contact:
-                title: 'Contact Me'
-                subtitle: "Please do not hesitate to contact me for a quotation."
+                surtitle: '04 - Contact'
+                title: "Let's work together"
+                description: 'A project in mind? Get in touch for a quote.'
+                location: 'Limoges, France'
+                reply_time: 'Replies within 2 business days'
                 text: 'So that I can best respond to your request and correctly assess the workload, please give as much detail as possible about the project. This will also enable me to give you an initial estimate as close as possible to the final quote.'
             faq:
-                title: 'Faq'
-                subtitle: 'Frequently asked questions'
+                surtitle: '05 - FAQ'
+                title: 'Frequently asked questions'
+                description: 'Answers to the questions I get most often.'
                 dl:
                     dt_1: "What's your availability?"
                     dd_1: "I am currently {available}."
@@ -90,10 +120,6 @@ website:
                     dd_2_price: '{price} € / day'
                     dt_3: 'Do you work on site?'
                     dd_3: "I do all my work remotely."
-            experience:
-                title: 'Experiences'
-                subtitle: 'A summary of my professional experience'
-                today: 'Today'
 
     # blog
     blog:
@@ -109,8 +135,6 @@ website:
             title: 'Articles in {category}'
             meta:
                 description: 'Every {category} article on PHP, Symfony and web development, written by Romain Monteil, freelance senior back-end developer.'
-        categories:
-            title: 'Browse by category'
         tag:
             title: 'Articles tagged {tag}'
         tags:
@@ -124,8 +148,6 @@ website:
     # resume
     resume:
         title: 'Romain Monteil - Resume'
-        name: 'Romain Monteil'
-        professional_title: 'Senior Back-end Developer'
         contact:
             location: 'Limoges, France (Remote)'
         action:

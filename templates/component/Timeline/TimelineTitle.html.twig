@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'text-lg font-bold leading-none',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="timeline-title"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</div>

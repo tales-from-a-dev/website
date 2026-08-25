@@ -1,0 +1,15 @@
+{%- set classes = html_classes(
+    'inline-flex shrink-0 items-center justify-center bg-transparent text-primary/80 size-10 anchor-name-[--navigation-menu-item]',
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<span
+    data-slot="navigation-menu-label"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</span>

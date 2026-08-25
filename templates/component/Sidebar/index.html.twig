@@ -47,12 +47,12 @@
     {# This is what handles the sidebar gap on desktop #}
     <div
         data-slot="sidebar-gap"
-        class="{{ gap_style.apply({variant: variant})|tailwind_merge }}"
+        class="{{ gap_style.apply({variant: variant})|tailwind_classes }}"
     >
     </div>
     <div
         data-slot="sidebar-container"
-        class="{{ container_style.apply({variant: variant, side: side}, attributes.render('class'))|tailwind_merge }}"
+        class="{{ container_style.apply({variant: variant, side: side}, attributes.render('class'))|tailwind_classes }}"
         {{ attributes }}
     >
         <nav

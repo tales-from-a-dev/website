@@ -1,14 +1,20 @@
 {%- set classes = html_classes(
-    'font-normal text-3xl md:text-4xl mb-5',
+    'flex w-full items-center justify-between gap-4 px-1 py-4 rounded-md font-semibold text-left cursor-pointer list-none outline-none transition-colors',
+    'hover:text-primary focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+    '[&::-webkit-details-marker]:hidden',
     attributes.render('class')|default(''),
 ) -%}
 
 {#- Template -#}
 
-<h3
+<summary
     data-slot="faq-title"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
-    {% block content %}{% endblock %}
-</h3>
+    <span>{% block content %}{% endblock %}</span>
+    <twig:Ux:Icon
+        name="lucide:chevron-down"
+        class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open/faq:rotate-180"
+    />
+</summary>

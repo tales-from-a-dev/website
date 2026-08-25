@@ -20,6 +20,8 @@ common:
         url: 'Url'
         user_agent: 'User Agent'
         visited_at: 'Visité le'
+    cta:
+        back_to_home: "Revenir à l'accueil"
 
 # enum
 enum:
@@ -114,27 +116,52 @@ dashboard:
 
 # website
 website:
+    navigation:
+        home: 'Accueil'
+        blog: 'Blog'
+        resume: 'CV'
+        locale_switcher: 'English'
+        theme_switcher: >-
+            {theme, select,
+                dark {Passer en mode clair}
+                other {Passer en mode sombre}
+            }
     index:
         title: 'Romain Monteil - Développeur Back-end Senior'
         section:
-            about:
-                surtitle: 'Romain Monteil'
-                title: 'Développeur Back-end Senior'
-                subtitle: "Développeur passionné avec 15+ ans d'expériences, je travaille principalement sur {php} avec {symfony}"
+            hero:
+                title: 'Je conçois et développe des applications web rapides et accessibles'
+                description: "Développeur freelance passionné avec 15+ ans d'expériences, je travaille principalement sur {php} avec {symfony} — basé en France, je collabore avec des équipes partout dans le monde. Certifié Symfony (Expert) et Twig."
+                available: 'Disponible pour des missions en freelance'
+                cta:
+                    projects: 'Voir mes projets'
+                    contact: 'Me contacter'
             blog:
-                title: 'Sur le blog'
-                subtitle: 'Mes dernières notes sur PHP, Symfony et le développement web'
-                all: 'Lire tous les articles'
+                surtitle: '01 - Blog'
+                title: 'Derniers récits'
+                description: "Des notes et retour d'expériences sur mon quotidien de développeur."
+                read_all: 'Lire tous les articles'
+                read_more: 'En savoir plus'
             open_source:
-                title: 'Open Source'
-                subtitle: "Voici quelques-uns des projets que j'ai créés et que je maintiens actuellement"
+                surtitle: '02 - Open Source'
+                title: 'Projets que je maintiens'
+                description: "Outils et librairies open source, utilisés en production."
+            experience:
+                surtitle: '03 - Expériences'
+                title: "Ce que j'ai construit"
+                description: 'Un résumé des mes expériences professionnelles, en startup comme en indépendant.'
+                today: "aujourd'hui"
             contact:
-                title: 'Me contacter'
-                subtitle: "N'hésitez pas à me contacter pour toute demande de devis."
+                surtitle: '04 - Contact'
+                title: 'Travaillons ensemble'
+                description: "Un projet en tête ? N'hésitez pas à me contacter pour toute demande de devis."
+                location: 'Limoges, France'
+                reply_time: 'Réponses dans un délai de 2 jours ouvrés'
                 text: 'Afin que je puisse répondre au mieux à votre demande et évaluer correctement la charge de travail, merci de donner un maximum de détail sur le projet. Cela me permettra également de vous transmettre un premier chiffrage au plus près du devis final.'
             faq:
-                title: 'Faq'
-                subtitle: 'Quelques questions fréquentes'
+                surtitle: '05 - FAQ'
+                title: 'Questions fréquentes'
+                description: 'Des réponses aux questions les plus souvent posées.'
                 dl:
                     dt_1: 'Quels sont tes disponibilités ?'
                     dd_1: 'Je suis actuellement {available}.'
@@ -149,10 +176,6 @@ website:
                     dd_2_price: '{price} € / jour'
                     dt_3: 'Te deplaces-tu en mission chez le client ?'
                     dd_3: "J'effectue l'ensemble de mes missions à distance."
-            experience:
-                title: 'Expériences'
-                subtitle: 'Un résumé des mes expériences professionnelles'
-                today: "aujourd'hui"
 
     # blog
     blog:
@@ -168,8 +191,6 @@ website:
             title: 'Articles dans {category}'
             meta:
                 description: 'Tous les articles {category} sur PHP, Symfony et le développement web, écrits par Romain Monteil, développeur back-end senior freelance.'
-        categories:
-            title: 'Parcourir par catégorie'
         tag:
             title: 'Articles tagués {tag}'
         tags:
@@ -183,8 +204,6 @@ website:
     # resume
     resume:
         title: 'Romain Monteil - CV'
-        name: 'Romain Monteil'
-        professional_title: 'Développeur Back-end Senior'
         contact:
             location: 'Limoges, France (Remote)'
         action:

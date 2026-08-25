@@ -5,28 +5,44 @@
  * so they are written as plain CSS rules: as utilities the Tailwind scanner
  * would purge them.
  *
- * Each colour keeps the chroma and hue of a jade token declared in app.css and
+ * Each colour keeps the chroma and hue of a brand token declared in app.css and
  * only moves the lightness, so code carries the site's palette while staying
  * legible on the light and the dark code surface.
  */
 
 [data-slot="post-content"] {
+    /*
+     * The surface code sits on. It cannot be `--card`: a post renders straight
+     * on the page, and in the light theme `--card` and `--background` are the
+     * same white, so the fill would vanish -- `pre` would keep only its border
+     * and inline `code`, which has neither border nor ring, nothing at all.
+     * `--muted` is the light theme's step away from the page; the dark theme
+     * takes `--card`, which is genuinely raised there while `--muted` sits too
+     * close to `--background` to read.
+     */
+    --hl-surface: var(--muted);
+
     --hl-comment: var(--muted-foreground);
-    --hl-keyword: oklch(from var(--jade-6) 0.47 c h);
-    --hl-type: oklch(from var(--jade-5) 0.47 c h);
-    --hl-variable: oklch(from var(--jade-4) 0.47 c h);
-    --hl-property: oklch(from var(--jade-3) 0.47 c h);
-    --hl-value: oklch(from var(--jade-2) 0.47 c h);
-    --hl-generic: oklch(from var(--jade-1) 0.47 calc(c * 2) h);
+    --hl-keyword: oklch(from var(--rusty-spice) 0.47 c h);
+    --hl-type: oklch(from var(--burnt-caramel) 0.47 c h);
+    --hl-variable: oklch(from var(--golden-orange) 0.47 c h);
+    --hl-property: oklch(from var(--green-calm) 0.47 c h);
+    --hl-value: oklch(from var(--dark-cyan) 0.47 c h);
+    --hl-generic: oklch(from var(--dark-teal) 0.47 calc(c * 2) h);
 }
 
-.dark [data-slot="post-content"] {
-    --hl-keyword: oklch(from var(--jade-6) 0.8 c h);
-    --hl-type: oklch(from var(--jade-5) 0.8 c h);
-    --hl-variable: oklch(from var(--jade-4) 0.8 c h);
-    --hl-property: oklch(from var(--jade-3) 0.8 c h);
-    --hl-value: oklch(from var(--jade-2) 0.8 c h);
-    --hl-generic: oklch(from var(--jade-1) 0.8 calc(c * 2) h);
+/* `@media screen` for the same reason as the dark palette in app.css */
+@media screen {
+    .dark [data-slot="post-content"] {
+        --hl-surface: var(--card);
+
+        --hl-keyword: oklch(from var(--rusty-spice) 0.8 c h);
+        --hl-type: oklch(from var(--burnt-caramel) 0.8 c h);
+        --hl-variable: oklch(from var(--golden-orange) 0.8 c h);
+        --hl-property: oklch(from var(--green-calm) 0.8 c h);
+        --hl-value: oklch(from var(--dark-cyan) 0.8 c h);
+        --hl-generic: oklch(from var(--dark-teal) 0.8 calc(c * 2) h);
+    }
 }
 
 /*
@@ -37,10 +53,9 @@
  * `@layer`, which is what lets them win over the `prose` defaults for `pre`.
  */
 
-/* `--card`, not `--muted`: the website body already sits on `bg-muted` */
 [data-slot="post-content"] pre {
-    color: var(--card-foreground);
-    background-color: var(--card);
+    color: var(--foreground);
+    background-color: var(--hl-surface);
     border: 1px solid var(--border);
     border-radius: calc(var(--radius) - 2px);
     padding: 1rem 1.25rem;
@@ -49,8 +64,8 @@
 }
 
 [data-slot="post-content"] :not(pre) > code {
-    color: var(--card-foreground);
-    background-color: var(--card);
+    color: var(--foreground);
+    background-color: var(--hl-surface);
     border-radius: calc(var(--radius) - 4px);
     padding: 0.15em 0.35em;
     font-weight: 500;

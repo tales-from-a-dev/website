@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'group/navigation-menu-item relative anchor-scope-[--navigation-menu-item]',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="navigation-menu-item"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</div>

@@ -1,0 +1,15 @@
+{%- set classes = html_classes(
+    'prose max-w-none prose-headings:font-medium prose-a:underline-offset-4 border-b pb-8',
+    'group-data-[variant=card]/post:prose-sm group-data-[variant=card]/post:px-6 group-data-[variant=card]/post:pb-0 group-data-[variant=card]/post:mb-0 group-data-[variant=card]/post:border-b-0',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="post-content"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {% block content %}{% endblock %}
+</div>

@@ -1,0 +1,18 @@
+{%- props size = 'default', -%}
+
+{%- set classes = html_classes(
+    'group/post-header flex flex-col gap-2.5 pb-8 border-b',
+    'group-data-[variant=card]/post:px-6 group-data-[variant=card]/post:pb-0 group-data-[variant=card]/post:mb-0 group-data-[variant=card]/post:border-b-0',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<header
+    data-slot="post-header"
+    data-size="{{ size }}"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {% block content %}{% endblock %}
+</header>

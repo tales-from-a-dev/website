@@ -30,10 +30,10 @@ final class IndexControllerTest extends WebTestCase
                 $translator->trans('website.blog.meta.description')
             )
             ->assertSeeIn('h1', $translator->trans('website.blog.title'))
-            ->assertElementCount('[data-slot=card]', 3)
-            ->assertElementCount('[data-slot=card] [data-slot=reading-time]', 3)
+            ->assertElementCount('[data-slot=post]', 3)
+            ->assertElementCount('[data-slot=post] [data-slot=reading-time]', 3)
             ->assertSeeIn(
-                '[data-slot=card] [data-slot=reading-time]',
+                '[data-slot=post] [data-slot=reading-time]',
                 $translator->trans('website.blog.reading_time', ['minutes' => 1])
             )
         ;
@@ -45,7 +45,7 @@ final class IndexControllerTest extends WebTestCase
             ->visit('/blog')
             ->assertSuccessful()
             ->crawler()
-            ->filter('[data-slot=card-title]')
+            ->filter('[data-slot=post-title]')
             ->each(static fn ($node): string => trim($node->text()))
         ;
 
@@ -60,37 +60,7 @@ final class IndexControllerTest extends WebTestCase
             ->assertSee('Premier article')
             ->assertSee('Deuxième article')
             ->assertNotSee('Untranslated post')
-            ->assertElementCount('[data-slot=card]', 2)
-        ;
-    }
-
-    public function testItLinksEveryPublishedCategoryToItsArchive(): void
-    {
-        $translator = self::getContainer()->get(TranslatorInterface::class);
-
-        $this->browser()
-            ->visit('/blog')
-            ->assertSuccessful()
-            ->assertSee($translator->trans('website.blog.categories.title'))
-            ->assertElementCount('[data-slot=blog-categories] a[data-slot=badge]', 3)
-            ->assertSeeElement('[data-slot=blog-categories] a[href="/blog/category/architecture"]')
-            ->assertSeeElement('[data-slot=blog-categories] a[href="/blog/category/notes"]')
-            ->assertSeeElement('[data-slot=blog-categories] a[href="/blog/category/performance"]')
-            ->assertNotSeeElement('[data-slot=blog-categories] a[href="/blog/category/testing"]')
-        ;
-    }
-
-    public function testItLinksEveryPublishedTagToItsArchive(): void
-    {
-        $translator = self::getContainer()->get(TranslatorInterface::class);
-
-        $this->browser()
-            ->visit('/blog')
-            ->assertSuccessful()
-            ->assertSee($translator->trans('website.blog.tags.title'))
-            ->assertElementCount('[data-slot=blog-tags] a[data-slot=badge]', 2)
-            ->assertSeeElement('[data-slot=blog-tags] a[href="/blog/tag/symfony"]')
-            ->assertNotSeeElement('[data-slot=blog-tags] a[href="/blog/tag/draft-only"]')
+            ->assertElementCount('[data-slot=post]', 2)
         ;
     }
 

@@ -28,7 +28,7 @@ final class CategoryControllerTest extends WebTestCase
             ))
             ->assertSeeIn('h1', $translator->trans('website.blog.category.title', ['category' => $label]))
             ->assertSee($translator->trans('website.blog.back_to_index'))
-            ->assertElementCount('[data-slot=card]', 1)
+            ->assertElementCount('[data-slot=post]', 1)
         ;
     }
 
@@ -40,7 +40,7 @@ final class CategoryControllerTest extends WebTestCase
             ->assertSee('Untranslated post')
             ->assertNotSee('First post')
             ->assertNotSee('Second post')
-            ->assertElementCount('[data-slot=card]', 1)
+            ->assertElementCount('[data-slot=post]', 1)
         ;
     }
 
@@ -52,7 +52,7 @@ final class CategoryControllerTest extends WebTestCase
             ->assertSee('Premier article')
             ->assertNotSee('Deuxième article')
             ->assertNotSee('First post')
-            ->assertElementCount('[data-slot=card]', 1)
+            ->assertElementCount('[data-slot=post]', 1)
         ;
     }
 
@@ -102,7 +102,7 @@ final class CategoryControllerTest extends WebTestCase
         $this->browser()
             ->visit('/blog/category/performance')
             ->assertSuccessful()
-            ->assertSeeElement('[data-slot=locale-switcher] span[aria-disabled=true]')
+            ->assertSeeElement('[data-role=locale-switcher] span[aria-disabled=true]')
         ;
     }
 

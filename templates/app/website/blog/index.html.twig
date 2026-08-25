@@ -5,51 +5,28 @@
 {% block meta_description %}{{ 'website.blog.meta.description'|trans }}{% endblock %}
 
 {% block main %}
-    <main class="container max-w-screen-xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
-        <twig:Section id="blog" size="lg">
-            <twig:Section:SectionHeader>
-                <h1 class="font-medium text-3xl md:text-4xl">{{ 'website.blog.title'|trans }}</h1>
-                <twig:Section:SectionDescription>{{ 'website.blog.subtitle'|trans }}</twig:Section:SectionDescription>
-            </twig:Section:SectionHeader>
-            <twig:Section:SectionContent class="flex flex-col gap-10">
-                {% if categories is not empty %}
-                    <nav data-slot="blog-categories" aria-labelledby="blog-categories-title" class="flex flex-col gap-3">
-                        <h2 id="blog-categories-title" class="font-medium text-sm text-muted-foreground uppercase tracking-wide">
-                            {{- 'website.blog.categories.title'|trans -}}
-                        </h2>
-                        <div class="flex flex-wrap gap-2">
-                            {% for category in categories %}
-                                <twig:Badge href="{{ path('app_website_blog_category', {category: category.value}) }}">
-                                    {{- category|trans -}}
-                                </twig:Badge>
-                            {% endfor %}
-                        </div>
-                    </nav>
-                {% endif %}
-                {% if tags is not empty %}
-                    <nav data-slot="blog-tags" aria-labelledby="blog-tags-title" class="flex flex-col gap-3">
-                        <h2 id="blog-tags-title" class="font-medium text-sm text-muted-foreground uppercase tracking-wide">
-                            {{- 'website.blog.tags.title'|trans -}}
-                        </h2>
-                        <div class="flex flex-wrap gap-2">
-                            {% for tag in tags %}
-                                <twig:Badge variant="secondary" href="{{ path('app_website_blog_tag', {tag: tag}) }}">
-                                    {{- tag -}}
-                                </twig:Badge>
-                            {% endfor %}
-                        </div>
-                    </nav>
-                {% endif %}
-                {% if posts is empty %}
-                    <p class="text-muted-foreground">{{ 'website.blog.empty'|trans }}</p>
-                {% else %}
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {% for post in posts %}
-                            <twig:Blog:PostCard :post="post" />
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </twig:Section:SectionContent>
-        </twig:Section>
-    </main>
+    <twig:Section id="blog">
+        <twig:Button
+            variant="muted"
+            class="px-0 mb-8 font-semibold"
+            href="{{ path('app_website_shared_index') }}"
+        >
+            <twig:Ux:Icon name="lucide:arrow-left" />
+            {{ 'common.cta.back_to_home'|trans }}
+        </twig:Button>
+        <twig:Section:SectionHeader>
+            <twig:Section:SectionDescription variant="surtitle">{{ 'website.index.section.blog.surtitle'|trans }}</twig:Section:SectionDescription>
+            <twig:Section:SectionTitle as="h1">{{ 'website.blog.title'|trans }}</twig:Section:SectionTitle>
+            <twig:Section:SectionDescription>{{ 'website.blog.subtitle'|trans }}</twig:Section:SectionDescription>
+        </twig:Section:SectionHeader>
+        <twig:Section:SectionContent class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {% if posts is empty %}
+                <p class="text-muted-foreground">{{ 'website.blog.empty'|trans }}</p>
+            {% else %}
+                {% for post in posts %}
+                    <twig:Blog:PostCard :post="post" />
+                {% endfor %}
+            {% endif %}
+        </twig:Section:SectionContent>
+    </twig:Section>
 {% endblock %}

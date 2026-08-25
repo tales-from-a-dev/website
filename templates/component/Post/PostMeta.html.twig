@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'flex flex-wrap items-center gap-2.5',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<div
+    data-slot="post-meta"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {% block content %}{% endblock %}
+</div>

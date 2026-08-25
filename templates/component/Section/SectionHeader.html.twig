@@ -1,6 +1,6 @@
 {%- set classes = html_classes(
-    'flex flex-col gap-4 mb-4',
-    'group-data-[size=lg]/section:mb-10',
+    'flex flex-col items-start gap-1 md:grid md:auto-rows-min pb-10',
+    'md:has-data-[slot=section-action]:grid-cols-[1fr_auto] md:has-data-[slot=section-description]:grid-rows-[auto_auto]',
     attributes.render('class')|default(''),
 ) -%}
 
@@ -8,7 +8,7 @@
 
 <div
     data-slot="section-header"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

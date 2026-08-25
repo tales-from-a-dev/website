@@ -1,0 +1,15 @@
+{%- set classes = html_classes(
+    'fixed top-auto inset-x-0 bottom-6 z-50 mx-auto w-fit flex items-center justify-center gap-1 p-2 border rounded-full bg-background shadow-sm dark:bg-card',
+    'md:top-6 md:right-auto md:left-6 md:bottom-auto md:mx-0 md:flex-col',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<nav
+    data-slot="navigation-menu"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {%- block content %}{% endblock -%}
+</nav>

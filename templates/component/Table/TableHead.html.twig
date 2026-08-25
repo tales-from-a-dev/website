@@ -16,7 +16,7 @@
 <th
     data-slot="table-head"
     scope="col"
-    class="{{ style.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({align: align}, attributes.render('class'))|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

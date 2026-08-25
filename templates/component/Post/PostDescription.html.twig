@@ -1,0 +1,14 @@
+{%- set classes = html_classes(
+    'text-muted-foreground text-sm',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<p
+    data-slot="post-description"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes }}
+>
+    {% block content %}{% endblock %}
+</p>

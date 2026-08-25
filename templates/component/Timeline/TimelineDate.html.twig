@@ -1,5 +1,5 @@
 {%- set classes = html_classes(
-    'relative pl-12 lg:pl-0 lg:pr-20 lg:pt-6',
+    'text-muted-foreground text-sm font-mono',
     attributes.render('class')|default(''),
 ) -%}
 
@@ -7,7 +7,7 @@
 
 <div
     data-slot="timeline-date"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

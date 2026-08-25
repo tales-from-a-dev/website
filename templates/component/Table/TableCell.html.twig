@@ -15,7 +15,7 @@
 
 <td
     data-slot="table-cell"
-    class="{{ style.apply({align: align}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({align: align}, attributes.render('class'))|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}

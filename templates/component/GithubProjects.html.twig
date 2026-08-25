@@ -3,9 +3,9 @@
     {{ attributes.defaults({class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}) }}
 >
     {% for project in this.projects %}
-        <twig:Card size="lg" class="relative justify-between">
-            <twig:Card:CardHeader class="items-center">
-                <twig:Card:CardTitle class="text-lg" as="h3">{{ project.name }}</twig:Card:CardTitle>
+        <twig:Card variant="outline" class="relative justify-between p-6 shadow-sm transition-transform duration-200 hover:-translate-y-1">
+            <twig:Card:CardHeader class="px-0 items-center">
+                <twig:Card:CardTitle as="h3" class="text-lg font-mono font-bold">{{ project.name }}</twig:Card:CardTitle>
                 <twig:Card:CardAction>
                     <twig:Button
                         variant="muted"
@@ -15,21 +15,25 @@
                         title="{{ project.name }}"
                     >
                         <span class="absolute inset-0" aria-hidden="true"></span>
-                        <twig:Ux:Icon name="lucide:arrow-up-right" class="size-6 transition-transform group-hover/button:-translate-y-1/4 group-hover/button:translate-x-1/4" />
+                        <twig:Ux:Icon name="lucide:external-link" class="size-4" />
                     </twig:Button>
                 </twig:Card:CardAction>
             </twig:Card:CardHeader>
-            <twig:Card:CardContent>
-                <twig:Card:CardDescription class="font-normal text-base">{{ project.description }}</twig:Card:CardDescription>
+            <twig:Card:CardContent class="px-0">
+                <twig:Card:CardDescription class="font-normal">{{ project.description }}</twig:Card:CardDescription>
             </twig:Card:CardContent>
-            <twig:Card:CardFooter class="gap-4 *:inline-flex *:items-center *:gap-x-1.5">
-                <twig:Card:CardDescription>
-                    <twig:Ux:Icon name="lucide:star" class="size-5" />
+            <twig:Card:CardFooter class="flex justify-between items-center px-0 pt-3 pb-6">
+                <div class="flex items-center gap-2">
+                    {% for language in project.languages %}
+                        <twig:Card:CardDescription class="flex items-center gap-2 text-xs font-mono">
+                            <span class="size-2 rounded-full" style="background: {{ language.color }}"></span>
+                            <span>{{ language.name }}</span>
+                        </twig:Card:CardDescription>
+                    {% endfor %}
+                </div>
+                <twig:Card:CardDescription class="flex items-center gap-2 text-xs font-mono">
+                    <twig:Ux:Icon name="lucide:star" class="size-3 fill-current" />
                     {{ project.stargazerCount }}
-                </twig:Card:CardDescription>
-                <twig:Card:CardDescription>
-                    <twig:Ux:Icon name="lucide:git-fork" class="size-5" />
-                    {{ project.forkCount }}
                 </twig:Card:CardDescription>
             </twig:Card:CardFooter>
         </twig:Card>

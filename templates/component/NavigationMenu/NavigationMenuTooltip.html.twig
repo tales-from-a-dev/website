@@ -1,0 +1,23 @@
+{%- set classes = html_classes(
+    'pointer-events-none absolute z-50 px-2 py-1 rounded-md bg-primary text-primary-foreground text-center text-xs/tight shadow-md',
+    'bottom-full left-1/2 mb-navigation-menu-tooltip -translate-x-1/2 origin-bottom',
+    'md:top-1/2 md:bottom-auto md:left-full md:mb-0 md:ml-navigation-menu-tooltip md:translate-x-0 md:-translate-y-1/2 md:origin-left md:whitespace-nowrap',
+    'anchored:fixed anchored:inset-auto anchored:translate-none',
+    'anchored:position-anchor-[--navigation-menu-item] anchored:position-area-[top_span-all]',
+    'anchored:position-try-[--navigation-menu-tooltip-before,--navigation-menu-tooltip-after]',
+    'md:anchored:position-area-[right_span-all] md:anchored:position-try-[none]',
+    'opacity-0 scale-95 transition-[opacity,scale] duration-150 ease-out motion-reduce:transition-none',
+    'group-hover/navigation-menu-item:opacity-100 group-hover/navigation-menu-item:scale-100',
+    'group-focus-within/navigation-menu-item:opacity-100 group-focus-within/navigation-menu-item:scale-100',
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<span
+    data-slot="navigation-menu-tooltip"
+    class="{{ classes|tailwind_classes }}"
+    {{ attributes.defaults({'aria-hidden': 'true'}) }}
+>
+    {%- block content %}{% endblock -%}
+</span>

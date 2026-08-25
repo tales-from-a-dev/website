@@ -27,7 +27,7 @@ final class TagControllerTest extends WebTestCase
             ))
             ->assertSeeIn('h1', $translator->trans('website.blog.tag.title', ['tag' => 'symfony']))
             ->assertSee($translator->trans('website.blog.back_to_index'))
-            ->assertElementCount('[data-slot=card]', 2)
+            ->assertElementCount('[data-slot=post]', 2)
         ;
     }
 
@@ -39,7 +39,7 @@ final class TagControllerTest extends WebTestCase
             ->assertSee('First post')
             ->assertSee('Untranslated post')
             ->assertNotSee('Second post')
-            ->assertElementCount('[data-slot=card]', 2)
+            ->assertElementCount('[data-slot=post]', 2)
         ;
     }
 
@@ -51,7 +51,7 @@ final class TagControllerTest extends WebTestCase
             ->assertSee('Premier article')
             ->assertSee('Deuxième article')
             ->assertNotSee('Untranslated post')
-            ->assertElementCount('[data-slot=card]', 2)
+            ->assertElementCount('[data-slot=post]', 2)
         ;
     }
 

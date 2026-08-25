@@ -1,0 +1,18 @@
+{%- props category -%}
+
+{%- set classes = html_classes(
+    'rounded-full leading-none',
+    category.color,
+    attributes.render('class')|default(''),
+) -%}
+
+{#- Template -#}
+
+<twig:Badge
+    size="md"
+    href="{{ path('app_website_blog_category', {category: category.value}) }}"
+    class="{{ classes|tailwind_classes }}"
+    {{ ...attributes.without('class') }}
+>
+    {{- category|trans -}}
+</twig:Badge>

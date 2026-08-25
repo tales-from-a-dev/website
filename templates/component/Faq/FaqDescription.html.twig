@@ -1,5 +1,5 @@
 {%- set classes = html_classes(
-    'font-normal text-muted-foreground text-sm md:text-base leading-loose',
+    'px-1 pb-4 font-normal text-muted-foreground text-sm md:text-base leading-loose',
     attributes.render('class')|default(''),
 ) -%}
 
@@ -7,7 +7,7 @@
 
 <p
     data-slot="faq-description"
-    class="{{ classes|tailwind_merge }}"
+    class="{{ classes|tailwind_classes }}"
     {{ attributes }}
 >
     {% block content %}{% endblock %}

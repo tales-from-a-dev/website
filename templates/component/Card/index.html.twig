@@ -4,7 +4,7 @@
     base: 'bg-card text-card-foreground overflow-hidden rounded-md text-sm ring-1 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-md *:[img:last-child]:rounded-b-md group/card flex flex-col',
     variants: {
         variant: {
-            default: 'ring-card',
+            default: 'ring-card dark:ring-border',
             outline: 'ring-foreground/10',
         },
         size: {
@@ -21,7 +21,7 @@
     data-slot="card"
     data-variant="{{ variant }}"
     data-size="{{ size }}"
-    class="{{ style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_merge }}"
+    class="{{ style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_classes }}"
     {{ attributes }}
 >
     {%- block content %}{% endblock -%}
