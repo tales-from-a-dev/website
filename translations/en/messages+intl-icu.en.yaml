@@ -130,6 +130,9 @@ website:
         published_at: 'Published on {date}'
         reading_time: '{minutes} min read'
         back_to_index: 'Back to all articles'
+        translation:
+            notice: 'This article is also available in {language}.'
+            language: 'English'
         empty: 'No article published yet.'
         category:
             title: 'Articles in {category}'

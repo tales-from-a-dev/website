@@ -186,6 +186,9 @@ website:
         published_at: 'Publié le {date}'
         reading_time: '{minutes} min de lecture'
         back_to_index: 'Retour aux articles'
+        translation:
+            notice: 'Cet article est aussi disponible en {language}.'
+            language: 'français'
         empty: 'Aucun article publié pour le moment.'
         category:
             title: 'Articles dans {category}'

@@ -49,6 +49,25 @@
                     </twig:Post:PostMeta>
                     <twig:Post:PostTitle>{{ post.title }}</twig:Post:PostTitle>
                 </twig:Post:PostHeader>
+                {% for locale, href in alternates|filter((href, locale) => locale != app.locale) %}
+                    <twig:Alert
+                        variant="info"
+                        role="note"
+                        data-role="post-translation"
+                        lang="{{ locale }}"
+                    >
+                        <twig:Ux:Icon name="lucide:languages"/>
+                        <twig:Alert:AlertTitle>
+                            {{- 'website.blog.translation.notice'|trans({
+                                language: '<a href="%s" hreflang="%s">%s</a>'|format(
+                                    href|e,
+                                    locale,
+                                    'website.blog.translation.language'|trans({}, 'messages', locale)|e,
+                                ),
+                            }, 'messages', locale)|raw -}}
+                        </twig:Alert:AlertTitle>
+                    </twig:Alert>
+                {% endfor %}
                 <twig:Post:PostContent>
                     {{ content|raw }}
                 </twig:Post:PostContent>

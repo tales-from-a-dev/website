@@ -1,119 +1,92 @@
-/*
- * Syntax highlighting for tempest/highlight.
- *
- * The `.hl-*` classes are emitted server side and never appear in a template,
- * so they are written as plain CSS rules: as utilities the Tailwind scanner
- * would purge them.
- *
- * Each colour keeps the chroma and hue of a brand token declared in app.css and
- * only moves the lightness, so code carries the site's palette while staying
- * legible on the light and the dark code surface.
- */
-
-[data-slot="post-content"] {
-    /*
-     * The surface code sits on. It cannot be `--card`: a post renders straight
-     * on the page, and in the light theme `--card` and `--background` are the
-     * same white, so the fill would vanish -- `pre` would keep only its border
-     * and inline `code`, which has neither border nor ring, nothing at all.
-     * `--muted` is the light theme's step away from the page; the dark theme
-     * takes `--card`, which is genuinely raised there while `--muted` sits too
-     * close to `--background` to read.
-     */
-    --hl-surface: var(--muted);
-
-    --hl-comment: var(--muted-foreground);
-    --hl-keyword: oklch(from var(--rusty-spice) 0.47 c h);
-    --hl-type: oklch(from var(--burnt-caramel) 0.47 c h);
-    --hl-variable: oklch(from var(--golden-orange) 0.47 c h);
-    --hl-property: oklch(from var(--green-calm) 0.47 c h);
-    --hl-value: oklch(from var(--dark-cyan) 0.47 c h);
-    --hl-generic: oklch(from var(--dark-teal) 0.47 calc(c * 2) h);
+pre, code {
+    color: #cad3f5;
+    background-color: #24273a;
 }
 
-/* `@media screen` for the same reason as the dark palette in app.css */
-@media screen {
-    .dark [data-slot="post-content"] {
-        --hl-surface: var(--card);
-
-        --hl-keyword: oklch(from var(--rusty-spice) 0.8 c h);
-        --hl-type: oklch(from var(--burnt-caramel) 0.8 c h);
-        --hl-variable: oklch(from var(--golden-orange) 0.8 c h);
-        --hl-property: oklch(from var(--green-calm) 0.8 c h);
-        --hl-value: oklch(from var(--dark-cyan) 0.8 c h);
-        --hl-generic: oklch(from var(--dark-teal) 0.8 calc(c * 2) h);
-    }
+.hl-keyword {
+    color: #c6a0f6;
 }
 
-/*
- * Blocks
- *
- * `tempest/highlight` emits the tokens straight inside `<pre>`, with no `<code>`
- * wrapper, so the block chrome goes on `<pre>` itself. These rules sit outside
- * `@layer`, which is what lets them win over the `prose` defaults for `pre`.
- */
-
-[data-slot="post-content"] pre {
-    color: var(--foreground);
-    background-color: var(--hl-surface);
-    border: 1px solid var(--border);
-    border-radius: calc(var(--radius) - 2px);
-    padding: 1rem 1.25rem;
-    overflow-x: auto;
-    tab-size: 4;
+.hl-property {
+    color: #8aadf4;
 }
 
-[data-slot="post-content"] :not(pre) > code {
-    color: var(--foreground);
-    background-color: var(--hl-surface);
-    border-radius: calc(var(--radius) - 4px);
-    padding: 0.15em 0.35em;
-    font-weight: 500;
-}
-
-/* `prose` wraps inline code in backticks; the background already sets it apart */
-[data-slot="post-content"] :not(pre) > code::before,
-[data-slot="post-content"] :not(pre) > code::after {
-    content: none;
-}
-
-/*
- * Tokens
- */
-
-[data-slot="post-content"] .hl-comment {
-    color: var(--hl-comment);
-}
-
-[data-slot="post-content"] .hl-keyword,
-[data-slot="post-content"] .hl-operator {
-    color: var(--hl-keyword);
-}
-
-[data-slot="post-content"] .hl-type {
-    color: var(--hl-type);
-}
-
-[data-slot="post-content"] .hl-attribute {
-    color: var(--hl-type);
+.hl-attribute {
     font-style: italic;
 }
 
-[data-slot="post-content"] .hl-variable {
-    color: var(--hl-variable);
+.hl-type {
+    color: #eed49f;
 }
 
-[data-slot="post-content"] .hl-property {
-    color: var(--hl-property);
+.hl-generic {
+    color: #ed8796;
 }
 
-[data-slot="post-content"] .hl-value,
-[data-slot="post-content"] .hl-literal,
-[data-slot="post-content"] .hl-number {
-    color: var(--hl-value);
+.hl-value {
+    color: #a6da95;
 }
 
-[data-slot="post-content"] .hl-generic,
-[data-slot="post-content"] .hl-injection {
-    color: var(--hl-generic);
+.hl-literal {
+    color: #a6da95;
+}
+
+.hl-number {
+    color: #f5a97f;
+}
+
+.hl-variable {
+    color: #cad3f5;
+}
+
+.hl-comment {
+    color: #6e738d;
+}
+
+.hl-blur {
+    filter: blur(2px);
+}
+
+.hl-strong {
+    font-weight: bold;
+}
+
+.hl-em {
+    font-style: italic;
+}
+
+.hl-addition {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #00FF0022;
+}
+
+.hl-deletion {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #FF000011;
+}
+
+.hl-gutter {
+    display: inline-block;
+    font-size: 0.9em;
+    color: #555;
+    padding: 0 1ch;
+    margin-right: 1ch;
+    user-select: none;
+}
+
+.hl-gutter-addition {
+    background-color: #34A853;
+    color: #fff;
+}
+
+.hl-gutter-deletion {
+    background-color: #EA4334;
+    color: #fff;
+}
+
+.code-title {
+    color: #6e738d;
+    font-style: italic;
 }
