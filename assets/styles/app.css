@@ -90,6 +90,8 @@
     --color-success-foreground: var(--success-foreground);
     --color-info: var(--info);
     --color-info-foreground: var(--info-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -155,12 +157,14 @@
     --muted-foreground: oklch(0.556 0 0);
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.577 0.245 27.325);
-    --success: oklch(0.627 0.194 149.214);
-    --success-foreground: oklch(0.627 0.194 149.214);
-    --info: oklch(0.546 0.245 262.881);
-    --info-foreground: oklch(0.546 0.245 262.881);
+    --destructive: oklch(0.4544 0.1568 24.59);
+    --destructive-foreground: oklch(0.4544 0.1568 24.59);
+    --success: oklch(0.718 0.085 138);
+    --success-foreground: oklch(0.718 0.085 138);
+    --info: oklch(0.6024 0.101 197.4);
+    --info-foreground: oklch(0.6024 0.101 197.4);
+    --warning: oklch(0.7547 0.1621 71.4);
+    --warning-foreground: oklch(0.7547 0.1621 71.4);
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
@@ -194,10 +198,10 @@
     /*
      * The accent laid over whatever sits behind it — the halo around a timeline
      * dot. Mixing towards `transparent` rather than a surface keeps it right on
-     * a card as well as on the page, and it follows `--dark-cyan` into the dark
+     * a card as well as on the page, and it follows `--info` into the dark
      * theme on its own.
      */
-    --dark-cyan-soft: color-mix(in oklab, var(--dark-cyan) 14%, transparent);
+    --info-soft: color-mix(in oklab, var(--info) 14%, transparent);
 
     --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
@@ -243,8 +247,8 @@
         --destructive-foreground: oklch(0.637 0.237 25.331);
         --success: oklch(0.393 0.095 152.535);
         --success-foreground: oklch(0.723 0.219 149.579);
-        --info: oklch(0.379 0.146 265.522);
-        --info-foreground: oklch(0.623 0.214 259.815);
+        --info: oklch(0.712 0.116 196.3);
+        --info-foreground: oklch(0.712 0.116 196.3);
         --input: var(--border);
         --ring: var(--dark-cyan);
         --chart-1: oklch(0.488 0.243 264.376);

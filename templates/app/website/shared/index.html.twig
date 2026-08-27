@@ -18,7 +18,7 @@
 
 {% block main %}
     <twig:Section id="hero" class="max-w-6xl mx-auto px-4 flex flex-col flex-wrap justify-center items-center gap-12">
-        <picture class="border border-pearl-aqua rounded-full p-2 dark:border-dark-cyan/40">
+        <picture class="border border-pearl-aqua rounded-full p-2 dark:border-info/40">
             <source
                 srcset="{{ preload(asset('images/profile_lg.webp'), {as: 'image', type: 'image/webp'}) }}"
                 media="(width >= 64rem)"
@@ -34,7 +34,7 @@
                 height="320"
             />
             <img
-                class="size-80 rounded-full bg-golden-orange 2xl:size-125"
+                class="size-80 rounded-full bg-warning 2xl:size-125"
                 src="{{ asset('images/profile_md.webp') }}"
                 alt="{{ 'app.author'|trans }}"
                 width="320"
@@ -45,7 +45,7 @@
         <div class="flex flex-col justify-center items-start gap-4 max-w-2xl">
             {% if settings.available %}
                 <twig:Badge variant="info" size="lg" class="rounded-full font-body">
-                    <span class="size-1.5 bg-dark-cyan rounded-full animate-pulse"></span>
+                    <span class="size-1.5 bg-info rounded-full animate-pulse"></span>
                     {{ 'website.index.section.hero.available'|trans }}
                 </twig:Badge>
             {% endif %}
@@ -53,7 +53,7 @@
                 <twig:Section:SectionTitle as="h1" class="text-4xl font-extrabold md:text-6xl">
                     {{- 'app.author'|trans -}}
                 </twig:Section:SectionTitle>
-                <twig:Section:SectionDescription class="font-mono text-dark-cyan md:text-lg">
+                <twig:Section:SectionDescription class="font-mono text-info md:text-lg">
                     {{- 'app.job_title'|trans -}}
                 </twig:Section:SectionDescription>
             </twig:Section:SectionHeader>
@@ -110,7 +110,7 @@
                         <twig:Button
                             variant="link"
                             size="lg"
-                            class="px-0 text-dark-cyan font-semibold"
+                            class="px-0 text-info font-semibold"
                             href="{{ path('app_website_blog_index') }}"
                         >
                             {{ 'website.index.section.blog.read_all'|trans }}
