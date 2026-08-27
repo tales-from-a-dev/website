@@ -1,4 +1,4 @@
-{%- props variant = 'default' -%}
+{%- props variant = 'default', role = 'alert' -%}
 
 {%- set ctx = html_cva(
     base: "grid gap-0.5 rounded-md border px-2.5 py-2 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4 w-full relative group/alert",
@@ -7,6 +7,8 @@
             default: 'bg-card text-card-foreground',
             error: 'bg-destructive/10 text-destructive border-destructive/10',
             success: 'bg-success/10 text-success border-success/10',
+            info: 'bg-info/10 text-info border-info/20',
+            warning: 'bg-warning/10 text-warning border-warning/20',
         },
     },
 ) -%}
@@ -15,7 +17,7 @@
 
 <div
     data-slot="alert"
-    role="alert"
+    role="{{ role }}"
     class="{{ ctx.apply({variant: variant}) }}"
     {{ attributes }}
 >

@@ -122,6 +122,57 @@ final class ShowControllerTest extends WebTestCase
         ;
     }
 
+    public function testItAdvertisesTheFrenchVersionInFrenchOnAnEnglishPost(): void
+    {
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
+        $this->browser()
+            ->visit('/blog/first-post')
+            ->assertSuccessful()
+            ->assertElementAttributeContains(
+                '[data-role=post-translation] a[hreflang=fr]',
+                'href',
+                '/fr/blog/premier-article'
+            )
+            ->assertSeeIn('[data-role=post-translation]', $translator->trans(
+                'website.blog.translation.notice',
+                ['language' => $translator->trans('website.blog.translation.language', [], 'messages', 'fr')],
+                'messages',
+                'fr'
+            ))
+        ;
+    }
+
+    public function testItAdvertisesTheEnglishVersionInEnglishOnAFrenchPost(): void
+    {
+        $translator = self::getContainer()->get(TranslatorInterface::class);
+
+        $this->browser()
+            ->visit('/fr/blog/premier-article')
+            ->assertSuccessful()
+            ->assertElementAttributeContains(
+                '[data-role=post-translation] a[hreflang=en]',
+                'href',
+                '/blog/first-post'
+            )
+            ->assertSeeIn('[data-role=post-translation]', $translator->trans(
+                'website.blog.translation.notice',
+                ['language' => $translator->trans('website.blog.translation.language', [], 'messages', 'en')],
+                'messages',
+                'en'
+            ))
+        ;
+    }
+
+    public function testItAdvertisesNoTranslationForAnUntranslatedPost(): void
+    {
+        $this->browser()
+            ->visit('/blog/untranslated-post')
+            ->assertSuccessful()
+            ->assertElementCount('[data-role=post-translation]', 0)
+        ;
+    }
+
     public function testItEmitsBlogPostingStructuredData(): void
     {
         $this->browser()
