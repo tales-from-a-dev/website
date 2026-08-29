@@ -1,6 +1,7 @@
 {%- set classes = html_classes(
-    'prose max-w-none prose-headings:font-medium prose-a:underline-offset-4 border-b pb-8',
+    'max-w-none border-b pb-8',
     'group-data-[variant=card]/post:prose-sm group-data-[variant=card]/post:px-6 group-data-[variant=card]/post:pb-0 group-data-[variant=card]/post:mb-0 group-data-[variant=card]/post:border-b-0',
+    'prose prose-headings:font-medium prose-a:underline-offset-4 prose-code:bg-muted prose-code:font-medium prose-code:px-0.75 prose-code:py-0.25 prose-code:rounded-sm',
     attributes.render('class')|default(''),
 ) -%}
 
