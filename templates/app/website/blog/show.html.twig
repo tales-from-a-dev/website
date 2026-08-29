@@ -23,6 +23,8 @@
     {{ structured_data|serialize('jsonld')|raw }}
 {% endblock %}
 
+{% block main_attributes %}class="max-w-3xl mx-auto px-12 pt-27 pb-24 md:pt-47 print:py-0"{% endblock %}
+
 {% block main %}
     <twig:Section id="blog">
         <twig:Button

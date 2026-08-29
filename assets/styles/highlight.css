@@ -1,6 +1,11 @@
-pre, code {
+pre {
     color: #cad3f5;
     background-color: #24273a;
+}
+
+code::before,
+code::after {
+    content: '';
 }
 
 .hl-keyword {
