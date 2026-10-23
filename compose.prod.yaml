@@ -2,7 +2,8 @@
 # Production environment override
 services:
   php:
-    image: ${IMAGES_PREFIX:-}app-php-prod
+    # Built and pushed by the cd workflow; IMAGE_TAG is the deployed git tag
+    image: ghcr.io/tales-from-a-dev/website:${IMAGE_TAG:-latest}
     build:
       context: .
       target: frankenphp_prod
@@ -20,10 +21,7 @@ services:
     extends:
       file: compose.yaml
       service: php-worker
-    image: ${IMAGES_PREFIX:-}app-php-prod-consumer
-    build:
-      context: .
-      target: frankenphp_prod
+    image: ghcr.io/tales-from-a-dev/website:${IMAGE_TAG:-latest}
     env_file:
       - .env.prod.local
     command: [ 'bin/console', 'messenger:consume', '--time-limit=60', '--limit=10', '--memory-limit=128M', '--all' ]

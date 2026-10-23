@@ -19,9 +19,52 @@ concurrency:
   group: deploy-${{ github.event.inputs.environment }}
   cancel-in-progress: false
 
+env:
+  IMAGE: ghcr.io/tales-from-a-dev/website
+
 jobs:
+  build:
+    name: Build ${{ github.event.inputs.tag }}
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout ${{ github.event.inputs.tag }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/tags/${{ github.event.inputs.tag }}
+          persist-credentials: false
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Built here rather than on the server: the from-scratch build starves the production host
+      - name: Build and push the production image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          target: frankenphp_prod
+          pull: true
+          no-cache: true
+          push: true
+          tags: ${{ env.IMAGE }}:${{ github.event.inputs.tag }}
+          labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}
+
   deployment:
     name: Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
+
+    needs: build
 
     runs-on: ubuntu-latest
 
@@ -29,6 +72,7 @@ jobs:
 
     permissions:
       contents: read
+      packages: read
 
     steps:
       - name: Configure SSH
@@ -58,6 +102,8 @@ jobs:
           DATABASE_SECRET: ${{ secrets.DB_PASSWORD }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           SSH_OPTS="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
 
@@ -65,22 +111,26 @@ jobs:
             "SERVER_NAME=$SERVER_NAME" \
             "APP_SECRET=$APP_SECRET" \
             "POSTGRES_PASSWORD=$DATABASE_SECRET" \
+            "IMAGE_TAG=$TAG" \
             | ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" "umask 077 && cat > '$APP_PATH/.env.deploy'"
+
+          printf '%s' "$REGISTRY_TOKEN" \
+            | ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" "docker login ghcr.io --username '$REGISTRY_USER' --password-stdin"
 
           ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" << EOF
             set -Eeuo pipefail
 
             cd "$APP_PATH"
 
+            trap 'rm -f .env.deploy; docker logout ghcr.io >/dev/null' EXIT
+
             git fetch --all --tags --prune
             git rev-parse --verify "refs/tags/$TAG" >/dev/null 2>&1 || { echo "Tag '$TAG' not found"; exit 1; }
             git reset --hard
             git checkout -f --detach "tags/$TAG"
 
-            trap 'rm -f .env.deploy' EXIT
-
-            docker compose -f compose.yaml -f compose.prod.yaml build --pull --no-cache
-            docker compose -f compose.yaml -f compose.prod.yaml --env-file .env --env-file .env.deploy up --remove-orphans --wait
+            docker compose -f compose.yaml -f compose.prod.yaml --env-file .env --env-file .env.deploy pull php php-consumer
+            docker compose -f compose.yaml -f compose.prod.yaml --env-file .env --env-file .env.deploy up --no-build --remove-orphans --wait
 
             docker system prune --force
           EOF
