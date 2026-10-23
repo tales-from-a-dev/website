@@ -1,0 +1,53 @@
+---
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Let a release age before proposing it: the deploy workflow pushes the production image
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ⬆️
+
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+    # Stay within the composer.json constraints: Symfony minors go through Flex's
+    # extra.symfony.require, and majors are upgraded deliberately
+    versioning-strategy: lockfile-only
+    cooldown:
+      default-days: 7
+    groups:
+      composer:
+        patterns:
+          - '*'
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ⬆️
+
+  # Only the Dockerfile: the compose images interpolate their tags from variables
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      docker:
+        patterns:
+          - '*'
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ⬆️

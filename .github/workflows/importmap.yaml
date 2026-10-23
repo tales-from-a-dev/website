@@ -1,0 +1,52 @@
+---
+name: importmap
+
+# Dependabot cannot read importmap.php, so the JavaScript packages are checked here
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - importmap.php
+      - .github/workflows/importmap.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check importmap packages
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: '8.5'
+          tools: composer
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --no-scripts
+
+      - name: Audit for known vulnerabilities
+        run: bin/console importmap:audit
+
+      # Warn rather than fail: some packages are held back on purpose (@kurkle/color for chart.js).
+      # The command exits 1 whenever something is outdated; a crash still fails on the jq parse below
+      - name: List outdated packages
+        run: |
+          outdated=$(bin/console importmap:outdated --format=json || true)
+          jq -r '.[] | "::warning title=Outdated importmap package::\(.name) \(.current) → \(.latest)"' <<< "$outdated"
+          {
+            echo '## Outdated importmap packages'
+            jq -r 'if length == 0 then "All up to date." else .[] | "- `\(.name)` \(.current) → \(.latest)" end' <<< "$outdated"
+          } >> "$GITHUB_STEP_SUMMARY"
