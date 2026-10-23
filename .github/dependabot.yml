@@ -1,0 +1,19 @@
+---
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Let a release age before proposing it: the deploy workflow pushes the production image
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+    labels:
+      - dependencies
+    commit-message:
+      prefix: ⬆️
