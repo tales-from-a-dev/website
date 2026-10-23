@@ -137,3 +137,49 @@ jobs:
 
       - name: Delete SSH
         run: rm -rf ~/.ssh/
+
+  prune:
+    name: Prune old images
+
+    needs: deployment
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Each tag is an image index whose platform image and attestation are separate untagged
+      # versions, so prune by tag and take the children along rather than counting versions
+      - name: Keep the last 3 tagged images
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEEP: 3
+        run: |
+          versions_url=/orgs/tales-from-a-dev/packages/container/website/versions
+          versions=$(gh api --paginate "$versions_url" --jq '.[]' | jq -s .)
+          tagged=$(jq -c '[.[] | select(.metadata.container.tags | length > 0)] | sort_by(.created_at) | reverse' <<< "$versions")
+
+          children() {
+            docker buildx imagetools inspect --raw "$IMAGE@$1" | jq -r '.manifests[]?.digest'
+          }
+
+          kept_children=$(for digest in $(jq -r --argjson keep "$KEEP" '.[:$keep][].name' <<< "$tagged"); do children "$digest"; done)
+
+          while read -r id digest tag; do
+            for child in $(children "$digest"); do
+              grep -qxF "$child" <<< "$kept_children" && continue
+              child_id=$(jq -r --arg digest "$child" '.[] | select(.name == $digest) | .id' <<< "$versions")
+              [ -z "$child_id" ] || gh api --method DELETE "$versions_url/$child_id"
+            done
+            gh api --method DELETE "$versions_url/$id"
+            echo "Deleted $tag ($digest)"
+          done < <(jq -r --argjson keep "$KEEP" '.[$keep:][] | "\(.id) \(.name) \(.metadata.container.tags[0])"' <<< "$tagged")
