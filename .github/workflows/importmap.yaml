@@ -40,10 +40,11 @@ jobs:
       - name: Audit for known vulnerabilities
         run: bin/console importmap:audit
 
-      # Warn rather than fail: some packages are held back on purpose (@kurkle/color for chart.js)
+      # Warn rather than fail: some packages are held back on purpose (@kurkle/color for chart.js).
+      # The command exits 1 whenever something is outdated; a crash still fails on the jq parse below
       - name: List outdated packages
         run: |
-          outdated=$(bin/console importmap:outdated --format=json)
+          outdated=$(bin/console importmap:outdated --format=json || true)
           jq -r '.[] | "::warning title=Outdated importmap package::\(.name) \(.current) → \(.latest)"' <<< "$outdated"
           {
             echo '## Outdated importmap packages'
