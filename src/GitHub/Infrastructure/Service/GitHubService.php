@@ -8,6 +8,7 @@ use App\GitHub\Domain\Service\GitHubServiceInterface;
 use App\GitHub\Domain\ValueObject\GitHubProject;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -18,6 +19,7 @@ final readonly class GitHubService implements GitHubServiceInterface
 {
     public function __construct(
         private CacheInterface $cache,
+        #[Autowire(service: 'github.client')]
         private HttpClientInterface $githubClient,
         private LoggerInterface $logger,
         private string $githubUsername,
