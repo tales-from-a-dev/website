@@ -357,18 +357,18 @@
         ]
     },
     "symfony/stimulus-bundle": {
-        "version": "2.26",
+        "version": "3.6",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "2.20",
-            "ref": "3acc494b566816514a6873a89023a35440b6386d"
+            "version": "3.3",
+            "ref": "30f7461c215766d446f3c990b2b18f08ff51386e"
         },
         "files": [
-            "assets/bootstrap.js",
             "assets/controllers.json",
             "assets/controllers/csrf_protection_controller.js",
-            "assets/controllers/hello_controller.js"
+            "assets/controllers/hello_controller.js",
+            "assets/stimulus_bootstrap.js"
         ]
     },
     "symfony/translation": {
@@ -468,16 +468,14 @@
         ]
     },
     "symfonycasts/tailwind-bundle": {
-        "version": "0.10",
+        "version": "1.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "0.8",
-            "ref": "4ea7c9488fdce8943520daf3fdc31e93e5b59c64"
+            "version": "0.14",
+            "ref": "b8af60cec7149fd0cde0ec9d89ccb32335c4d9bd"
         },
-        "files": [
-            "config/packages/symfonycasts_tailwind.yaml"
-        ]
+        "files": []
     },
     "tales-from-a-dev/twig-tailwind-extra": {
         "version": "1.0",

@@ -58,6 +58,7 @@ final readonly class ProcessDailyTrafficMessageHandler
 
     public function __construct(
         private LogParserInterface $logParser,
+        #[Autowire(service: 'analytics.cache')]
         private CacheInterface $analyticsCache,
         private PageViewRepositoryInterface $pageViewRepository,
         #[Autowire(value: '%kernel.logs_dir%')]
