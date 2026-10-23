@@ -56,7 +56,6 @@ jobs:
           SERVER_NAME: ${{ vars.SERVER_NAME }}
           APP_SECRET: ${{ secrets.APP_SECRET }}
           DATABASE_SECRET: ${{ secrets.DB_PASSWORD }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
@@ -65,7 +64,6 @@ jobs:
           printf '%s\n' \
             "SERVER_NAME=$SERVER_NAME" \
             "APP_SECRET=$APP_SECRET" \
-            "CADDY_MERCURE_JWT_SECRET=$JWT_SECRET" \
             "POSTGRES_PASSWORD=$DATABASE_SECRET" \
             | ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" "umask 077 && cat > '$APP_PATH/.env.deploy'"
 

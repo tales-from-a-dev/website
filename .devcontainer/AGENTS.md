@@ -1,6 +1,6 @@
 # Project
 
-This is a Symfony application running on [FrankenPHP](https://frankenphp.dev), generated using [Symfony Docker](https://github.com/dunglas/symfony-docker). The stack includes Caddy (via FrankenPHP), [Mercure](https://mercure.rocks) for real-time, and [Vulcain](https://vulcain.rocks) for preloading. The Dockerfile uses multi-stage builds with separate dev and prod targets.
+This is a Symfony application running on [FrankenPHP](https://frankenphp.dev), generated using [Symfony Docker](https://github.com/dunglas/symfony-docker). The stack includes Caddy (via FrankenPHP) and [Vulcain](https://vulcain.rocks) for preloading. The Dockerfile uses multi-stage builds with separate dev and prod targets.
 
 ## Dev Container Environment
 

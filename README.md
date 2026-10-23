@@ -14,7 +14,6 @@ This is a modern web application built with Symfony 8.1 and PHP 8.5, featuring:
 - **Modular Architecture**: Organized into domain modules (Analytics, Contact, Experience, GitHub, Resume, Settings, User)
 - **Internationalization**: English (default) and French, with locale-prefixed routes (`/fr/...`)
 - **SEO**: XML sitemap (PrestaSitemapBundle), JSON-LD structured data, dynamic `robots.txt`, hreflang alternate links
-- **Real-time Features**: Mercure integration for live updates
 - **Modern Frontend**: Tailwind CSS 4.3 with Symfony AssetMapper and Stimulus
 - **Message Queue**: Symfony Messenger with Doctrine transport
 - **Caching**: Valkey (Redis-compatible) for application cache
@@ -224,11 +223,6 @@ Key environment variables (defined in `.env` and `.env.local`):
 
 ### Notifications
 - `FREE_MOBILE_DSN`: Free Mobile notifier DSN
-
-### Mercure (Real-time)
-- `MERCURE_URL`: Internal Mercure hub URL
-- `MERCURE_PUBLIC_URL`: Public Mercure hub URL
-- `MERCURE_JWT_SECRET`: JWT secret for Mercure
 
 ## 🧪 Testing
 

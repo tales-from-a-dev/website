@@ -19,7 +19,12 @@ services:
     environment:
       FRANKENPHP_WORKER_CONFIG: watch
       FRANKENPHP_SITE_CONFIG: hot_reload
-      MERCURE_EXTRA_DIRECTIVES: demo
+      # hot_reload pushes its events through a Mercure hub; named because the site serves two addresses
+      CADDY_SERVER_EXTRA_DIRECTIVES: |
+        mercure {
+          name hot_reload
+          anonymous
+        }
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-develop}"
       APP_ENV: "${APP_ENV:-dev}"
@@ -67,9 +72,6 @@ services:
     depends_on:
       php:
         condition: service_healthy
-
-###> symfony/mercure-bundle ###
-###< symfony/mercure-bundle ###
 
 ###> doctrine/doctrine-bundle ###
   database:

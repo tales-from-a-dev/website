@@ -65,7 +65,7 @@ final readonly class GitHubService implements GitHubServiceInterface
                 ;
 
                 return array_map(
-                    static fn (array $value): GitHubProject => GitHubProject::fromArray($value),
+                    GitHubProject::fromArray(...),
                     $data['data']['user']['pinnedItems']['nodes']
                 );
             });
