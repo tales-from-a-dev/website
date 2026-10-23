@@ -468,16 +468,14 @@
         ]
     },
     "symfonycasts/tailwind-bundle": {
-        "version": "0.10",
+        "version": "1.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "0.8",
-            "ref": "4ea7c9488fdce8943520daf3fdc31e93e5b59c64"
+            "version": "0.14",
+            "ref": "b8af60cec7149fd0cde0ec9d89ccb32335c4d9bd"
         },
-        "files": [
-            "config/packages/symfonycasts_tailwind.yaml"
-        ]
+        "files": []
     },
     "tales-from-a-dev/twig-tailwind-extra": {
         "version": "1.0",
