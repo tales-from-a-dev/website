@@ -51,11 +51,14 @@ COPY --link frankenphp/Caddyfile /etc/frankenphp/Caddyfile
 
 ENTRYPOINT ["docker-entrypoint"]
 
-HEALTHCHECK --start-period=60s CMD php -r 'exit(false === @file_get_contents("http://localhost:2019/metrics", context: stream_context_create(["http" => ["timeout" => 5]])) ? 1 : 0);'
+HEALTHCHECK --start-period=60s CMD ["php", "-r", "exit(false === @file_get_contents('http://localhost:2019/metrics', context: stream_context_create(['http' => ['timeout' => 5]])) ? 1 : 0);"]
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]
 
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
+
+# Repeated until hadolint inherits the parent stage SHELL: https://github.com/hadolint/hadolint/pull/1258
+SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 ENV APP_ENV=dev
 ENV XDEBUG_MODE=off
@@ -83,12 +86,30 @@ RUN <<-EOF
 	git config --system --add safe.directory /app
 EOF
 
+# Symfony Language Server, for editors and AI agents that don't bundle it themselves
+# https://github.com/symfony/language-tools
+ARG TARGETARCH
+RUN <<-EOF
+	case "$TARGETARCH" in
+		amd64) lsp_arch=x64 ;;
+		arm64) lsp_arch=arm64 ;;
+		*) echo "unsupported architecture: $TARGETARCH"; exit 1 ;;
+	esac
+	# The release URL redirects to the latest tag, no API token nor rate limit involved
+	lsp_version=$(basename "$(curl -fsSLI -o /dev/null -w '%{url_effective}' https://github.com/symfony/language-tools/releases/latest)")
+	curl -fsSL "https://github.com/symfony/language-tools/releases/download/$lsp_version/symfony-lsp-$lsp_version-linux-$lsp_arch.tar.gz" \
+		| tar -xz -C /usr/local/bin --strip-components=1 --wildcards '*/symfony-lsp'
+EOF
+
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
 # Builder for the prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod_builder
+
+# Repeated until hadolint inherits the parent stage SHELL: https://github.com/hadolint/hadolint/pull/1258
+SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 ENV APP_ENV=prod
 
@@ -119,7 +140,7 @@ RUN <<-EOF
 EOF
 
 # Collect shared libraries needed by FrankenPHP and PHP extensions
-# hadolint ignore=DL3008,SC3054,DL4006
+# hadolint ignore=DL3008,SC3054
 RUN <<-'EOF'
 	apt-get update
 	apt-get install -y --no-install-recommends libtree
@@ -159,8 +180,9 @@ COPY --from=frankenphp_prod_builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/
 COPY --from=frankenphp_prod_builder /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
 COPY --from=frankenphp_prod_builder /usr/bin/file /usr/bin/file
 COPY --from=frankenphp_prod_builder /usr/lib/file/magic.mgc /usr/lib/file/magic.mgc
+COPY --from=frankenphp_prod_builder /usr/lib/ssl /usr/lib/ssl
 
-ENV  OPENSSL_CONF=/etc/ssl/openssl.cnf XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+ENV XDG_CONFIG_HOME=/config XDG_DATA_HOME=/data
 
 RUN <<-EOF
 	apt-get update
@@ -179,11 +201,12 @@ RUN chmod g=u /app/var
 
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 
-USER www-data
+# www-data, numeric so runtimes can verify runAsNonRoot
+USER 33
 
 WORKDIR /app
 
 ENTRYPOINT ["docker-entrypoint"]
 
-HEALTHCHECK --start-period=60s CMD php -r 'exit(false === @file_get_contents("http://localhost:2019/metrics", context: stream_context_create(["http" => ["timeout" => 5]])) ? 1 : 0);'
+HEALTHCHECK --start-period=60s CMD ["php", "-r", "exit(false === @file_get_contents('http://localhost:2019/metrics', context: stream_context_create(['http' => ['timeout' => 5]])) ? 1 : 0);"]
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]

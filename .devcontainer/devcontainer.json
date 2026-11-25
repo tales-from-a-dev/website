@@ -18,6 +18,7 @@
         "vscode": {
             "extensions": [
                 "anthropic.claude-code",
+                "symfony.language-tools",
                 "bmewburn.vscode-intelephense-client",
                 "xdebug.php-debug"
             ],
